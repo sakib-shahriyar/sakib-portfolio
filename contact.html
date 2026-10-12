@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Sakib Shahriyar Pathan</title>
+  <meta name="description" content="Contact Sakib Shahriyar Pathan — request complete study documents or ask a question.">
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <script src="js/theme.js?v=2"></script>
+  <script src="js/site-config.js?v=2"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+        <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="notes.html">Notes</a>
+        <a href="lectures.html">Lectures</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container" style="padding-top:64px; text-align:center;">
+    <span class="badge reveal">Contact Me</span>
+    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">Get in Touch</h1>
+    <p class="reveal" style="color:var(--muted); max-width:640px; margin:0 auto;">Questions about a topic, or want the complete copy of a document? Send a message — I read every one.</p>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="contact-grid">
+        <div class="card contact-item reveal">
+          <h3>Email</h3>
+          <p><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></p>
+        </div>
+        <div class="card contact-item reveal">
+          <h3>Phone</h3>
+          <p><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></p>
+        </div>
+        <div class="card contact-item reveal">
+          <h3>WhatsApp</h3>
+          <p><a class="btn btn-outline" data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+        </div>
+      </div>
+
+      <div class="card form-card reveal">
+        <div class="request-banner" id="request-banner">📄 <span id="request-banner-text"></span></div>
+        <h3 style="margin-top:0;">Send a message</h3>
+        <p style="color:var(--muted); font-size:15px; margin-top:0;">This opens your email app with the message addressed to me — nothing is stored online.</p>
+        <form id="contact-form">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name">
+          <label for="cf-email">Your email</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email">
+          <label for="cf-subject">Subject</label>
+          <input id="cf-subject" name="subject" type="text" required>
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" required></textarea>
+          <button class="btn btn-primary" type="submit">Send via Email</button>
+        </form>
+        <div id="social-row" style="margin-top:22px; display:flex; gap:10px; flex-wrap:wrap;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
+      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=2"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var params = new URLSearchParams(window.location.search);
+      var docId = params.get("doc");
+      var doc = docId ? DOCUMENTS.find(function (d) { return d.id === docId; }) : null;
+      var requestMsg = doc
+        ? "Hello, I would like to request the complete copy of the document: " + doc.title + "."
+        : "";
+
+      var subjectEl = document.getElementById("cf-subject");
+      var msgEl = document.getElementById("cf-msg");
+      if (doc) {
+        var banner = document.getElementById("request-banner");
+        document.getElementById("request-banner-text").textContent = "Requesting: " + doc.title;
+        banner.classList.add("show");
+        subjectEl.value = "Document request: " + doc.title;
+        msgEl.value = requestMsg;
+      } else {
+        subjectEl.value = "";
+        subjectEl.placeholder = "What is this about?";
+      }
+
+      // Social buttons (Facebook hidden until a link is set in site-config.js)
+      var social = document.getElementById("social-row");
+      function socialBtn(href, label) {
+        var a = document.createElement("a");
+        a.className = "btn btn-outline"; a.href = href;
+        a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
+        social.appendChild(a);
+      }
+      socialBtn(SITE.whatsapp, "WhatsApp");
+      socialBtn("mailto:" + SITE.email, "Email");
+      if (SITE.facebook) socialBtn(SITE.facebook, "Facebook");
+
+      document.getElementById("contact-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = document.getElementById("cf-name").value.trim();
+        var email = document.getElementById("cf-email").value.trim();
+        var subject = subjectEl.value.trim();
+        var msg = msgEl.value.trim();
+        var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + msg);
+        window.location.href = "mailto:" + SITE.email +
+          "?subject=" + encodeURIComponent(subject + " — " + name) + "&body=" + body;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Sakib Shahriyar Pathan</title>
+  <meta name="description" content="About Sakib Shahriyar Pathan: education, teaching philosophy and expertise in the HSC ICT curriculum.">
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <script src="js/theme.js?v=2"></script>
+  <script src="js/site-config.js?v=2"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+        <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="notes.html">Notes</a>
+        <a href="lectures.html">Lectures</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container" style="padding-top:64px; text-align:center;">
+    <span class="badge reveal">About Me</span>
+    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">Teacher first, technologist always.</h1>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="card bio reveal">
+        <h2 style="margin-top:0;">Biography</h2>
+        <p>I am <strong data-site="name">Sakib Shahriyar Pathan</strong>, <span data-site="deptLine">Lecturer, Department of ICT</span> at <span data-site="institution">Gosinga Alim Madrasah</span>, Bangladesh. I hold an MSc in Computer Science &amp; Engineering from BUET and a BSc in Computer Science &amp; Engineering from Southeast University.</p>
+        <p>Over <strong>8 years of teaching</strong>, I have taught HSC Physics and ICT, SSC Mathematics, Physics, Chemistry and Higher Mathematics, and O/A Level ICT and Computer Science. That range taught me one thing: students do not struggle because a subject is hard — they struggle because it was never explained simply.</p>
+        <p>My teaching philosophy is straightforward: <strong>make ICT simple — memorise less, understand more.</strong> Every note I write and every lecture I plan starts from the concept, builds up with real examples, and only then touches the exam question. Understanding first; marks follow.</p>
+        <h3 style="margin-top:28px;">Areas of Expertise</h3>
+        <div class="chips" id="expertise-chips"></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="section-head reveal">
+        <h2>Milestones</h2>
+        <p>The path so far — in order, not in years.</p>
+      </div>
+      <div class="card reveal">
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0; text-align:center;">
+      <a class="btn btn-primary reveal" href="notes.html">Explore My Notes</a>
+      <a class="btn btn-outline reveal" href="contact.html" style="margin-left:10px;">Contact Me</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
+      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=2"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Expertise chips
+      var chips = document.getElementById("expertise-chips");
+      (SITE.expertise || []).forEach(function (e) {
+        var s = document.createElement("span");
+        s.className = "chip"; s.textContent = e;
+        chips.appendChild(s);
+      });
+      // Timeline
+      var tl = document.getElementById("timeline");
+      (SITE.milestones || []).forEach(function (m) {
+        var d = document.createElement("div");
+        d.className = "timeline-item";
+        var h = document.createElement("h3"); h.textContent = m.title;
+        var p = document.createElement("p"); p.textContent = m.text;
+        d.appendChild(h); d.appendChild(p);
+        tl.appendChild(d);
+      });
+    });
+  </script>
+</body>
+</html>

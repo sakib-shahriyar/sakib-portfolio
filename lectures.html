@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Lectures — Sakib Shahriyar Pathan</title>
+  <meta name="description" content="HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <script src="js/theme.js?v=2"></script>
+  <script src="js/site-config.js?v=2"></script>
+  <script src="js/videos.js?v=2"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+        <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="notes.html">Notes</a>
+        <a href="lectures.html" class="active">Lectures</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container" style="padding-top:64px; text-align:center;">
+    <span class="badge reveal">Video Lectures</span>
+    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">Lecture Video Hub</h1>
+    <p class="reveal" style="color:var(--muted); max-width:640px; margin:0 auto;">Concept-by-concept video lectures, organised by chapter. Search a topic or filter by chapter.</p>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="toolbar reveal">
+        <input class="search" id="video-search" type="search" placeholder="Search lectures by topic…" aria-label="Search lectures">
+        <div class="filter-chips" id="chapter-filters"></div>
+      </div>
+      <div id="video-sections"></div>
+      <p class="no-results" id="no-results">No lectures match your search. Try a different keyword.</p>
+    </section>
+  </main>
+
+  <!-- Video player modal -->
+  <div class="modal-backdrop" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="vm-title">Lecture</h3>
+        <button class="modal-close" id="vm-close" aria-label="Close player">✕</button>
+      </div>
+      <div class="video-player-wrap">
+        <iframe id="vm-frame" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
+      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=2"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var sectionsEl = document.getElementById("video-sections");
+      var filtersEl = document.getElementById("chapter-filters");
+      var searchEl = document.getElementById("video-search");
+      var noResults = document.getElementById("no-results");
+      var modal = document.getElementById("video-modal");
+      var frame = document.getElementById("vm-frame");
+      var vmTitle = document.getElementById("vm-title");
+      var activeChapter = "all";
+      var query = "";
+
+      function chapterName(id) {
+        var d = DOCUMENTS.find(function (x) { return x.id === id; });
+        return d ? d.chapter : id;
+      }
+
+      // Filter chips
+      var chips = [{ id: "all", label: "All chapters" }].concat(
+        DOCUMENTS.map(function (d) { return { id: d.id, label: d.chapter.split(" — ")[0] }; })
+      );
+      chips.forEach(function (c) {
+        var b = document.createElement("button");
+        b.className = "fchip" + (c.id === "all" ? " on" : "");
+        b.textContent = c.label;
+        b.addEventListener("click", function () {
+          activeChapter = c.id;
+          filtersEl.querySelectorAll(".fchip").forEach(function (x) { x.classList.remove("on"); });
+          b.classList.add("on");
+          render();
+        });
+        filtersEl.appendChild(b);
+      });
+
+      function matches(v) {
+        return v.title.toLowerCase().indexOf(query) !== -1;
+      }
+
+      function render() {
+        sectionsEl.innerHTML = "";
+        var anyVisible = false;
+        DOCUMENTS.forEach(function (doc) {
+          if (activeChapter !== "all" && activeChapter !== doc.id) return;
+          var vids = (VIDEOS[doc.id] || []).filter(matches);
+          var sec = document.createElement("div");
+          sec.style.marginBottom = "38px";
+          var h = document.createElement("h2");
+          h.style.fontSize = "21px"; h.style.marginBottom = "14px";
+          h.textContent = doc.chapter;
+          sec.appendChild(h);
+          if (vids.length === 0) {
+            var empty = document.createElement("div");
+            empty.className = "empty-state";
+            empty.innerHTML = '<span class="big">🎬</span><strong>Video lectures coming soon</strong><br>Lectures for this chapter are being recorded — check back later.';
+            sec.appendChild(empty);
+          } else {
+            anyVisible = true;
+            var g = document.createElement("div");
+            g.className = "video-grid";
+            vids.forEach(function (v) {
+              var card = document.createElement("div");
+              card.className = "card video-card";
+              card.innerHTML =
+                '<div class="video-thumb"><span class="play">▶</span></div>' +
+                '<div class="video-body"><h4></h4><p></p></div>';
+              card.querySelector("h4").textContent = v.title;
+              card.querySelector("p").textContent = doc.chapter;
+              card.addEventListener("click", function () { playVideo(v); });
+              g.appendChild(card);
+            });
+            sec.appendChild(g);
+          }
+          sectionsEl.appendChild(sec);
+        });
+        noResults.style.display = (!anyVisible && query) ? "block" : "none";
+      }
+
+      function playVideo(v) {
+        vmTitle.textContent = v.title;
+        frame.src = "https://www.youtube.com/embed/" + encodeURIComponent(v.id) + "?autoplay=1&rel=0";
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeVideo() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+        frame.src = "about:blank";
+      }
+      document.getElementById("vm-close").addEventListener("click", closeVideo);
+      modal.addEventListener("click", function (e) { if (e.target === modal) closeVideo(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeVideo(); });
+
+      searchEl.addEventListener("input", function () {
+        query = searchEl.value.trim().toLowerCase();
+        render();
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>
