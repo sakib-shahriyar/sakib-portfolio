@@ -28,6 +28,12 @@ var SITE = {
   whatsapp: "https://wa.me/8801832202600",
   facebook: "", // paste your Facebook profile link here, e.g. "https://facebook.com/yourname"
 
+  // Dashboard passcode for admin.html — CHANGE THIS to something only you know.
+  // NOTE: this is a casual lock, not real security. A static site cannot have
+  // true logins; anyone with the site files could bypass it. Your real
+  // protection is that only you can push updates to your GitHub repository.
+  adminPasscode: "PaTHaN@1993",
+
   // ---- About ----
   experienceSummary: "8 years of teaching experience",
   subjects: {

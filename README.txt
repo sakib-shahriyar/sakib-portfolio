@@ -52,5 +52,14 @@ css/style.css — theme, layout, light/dark modes
 js/theme.js — theme toggle (remembers choice, respects OS setting)
 js/site-config.js — all site text + document list
 js/videos.js — YouTube lecture data
+js/admin.js — dashboard logic
 js/main.js — menu, animations, shared interactions
+assets/photo.png — your circular photo (nav + hero)
 assets/previews/ — 4-page PDF previews (ch1 … ch6)
+admin.html — PRIVATE dashboard (not linked anywhere): open
+  yoursite.com/admin.html, enter your passcode (set it in
+  js/site-config.js → adminPasscode), add/remove YouTube lectures,
+  then Download updated videos.js → replace js/videos.js →
+  git add, commit, push. Note: the passcode is a casual lock only;
+  a static site can't have real logins — only you can push to
+  your GitHub repo, and that's the real protection.
