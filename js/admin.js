@@ -164,7 +164,11 @@
         return (working[ch.id] || []).some(function (v) { return v.id === vid; });
       });
       if (exists) { formErr.textContent = "This video is already in your list."; return; }
-      working[chId].push({ id: vid, title: title });
+      var today = new Date();
+      var addedAt = today.getFullYear() + "-" +
+        ("0" + (today.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + today.getDate()).slice(-2);
+      working[chId].push({ id: vid, title: title, addedAt: addedAt });
       lastAddedKey = chId + "|" + vid;
       document.getElementById("f-url").value = "";
       document.getElementById("f-title").value = "";
@@ -178,11 +182,13 @@
       out.push("   VIDEO LECTURES: managed from the site dashboard (admin.html).");
       out.push("   To edit by hand, add entries like this inside a chapter's [ ] list:");
       out.push("");
-      out.push('     { id: "dQw4w9WgXcQ", title: "What is a Number System?" },');
+      out.push('     { id: "dQw4w9WgXcQ", title: "What is a Number System?", addedAt: "2026-10-15" },');
       out.push("");
       out.push("   id:    the 11-character YouTube video ID (the part after");
       out.push('           "watch?v=" in the video\'s URL)');
       out.push("   title: the title shown on the video card");
+      out.push('   addedAt (optional): the date the video was added, YYYY-MM-DD.');
+      out.push('           Powers the "Recently added" section; newest first.');
       out.push("");
       out.push("   Leave a chapter's list empty [ ] and the site shows a");
       out.push('   tasteful "coming soon" message for that chapter.');
@@ -192,7 +198,8 @@
       chapters.forEach(function (ch, ci) {
         out.push("  " + ch.id + ": [");
         (working[ch.id] || []).forEach(function (v) {
-          out.push("    { id: \"" + v.id + "\", title: " + JSON.stringify(v.title) + " },");
+          out.push("    { id: \"" + v.id + "\", title: " + JSON.stringify(v.title) +
+            (v.addedAt ? ", addedAt: \"" + v.addedAt + "\"" : "") + " },");
         });
         out.push("  ]" + (ci < chapters.length - 1 ? "," : ""));
       });

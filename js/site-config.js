@@ -59,8 +59,10 @@ var SITE = {
   milestones: [
     { title: "BSc in Computer Science & Engineering", text: "Graduated from Southeast University (SEU)." },
     { title: "MSc in Computer Science & Engineering", text: "Completed postgraduate studies at Bangladesh University of Engineering and Technology (BUET)." },
-    { title: "Lecturer of ICT, Gosinga Alim Madrasah", text: "Teaching ICT with a simple, understanding-first approach." },
-    { title: "8 years across HSC, SSC and O/A Level", text: "HSC Physics & ICT; SSC Math, Physics, Chemistry & Higher Math; O/A Level ICT & CS." },
+    { title: "Software Quality Assurance Engineer", text: "Began my career in software quality assurance before moving into teaching." },
+    { title: "Senior Teacher, O/A Level section", text: "Taught ICT and Computer Science at a reputed English medium school." },
+    { title: "Lecturer of ICT, Gosinga Alim Madrasah", text: "Teaching here for the past 3 years, also serving as a guest lecturer at another reputed college." },
+    { title: "8 years of teaching", text: "HSC Physics & ICT; SSC Math, Physics, Chemistry & Higher Math; O/A Level ICT & CS." },
     { title: "Complete HSC ICT resource set", text: "Detailed notes, 134 lecture plans and 134 slide decks covering all six chapters." }
   ],
 

@@ -334,11 +334,21 @@ img { max-width: 100%; }
 .video-thumb {
   aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-lavender-mist), #d5ecff);
   display: grid; place-items: center; border-bottom: 1px solid var(--color-hairline);
+  position: relative;
 }
 .video-thumb .play {
   width: 56px; height: 56px; border-radius: 50%; background: var(--color-electric-cobalt); color: #fff;
   display: grid; place-items: center; font-size: 18px; padding-left: 3px;
 }
+.video-share {
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(13, 18, 32, 0.65); color: #ffffff;
+  display: grid; place-items: center; padding: 0;
+  opacity: 0.85; transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.video-card:hover .video-share { opacity: 1; transform: scale(1.06); }
+.video-share svg { width: 17px; height: 17px; fill: currentColor; display: block; }
 .video-body { padding: 20px 24px 24px; }
 .video-body h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .video-body p { font-size: 13px; color: var(--color-slate-gray); margin: 0; }

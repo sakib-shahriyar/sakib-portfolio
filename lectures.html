@@ -18,10 +18,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/style.css?v=2">
   <script src="js/theme.js?v=1"></script>
-  <script src="js/site-config.js?v=1"></script>
-  <script src="js/videos.js?v=1"></script>
+  <script src="js/site-config.js?v=2"></script>
+  <script src="js/videos.js?v=2"></script>
 </head>
 <body>
 
@@ -178,10 +178,60 @@
         return v.title.toLowerCase().indexOf(query) !== -1;
       }
 
+      function videoCard(v, doc) {
+        var card = document.createElement("div");
+        card.className = "card video-card";
+        card.innerHTML =
+          '<div class="video-thumb"><span class="play">▶</span></div>' +
+          '<div class="video-body"><h4></h4><p></p></div>';
+        card.querySelector("h4").textContent = v.title;
+        card.querySelector("p").textContent = doc.chapter;
+        card.addEventListener("click", function () { playVideo(v); });
+        var share = document.createElement("button");
+        share.className = "video-share";
+        share.setAttribute("aria-label", "Share this video on WhatsApp");
+        share.setAttribute("title", "Share on WhatsApp");
+        share.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l7 7-7 7v-4C8 15 5 17.5 3 20c.5-5 3.5-9.5 8-11.5V5z"/></svg>';
+        share.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var base = (typeof SITE !== "undefined" && SITE.siteUrl) || "https://lecturer-pathan.vercel.app";
+          var link = base + "/lectures.html?v=" + v.id;
+          window.open("https://wa.me/?text=" + encodeURIComponent(v.title + " " + link), "_blank", "noopener");
+        });
+        card.querySelector(".video-thumb").appendChild(share);
+        return card;
+      }
+
       function render() {
         sectionsEl.innerHTML = "";
         var anyVisible = false;
-        DOCUMENTS.forEach(function (doc) {
+        var docs = DOCUMENTS.slice();
+        if (activeChapter === "all" && !query) {
+          // Recently added: newest videos across all chapters, latest first.
+          var recent = [];
+          DOCUMENTS.forEach(function (doc) {
+            (VIDEOS[doc.id] || []).forEach(function (v) {
+              if (v.addedAt) recent.push({ v: v, doc: doc });
+            });
+          });
+          recent.sort(function (a, b) { return b.v.addedAt.localeCompare(a.v.addedAt); });
+          recent = recent.slice(0, 6);
+          if (recent.length) {
+            anyVisible = true;
+            var rsec = document.createElement("div");
+            rsec.style.marginBottom = "48px";
+            var rh = document.createElement("h2");
+            rh.style.fontSize = "24px"; rh.style.fontWeight = "600"; rh.style.marginBottom = "16px";
+            rh.textContent = "Recently added";
+            rsec.appendChild(rh);
+            var rg = document.createElement("div");
+            rg.className = "video-grid";
+            recent.forEach(function (item) { rg.appendChild(videoCard(item.v, item.doc)); });
+            rsec.appendChild(rg);
+            sectionsEl.appendChild(rsec);
+          }
+        }
+        docs.forEach(function (doc) {
           if (activeChapter !== "all" && activeChapter !== doc.id) return;
           var vids = (VIDEOS[doc.id] || []).filter(matches);
           var sec = document.createElement("div");
@@ -209,17 +259,7 @@
             anyVisible = true;
             var g = document.createElement("div");
             g.className = "video-grid";
-            vids.forEach(function (v) {
-              var card = document.createElement("div");
-              card.className = "card video-card";
-              card.innerHTML =
-                '<div class="video-thumb"><span class="play">▶</span></div>' +
-                '<div class="video-body"><h4></h4><p></p></div>';
-              card.querySelector("h4").textContent = v.title;
-              card.querySelector("p").textContent = doc.chapter;
-              card.addEventListener("click", function () { playVideo(v); });
-              g.appendChild(card);
-            });
+            vids.forEach(function (v) { g.appendChild(videoCard(v, doc)); });
             sec.appendChild(g);
           }
           sectionsEl.appendChild(sec);
@@ -256,11 +296,6 @@
       var notifyModal = document.getElementById("notify-modal");
       var notifyPhone = document.getElementById("notify-phone");
       var notifyErr = document.getElementById("notify-err");
-      function updateNotifyBtn() {
-        var done = false;
-        try { done = localStorage.getItem("spd-notify") === "1"; } catch (e) {}
-        notifyBtn.textContent = done ? "Subscribed ✓" : "Notify me on WhatsApp";
-      }
       function openNotify() {
         notifyErr.textContent = "";
         notifyModal.classList.add("open");
@@ -285,11 +320,8 @@
         var msg = "Hi! Please notify me when new ICT video lectures are published. My WhatsApp number is: " + raw;
         var base = (typeof SITE !== "undefined" && SITE.whatsapp) || "https://wa.me/8801832202600";
         window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
-        try { localStorage.setItem("spd-notify", "1"); } catch (e) {}
-        updateNotifyBtn();
         closeNotify();
       });
-      updateNotifyBtn();
     });
   </script>
   <script>
