@@ -69,7 +69,7 @@ can push to your repository, and that is the real protection.
 IMPORTANT — SHARE-LINK DOMAIN
 ------------------------------
 The Open Graph/Twitter tags use a PLACEHOLDER canonical domain:
-    https://sakib-portfolio-dock.vercel.app/
+    https://lecturer-pathan.vercel.app/
 Update all og:url / og:image / twitter:image values in the 5 public
 HTML files to your real deployed domain before sharing links
 (otherwise link previews will point at the wrong address).
