@@ -21,6 +21,29 @@ HOW TO EDIT (no coding needed)
    preview modal. To replace one, convert your document to PDF, keep
    only the first 4 pages, and save it over the matching file
    (ch1-preview.pdf … ch6-preview.pdf).
+5. js/site-config.js → testimonials — real student quotes for the
+   homepage "What students say" section. Add lines like:
+       { name: "Student Name", detail: "HSC 2025, College",
+         text: "Their exact words." },
+   Leave the list empty and the section stays hidden.
+6. js/site-config.js → DOCUMENTS → chapterBn — the Bengali chapter
+   names shown under each English heading on the Notes page
+   (and Lectures page).
+
+WHAT'S NEW (student-attraction upgrades)
+----------------------------------------
+- Floating WhatsApp button (bottom-right, all 5 public pages).
+  The number comes from js/site-config.js → whatsapp. It is injected
+  by js/main.js, which admin.html does not load — so the dashboard
+  has no button.
+- Testimonials: homepage section, config-driven (see 5 above).
+- Bengali chapter names on Notes/Lectures + Bengali keywords
+  (এইচএসসি আইসিটি নোট, এইচএসসি আইসিটি ভিডিও লেকচার) in the
+  <title> and meta descriptions of notes.html and lectures.html.
+- Lectures page: "Notify me on WhatsApp" button under the chapter
+  list — students tap it to ask for a message when videos drop.
+- assets/favicon.svg ("SP" monogram) + Open Graph/Twitter share
+  tags on all 5 pages (share image: your photo).
 
 HOW IT WORKS
 ------------

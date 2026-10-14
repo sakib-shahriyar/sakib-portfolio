@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Notes — Sakib Shahriyar Pathan</title>
-  <meta name="description" content="Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
+  <title>Study Notes — এইচএসসি আইসিটি নোট | Sakib Shahriyar Pathan</title>
+  <meta name="description" content="এইচএসসি আইসিটি নোট — Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Study Notes — এইচএসসি আইসিটি নোট | Sakib Shahriyar Pathan">
+  <meta property="og:description" content="এইচএসসি আইসিটি নোট — Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
+  <meta property="og:url" content="https://lecturer-pathan.vercel.app/notes.html">
+  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Study Notes — এইচএসসি আইসিটি নোট | Sakib Shahriyar Pathan">
+  <meta name="twitter:description" content="এইচএসসি আইসিটি নোট — Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
+  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <link rel="stylesheet" href="css/style.css?v=2">
   <script src="js/theme.js?v=2"></script>
   <script src="js/site-config.js?v=2"></script>
@@ -90,10 +100,13 @@
         card.className = "card reveal";
         card.innerHTML =
           '<span class="card-icon">📄</span>' +
-          "<h3></h3><p></p>" +
+          '<h3 class="doc-ch"></h3>' +
+          '<p class="doc-bn"></p>' +
+          '<p class="doc-desc"></p>' +
           '<a class="card-link" href="#">Preview document →</a>';
-        card.querySelector("h3").textContent = doc.chapter;
-        card.querySelector("p").textContent = doc.desc;
+        card.querySelector(".doc-ch").textContent = doc.chapter;
+        card.querySelector(".doc-bn").textContent = doc.chapterBn || "";
+        card.querySelector(".doc-desc").textContent = doc.desc;
         card.querySelector("a").addEventListener("click", function (e) {
           e.preventDefault();
           openPreview(doc);

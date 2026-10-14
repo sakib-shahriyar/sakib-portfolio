@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Lectures — Sakib Shahriyar Pathan</title>
-  <meta name="description" content="HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <title>Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan</title>
+  <meta name="description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
+  <meta property="og:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <meta property="og:url" content="https://lecturer-pathan.vercel.app/lectures.html">
+  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
+  <meta name="twitter:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <link rel="stylesheet" href="css/style.css?v=2">
   <script src="js/theme.js?v=2"></script>
   <script src="js/site-config.js?v=2"></script>
@@ -46,6 +56,11 @@
       </div>
       <div id="video-sections"></div>
       <p class="no-results" id="no-results">No lectures match your search. Try a different keyword.</p>
+      <div class="card reveal" style="text-align:center; margin-top:26px;">
+        <h3 style="margin-bottom:8px;">New videos are on the way</h3>
+        <p style="max-width:520px; margin:0 auto 18px;">Get a WhatsApp message the moment new ICT video lectures are published.</p>
+        <a class="btn btn-primary" href="https://wa.me/8801832202600?text=Hi!%20Please%20notify%20me%20when%20new%20ICT%20video%20lectures%20are%20published." target="_blank" rel="noopener">Notify me on WhatsApp</a>
+      </div>
     </section>
   </main>
 
@@ -119,6 +134,16 @@
           var h = document.createElement("h2");
           h.style.fontSize = "21px"; h.style.marginBottom = "14px";
           h.textContent = doc.chapter;
+          if (doc.chapterBn) {
+            var bn = document.createElement("span");
+            bn.className = "doc-bn";
+            bn.style.display = "block";
+            bn.style.fontSize = "15px";
+            bn.style.fontWeight = "400";
+            bn.style.margin = "4px 0 0";
+            bn.textContent = doc.chapterBn;
+            h.appendChild(bn);
+          }
           sec.appendChild(h);
           if (vids.length === 0) {
             var empty = document.createElement("div");

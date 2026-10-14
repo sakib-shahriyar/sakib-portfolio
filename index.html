@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sakib Shahriyar Pathan — Lecturer in ICT</title>
   <meta name="description" content="Personal portfolio and ICT learning portal of Sakib Shahriyar Pathan, Lecturer in ICT at Gosinga Alim Madrasah.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
+  <meta property="og:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
+  <meta property="og:url" content="https://lecturer-pathan.vercel.app/">
+  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
+  <meta name="twitter:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
+  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <link rel="stylesheet" href="css/style.css?v=2">
   <script src="js/theme.js?v=2"></script>
   <script src="js/site-config.js?v=2"></script>
@@ -80,6 +90,8 @@
         <a class="btn btn-primary" href="about.html">More About Me</a>
       </div>
     </section>
+
+    <div id="testimonials-mount"></div>
   </main>
 
   <footer>
@@ -90,5 +102,139 @@
   </footer>
 
   <script src="js/main.js?v=2"></script>
+  <script>
+    // Testimonials carousel — rendered only when SITE.testimonials is non-empty.
+    // Shows 3 cards on desktop, 2 on tablet, 1 on mobile; slides one by one.
+    // Runs during parsing, before main.js's DOMContentLoaded handler,
+    // so the .reveal animation observer picks the section head up.
+    (function () {
+      var list = (typeof SITE !== "undefined" && Array.isArray(SITE.testimonials))
+        ? SITE.testimonials : [];
+      if (!list.length) return;
+      var mount = document.getElementById("testimonials-mount");
+      if (!mount) return;
+
+      var sec = document.createElement("section");
+      sec.className = "section";
+      sec.setAttribute("aria-label", "Student testimonials");
+
+      var head = document.createElement("div");
+      head.className = "section-head reveal";
+      var h2 = document.createElement("h2");
+      h2.textContent = "What students say";
+      var hp = document.createElement("p");
+      hp.textContent = "Real words from students I have taught.";
+      head.appendChild(h2);
+      head.appendChild(hp);
+
+      var GAP = 18;
+      var view = document.createElement("div");
+      view.className = "t-carousel";
+      var track = document.createElement("div");
+      track.className = "t-track";
+      var slides = list.map(function (t) {
+        var s = document.createElement("div");
+        s.className = "t-slide";
+        var card = document.createElement("div");
+        card.className = "card t-card";
+        var bq = document.createElement("blockquote");
+        bq.textContent = t.text;
+        var nm = document.createElement("div");
+        nm.className = "t-name";
+        nm.textContent = t.name;
+        card.appendChild(bq);
+        card.appendChild(nm);
+        if (t.detail) {
+          var dt = document.createElement("div");
+          dt.className = "t-detail";
+          dt.textContent = t.detail;
+          card.appendChild(dt);
+        }
+        s.appendChild(card);
+        track.appendChild(s);
+        return s;
+      });
+      view.appendChild(track);
+
+      var nav = document.createElement("div");
+      nav.className = "t-nav";
+      var prev = document.createElement("button");
+      prev.className = "t-arrow";
+      prev.setAttribute("aria-label", "Previous testimonials");
+      prev.innerHTML = "&#8592;";
+      var next = document.createElement("button");
+      next.className = "t-arrow";
+      next.setAttribute("aria-label", "Next testimonials");
+      next.innerHTML = "&#8594;";
+      var dots = document.createElement("div");
+      dots.className = "t-dots";
+      nav.appendChild(prev);
+      nav.appendChild(dots);
+      nav.appendChild(next);
+
+      var idx = 0, timer = null;
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function visible() {
+        var w = view.clientWidth || window.innerWidth;
+        return w >= 1024 ? 3 : w >= 640 ? 2 : 1;
+      }
+      function maxIdx() { return Math.max(0, list.length - visible()); }
+      function step() {
+        var s0 = slides[0];
+        return s0 ? s0.getBoundingClientRect().width + GAP : 0;
+      }
+      function go(i, instant) {
+        idx = i;
+        if (instant) track.style.transition = "none";
+        track.style.transform = "translateX(" + (-idx * step()) + "px)";
+        if (instant) { void track.offsetWidth; track.style.transition = ""; }
+        Array.prototype.forEach.call(dots.children, function (d, di) {
+          d.classList.toggle("active", di === idx);
+          d.setAttribute("aria-current", di === idx ? "true" : "false");
+        });
+      }
+      function renderDots() {
+        dots.innerHTML = "";
+        for (var d = 0; d <= maxIdx(); d++) {
+          (function (di) {
+            var b = document.createElement("button");
+            b.className = "t-dot" + (di === idx ? " active" : "");
+            b.setAttribute("aria-label", "Go to slide " + (di + 1));
+            b.addEventListener("click", function () { go(di); restart(); });
+            dots.appendChild(b);
+          })(d);
+        }
+      }
+      function layout() {
+        var v = visible();
+        var basis = "calc(" + (100 / v) + "% - " + (GAP * (v - 1) / v) + "px)";
+        slides.forEach(function (s) { s.style.flex = "0 0 " + basis; });
+        if (idx > maxIdx()) idx = maxIdx();
+        renderDots();
+        go(idx, true);
+        nav.style.display = maxIdx() === 0 ? "none" : "";
+      }
+      function restart() {
+        if (timer) clearInterval(timer);
+        if (!reduceMotion && maxIdx() > 0) timer = setInterval(function () {
+          go(idx >= maxIdx() ? 0 : idx + 1);
+        }, 5000);
+      }
+      prev.addEventListener("click", function () { go(idx <= 0 ? maxIdx() : idx - 1); restart(); });
+      next.addEventListener("click", function () { go(idx >= maxIdx() ? 0 : idx + 1); restart(); });
+      view.addEventListener("mouseenter", function () { if (timer) clearInterval(timer); });
+      view.addEventListener("mouseleave", restart);
+      view.addEventListener("touchstart", function () { if (timer) clearInterval(timer); }, { passive: true });
+      window.addEventListener("resize", layout);
+
+      sec.appendChild(head);
+      sec.appendChild(view);
+      sec.appendChild(nav);
+      mount.appendChild(sec);
+      layout();
+      restart();
+    })();
+  </script>
 </body>
 </html>
