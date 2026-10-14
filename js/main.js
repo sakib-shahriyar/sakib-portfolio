@@ -1,6 +1,18 @@
 /* Shared interactions: mobile menu, scroll reveals, hero highlight rotation,
    active nav link, and floating WhatsApp button. */
 (function () {
+  // Discourage casual copying: block right-click and the usual
+  // "inspect element" shortcuts on the public pages. This is a
+  // deterrent only, not real protection: anyone determined can
+  // still view the page source or open devtools another way.
+  document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  document.addEventListener("keydown", function (e) {
+    var k = (e.key || "").toLowerCase();
+    if (e.key === "F12") { e.preventDefault(); return; }
+    if (e.ctrlKey && e.shiftKey && (k === "i" || k === "j" || k === "c")) { e.preventDefault(); return; }
+    if (e.ctrlKey && k === "u") { e.preventDefault(); }
+  });
+
   document.addEventListener("DOMContentLoaded", function () {
     // Active nav link: marks whichever page the visitor is on.
     (function () {
