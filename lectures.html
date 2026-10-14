@@ -292,5 +292,32 @@
       updateNotifyBtn();
     });
   </script>
+  <script>
+    // Deep link: lectures.html?v=<youtube-id> opens that video's player
+    // directly, the same popup as clicking the video card.
+    (function () {
+      function openDeepLink() {
+        var vid = null;
+        try { vid = new URLSearchParams(window.location.search).get("v"); } catch (e) {}
+        if (!vid || !/^[A-Za-z0-9_-]{11}$/.test(vid)) return;
+        if (typeof VIDEOS === "undefined") return;
+        var found = null;
+        Object.keys(VIDEOS).forEach(function (chId) {
+          (VIDEOS[chId] || []).forEach(function (v) { if (v.id === vid) found = v; });
+        });
+        if (!found) return;
+        document.getElementById("vm-title").textContent = found.title;
+        document.getElementById("vm-frame").src =
+          "https://www.youtube.com/embed/" + encodeURIComponent(found.id) + "?autoplay=1&rel=0";
+        document.getElementById("video-modal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", openDeepLink);
+      } else {
+        openDeepLink();
+      }
+    })();
+  </script>
 </body>
 </html>

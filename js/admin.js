@@ -238,7 +238,7 @@
       if (!v) { announceText.value = ""; announceSend.style.display = "none"; return; }
       var msg = "New ICT lecture: " + v.title +
         "\n(" + chapterLabel(parts[0]) + ")" +
-        "\nWatch it here: " + siteBase + "/lectures.html";
+        "\nWatch it here: " + siteBase + "/lectures.html?v=" + v.id;
       announceText.value = msg;
       announceSend.href = "https://wa.me/?text=" + encodeURIComponent(msg);
     }
