@@ -39,7 +39,7 @@ var SITE = {
   subjects: {
     "HSC": "Physics, ICT",
     "SSC": "Mathematics, Physics, Chemistry, Higher Mathematics",
-    "O / A Level": "ICT, Computer Science"
+    "O / A Level": "ICT, Computer Science (Cambridge & Edexcel)"
   },
   education: [
     { degree: "MSc in Computer Science & Engineering", school: "Bangladesh University of Engineering and Technology (BUET)" },
@@ -47,7 +47,9 @@ var SITE = {
   ],
   expertise: [
     "Web Development", "C Programming", "Logic Gates",
-    "Networking", "Database Management", "HSC ICT Curriculum"
+    "Networking", "Database Management", "HSC ICT Curriculum",
+    "Cambridge ICT", "Cambridge Computer Science",
+    "Edexcel ICT", "Edexcel Computer Science"
   ],
 
   // ---- Milestones (shown in order, no years) ----

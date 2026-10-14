@@ -9,15 +9,18 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
   <meta property="og:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
-  <meta property="og:url" content="https://lecturer-pathan.vercel.app/">
-  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta property="og:url" content="https://sakib-portfolio-dock.vercel.app/">
+  <meta property="og:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
   <meta name="twitter:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
-  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <script src="js/theme.js?v=2"></script>
-  <script src="js/site-config.js?v=2"></script>
+  <meta name="twitter:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="js/theme.js?v=1"></script>
+  <script src="js/site-config.js?v=1"></script>
 </head>
 <body>
 
@@ -32,7 +35,7 @@
         <a href="about.html">About</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html">Lectures</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Contact Me</a>
       </div>
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
@@ -41,40 +44,43 @@
     </div>
   </nav>
 
-  <header class="hero container">
-    <img class="hero-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
-    <h1 data-site="name">Sakib Shahriyar Pathan</h1>
-    <p class="designation"><span data-site="designation">Lecturer in ICT</span> · <span data-site="institution">Gosinga Alim Madrasah</span></p>
-    <p class="tagline" data-site="tagline">Make ICT simple — memorise less, understand more</p>
-    <p><span class="tagline-dynamic" id="tagline-dynamic"></span></p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="notes.html">Explore Notes</a>
-      <a class="btn btn-outline" href="lectures.html">Watch Lectures</a>
-      <a class="btn btn-outline" href="contact.html">Contact Me</a>
+  <header class="hero">
+    <div class="container">
+      <img class="hero-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+      <p class="designation"><span data-site="designation">Lecturer in ICT</span> · <span data-site="institution">Gosinga Alim Madrasah</span></p>
+      <h1 data-site="name">Sakib Shahriyar Pathan</h1>
+      <p class="tagline" data-site="tagline">Make ICT simple — memorise less, understand more</p>
+      <p><span class="tagline-dynamic" id="tagline-dynamic"></span></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="notes.html">Explore Notes</a>
+        <a class="btn btn-ghost" href="lectures.html">Watch Lectures</a>
+        <a class="btn btn-ghost" href="contact.html">Contact Me</a>
+      </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" style="padding-top:80px;">
     <section class="section">
       <div class="section-head reveal">
-        <h2>Start Learning</h2>
-        <p>Everything a HSC ICT student needs — study notes, video lectures and a direct line to me.</p>
+        <span class="eyebrow">Start Learning</span>
+        <h2>Everything an HSC ICT student needs</h2>
+        <p>Study notes, video lectures and a direct line to me.</p>
       </div>
       <div class="grid grid-3">
         <div class="card reveal">
-          <span class="card-icon">📝</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
           <h3>Study Notes</h3>
           <p>Chapter-wise detailed notes for all six HSC ICT chapters. Preview the first 4 pages free, request the full document any time.</p>
           <a class="card-link" href="notes.html">Browse notes →</a>
         </div>
         <div class="card reveal">
-          <span class="card-icon">🎬</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg></span>
           <h3>Video Lectures</h3>
           <p>Concept-by-concept video lectures organised by chapter, with search and filtering to find exactly what you need.</p>
           <a class="card-link" href="lectures.html">Watch lectures →</a>
         </div>
         <div class="card reveal">
-          <span class="card-icon">✉️</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span>
           <h3>Contact Me</h3>
           <p>Questions about a topic, or want the complete copy of a document? Send a message — I read every one.</p>
           <a class="card-link" href="contact.html">Get in touch →</a>
@@ -83,10 +89,10 @@
     </section>
 
     <section class="section">
-      <div class="card reveal" style="text-align:center; padding: 44px 32px;">
-        <span class="badge">Teaching Philosophy</span>
-        <h2 style="margin-bottom:10px;">Memorise less, understand more.</h2>
-        <p style="max-width:620px; margin:0 auto 22px;">ICT is not a subject to memorise — it is a subject to understand. Every note and lecture here is built around that idea: clear concepts first, examples second, exams a natural result.</p>
+      <div class="card reveal" style="text-align:center; padding: 56px 40px;">
+        <span class="eyebrow">Teaching Philosophy</span>
+        <h2 style="font-size:40px; font-weight:600; line-height:1.25;">Memorise less, understand more.</h2>
+        <p style="max-width:620px; margin:0 auto 28px; font-size:18px;">ICT is not a subject to memorise — it is a subject to understand. Every note and lecture here is built around that idea: clear concepts first, examples second, exams a natural result.</p>
         <a class="btn btn-primary" href="about.html">More About Me</a>
       </div>
     </section>
@@ -94,19 +100,62 @@
     <div id="testimonials-mount"></div>
   </main>
 
-  <footer>
+  <section class="cta-banner">
     <div class="container">
-      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
-      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+      <h2 class="reveal">Want the complete notes for any chapter?</h2>
+      <p class="reveal">Preview the first 4 pages free, then request the full document — I send every copy personally.</p>
+      <a class="btn btn-primary reveal" href="contact.html">Get in Touch</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+            <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=1"></script>
   <script>
-    // Testimonials carousel — rendered only when SITE.testimonials is non-empty.
-    // Shows 3 cards on desktop, 2 on tablet, 1 on mobile; slides one by one.
-    // Runs during parsing, before main.js's DOMContentLoaded handler,
-    // so the .reveal animation observer picks the section head up.
+    // Testimonials carousel — 3 visible on desktop, sliding one by one.
+    // Rendered only when SITE.testimonials is non-empty.
     (function () {
       var list = (typeof SITE !== "undefined" && Array.isArray(SITE.testimonials))
         ? SITE.testimonials : [];
@@ -120,28 +169,37 @@
 
       var head = document.createElement("div");
       head.className = "section-head reveal";
+      var eb = document.createElement("span");
+      eb.className = "eyebrow";
+      eb.textContent = "Testimonials";
       var h2 = document.createElement("h2");
       h2.textContent = "What students say";
       var hp = document.createElement("p");
       hp.textContent = "Real words from students I have taught.";
+      head.appendChild(eb);
       head.appendChild(h2);
       head.appendChild(hp);
 
-      var GAP = 18;
+      var GAP = 24;
       var view = document.createElement("div");
       view.className = "t-carousel";
       var track = document.createElement("div");
       track.className = "t-track";
-      var slides = list.map(function (t) {
+      var slides = list.map(function (t, i) {
         var s = document.createElement("div");
         s.className = "t-slide";
         var card = document.createElement("div");
         card.className = "card t-card";
+        var av = document.createElement("div");
+        av.className = "t-avatar " + (i % 2 === 0 ? "cobalt" : "violet");
+        av.textContent = (t.name || "?").trim().charAt(0);
+        av.setAttribute("aria-hidden", "true");
         var bq = document.createElement("blockquote");
         bq.textContent = t.text;
         var nm = document.createElement("div");
         nm.className = "t-name";
         nm.textContent = t.name;
+        card.appendChild(av);
         card.appendChild(bq);
         card.appendChild(nm);
         if (t.detail) {

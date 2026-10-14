@@ -9,15 +9,18 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Study Notes — এইচএসসি আইসিটি নোট | Sakib Shahriyar Pathan">
   <meta property="og:description" content="এইচএসসি আইসিটি নোট — Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
-  <meta property="og:url" content="https://lecturer-pathan.vercel.app/notes.html">
-  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta property="og:url" content="https://sakib-portfolio-dock.vercel.app/notes.html">
+  <meta property="og:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Study Notes — এইচএসসি আইসিটি নোট | Sakib Shahriyar Pathan">
   <meta name="twitter:description" content="এইচএসসি আইসিটি নোট — Chapter-wise HSC ICT study notes. Preview the first 4 pages free, request the complete document.">
-  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <script src="js/theme.js?v=2"></script>
-  <script src="js/site-config.js?v=2"></script>
+  <meta name="twitter:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="js/theme.js?v=1"></script>
+  <script src="js/site-config.js?v=1"></script>
 </head>
 <body>
 
@@ -32,7 +35,7 @@
         <a href="about.html">About</a>
         <a href="notes.html" class="active">Notes</a>
         <a href="lectures.html">Lectures</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Contact Me</a>
       </div>
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
@@ -41,15 +44,15 @@
     </div>
   </nav>
 
-  <header class="container" style="padding-top:64px; text-align:center;">
-    <span class="badge reveal">Study Notes</span>
-    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">HSC ICT Chapter Notes</h1>
-    <p class="reveal" style="color:var(--muted); max-width:640px; margin:0 auto;">Preview the first 4 pages of any document free. Like what you see? Request the complete copy and I will send it to you.</p>
+  <header class="page-head">
+    <span class="eyebrow reveal">Study Notes</span>
+    <h1 class="reveal">HSC ICT Chapter Notes</h1>
+    <p class="reveal">Preview the first 4 pages of any document free. Like what you see? Request the complete copy and I will send it to you.</p>
   </header>
 
-  <main class="container">
+  <main class="container" style="padding-top:56px;">
     <section class="section">
-      <div class="grid grid-2" id="doc-grid"></div>
+      <div class="grid grid-3" id="doc-grid"></div>
     </section>
   </main>
 
@@ -58,7 +61,7 @@
     <div class="modal">
       <div class="modal-head">
         <div>
-          <span class="badge" id="pm-chapter">Chapter</span>
+          <span class="eyebrow" id="pm-chapter" style="margin-bottom:4px;">Chapter</span>
           <h3 id="pm-title">Document title</h3>
         </div>
         <button class="modal-close" id="pm-close" aria-label="Close preview">✕</button>
@@ -78,14 +81,51 @@
     </div>
   </div>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
-      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+            <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=1"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var grid = document.getElementById("doc-grid");
@@ -97,9 +137,9 @@
 
       DOCUMENTS.forEach(function (doc) {
         var card = document.createElement("div");
-        card.className = "card reveal";
+        card.className = "card doc-card reveal";
         card.innerHTML =
-          '<span class="card-icon">📄</span>' +
+          '<span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>' +
           '<h3 class="doc-ch"></h3>' +
           '<p class="doc-bn"></p>' +
           '<p class="doc-desc"></p>' +

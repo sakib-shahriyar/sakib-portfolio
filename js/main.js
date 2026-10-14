@@ -1,6 +1,20 @@
-/* Shared interactions: mobile menu, scroll reveals, hero highlight rotation. */
+/* Shared interactions: mobile menu, scroll reveals, hero highlight rotation,
+   active nav link, and floating WhatsApp button. */
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
+    // Active nav link — marks whichever page the visitor is on.
+    (function () {
+      var links = document.getElementById("nav-links");
+      if (!links) return;
+      var page = window.location.pathname.split("/").pop() || "index.html";
+      links.querySelectorAll("a[href]").forEach(function (a) {
+        var href = a.getAttribute("href") || "";
+        if (href.indexOf("#") === 0 || href.indexOf("http") === 0 || href.indexOf("mailto:") === 0) return;
+        var target = href.split("/").pop().split("?")[0] || "index.html";
+        a.classList.toggle("active", target.toLowerCase() === page.toLowerCase());
+      });
+    })();
+
     // Mobile hamburger
     var burger = document.getElementById("hamburger");
     var links = document.getElementById("nav-links");

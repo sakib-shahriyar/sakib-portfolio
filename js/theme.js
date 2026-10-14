@@ -1,6 +1,6 @@
 /* Theme toggle — runs early to avoid a flash of the wrong theme. */
 (function () {
-  var KEY = "sp-theme";
+  var KEY = "spd-theme";
   function current() {
     try {
       var saved = localStorage.getItem(KEY);

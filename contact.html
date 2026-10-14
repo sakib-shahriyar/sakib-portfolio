@@ -9,15 +9,18 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Contact — Sakib Shahriyar Pathan">
   <meta property="og:description" content="Contact Sakib Shahriyar Pathan — request complete study documents or ask a question.">
-  <meta property="og:url" content="https://lecturer-pathan.vercel.app/contact.html">
-  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta property="og:url" content="https://sakib-portfolio-dock.vercel.app/contact.html">
+  <meta property="og:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact — Sakib Shahriyar Pathan">
   <meta name="twitter:description" content="Contact Sakib Shahriyar Pathan — request complete study documents or ask a question.">
-  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <script src="js/theme.js?v=2"></script>
-  <script src="js/site-config.js?v=2"></script>
+  <meta name="twitter:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="js/theme.js?v=1"></script>
+  <script src="js/site-config.js?v=1"></script>
 </head>
 <body>
 
@@ -32,7 +35,7 @@
         <a href="about.html">About</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html">Lectures</a>
-        <a href="contact.html" class="active">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Contact Me</a>
       </div>
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
@@ -41,13 +44,13 @@
     </div>
   </nav>
 
-  <header class="container" style="padding-top:64px; text-align:center;">
-    <span class="badge reveal">Contact Me</span>
-    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">Get in Touch</h1>
-    <p class="reveal" style="color:var(--muted); max-width:640px; margin:0 auto;">Questions about a topic, or want the complete copy of a document? Send a message — I read every one.</p>
+  <header class="page-head">
+    <span class="eyebrow reveal">Contact Me</span>
+    <h1 class="reveal">Get in Touch</h1>
+    <p class="reveal">Questions about a topic, or want the complete copy of a document? Send a message — I read every one.</p>
   </header>
 
-  <main class="container">
+  <main class="container" style="padding-top:56px;">
     <section class="section">
       <div class="contact-grid">
         <div class="card contact-item reveal">
@@ -60,14 +63,14 @@
         </div>
         <div class="card contact-item reveal">
           <h3>WhatsApp</h3>
-          <p><a class="btn btn-outline" data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+          <p><a class="btn btn-ghost" data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
         </div>
       </div>
 
       <div class="card form-card reveal">
         <div class="request-banner" id="request-banner">📄 <span id="request-banner-text"></span></div>
-        <h3 style="margin-top:0;">Send a message</h3>
-        <p style="color:var(--muted); font-size:15px; margin-top:0;">This opens your email app with the message addressed to me — nothing is stored online.</p>
+        <h3 style="margin-top:0; font-size:20px; font-weight:600;">Send a message</h3>
+        <p style="color:var(--color-slate-gray); font-size:15px; margin-top:0;">Choose how to reach me — this opens your email app or WhatsApp with the message ready to send. Nothing is stored online.</p>
         <form id="contact-form">
           <label for="cf-name">Your name</label>
           <input id="cf-name" name="name" type="text" required autocomplete="name">
@@ -77,21 +80,60 @@
           <input id="cf-subject" name="subject" type="text" required>
           <label for="cf-msg">Message</label>
           <textarea id="cf-msg" name="message" required></textarea>
-          <button class="btn btn-primary" type="submit">Send via Email</button>
+          <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn btn-primary" type="submit">Send via Email</button>
+            <button class="btn btn-ghost" type="button" id="wa-send">Send on WhatsApp</button>
+          </div>
         </form>
-        <div id="social-row" style="margin-top:22px; display:flex; gap:10px; flex-wrap:wrap;"></div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
-      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+            <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=1"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var params = new URLSearchParams(window.location.search);
@@ -114,27 +156,30 @@
         subjectEl.placeholder = "What is this about?";
       }
 
-      // Social buttons (Facebook hidden until a link is set in site-config.js)
-      var social = document.getElementById("social-row");
-      function socialBtn(href, label) {
-        var a = document.createElement("a");
-        a.className = "btn btn-outline"; a.href = href;
-        a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
-        social.appendChild(a);
+      var form = document.getElementById("contact-form");
+      function readForm() {
+        return {
+          name: document.getElementById("cf-name").value.trim(),
+          email: document.getElementById("cf-email").value.trim(),
+          subject: subjectEl.value.trim(),
+          msg: msgEl.value.trim()
+        };
       }
-      socialBtn(SITE.whatsapp, "WhatsApp");
-      socialBtn("mailto:" + SITE.email, "Email");
-      if (SITE.facebook) socialBtn(SITE.facebook, "Facebook");
 
-      document.getElementById("contact-form").addEventListener("submit", function (e) {
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
-        var name = document.getElementById("cf-name").value.trim();
-        var email = document.getElementById("cf-email").value.trim();
-        var subject = subjectEl.value.trim();
-        var msg = msgEl.value.trim();
-        var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + msg);
+        var f = readForm();
+        var body = encodeURIComponent("Name: " + f.name + "\nEmail: " + f.email + "\n\n" + f.msg);
         window.location.href = "mailto:" + SITE.email +
-          "?subject=" + encodeURIComponent(subject + " — " + name) + "&body=" + body;
+          "?subject=" + encodeURIComponent(f.subject + " — " + f.name) + "&body=" + body;
+      });
+
+      document.getElementById("wa-send").addEventListener("click", function () {
+        if (!form.reportValidity()) return;
+        var f = readForm();
+        var text = encodeURIComponent("Name: " + f.name + "\nEmail: " + f.email + "\nSubject: " + f.subject + "\n\n" + f.msg);
+        var sep = SITE.whatsapp.indexOf("?") === -1 ? "?" : "&";
+        window.open(SITE.whatsapp + sep + "text=" + text, "_blank", "noopener");
       });
     });
   </script>

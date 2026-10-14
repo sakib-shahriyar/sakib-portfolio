@@ -6,48 +6,46 @@
   <title>Dashboard — Sakib Shahriyar Pathan</title>
   <meta name="description" content="Private dashboard: manage video lectures for the portfolio site.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <script src="js/theme.js?v=2"></script>
-  <script src="js/site-config.js?v=2"></script>
-  <script src="js/videos.js?v=2"></script>
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="js/theme.js?v=1"></script>
+  <script src="js/site-config.js?v=1"></script>
+  <script src="js/videos.js?v=1"></script>
   <style>
     .admin-wrap { max-width: 860px; margin: 0 auto; padding: 64px 20px 80px; }
-    .admin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 26px; margin-bottom: 22px; box-shadow: var(--shadow); }
-    .admin-card h2 { margin: 0 0 6px; font-size: 20px; }
+    .admin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .admin-card h2 { margin: 0 0 6px; font-size: 20px; font-weight: 600; }
     .admin-card p.sub { color: var(--muted); font-size: 14.5px; margin: 0 0 18px; }
-    .admin-card label { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; }
+    .admin-card label { display: block; font-weight: 500; font-size: 14px; margin: 14px 0 6px; }
     .admin-card input[type="text"], .admin-card input[type="password"],
     .admin-card select {
-      width: 100%; padding: 12px 14px; border-radius: 12px; font-size: 15px;
-      border: 1px solid var(--border); background: var(--bg); color: var(--text);
+      width: 100%; padding: 12px 16px; border-radius: 16px; font-size: 15px;
+      border: 1px solid var(--border); background: #ffffff; color: var(--text);
       font-family: inherit; box-sizing: border-box;
     }
     .admin-card input:focus, .admin-card select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
     .field-err { color: #d33; font-size: 13.5px; margin-top: 6px; min-height: 1.2em; }
-    [data-theme="dark"] .field-err { color: #ff8a8a; }
     .lock-box { max-width: 420px; margin: 90px auto; text-align: center; }
     .lock-box .big { font-size: 44px; }
     .steps { margin: 0; padding-left: 20px; color: var(--text); font-size: 15px; }
     .steps li { margin-bottom: 10px; }
-    .steps code { background: var(--accent-soft); padding: 2px 8px; border-radius: 6px; font-size: 13.5px; }
+    .steps code { background: var(--accent-soft); padding: 2px 8px; border-radius: 8px; font-size: 13.5px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-    .chip { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
-      cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--muted); font-family: inherit; }
-    .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chip { padding: 8px 16px; border-radius: 48px; border: none; background: transparent;
+      cursor: pointer; font-size: 14px; font-weight: 500; color: var(--muted); font-family: inherit; }
+    .chip:hover { background: var(--surface); }
+    .chip.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
     .vid-row { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--border); }
-    .vid-row img.thumb { width: 120px; height: 68px; object-fit: cover; border-radius: 10px; flex: none; background: #000; }
+    .vid-row img.thumb { width: 120px; height: 68px; object-fit: cover; border-radius: 16px; flex: none; background: #000; }
     .vid-row .meta { flex: 1; min-width: 0; }
-    .vid-row .meta .t { font-weight: 700; font-size: 15px; }
+    .vid-row .meta .t { font-weight: 600; font-size: 15px; }
     .vid-row .meta .i { color: var(--muted); font-size: 12.5px; font-family: monospace; }
-    .btn-danger { background: none; border: 1px solid #d33; color: #d33; border-radius: 10px; padding: 8px 14px;
-      cursor: pointer; font-weight: 700; font-size: 13.5px; font-family: inherit; flex: none; }
+    .btn-danger { background: #ffffff; border: 1px solid #d33; color: #d33; border-radius: 48px; padding: 8px 16px;
+      cursor: pointer; font-weight: 500; font-size: 14px; font-family: inherit; flex: none; }
     .btn-danger:hover { background: #d33; color: #fff; }
-    [data-theme="dark"] .btn-danger { border-color: #ff8a8a; color: #ff8a8a; }
-    [data-theme="dark"] .btn-danger:hover { background: #ff8a8a; color: #222; }
-    .dirty-badge { display: inline-block; background: #b7791f; color: #fff; font-size: 12.5px; font-weight: 700;
-      padding: 4px 12px; border-radius: 999px; margin-left: 10px; vertical-align: middle; }
+    .dirty-badge { display: inline-block; background: #b7791f; color: #fff; font-size: 12.5px; font-weight: 600;
+      padding: 4px 14px; border-radius: 48px; margin-left: 10px; vertical-align: middle; }
     .empty-note { color: var(--muted); font-size: 14.5px; padding: 18px 0 6px; text-align: center; }
-    .count-pill { font-size: 13px; color: var(--muted); font-weight: 600; }
+    .count-pill { font-size: 13px; color: var(--muted); font-weight: 500; }
   </style>
 </head>
 <body>
@@ -57,30 +55,30 @@
       <a class="brand" href="index.html">
         <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
         <span class="name">Dashboard</span>
+        <div class="nav-actions" style="margin-left:auto;">
+          <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
+        </div>
       </a>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
-      </div>
     </div>
   </nav>
 
   <!-- Lock screen -->
   <div class="admin-wrap lock-box" id="lock-screen">
     <div class="big">🔒</div>
-    <h1 style="font-size:26px;">Private Dashboard</h1>
+    <h1 style="font-size:26px; font-weight:600;">Private Dashboard</h1>
     <p style="color:var(--muted); font-size:15px;">This area is only for the site owner.</p>
-    <label for="passcode" style="display:block; font-weight:600; font-size:14px; margin:18px 0 6px; text-align:left;">Passcode</label>
+    <label for="passcode" style="display:block; font-weight:500; font-size:14px; margin:18px 0 6px; text-align:left;">Passcode</label>
     <input type="password" id="passcode" autocomplete="off" placeholder="Enter passcode"
-      style="width:100%; padding:12px 14px; border-radius:12px; font-size:15px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; box-sizing:border-box;">
+      style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; border:1px solid var(--border); background:#ffffff; color:var(--text); font-family:inherit; box-sizing:border-box;">
     <div class="field-err" id="lock-err"></div>
-    <button class="btn" id="unlock-btn" style="width:100%; justify-content:center; margin-top:6px;">Unlock</button>
+    <button class="btn btn-primary" id="unlock-btn" style="width:100%; justify-content:center; margin-top:6px;">Unlock</button>
     <p style="color:var(--muted); font-size:12.5px; margin-top:14px;">Set your passcode in <code>js/site-config.js</code> → <code>adminPasscode</code>.</p>
   </div>
 
   <!-- Dashboard -->
   <div class="admin-wrap" id="dashboard" hidden>
     <header style="margin-bottom:26px;">
-      <h1 style="font-size:clamp(26px,4vw,36px); margin-bottom:6px;">Video Lecture Manager <span class="dirty-badge" id="dirty-badge" hidden>Unsaved changes</span></h1>
+      <h1 style="font-size:clamp(26px,4vw,36px); font-weight:600; margin-bottom:6px;">Video Lecture Manager <span class="dirty-badge" id="dirty-badge" hidden>Unsaved changes</span></h1>
       <p style="color:var(--muted); font-size:15px; margin:0;">Add your YouTube lectures below. Nothing goes live until you download the updated file and push it.</p>
     </header>
 
@@ -109,7 +107,7 @@
       <label for="f-title">Video title</label>
       <input type="text" id="f-title" placeholder="e.g. Number System Conversion — Part 1">
       <div class="field-err" id="form-err"></div>
-      <button class="btn" id="add-btn" style="margin-top:10px;">➕ Add video</button>
+      <button class="btn btn-primary" id="add-btn" style="margin-top:10px;">➕ Add video</button>
     </div>
 
     <div class="admin-card">
@@ -122,11 +120,11 @@
     <div class="admin-card" style="text-align:center;">
       <h2>Publish your changes</h2>
       <p class="sub">Downloads a new <code>videos.js</code> containing everything above.</p>
-      <button class="btn" id="download-btn">⬇ Download updated videos.js</button>
+      <button class="btn btn-primary" id="download-btn">⬇ Download updated videos.js</button>
       <p class="sub" style="margin:12px 0 0;">Then replace <code>js/videos.js</code> and <code>git push</code> — see the steps at the top.</p>
     </div>
   </div>
 
-  <script src="js/admin.js?v=2"></script>
+  <script src="js/admin.js?v=1"></script>
 </body>
 </html>

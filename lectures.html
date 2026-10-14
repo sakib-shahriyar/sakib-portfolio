@@ -9,16 +9,19 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
   <meta property="og:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
-  <meta property="og:url" content="https://lecturer-pathan.vercel.app/lectures.html">
-  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta property="og:url" content="https://sakib-portfolio-dock.vercel.app/lectures.html">
+  <meta property="og:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
   <meta name="twitter:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
-  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <script src="js/theme.js?v=2"></script>
-  <script src="js/site-config.js?v=2"></script>
-  <script src="js/videos.js?v=2"></script>
+  <meta name="twitter:image" content="https://sakib-portfolio-dock.vercel.app/assets/photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="js/theme.js?v=1"></script>
+  <script src="js/site-config.js?v=1"></script>
+  <script src="js/videos.js?v=1"></script>
 </head>
 <body>
 
@@ -33,7 +36,7 @@
         <a href="about.html">About</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html" class="active">Lectures</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Contact Me</a>
       </div>
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">☾</button>
@@ -42,13 +45,13 @@
     </div>
   </nav>
 
-  <header class="container" style="padding-top:64px; text-align:center;">
-    <span class="badge reveal">Video Lectures</span>
-    <h1 class="reveal" style="font-size:clamp(30px,4.6vw,44px);">Lecture Video Hub</h1>
-    <p class="reveal" style="color:var(--muted); max-width:640px; margin:0 auto;">Concept-by-concept video lectures, organised by chapter. Search a topic or filter by chapter.</p>
+  <header class="page-head">
+    <span class="eyebrow reveal">Video Lectures</span>
+    <h1 class="reveal">Lecture Video Hub</h1>
+    <p class="reveal">Concept-by-concept video lectures, organised by chapter. Search a topic or filter by chapter.</p>
   </header>
 
-  <main class="container">
+  <main class="container" style="padding-top:56px;">
     <section class="section">
       <div class="toolbar reveal">
         <input class="search" id="video-search" type="search" placeholder="Search lectures by topic…" aria-label="Search lectures">
@@ -56,9 +59,9 @@
       </div>
       <div id="video-sections"></div>
       <p class="no-results" id="no-results">No lectures match your search. Try a different keyword.</p>
-      <div class="card reveal" style="text-align:center; margin-top:26px;">
+      <div class="card reveal" style="text-align:center; margin-top:32px;">
         <h3 style="margin-bottom:8px;">New videos are on the way</h3>
-        <p style="max-width:520px; margin:0 auto 18px;">Get a WhatsApp message the moment new ICT video lectures are published.</p>
+        <p style="max-width:520px; margin:0 auto 20px;">Get a WhatsApp message the moment new ICT video lectures are published.</p>
         <a class="btn btn-primary" href="https://wa.me/8801832202600?text=Hi!%20Please%20notify%20me%20when%20new%20ICT%20video%20lectures%20are%20published." target="_blank" rel="noopener">Notify me on WhatsApp</a>
       </div>
     </section>
@@ -77,14 +80,51 @@
     </div>
   </div>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      © <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span> ·
-      <a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+            <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=1"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var sectionsEl = document.getElementById("video-sections");
@@ -102,7 +142,7 @@
         return d ? d.chapter : id;
       }
 
-      // Filter chips
+      // Filter chips (Dock tab-bar pattern: pill background marks the active tab)
       var chips = [{ id: "all", label: "All chapters" }].concat(
         DOCUMENTS.map(function (d) { return { id: d.id, label: d.chapter.split(" — ")[0] }; })
       );
@@ -130,9 +170,9 @@
           if (activeChapter !== "all" && activeChapter !== doc.id) return;
           var vids = (VIDEOS[doc.id] || []).filter(matches);
           var sec = document.createElement("div");
-          sec.style.marginBottom = "38px";
+          sec.style.marginBottom = "48px";
           var h = document.createElement("h2");
-          h.style.fontSize = "21px"; h.style.marginBottom = "14px";
+          h.style.fontSize = "24px"; h.style.fontWeight = "600"; h.style.marginBottom = "16px";
           h.textContent = doc.chapter;
           if (doc.chapterBn) {
             var bn = document.createElement("span");
