@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sakib Shahriyar Pathan — Lecturer in ICT</title>
+  <title>Sakib Shahriyar Pathan, Lecturer in ICT</title>
   <meta name="description" content="Personal portfolio and ICT learning portal of Sakib Shahriyar Pathan, Lecturer in ICT at Gosinga Alim Madrasah.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
+  <meta property="og:title" content="Sakib Shahriyar Pathan, Lecturer in ICT">
   <meta property="og:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/">
   <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sakib Shahriyar Pathan — Lecturer in ICT">
+  <meta name="twitter:title" content="Sakib Shahriyar Pathan, Lecturer in ICT">
   <meta name="twitter:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
   <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,9 +47,9 @@
   <header class="hero">
     <div class="container">
       <img class="hero-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
-      <p class="designation"><span data-site="designation">Lecturer in ICT</span> · <span data-site="institution">Gosinga Alim Madrasah</span></p>
+      <p class="designation"><span data-site="designation">Lecturer in ICT</span><br><span data-site="institution">Gosinga Alim Madrasah</span></p>
       <h1 data-site="name">Sakib Shahriyar Pathan</h1>
-      <p class="tagline" data-site="tagline">Make ICT simple — memorise less, understand more</p>
+      <p class="tagline" data-site="tagline">Make ICT simple: memorise less, understand more.</p>
       <p><span class="tagline-dynamic" id="tagline-dynamic"></span></p>
       <div class="cta-row">
         <a class="btn btn-primary" href="notes.html">Explore Notes</a>
@@ -82,7 +82,7 @@
         <div class="card reveal">
           <span class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span>
           <h3>Contact Me</h3>
-          <p>Questions about a topic, or want the complete copy of a document? Send a message — I read every one.</p>
+          <p>Questions about a topic, or want the complete copy of a document? Send a message. I read every one.</p>
           <a class="card-link" href="contact.html">Get in touch →</a>
         </div>
       </div>
@@ -92,7 +92,7 @@
       <div class="card reveal" style="text-align:center; padding: 56px 40px;">
         <span class="eyebrow">Teaching Philosophy</span>
         <h2 style="font-size:40px; font-weight:600; line-height:1.25;">Memorise less, understand more.</h2>
-        <p style="max-width:620px; margin:0 auto 28px; font-size:18px;">ICT is not a subject to memorise — it is a subject to understand. Every note and lecture here is built around that idea: clear concepts first, examples second, exams a natural result.</p>
+        <p style="max-width:620px; margin:0 auto 28px; font-size:18px;">ICT is not a subject to memorise. It is a subject to understand. Every note and lecture here is built around that idea: clear concepts first, examples second, exams a natural result.</p>
         <a class="btn btn-primary" href="about.html">More About Me</a>
       </div>
     </section>
@@ -103,7 +103,7 @@
   <section class="cta-banner">
     <div class="container">
       <h2 class="reveal">Want the complete notes for any chapter?</h2>
-      <p class="reveal">Preview the first 4 pages free, then request the full document — I send every copy personally.</p>
+      <p class="reveal">Preview the first 4 pages free, then request the full document. I send every copy personally.</p>
       <a class="btn btn-primary reveal" href="contact.html">Get in Touch</a>
     </div>
   </section>
@@ -116,7 +116,7 @@
             <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
             <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
           </a>
-          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
         </div>
         <div>
           <h4>Pages</h4>
@@ -154,7 +154,7 @@
 
   <script src="js/main.js?v=1"></script>
   <script>
-    // Testimonials carousel — 3 visible on desktop, sliding one by one.
+    // Testimonials carousel: 3 visible on desktop, sliding one by one.
     // Rendered only when SITE.testimonials is non-empty.
     (function () {
       var list = (typeof SITE !== "undefined" && Array.isArray(SITE.testimonials))
@@ -185,6 +185,8 @@
       view.className = "t-carousel";
       var track = document.createElement("div");
       track.className = "t-track";
+      var MALE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21v-2.5C5 14.6 8 12 12 12s7 2.6 7 6.5V21H5z"/></svg>';
+      var FEMALE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.6"/><path d="M12 11.5c-2.2 0-3.8 1-4.2 2.6L5.5 21h13l-2.3-6.9c-.4-1.6-2-2.6-4.2-2.6z"/></svg>';
       var slides = list.map(function (t, i) {
         var s = document.createElement("div");
         s.className = "t-slide";
@@ -192,7 +194,8 @@
         card.className = "card t-card";
         var av = document.createElement("div");
         av.className = "t-avatar " + (i % 2 === 0 ? "cobalt" : "violet");
-        av.textContent = (t.name || "?").trim().charAt(0);
+        var sex = String(t.sex || "M").trim().toLowerCase();
+        av.innerHTML = (sex === "f" || sex === "female") ? FEMALE_ICON : MALE_ICON;
         av.setAttribute("aria-hidden", "true");
         var bq = document.createElement("blockquote");
         bq.textContent = t.text;

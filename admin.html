@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — Sakib Shahriyar Pathan</title>
+  <title>Dashboard | Sakib Shahriyar Pathan</title>
   <meta name="description" content="Private dashboard: manage video lectures for the portfolio site.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="css/style.css?v=1">
@@ -84,7 +84,7 @@
 
     <div class="admin-card">
       <h2>How publishing works</h2>
-      <p class="sub">This is a static website, so the dashboard prepares the updated data file for you — the last two steps are yours:</p>
+      <p class="sub">This is a static website, so the dashboard prepares the updated data file for you. The last two steps are yours:</p>
       <ol class="steps">
         <li>Make your changes below, then click <strong>Download updated videos.js</strong>.</li>
         <li>Replace <code>js/videos.js</code> in your site folder with the downloaded file.</li>
@@ -99,13 +99,13 @@
 
     <div class="admin-card">
       <h2>Add a video lecture</h2>
-      <p class="sub">Paste any YouTube link — the video ID is extracted automatically.</p>
+      <p class="sub">Paste any YouTube link. The video ID is extracted automatically.</p>
       <label for="f-chapter">Chapter</label>
       <select id="f-chapter"></select>
       <label for="f-url">YouTube link or video ID</label>
       <input type="text" id="f-url" placeholder="https://www.youtube.com/watch?v=...">
       <label for="f-title">Video title</label>
-      <input type="text" id="f-title" placeholder="e.g. Number System Conversion — Part 1">
+      <input type="text" id="f-title" placeholder="e.g. Number System Conversion, Part 1">
       <div class="field-err" id="form-err"></div>
       <button class="btn btn-primary" id="add-btn" style="margin-top:10px;">➕ Add video</button>
     </div>
@@ -117,11 +117,22 @@
       <div id="video-list"></div>
     </div>
 
+    <div class="admin-card">
+      <h2>Announce a new video on WhatsApp</h2>
+      <p class="sub">Pick the video, then open WhatsApp with the announcement already written. Send it to your broadcast list of subscribers.</p>
+      <label for="announce-video">Video</label>
+      <select id="announce-video"></select>
+      <label for="announce-text">Message preview</label>
+      <textarea id="announce-text" rows="4" readonly style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:12px; font-family:inherit; font-size:14px; background:var(--surface); color:var(--text);"></textarea>
+      <a class="btn btn-primary" id="announce-send" href="#" target="_blank" rel="noopener" style="margin-top:12px; display:inline-block;">Open in WhatsApp</a>
+      <p class="sub" style="margin:12px 0 0;">Note: WhatsApp does not let a website send messages by itself. This opens WhatsApp with the message ready, so announcing is one tap instead of typing it out.</p>
+    </div>
+
     <div class="admin-card" style="text-align:center;">
       <h2>Publish your changes</h2>
       <p class="sub">Downloads a new <code>videos.js</code> containing everything above.</p>
       <button class="btn btn-primary" id="download-btn">⬇ Download updated videos.js</button>
-      <p class="sub" style="margin:12px 0 0;">Then replace <code>js/videos.js</code> and <code>git push</code> — see the steps at the top.</p>
+      <p class="sub" style="margin:12px 0 0;">Then replace <code>js/videos.js</code> and <code>git push</code>. See the steps at the top.</p>
     </div>
   </div>
 

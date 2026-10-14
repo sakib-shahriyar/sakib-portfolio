@@ -56,6 +56,11 @@ HOW IT WORKS
   nothing stored online.
 - Floating WhatsApp button (bottom-right) appears on the 5 public
   pages; the number comes from js/site-config.js → whatsapp.
+- "Notify me on WhatsApp" (lectures page) asks the visitor for their
+  WhatsApp number, then opens your WhatsApp with their number prefilled
+  so you receive it as a message. Save those numbers to a WhatsApp
+  broadcast list. (A static site cannot store visitor data or send
+  messages by itself.)
 
 PRIVATE DASHBOARD (admin.html)
 ------------------------------
@@ -65,6 +70,10 @@ YouTube lectures per chapter, then Download updated videos.js →
 replace js/videos.js → git add, commit, push. The passcode is a
 casual lock only — a static site cannot have real logins; only you
 can push to your repository, and that is the real protection.
+The dashboard also has "Announce a new video on WhatsApp": pick the
+video and it opens WhatsApp with the announcement (title + link to
+the lectures page) already written — send it to your broadcast list
+of subscribers in one tap.
 
 IMPORTANT — SHARE-LINK DOMAIN
 ------------------------------

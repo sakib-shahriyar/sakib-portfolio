@@ -1,4 +1,4 @@
-/* Theme toggle — runs early to avoid a flash of the wrong theme. */
+/* Theme toggle: runs early to avoid a flash of the wrong theme. */
 (function () {
   var KEY = "spd-theme";
   function current() {

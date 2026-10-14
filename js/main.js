@@ -2,7 +2,7 @@
    active nav link, and floating WhatsApp button. */
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
-    // Active nav link — marks whichever page the visitor is on.
+    // Active nav link: marks whichever page the visitor is on.
     (function () {
       var links = document.getElementById("nav-links");
       if (!links) return;

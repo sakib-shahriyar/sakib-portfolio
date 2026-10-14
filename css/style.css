@@ -1,5 +1,5 @@
 /* ============================================================
-   DOCK design system — light + dark themes.
+   DOCK design system: light + dark themes.
    Light: canvas #faf9f7 (never pure white) · Ink #121722.
    Dark: deep ink-blue palette via [data-theme="dark"] overrides.
    Electric Cobalt #0068f9 is the ONLY interactive color.
@@ -99,7 +99,7 @@ img { max-width: 100%; }
 .section { margin-bottom: 80px; }
 .section:last-child { margin-bottom: 0; }
 /* The testimonials section is the only child of its mount div, so the
-   :last-child reset above would remove its bottom spacing — restore it. */
+   :last-child reset above would remove its bottom spacing. Restoring it. */
 #testimonials-mount .section:last-child { margin-bottom: 80px; }
 
 /* ---------- Eyebrow / caption label ---------- */
@@ -235,8 +235,9 @@ img { max-width: 100%; }
 .t-avatar {
   width: 48px; height: 48px; border-radius: 50%; flex: none;
   display: grid; place-items: center; color: #ffffff;
-  font-size: 20px; font-weight: 600; margin-bottom: 16px;
+  margin-bottom: 16px;
 }
+.t-avatar svg { width: 26px; height: 26px; fill: #ffffff; display: block; }
 .t-avatar.cobalt { background: var(--color-electric-cobalt); }
 .t-avatar.violet { background: var(--color-vivid-violet); }
 .t-card blockquote { margin: 0 0 16px; font-size: 16px; line-height: 1.6; flex: 1; }

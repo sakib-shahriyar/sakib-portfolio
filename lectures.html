@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan</title>
-  <meta name="description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <title>Video Lectures | এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan</title>
+  <meta name="description" content="এইচএসসি আইসিটি ভিডিও লেকচার. HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
-  <meta property="og:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <meta property="og:title" content="Video Lectures | এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
+  <meta property="og:description" content="এইচএসসি আইসিটি ভিডিও লেকচার. HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/lectures.html">
   <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Video Lectures — এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
-  <meta name="twitter:description" content="এইচএসসি আইসিটি ভিডিও লেকচার — HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
+  <meta name="twitter:title" content="Video Lectures | এইচএসসি আইসিটি ভিডিও লেকচার | Sakib Shahriyar Pathan">
+  <meta name="twitter:description" content="এইচএসসি আইসিটি ভিডিও লেকচার. HSC ICT video lectures organised by chapter. Search and filter to find your topic.">
   <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,10 +62,25 @@
       <div class="card reveal" style="text-align:center; margin-top:32px;">
         <h3 style="margin-bottom:8px;">New videos are on the way</h3>
         <p style="max-width:520px; margin:0 auto 20px;">Get a WhatsApp message the moment new ICT video lectures are published.</p>
-        <a class="btn btn-primary" href="https://wa.me/8801832202600?text=Hi!%20Please%20notify%20me%20when%20new%20ICT%20video%20lectures%20are%20published." target="_blank" rel="noopener">Notify me on WhatsApp</a>
+        <button class="btn btn-primary" id="notify-btn">Notify me on WhatsApp</button>
       </div>
     </section>
   </main>
+
+  <!-- Subscribe modal -->
+  <div class="modal-backdrop" id="notify-modal" role="dialog" aria-modal="true" aria-label="Subscribe to WhatsApp notifications">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-head">
+        <h3 style="margin:0;">Get notified on WhatsApp</h3>
+        <button class="modal-close" id="notify-close" aria-label="Close">✕</button>
+      </div>
+      <p style="color:var(--color-slate-gray); font-size:15px;">Enter your WhatsApp number below. You will receive a message from me whenever a new lecture is published.</p>
+      <label for="notify-phone">Your WhatsApp number</label>
+      <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel">
+      <div class="field-err" id="notify-err"></div>
+      <button class="btn btn-primary" id="notify-submit" style="margin-top:14px; width:100%;">Subscribe</button>
+    </div>
+  </div>
 
   <!-- Video player modal -->
   <div class="modal-backdrop" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
@@ -88,7 +103,7 @@
             <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
             <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
           </a>
-          <p data-site="tagline">Make ICT simple — memorise less, understand more</p>
+          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
         </div>
         <div>
           <h4>Pages</h4>
@@ -144,7 +159,7 @@
 
       // Filter chips (Dock tab-bar pattern: pill background marks the active tab)
       var chips = [{ id: "all", label: "All chapters" }].concat(
-        DOCUMENTS.map(function (d) { return { id: d.id, label: d.chapter.split(" — ")[0] }; })
+        DOCUMENTS.map(function (d) { return { id: d.id, label: d.chapter.split(" - ")[0] }; })
       );
       chips.forEach(function (c) {
         var b = document.createElement("button");
@@ -188,7 +203,7 @@
           if (vids.length === 0) {
             var empty = document.createElement("div");
             empty.className = "empty-state";
-            empty.innerHTML = '<span class="big">🎬</span><strong>Video lectures coming soon</strong><br>Lectures for this chapter are being recorded — check back later.';
+            empty.innerHTML = '<span class="big">🎬</span><strong>Video lectures coming soon</strong><br>Lectures for this chapter are being recorded. Check back later.';
             sec.appendChild(empty);
           } else {
             anyVisible = true;
@@ -233,6 +248,48 @@
       });
 
       render();
+
+      // ---- WhatsApp notify subscription ----
+      // Static sites cannot store visitor data, so subscribing sends the
+      // visitor's number to the site owner as a WhatsApp message instead.
+      var notifyBtn = document.getElementById("notify-btn");
+      var notifyModal = document.getElementById("notify-modal");
+      var notifyPhone = document.getElementById("notify-phone");
+      var notifyErr = document.getElementById("notify-err");
+      function updateNotifyBtn() {
+        var done = false;
+        try { done = localStorage.getItem("spd-notify") === "1"; } catch (e) {}
+        notifyBtn.textContent = done ? "Subscribed ✓" : "Notify me on WhatsApp";
+      }
+      function openNotify() {
+        notifyErr.textContent = "";
+        notifyModal.classList.add("open");
+        document.body.style.overflow = "hidden";
+        setTimeout(function () { notifyPhone.focus(); }, 60);
+      }
+      function closeNotify() {
+        notifyModal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      notifyBtn.addEventListener("click", openNotify);
+      document.getElementById("notify-close").addEventListener("click", closeNotify);
+      notifyModal.addEventListener("click", function (e) { if (e.target === notifyModal) closeNotify(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNotify(); });
+      document.getElementById("notify-submit").addEventListener("click", function () {
+        var raw = notifyPhone.value.trim();
+        if (raw.replace(/\D/g, "").length < 7) {
+          notifyErr.textContent = "Please enter a valid WhatsApp number.";
+          notifyPhone.focus();
+          return;
+        }
+        var msg = "Hi! Please notify me when new ICT video lectures are published. My WhatsApp number is: " + raw;
+        var base = (typeof SITE !== "undefined" && SITE.whatsapp) || "https://wa.me/8801832202600";
+        window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+        try { localStorage.setItem("spd-notify", "1"); } catch (e) {}
+        updateNotifyBtn();
+        closeNotify();
+      });
+      updateNotifyBtn();
     });
   </script>
 </body>

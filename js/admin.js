@@ -1,5 +1,5 @@
 /* ============================================================
-   ADMIN DASHBOARD — video lecture manager (admin.html only).
+   ADMIN DASHBOARD: video lecture manager (admin.html only).
    Lets the site owner add/remove YouTube lectures per chapter
    and download an updated videos.js to publish via git push.
    ============================================================ */
@@ -10,7 +10,7 @@
     var lockScreen = document.getElementById("lock-screen");
     var dashboard = document.getElementById("dashboard");
 
-    // ---- Passcode gate (casual lock only — see site-config.js note) ----
+    // ---- Passcode gate (casual lock only; see site-config.js note) ----
     var PASS = (typeof SITE !== "undefined" && SITE.adminPasscode) || "sakib123";
     function isUnlocked() {
       try { return sessionStorage.getItem("admin-unlocked") === "yes"; } catch (e) { return false; }
@@ -106,7 +106,7 @@
       if (!vids.length) {
         var p = document.createElement("p");
         p.className = "empty-note";
-        p.textContent = "No videos in this chapter yet — add your first one above.";
+        p.textContent = "No videos in this chapter yet. Add your first one above.";
         videoList.appendChild(p);
         return;
       }
@@ -134,7 +134,7 @@
         del.addEventListener("click", function () {
           if (confirm('Delete "' + v.title + '"?')) {
             working[activeChapter].splice(idx, 1);
-            renderChips(); renderList(); refreshDirty();
+            renderChips(); renderList(); refreshDirty(); refreshAnnounce();
           }
         });
         row.appendChild(thumb);
@@ -152,6 +152,7 @@
     }
 
     var formErr = document.getElementById("form-err");
+    var lastAddedKey = null; // "chapterId|videoId" of the video added this session
     document.getElementById("add-btn").addEventListener("click", function () {
       var chId = chapterSelect.value;
       var vid = extractId(document.getElementById("f-url").value);
@@ -164,16 +165,17 @@
       });
       if (exists) { formErr.textContent = "This video is already in your list."; return; }
       working[chId].push({ id: vid, title: title });
+      lastAddedKey = chId + "|" + vid;
       document.getElementById("f-url").value = "";
       document.getElementById("f-title").value = "";
       activeChapter = chId;
-      renderChips(); renderList(); refreshDirty();
+      renderChips(); renderList(); refreshDirty(); refreshAnnounce();
     });
 
     document.getElementById("download-btn").addEventListener("click", function () {
       var out = [];
       out.push("/* ============================================================");
-      out.push("   VIDEO LECTURES — managed from the site dashboard (admin.html).");
+      out.push("   VIDEO LECTURES: managed from the site dashboard (admin.html).");
       out.push("   To edit by hand, add entries like this inside a chapter's [ ] list:");
       out.push("");
       out.push('     { id: "dQw4w9WgXcQ", title: "What is a Number System?" },');
@@ -208,5 +210,67 @@
     renderChips();
     renderList();
     refreshDirty();
+
+    // ---- WhatsApp announcement composer ----
+    // WhatsApp offers no API for a static site to send messages on its own,
+    // so this prepares the announcement text and opens WhatsApp with it
+    // prefilled. One tap on the broadcast list sends it to every subscriber.
+    var announceVideo = document.getElementById("announce-video");
+    var announceText = document.getElementById("announce-text");
+    var announceSend = document.getElementById("announce-send");
+    var siteBase = (typeof SITE !== "undefined" && SITE.siteUrl) || "https://lecturer-pathan.vercel.app";
+
+    function chapterLabel(id) {
+      var ch = chapters.filter(function (c) { return c.id === id; })[0];
+      return ch ? ch.name.split(" - ")[0] : id;
+    }
+    function composeAnnounce() {
+      var key = announceVideo.value;
+      if (!key) {
+        announceText.value = "Add a video above, then pick it here to compose the announcement.";
+        announceSend.style.display = "none";
+        return;
+      }
+      announceSend.style.display = "";
+      var parts = key.split("|");
+      var vids = working[parts[0]] || [];
+      var v = vids.filter(function (x) { return x.id === parts[1]; })[0];
+      if (!v) { announceText.value = ""; announceSend.style.display = "none"; return; }
+      var msg = "New ICT lecture: " + v.title +
+        "\n(" + chapterLabel(parts[0]) + ")" +
+        "\nWatch it here: " + siteBase + "/lectures.html";
+      announceText.value = msg;
+      announceSend.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+    }
+    function refreshAnnounce() {
+      var keep = announceVideo.value;
+      announceVideo.innerHTML = "";
+      var keys = [];
+      chapters.forEach(function (ch) {
+        var grp = document.createElement("optgroup");
+        grp.label = ch.name;
+        var any = false;
+        (working[ch.id] || []).forEach(function (v) {
+          var opt = document.createElement("option");
+          opt.value = ch.id + "|" + v.id;
+          opt.textContent = v.title;
+          grp.appendChild(opt);
+          keys.push(opt.value);
+          any = true;
+        });
+        if (any) announceVideo.appendChild(grp);
+      });
+      if (!keys.length) {
+        announceVideo.disabled = true;
+      } else {
+        announceVideo.disabled = false;
+        announceVideo.value = (lastAddedKey && keys.indexOf(lastAddedKey) !== -1)
+          ? lastAddedKey
+          : (keys.indexOf(keep) !== -1 ? keep : keys[keys.length - 1]);
+      }
+      composeAnnounce();
+    }
+    announceVideo.addEventListener("change", composeAnnounce);
+    refreshAnnounce();
   }
 })();
