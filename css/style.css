@@ -98,6 +98,9 @@ img { max-width: 100%; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .section { margin-bottom: 80px; }
 .section:last-child { margin-bottom: 0; }
+/* The testimonials section is the only child of its mount div, so the
+   :last-child reset above would remove its bottom spacing — restore it. */
+#testimonials-mount .section:last-child { margin-bottom: 80px; }
 
 /* ---------- Eyebrow / caption label ---------- */
 .eyebrow {
