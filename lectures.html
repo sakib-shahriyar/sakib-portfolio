@@ -187,17 +187,18 @@
         card.querySelector("h4").textContent = v.title;
         card.querySelector("p").textContent = doc.chapter;
         card.addEventListener("click", function () { playVideo(v); });
-        var share = document.createElement("button");
+        var share = document.createElement("a");
         share.className = "video-share";
         share.setAttribute("aria-label", "Share this video on WhatsApp");
         share.setAttribute("title", "Share on WhatsApp");
+        share.target = "_blank";
+        share.rel = "noopener";
+        var shareBase = (typeof SITE !== "undefined" && SITE.siteUrl) || "https://lecturer-pathan.vercel.app";
+        share.href = "https://wa.me/?text=" + encodeURIComponent(v.title + " " + shareBase + "/lectures.html?v=" + v.id);
         share.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l7 7-7 7v-4C8 15 5 17.5 3 20c.5-5 3.5-9.5 8-11.5V5z"/></svg>';
-        share.addEventListener("click", function (e) {
-          e.stopPropagation();
-          var base = (typeof SITE !== "undefined" && SITE.siteUrl) || "https://lecturer-pathan.vercel.app";
-          var link = base + "/lectures.html?v=" + v.id;
-          window.open("https://wa.me/?text=" + encodeURIComponent(v.title + " " + link), "_blank", "noopener");
-        });
+        // Stop the click reaching the card (which would play the video);
+        // the link itself navigates normally, no popup involved.
+        share.addEventListener("click", function (e) { e.stopPropagation(); });
         card.querySelector(".video-thumb").appendChild(share);
         return card;
       }
