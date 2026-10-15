@@ -207,12 +207,13 @@
         sectionsEl.innerHTML = "";
         var anyVisible = false;
         var docs = DOCUMENTS.slice();
-        if (activeChapter === "all" && !query) {
+        if (activeChapter === "all") {
           // Recently added: newest videos across all chapters, latest first.
+          // During search it stays visible, showing only matching videos.
           var recent = [];
           DOCUMENTS.forEach(function (doc) {
             (VIDEOS[doc.id] || []).forEach(function (v) {
-              if (v.addedAt) recent.push({ v: v, doc: doc });
+              if (v.addedAt && matches(v)) recent.push({ v: v, doc: doc });
             });
           });
           recent.sort(function (a, b) { return b.v.addedAt.localeCompare(a.v.addedAt); });
