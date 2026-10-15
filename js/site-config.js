@@ -154,3 +154,82 @@ var DOCUMENTS = [
     preview: "assets/previews/ch6-preview.pdf"
   }
 ];
+
+/* ============================================================
+   O LEVEL DOCUMENTS: Cambridge O Level Computer Science notes.
+   Same fields as DOCUMENTS above. ids use the "ol" prefix so
+   they never clash with HSC ids.
+   ============================================================ */
+
+var OLEVEL_DOCUMENTS = [
+  {
+    id: "ol1",
+    chapter: "Chapter 1 - Data Representation",
+    title: "O Level CS Chapter 1 Detailed Notes",
+    desc: "Number systems, binary shifts, character sets, sound and image sampling, compression.",
+    preview: "assets/previews/olevel-ch1-preview.pdf"
+  },
+  {
+    id: "ol2",
+    chapter: "Chapter 2 - Data Transmission",
+    title: "O Level CS Chapter 2 Detailed Notes",
+    desc: "Packets, parity checks, checksums, encryption, symmetric and asymmetric keys.",
+    preview: "assets/previews/olevel-ch2-preview.pdf"
+  },
+  {
+    id: "ol3",
+    chapter: "Chapter 3 - Hardware",
+    title: "O Level CS Chapter 3 Detailed Notes",
+    desc: "CPU and the fetch-execute cycle, input/output devices, sensors, storage.",
+    preview: "assets/previews/olevel-ch3-preview.pdf"
+  },
+  {
+    id: "ol4",
+    chapter: "Chapter 4 - Software",
+    title: "O Level CS Chapter 4 Detailed Notes",
+    desc: "System vs application software, OS functions, interrupts, compilers and interpreters.",
+    preview: "assets/previews/olevel-ch4-preview.pdf"
+  },
+  {
+    id: "ol5",
+    chapter: "Chapter 5 - The Internet and Its Uses",
+    title: "O Level CS Chapter 5 Detailed Notes",
+    desc: "How the internet works, URLs, DNS, blockchain, cyber threats and defences.",
+    preview: "assets/previews/olevel-ch5-preview.pdf"
+  },
+  {
+    id: "ol6",
+    chapter: "Chapter 6 - Automated and Emerging Technologies",
+    title: "O Level CS Chapter 6 Detailed Notes",
+    desc: "Automated systems, robotics, expert systems and machine learning.",
+    preview: "assets/previews/olevel-ch6-preview.pdf"
+  },
+  {
+    id: "ol7",
+    chapter: "Chapter 7 - Algorithm Design and Problem Solving",
+    title: "O Level CS Chapter 7 Detailed Notes",
+    desc: "Pseudocode, flowcharts, validation, test data, searching and sorting.",
+    preview: "assets/previews/olevel-ch7-preview.pdf"
+  },
+  {
+    id: "ol8",
+    chapter: "Chapter 8 - Programming",
+    title: "O Level CS Chapter 8 Detailed Notes",
+    desc: "Variables, data types, selection, loops, procedures, arrays and file handling.",
+    preview: "assets/previews/olevel-ch8-preview.pdf"
+  },
+  {
+    id: "ol9",
+    chapter: "Chapter 9 - Databases",
+    title: "O Level CS Chapter 9 Detailed Notes",
+    desc: "Single-table databases, primary keys and SQL queries with worked examples.",
+    preview: "assets/previews/olevel-ch9-preview.pdf"
+  },
+  {
+    id: "ol10",
+    chapter: "Chapter 10 - Boolean Logic",
+    title: "O Level CS Chapter 10 Detailed Notes",
+    desc: "Logic gates, truth tables, Boolean expressions and logic circuits.",
+    preview: "assets/previews/olevel-ch10-preview.pdf"
+  }
+];

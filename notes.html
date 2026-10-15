@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=3">
   <script src="js/theme.js?v=1"></script>
-  <script src="js/site-config.js?v=2"></script>
+  <script src="js/site-config.js?v=3"></script>
 </head>
 <body>
 
@@ -46,12 +46,13 @@
 
   <header class="page-head">
     <span class="eyebrow reveal">Study Notes</span>
-    <h1 class="reveal">HSC ICT Chapter Notes</h1>
-    <p class="reveal">Preview the first 4 pages of any document free. Like what you see? Request the complete copy and I will send it to you.</p>
+    <h1 class="reveal" id="notes-title">Pick your notes</h1>
+    <p class="reveal" id="notes-sub">Two complete sets. Preview the first 4 pages of any document free, then request the complete copy.</p>
   </header>
 
   <main class="container" style="padding-top:56px;">
     <section class="section">
+      <a class="card-link" id="notes-back" href="notes.html" style="display:none; margin-bottom:24px;">← All notes</a>
       <div class="grid grid-3" id="doc-grid"></div>
     </section>
   </main>
@@ -134,8 +135,30 @@
       var pmChapter = document.getElementById("pm-chapter");
       var pmTitle = document.getElementById("pm-title");
       var pmRequest = document.getElementById("pm-request");
+      var notesTitle = document.getElementById("notes-title");
+      var notesSub = document.getElementById("notes-sub");
+      var notesBack = document.getElementById("notes-back");
 
-      DOCUMENTS.forEach(function (doc) {
+      var SETS = {
+        hsc: {
+          name: "NCTB HSC ICT Notes",
+          docs: (typeof DOCUMENTS !== "undefined") ? DOCUMENTS : []
+        },
+        olevel: {
+          name: "Cambridge O Level CS Notes",
+          docs: (typeof OLEVEL_DOCUMENTS !== "undefined") ? OLEVEL_DOCUMENTS : []
+        }
+      };
+      var SET_SUB = "Preview the first 4 pages of any document free. Like what you see? Request the complete copy and I will send it to you.";
+
+      var activeSet = null;
+      try {
+        var q = new URLSearchParams(window.location.search);
+        var sq = q.get("set") || q.get("tab");
+        if (sq === "hsc" || sq === "olevel") activeSet = sq;
+      } catch (e) {}
+
+      function docCard(doc, onOpen) {
         var card = document.createElement("div");
         card.className = "card doc-card reveal";
         card.innerHTML =
@@ -143,13 +166,15 @@
           '<h3 class="doc-ch"></h3>' +
           '<p class="doc-bn"></p>' +
           '<p class="doc-desc"></p>' +
-          '<a class="card-link" href="#">Preview document →</a>';
-        card.querySelector(".doc-ch").textContent = doc.chapter;
-        card.querySelector(".doc-bn").textContent = doc.chapterBn || "";
+          '<a class="card-link" href="#"></a>';
+        card.querySelector(".doc-ch").textContent = doc.chapter || doc.name;
+        card.querySelector(".doc-bn").textContent = doc.chapterBn || doc.count || "";
         card.querySelector(".doc-desc").textContent = doc.desc;
-        card.querySelector("a").addEventListener("click", function (e) {
+        var link = card.querySelector("a");
+        link.textContent = doc.linkText || "Preview document \u2192";
+        link.addEventListener("click", function (e) {
           e.preventDefault();
-          openPreview(doc);
+          onOpen(doc);
         });
         grid.appendChild(card);
         // reveal needs observing since cards are added after main.js ran
@@ -160,7 +185,47 @@
             });
           }, { threshold: 0.12 }).observe(card);
         } else { card.classList.add("in"); }
-      });
+      }
+
+      function renderLanding() {
+        notesTitle.textContent = "Pick your notes";
+        notesSub.textContent = "Two complete sets. Preview the first 4 pages of any document free, then request the complete copy.";
+        notesBack.style.display = "none";
+        grid.innerHTML = "";
+        [
+          {
+            name: "NCTB HSC ICT Notes",
+            count: SETS.hsc.docs.length + " documents",
+            desc: "Chapter-wise detailed notes covering all six HSC ICT chapters, based on the NCTB curriculum.",
+            linkText: "Browse notes \u2192",
+            set: "hsc"
+          },
+          {
+            name: "Cambridge O Level CS Notes",
+            count: SETS.olevel.docs.length + " documents",
+            desc: "Chapter-wise detailed notes covering all ten Cambridge O Level Computer Science chapters.",
+            linkText: "Browse notes \u2192",
+            set: "olevel"
+          }
+        ].forEach(function (item) {
+          docCard(item, function (d) {
+            window.location.href = "notes.html?set=" + d.set;
+          });
+        });
+      }
+
+      function renderSet() {
+        var set = SETS[activeSet];
+        notesTitle.textContent = set.name;
+        notesSub.textContent = SET_SUB;
+        notesBack.style.display = "inline-block";
+        grid.innerHTML = "";
+        set.docs.forEach(function (doc) {
+          docCard(doc, openPreview);
+        });
+      }
+
+      if (activeSet) { renderSet(); } else { renderLanding(); }
 
       function openPreview(doc) {
         pmChapter.textContent = doc.chapter;
