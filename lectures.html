@@ -54,7 +54,7 @@
   <main class="container" style="padding-top:56px;">
     <section class="section">
       <div class="toolbar reveal">
-        <input class="search" id="video-search" type="search" placeholder="Search lectures by topic…" aria-label="Search lectures">
+        <input class="search" id="video-search" type="search" placeholder="Search lectures by topic or chapter…" aria-label="Search lectures">
         <div class="filter-chips" id="chapter-filters"></div>
       </div>
       <div id="video-sections"></div>
@@ -174,8 +174,12 @@
         filtersEl.appendChild(b);
       });
 
-      function matches(v) {
-        return v.title.toLowerCase().indexOf(query) !== -1;
+      function matches(v, doc) {
+        if (!query) return true;
+        if (v.title.toLowerCase().indexOf(query) !== -1) return true;
+        if (doc && doc.chapter && doc.chapter.toLowerCase().indexOf(query) !== -1) return true;
+        if (doc && doc.chapterBn && doc.chapterBn.indexOf(query) !== -1) return true;
+        return false;
       }
 
       function videoCard(v, doc) {
@@ -213,7 +217,7 @@
           var recent = [];
           DOCUMENTS.forEach(function (doc) {
             (VIDEOS[doc.id] || []).forEach(function (v) {
-              if (v.addedAt && matches(v)) recent.push({ v: v, doc: doc });
+              if (v.addedAt && matches(v, doc)) recent.push({ v: v, doc: doc });
             });
           });
           recent.sort(function (a, b) { return b.v.addedAt.localeCompare(a.v.addedAt); });
@@ -235,7 +239,7 @@
         }
         docs.forEach(function (doc) {
           if (activeChapter !== "all" && activeChapter !== doc.id) return;
-          var vids = (VIDEOS[doc.id] || []).filter(matches);
+          var vids = (VIDEOS[doc.id] || []).filter(function (v) { return matches(v, doc); });
           var sec = document.createElement("div");
           sec.style.marginBottom = "48px";
           var h = document.createElement("h2");
