@@ -2,16 +2,16 @@
    25 questions, 20-minute timer, instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc: { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json", title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" }
   };
-  var subjectKey = "olevel";
-  var banks = {};
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
   var LETTERS = ["A", "B", "C", "D"];
 
-  var bank = null;
+  var banks = {};  // subject key -> bank JSON (cached)
+  var bank = null; // current subject's bank
+  var subject = null; // current subject key
   var state = null; // { title, chapterwise, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto }
 
   function $(id) { return document.getElementById(id); }
@@ -48,19 +48,39 @@
     };
   }
 
-  function loadBank(key, cb) {
-    if (banks[key]) { bank = banks[key]; cb(bank); return; }
+  function showSetup(key) {
+    subject = key;
+    bank = null;
+    $("setup-title").textContent = SUBJECTS[key].title;
+    $("chapter-picker").hidden = true;
+    show("view-setup");
+    loadBank(function () {});
+  }
+
+  function afterBankLoad() {
+    $("setup-loading").hidden = true;
+    $("setup-types").hidden = false;
+    $("wholebook-desc").textContent =
+      "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
+    renderChapterGrid();
+  }
+
+  function loadBank(cb) {
+    if (banks[subject]) {
+      bank = banks[subject];
+      afterBankLoad();
+      cb(bank);
+      return;
+    }
     $("setup-loading").hidden = false;
     $("setup-types").hidden = true;
-    fetch(SUBJECTS[key].bankUrl).then(function (r) {
+    fetch(SUBJECTS[subject].bankUrl).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (data) {
-      banks[key] = data;
+      banks[subject] = data;
       bank = data;
-      $("setup-loading").hidden = true;
-      $("setup-types").hidden = false;
-      renderChapterGrid();
+      afterBankLoad();
       cb(bank);
     }).catch(function () {
       $("setup-loading").textContent = "Could not load the question bank. Please check your connection and try again.";
@@ -301,22 +321,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    function startSubject(key) {
-      subjectKey = key;
-      $("setup-title").textContent = SUBJECTS[key].title;
-      show("view-setup");
-      loadBank(key, function () {
-        $("type-wholebook").querySelector("p").textContent =
-          "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
-      });
-    }
-    $("start-olevel").addEventListener("click", function (e) {
-      e.preventDefault();
-      startSubject("olevel");
-    });
     $("start-hsc").addEventListener("click", function (e) {
       e.preventDefault();
-      startSubject("hsc");
+      showSetup("hsc");
+    });
+    $("start-olevel").addEventListener("click", function (e) {
+      e.preventDefault();
+      showSetup("olevel");
     });
     $("setup-back").addEventListener("click", function (e) {
       e.preventDefault();
@@ -325,10 +336,10 @@
     });
 
     function pickChapterwise() {
-      loadBank(subjectKey, function () { $("chapter-picker").hidden = false; });
+      loadBank(function () { $("chapter-picker").hidden = false; });
     }
     function pickWholeBook() {
-      loadBank(subjectKey, function () {
+      loadBank(function () {
         var all = [];
         bank.chapters.forEach(function (ch) {
           ch.questions.forEach(function (q) { all.push(prepQuestion(q, chapterTitle(ch))); });
