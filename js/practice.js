@@ -2,7 +2,7 @@
    25 questions, 20-minute timer, instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=5",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=6",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" }
   };
   var TEST_LEN = 25;
