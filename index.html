@@ -10,11 +10,11 @@
   <meta property="og:title" content="Sakib Shahriyar Pathan, Lecturer in ICT">
   <meta property="og:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/">
-  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sakib Shahriyar Pathan, Lecturer in ICT">
   <meta name="twitter:description" content="HSC ICT study notes, video lectures and guidance from Sakib Shahriyar Pathan, Lecturer in ICT. Memorise less, understand more.">
-  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo.png">
+  <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -27,23 +27,24 @@
       { "@type": "EducationalOrganization", "name": "Southeast University" }
     ],
     "url": "https://lecturer-pathan.vercel.app/",
-    "image": "https://lecturer-pathan.vercel.app/assets/photo.png",
+    "image": "https://lecturer-pathan.vercel.app/assets/photo-og.jpg",
     "knowsAbout": ["HSC ICT", "Computer Science", "Cambridge O Level", "Edexcel International GCSE"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/photo-hero.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=3">
   <script src="js/theme.js?v=1"></script>
-  <script src="js/site-config.js?v=3"></script>
+  <script defer src="js/site-config.js?v=3"></script>
 </head>
 <body>
 
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="index.html">
-        <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+        <img class="brand-photo" src="assets/photo-nav.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
         <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
       </a>
       <div class="nav-links" id="nav-links">
@@ -63,7 +64,7 @@
 
   <header class="hero">
     <div class="container">
-      <img class="hero-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+      <img class="hero-photo" src="assets/photo-hero.webp" width="350" height="371" fetchpriority="high" alt="Photo of Sakib Shahriyar Pathan">
       <p class="designation"><span data-site="designation">Lecturer in ICT</span><br><span data-site="institution">Gosinga Alim Madrasah</span></p>
       <h1 data-site="name">Sakib Shahriyar Pathan</h1>
       <p class="tagline" data-site="tagline">Make ICT simple: memorise less, understand more.</p>
@@ -130,7 +131,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a class="brand" href="index.html" style="margin-bottom:14px;">
-            <img class="brand-photo" src="assets/photo.png" alt="Photo of Sakib Shahriyar Pathan">
+        <img class="brand-photo" loading="lazy" src="assets/photo-nav.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
             <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
           </a>
           <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
@@ -171,7 +172,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script defer src="js/main.js?v=2"></script>
   <script>
     // Testimonials carousel: 3 visible on desktop, sliding one by one.
     // Rendered only when SITE.testimonials is non-empty.
