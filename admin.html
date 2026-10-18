@@ -219,6 +219,8 @@ img { max-width: 100%; }
   border-radius: 16px;
   padding: 24px;
   box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
 }
 .card h3 { font-size: 20px; font-weight: 600; line-height: 1.38; margin-bottom: 8px; }
 .card p { color: var(--color-slate-gray); font-size: 15px; margin-bottom: 12px; }
@@ -228,7 +230,7 @@ img { max-width: 100%; }
   background: var(--color-lavender-mist); margin-bottom: 16px;
 }
 .card-icon svg { width: 24px; height: 24px; stroke: var(--color-vivid-violet); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.card-link { font-size: 15px; }
+.card-link { font-size: 15px; margin-top: auto; padding-top: 12px; }
 .grid { display: grid; gap: 24px; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
