@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/inter-latin.woff2') format('woff2');
+}
 /* ============================================================
    DOCK design system: light + dark themes.
    Light: canvas #faf9f7 (never pure white) · Ink #121722.
