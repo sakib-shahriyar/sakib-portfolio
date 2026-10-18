@@ -44,7 +44,8 @@
       options: order.map(function (o) { return o.text; }),
       answer: answer,
       explanation: q.explanation,
-      chapter: chapterTitle
+      chapter: chapterTitle,
+      figure: q.figure || null
     };
   }
 
@@ -198,6 +199,9 @@
       card.className = "qcard";
       card.id = "qcard-" + i;
       var html = '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + escapeHtml(q.question) + "</p>";
+      if (q.figure) {
+        html += '<div class="qfig"><img src="' + escapeHtml(q.figure) + '" alt="Circuit diagram for question ' + (i + 1) + '" loading="lazy"></div>';
+      }
       html += '<div class="qopts" role="radiogroup" aria-label="Question ' + (i + 1) + ' options">';
       q.options.forEach(function (opt, oi) {
         var oid = "q" + i + "o" + oi;

@@ -4302,7 +4302,8 @@
             "কোয়ান্টাম পদার্থ"
           ],
           "answer": 0,
-          "explanation": "চিত্রের পদার্থটি ন্যানোপার্টিকেল।"
+          "explanation": "চিত্রের পদার্থটি ন্যানোপার্টিকেল।",
+          "figure": "assets/mcq/figures/hsc1-q358-q359.png"
         },
         {
           "id": "hsc1-q359",
@@ -4314,7 +4315,8 @@
             "ii ও iii"
           ],
           "answer": 2,
-          "explanation": "পৃষ্ঠদেশ বেশি ও রাসায়নিকভাবে ক্রিয়াশীল।"
+          "explanation": "পৃষ্ঠদেশ বেশি ও রাসায়নিকভাবে ক্রিয়াশীল।",
+          "figure": "assets/mcq/figures/hsc1-q358-q359.png"
         },
         {
           "id": "hsc1-q360",
@@ -8113,7 +8115,8 @@
             "হাইব্রিড"
           ],
           "answer": 1,
-          "explanation": "চিত্রটি বাস টপোলজি নির্দেশ করে।"
+          "explanation": "চিত্রটি বাস টপোলজি নির্দেশ করে।",
+          "figure": "assets/mcq/figures/hsc2-q231-q232.png"
         },
         {
           "id": "hsc2-q232",
@@ -8125,7 +8128,8 @@
             "৪টি"
           ],
           "answer": 3,
-          "explanation": "চিত্রে ৪টি টপোলজি রয়েছে।"
+          "explanation": "চিত্রে ৪টি টপোলজি রয়েছে।",
+          "figure": "assets/mcq/figures/hsc2-q231-q232.png"
         },
         {
           "id": "hsc2-q233",
@@ -8341,7 +8345,8 @@
             "ট্রি"
           ],
           "answer": 0,
-          "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।"
+          "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।",
+          "figure": "assets/mcq/figures/hsc2-q250.png"
         },
         {
           "id": "hsc2-q251",
@@ -8365,7 +8370,8 @@
             "হাইব্রিড"
           ],
           "answer": 0,
-          "explanation": "চিত্র ২ বাস টপোলজি।"
+          "explanation": "চিত্র ২ বাস টপোলজি।",
+          "figure": "assets/mcq/figures/hsc2-q252-q253.png"
         },
         {
           "id": "hsc2-q253",
@@ -8377,7 +8383,8 @@
             "শংকর"
           ],
           "answer": 2,
-          "explanation": "নোডগুলো পরস্পর যুক্ত করলে মেশ হয়।"
+          "explanation": "নোডগুলো পরস্পর যুক্ত করলে মেশ হয়।",
+          "figure": "assets/mcq/figures/hsc2-q252-q253.png"
         },
         {
           "id": "hsc2-q254",
@@ -8413,7 +8420,8 @@
             "মেশ"
           ],
           "answer": 0,
-          "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।"
+          "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।",
+          "figure": "assets/mcq/figures/hsc2-q256.png"
         },
         {
           "id": "hsc2-q257",
@@ -9728,7 +9736,8 @@
             "110011"
           ],
           "answer": 0,
-          "explanation": "বইয়ের তরঙ্গচিত্র অনুযায়ী বাইনারি মান: 100110।"
+          "explanation": "বইয়ের তরঙ্গচিত্র অনুযায়ী বাইনারি মান: 100110।",
+          "figure": "assets/mcq/figures/hsc3-q064.png"
         },
         {
           "id": "hsc3-q065",
@@ -10124,7 +10133,8 @@
             "63"
           ],
           "answer": 0,
-          "explanation": "বইয়ের ৪-বিট তরঙ্গচিত্রের দশমিক মান ১০।"
+          "explanation": "বইয়ের ৪-বিট তরঙ্গচিত্রের দশমিক মান ১০।",
+          "figure": "assets/mcq/figures/hsc3-q097.png"
         },
         {
           "id": "hsc3-q098",
@@ -10136,7 +10146,8 @@
             "13"
           ],
           "answer": 3,
-          "explanation": "বইয়ের চিত্র B-এর সিগন্যালের অক্টাল মান ১৩।"
+          "explanation": "বইয়ের চিত্র B-এর সিগন্যালের অক্টাল মান ১৩।",
+          "figure": "assets/mcq/figures/hsc3-q098.png"
         },
         {
           "id": "hsc3-q099",
@@ -12920,7 +12931,8 @@
             "AB"
           ],
           "answer": 3,
-          "explanation": "বর্তনীটি AND গেইটের সমতুল্য, Y = AB।"
+          "explanation": "বর্তনীটি AND গেইটের সমতুল্য, Y = AB।",
+          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
         },
         {
           "id": "hsc32-q046",
@@ -12932,7 +12944,8 @@
             "A=1 ও B=1"
           ],
           "answer": 3,
-          "explanation": "AND-এ Y=১ পেতে A=১, B=১ দিতে হয়।"
+          "explanation": "AND-এ Y=১ পেতে A=১, B=১ দিতে হয়।",
+          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
         },
         {
           "id": "hsc32-q047",
@@ -13112,7 +13125,8 @@
             "NAND"
           ],
           "answer": 1,
-          "explanation": "OR প্রতীক = OR গেইট।"
+          "explanation": "OR প্রতীক = OR গেইট।",
+          "figure": "assets/mcq/figures/hsc32-q061.png"
         },
         {
           "id": "hsc32-q062",
@@ -13172,7 +13186,8 @@
             "ঘ"
           ],
           "answer": 3,
-          "explanation": "ঘ নং চিত্রটি OR গেইটের বর্তনী।"
+          "explanation": "ঘ নং চিত্রটি OR গেইটের বর্তনী।",
+          "figure": "assets/mcq/figures/hsc32-q066.png"
         },
         {
           "id": "hsc32-q067",
@@ -13220,7 +13235,8 @@
             "NOR"
           ],
           "answer": 2,
-          "explanation": "NOR-এর পর NOT = OR।"
+          "explanation": "NOR-এর পর NOT = OR।",
+          "figure": "assets/mcq/figures/hsc32-q070.png"
         },
         {
           "id": "hsc32-q071",
@@ -13256,7 +13272,8 @@
             "NAND"
           ],
           "answer": 0,
-          "explanation": "AND প্রতীক = AND গেইট।"
+          "explanation": "AND প্রতীক = AND গেইট।",
+          "figure": "assets/mcq/figures/hsc32-q073.png"
         },
         {
           "id": "hsc32-q074",
@@ -13316,7 +13333,8 @@
             "ঘ"
           ],
           "answer": 3,
-          "explanation": "ঘ নং চিত্রটি AND গেইটের বর্তনী।"
+          "explanation": "ঘ নং চিত্রটি AND গেইটের বর্তনী।",
+          "figure": "assets/mcq/figures/hsc32-q078.png"
         },
         {
           "id": "hsc32-q079",
@@ -13328,7 +13346,8 @@
             "NAND"
           ],
           "answer": 1,
-          "explanation": "NAND-এর পর NOT = AND।"
+          "explanation": "NAND-এর পর NOT = AND।",
+          "figure": "assets/mcq/figures/hsc32-q079.png"
         },
         {
           "id": "hsc32-q080",
@@ -13340,7 +13359,8 @@
             "নর"
           ],
           "answer": 0,
-          "explanation": "শ্রেণিতে সুইচ = AND।"
+          "explanation": "শ্রেণিতে সুইচ = AND।",
+          "figure": "assets/mcq/figures/hsc32-q080.png"
         },
         {
           "id": "hsc32-q081",
@@ -13448,7 +13468,8 @@
             "নর"
           ],
           "answer": 2,
-          "explanation": "বর্তনীটি NOT গেইটের।"
+          "explanation": "বর্তনীটি NOT গেইটের।",
+          "figure": "assets/mcq/figures/hsc32-q089.png"
         },
         {
           "id": "hsc32-q090",
@@ -13484,7 +13505,8 @@
             "(AB)̄"
           ],
           "answer": 3,
-          "explanation": "NAND = (AB)̄।"
+          "explanation": "NAND = (AB)̄।",
+          "figure": "assets/mcq/figures/hsc32-q092.png"
         },
         {
           "id": "hsc32-q093",
@@ -13520,7 +13542,8 @@
             "ঘ"
           ],
           "answer": 1,
-          "explanation": "খ নং প্রতীকটি NAND।"
+          "explanation": "খ নং প্রতীকটি NAND।",
+          "figure": "assets/mcq/figures/hsc32-q095.png"
         },
         {
           "id": "hsc32-q096",
@@ -13532,7 +13555,8 @@
             "নর"
           ],
           "answer": 2,
-          "explanation": "সমান্তরাল সুইচ = OR।"
+          "explanation": "সমান্তরাল সুইচ = OR।",
+          "figure": "assets/mcq/figures/hsc32-q096.png"
         },
         {
           "id": "hsc32-q097",
@@ -13580,7 +13604,8 @@
             "X̄Ȳ"
           ],
           "answer": 2,
-          "explanation": "AND+NOT = NAND = (XY)̄।"
+          "explanation": "AND+NOT = NAND = (XY)̄।",
+          "figure": "assets/mcq/figures/hsc32-q100.png"
         },
         {
           "id": "hsc32-q101",
@@ -13664,7 +13689,8 @@
             "ঘ"
           ],
           "answer": 2,
-          "explanation": "XOR-এর আউটপুট প্যাটার্ন।"
+          "explanation": "XOR-এর আউটপুট প্যাটার্ন।",
+          "figure": "assets/mcq/figures/hsc32-q107.png"
         },
         {
           "id": "hsc32-q108",
@@ -13676,7 +13702,8 @@
             "ĀB"
           ],
           "answer": 2,
-          "explanation": "NAND(Ā,B) = (ĀB)̄ = A+B̄।"
+          "explanation": "NAND(Ā,B) = (ĀB)̄ = A+B̄।",
+          "figure": "assets/mcq/figures/hsc32-q108.png"
         },
         {
           "id": "hsc32-q109",
@@ -13700,7 +13727,8 @@
             "NAND"
           ],
           "answer": 2,
-          "explanation": "বর্তনীটি NOR গেইটের।"
+          "explanation": "বর্তনীটি NOR গেইটের।",
+          "figure": "assets/mcq/figures/hsc32-q110.png"
         },
         {
           "id": "hsc32-q111",
@@ -13736,7 +13764,8 @@
             "(AB)̄"
           ],
           "answer": 0,
-          "explanation": "NOR = (A+B)̄।"
+          "explanation": "NOR = (A+B)̄।",
+          "figure": "assets/mcq/figures/hsc32-q113.png"
         },
         {
           "id": "hsc32-q114",
@@ -13772,7 +13801,8 @@
             "X̄Ȳ"
           ],
           "answer": 0,
-          "explanation": "OR+NOT = NOR = (X+Y)̄।"
+          "explanation": "OR+NOT = NOR = (X+Y)̄।",
+          "figure": "assets/mcq/figures/hsc32-q116.png"
         },
         {
           "id": "hsc32-q117",
@@ -13784,7 +13814,8 @@
             "নর"
           ],
           "answer": 3,
-          "explanation": "বর্তনীটি নর গেইটের।"
+          "explanation": "বর্তনীটি নর গেইটের।",
+          "figure": "assets/mcq/figures/hsc32-q117.png"
         },
         {
           "id": "hsc32-q118",
@@ -13916,7 +13947,8 @@
             "ঘ"
           ],
           "answer": 3,
-          "explanation": "ঘ নং প্রতীকটি XOR-এর।"
+          "explanation": "ঘ নং প্রতীকটি XOR-এর।",
+          "figure": "assets/mcq/figures/hsc32-q128.png"
         },
         {
           "id": "hsc32-q129",
@@ -13928,7 +13960,8 @@
             "X-OR"
           ],
           "answer": 3,
-          "explanation": "বর্তনীটি XOR বাস্তবায়ন করে।"
+          "explanation": "বর্তনীটি XOR বাস্তবায়ন করে।",
+          "figure": "assets/mcq/figures/hsc32-q129.png"
         },
         {
           "id": "hsc32-q130",
@@ -13964,7 +13997,8 @@
             "i, ii ও iii"
           ],
           "answer": 2,
-          "explanation": "XOR = ĀB+AB̄ = A⊕B।"
+          "explanation": "XOR = ĀB+AB̄ = A⊕B।",
+          "figure": "assets/mcq/figures/hsc32-q132.png"
         },
         {
           "id": "hsc32-q133",
@@ -14012,7 +14046,8 @@
             "XNOR"
           ],
           "answer": 2,
-          "explanation": "বর্তনীটি XOR-এর।"
+          "explanation": "বর্তনীটি XOR-এর।",
+          "figure": "assets/mcq/figures/hsc32-q136.png"
         },
         {
           "id": "hsc32-q137",
@@ -14048,7 +14083,8 @@
             "ঘ"
           ],
           "answer": 2,
-          "explanation": "গ নং প্রতীকটি XNOR-এর।"
+          "explanation": "গ নং প্রতীকটি XNOR-এর।",
+          "figure": "assets/mcq/figures/hsc32-q139.png"
         },
         {
           "id": "hsc32-q140",
@@ -14072,7 +14108,8 @@
             "i, ii ও iii"
           ],
           "answer": 2,
-          "explanation": "XNOR = (A⊕B)̄ = ĀB̄+AB।"
+          "explanation": "XNOR = (A⊕B)̄ = ĀB̄+AB।",
+          "figure": "assets/mcq/figures/hsc32-q141.png"
         },
         {
           "id": "hsc32-q142",
@@ -14084,7 +14121,8 @@
             "XNOR"
           ],
           "answer": 3,
-          "explanation": "বর্তনীটি XNOR-এর।"
+          "explanation": "বর্তনীটি XNOR-এর।",
+          "figure": "assets/mcq/figures/hsc32-q142.png"
         },
         {
           "id": "hsc32-q143",
@@ -14612,7 +14650,8 @@
             "i, ii ও iii"
           ],
           "answer": 2,
-          "explanation": "XOR ও AND।"
+          "explanation": "XOR ও AND।",
+          "figure": "assets/mcq/figures/hsc32-q186.png"
         },
         {
           "id": "hsc32-q187",
@@ -14624,7 +14663,8 @@
             "A⊕B"
           ],
           "answer": 0,
-          "explanation": "Y = A+B।"
+          "explanation": "Y = A+B।",
+          "figure": "assets/mcq/figures/hsc32-q187-q188.png"
         },
         {
           "id": "hsc32-q188",
@@ -14636,7 +14676,8 @@
             "A=1 ও B=1"
           ],
           "answer": 0,
-          "explanation": "OR-এ ০ পেতে উভয় ০।"
+          "explanation": "OR-এ ০ পেতে উভয় ০।",
+          "figure": "assets/mcq/figures/hsc32-q187-q188.png"
         },
         {
           "id": "hsc32-q189",
@@ -14660,7 +14701,8 @@
             "i, ii ও iii"
           ],
           "answer": 0,
-          "explanation": "P⊕Q = P̄Q+PQ̄।"
+          "explanation": "P⊕Q = P̄Q+PQ̄।",
+          "figure": "assets/mcq/figures/hsc32-q190-q191.png"
         },
         {
           "id": "hsc32-q191",
@@ -14672,7 +14714,8 @@
             "5নং gate এর পরিবর্তে NAND gate ব্যবহার করা হবে"
           ],
           "answer": 1,
-          "explanation": "৩নং গেইটে NAND বসালে।"
+          "explanation": "৩নং গেইটে NAND বসালে।",
+          "figure": "assets/mcq/figures/hsc32-q190-q191.png"
         },
         {
           "id": "hsc32-q192",
@@ -14708,7 +14751,8 @@
             "P̄+Q̄"
           ],
           "answer": 0,
-          "explanation": "F = P⊕Q।"
+          "explanation": "F = P⊕Q।",
+          "figure": "assets/mcq/figures/hsc32-q194-q195.png"
         },
         {
           "id": "hsc32-q195",
@@ -14720,7 +14764,8 @@
             "৫"
           ],
           "answer": 1,
-          "explanation": "৩টি মৌলিক গেইট।"
+          "explanation": "৩টি মৌলিক গেইট।",
+          "figure": "assets/mcq/figures/hsc32-q194-q195.png"
         },
         {
           "id": "hsc32-q196",
@@ -14748,15 +14793,15 @@
         },
         {
           "id": "hsc32-q198",
-          "question": "198. (ABC + ABC)̄ এর সরলীকৃত মান কোনটি? [চ. বো. ২০১৬]",
+          "question": "198. ((ABC)̄ + (ABC)̄)̄ এর সরলীকৃত মান কোনটি? [চ. বো. ২০১৬]",
           "options": [
             "(A+B+C)̄",
             "(ABC)̄",
             "ABC",
             "A+B+C"
           ],
-          "answer": 1,
-          "explanation": "(ABC+ABC)=ABC, তাই ((...))̄ = (ABC)̄। (বইয়ে ভুলভাবে গ চিহ্নিত ছিল; সংশোধিত।)"
+          "answer": 2,
+          "explanation": "X=(ABC)̄ ধরলে, (X+X)̄ = X̄ = ABC। (আগে রাশিমালা ভুল পড়া হয়েছিল; বইয়ের চিহ্নিত উত্তরই সঠিক।)"
         },
         {
           "id": "hsc32-q199",
@@ -14804,7 +14849,8 @@
             "NAND"
           ],
           "answer": 1,
-          "explanation": "(Ā+B̄)̄ = AB।"
+          "explanation": "(Ā+B̄)̄ = AB।",
+          "figure": "assets/mcq/figures/hsc32-q202.png"
         },
         {
           "id": "hsc32-q203",
@@ -14816,7 +14862,8 @@
             "A⊕B̄"
           ],
           "answer": 1,
-          "explanation": "X = (A⊕B)̄।"
+          "explanation": "X = (A⊕B)̄।",
+          "figure": "assets/mcq/figures/hsc32-q203.png"
         },
         {
           "id": "hsc32-q204",
@@ -14828,7 +14875,8 @@
             "C(A+B+C)"
           ],
           "answer": 0,
-          "explanation": "Y = C(B+C)(A+B+C)।"
+          "explanation": "Y = C(B+C)(A+B+C)।",
+          "figure": "assets/mcq/figures/hsc32-q204.png"
         },
         {
           "id": "hsc32-q205",
@@ -14880,7 +14928,7 @@
         },
         {
           "id": "hsc32-q209",
-          "question": "209. S = ((A+B+C̄))̄ + B̄C; উদ্দীপকের সরলীকৃত রূপ কোনটি?",
+          "question": "209. S = (A+B+C̄)̄ + B̄C; উদ্দীপকের সরলীকৃত রূপ কোনটি?",
           "options": [
             "A",
             "B",
@@ -14912,7 +14960,8 @@
             "((A+B)̄)C"
           ],
           "answer": 1,
-          "explanation": "X = (Ā+B)C।"
+          "explanation": "X = (Ā+B)C।",
+          "figure": "assets/mcq/figures/hsc32-q211.png"
         },
         {
           "id": "hsc32-q212",
@@ -14924,7 +14973,8 @@
             "ঘ"
           ],
           "answer": 2,
-          "explanation": "গ নং চিত্রটি।"
+          "explanation": "গ নং চিত্রটি।",
+          "figure": "assets/mcq/figures/hsc32-q212.png"
         },
         {
           "id": "hsc32-q213",
@@ -14936,7 +14986,8 @@
             "ĀB"
           ],
           "answer": 2,
-          "explanation": "Y = A+B̄।"
+          "explanation": "Y = A+B̄।",
+          "figure": "assets/mcq/figures/hsc32-q213.png"
         },
         {
           "id": "hsc32-q214",
@@ -14960,7 +15011,8 @@
             "AC+B"
           ],
           "answer": 0,
-          "explanation": "F = B(C+A)।"
+          "explanation": "F = B(C+A)।",
+          "figure": "assets/mcq/figures/hsc32-q215.png"
         },
         {
           "id": "hsc32-q216",
@@ -15020,7 +15072,8 @@
             "A=1 ও B=1"
           ],
           "answer": 0,
-          "explanation": "⚠️ Y=A+B=১ হয় (০,১), (১,০), (১,১) তিনটিতেই; একক সঠিক উত্তর নেই। বইয়ের (০,০) ভুল।"
+          "explanation": "⚠️ Y=A+B=১ হয় (০,১), (১,০), (১,১) তিনটিতেই; একক সঠিক উত্তর নেই। বইয়ের (০,০) ভুল।",
+          "figure": "assets/mcq/figures/hsc32-q220.png"
         },
         {
           "id": "hsc32-q221",
@@ -15068,7 +15121,8 @@
             "M+N"
           ],
           "answer": 1,
-          "explanation": "Q = ১।"
+          "explanation": "Q = ১।",
+          "figure": "assets/mcq/figures/hsc32-q224.png"
         },
         {
           "id": "hsc32-q225",
@@ -15092,7 +15146,8 @@
             "i, ii ও iii"
           ],
           "answer": 2,
-          "explanation": "ii ও iii।"
+          "explanation": "ii ও iii।",
+          "figure": "assets/mcq/figures/hsc32-q226.png"
         },
         {
           "id": "hsc32-q227",
@@ -15116,7 +15171,8 @@
             "X-NOR"
           ],
           "answer": 1,
-          "explanation": "NAND।"
+          "explanation": "NAND।",
+          "figure": "assets/mcq/figures/hsc32-q228.png"
         },
         {
           "id": "hsc32-q229",
@@ -15152,7 +15208,8 @@
             "AB"
           ],
           "answer": 3,
-          "explanation": "Y = AB।"
+          "explanation": "Y = AB।",
+          "figure": "assets/mcq/figures/hsc32-q231-q232.png"
         },
         {
           "id": "hsc32-q232",
@@ -15164,7 +15221,8 @@
             "A=1 ও B=1"
           ],
           "answer": 3,
-          "explanation": "A=১, B=১।"
+          "explanation": "A=১, B=১।",
+          "figure": "assets/mcq/figures/hsc32-q231-q232.png"
         },
         {
           "id": "hsc32-q233",
@@ -15200,7 +15258,8 @@
             "XNOR"
           ],
           "answer": 2,
-          "explanation": "XOR।"
+          "explanation": "XOR।",
+          "figure": "assets/mcq/figures/hsc32-q235-q236.png"
         },
         {
           "id": "hsc32-q236",
@@ -15212,7 +15271,8 @@
             "2 ও 3"
           ],
           "answer": 0,
-          "explanation": "⚠️ বইয়ের নিজের নোট: সব গেইট NOR হওয়ায় বিনিময়ে ফল বদলায় না; সঠিক অপশন নেই।"
+          "explanation": "⚠️ বইয়ের নিজের নোট: সব গেইট NOR হওয়ায় বিনিময়ে ফল বদলায় না; সঠিক অপশন নেই।",
+          "figure": "assets/mcq/figures/hsc32-q235-q236.png"
         },
         {
           "id": "hsc32-q237",
@@ -15224,7 +15284,8 @@
             "AB + ĀB̄"
           ],
           "answer": 3,
-          "explanation": "F = AB + ĀB̄।"
+          "explanation": "F = AB + ĀB̄।",
+          "figure": "assets/mcq/figures/hsc32-q237-q238.png"
         },
         {
           "id": "hsc32-q238",
@@ -15236,7 +15297,8 @@
             "1"
           ],
           "answer": 2,
-          "explanation": "F = ০।"
+          "explanation": "F = ০।",
+          "figure": "assets/mcq/figures/hsc32-q237-q238.png"
         },
         {
           "id": "hsc32-q239",
@@ -15396,7 +15458,7 @@
         },
         {
           "id": "hsc32-q252",
-          "question": "252. ((Ā + B̄ + AB))̄ এর সরলীকৃত মান কত? [ঢাবি ক ইউনিট]",
+          "question": "252. (Ā + B̄ + AB)̄ এর সরলীকৃত মান কত? [ঢাবি ক ইউনিট]",
           "options": [
             "AB",
             "(AB)̄",

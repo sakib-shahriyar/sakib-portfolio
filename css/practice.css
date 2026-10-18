@@ -135,6 +135,15 @@
 }
 .qstem { font-size: 17px; font-weight: 500; margin: 0 0 16px; line-height: 1.55; }
 .qnum { color: var(--color-electric-cobalt); font-weight: 700; margin-right: 6px; }
+.qfig { margin: 0 0 16px; text-align: center; }
+.qfig img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-hairline);
+  background: #fff;
+  padding: 12px;
+}
 .qopts { display: grid; gap: 10px; }
 .qopt {
   display: flex;
