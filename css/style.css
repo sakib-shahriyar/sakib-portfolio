@@ -222,6 +222,7 @@ img { max-width: 100%; }
 .card-link { font-size: 15px; }
 .grid { display: grid; gap: 24px; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 
 /* ---------- Page headers (inner pages) ---------- */
@@ -438,7 +439,7 @@ img { max-width: 100%; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1023px) {
-  .grid-3, .t-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .grid-4, .t-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 860px) {
@@ -454,7 +455,7 @@ img { max-width: 100%; }
   .brand .name { display: none; }
 }
 @media (max-width: 639px) {
-  .grid-3, .grid-2, .t-grid, .video-grid, .contact-grid { grid-template-columns: 1fr; }
+  .grid-3, .grid-4, .grid-2, .t-grid, .video-grid, .contact-grid { grid-template-columns: 1fr; }
   .section { margin-bottom: 64px; }
   .hero { padding: 72px 20px 64px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
