@@ -4,7 +4,7 @@
   var SUBJECTS = {
     hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=28",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=1", title: "Board Papers · HSC ICT" }
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=2", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
@@ -46,7 +46,8 @@
       answer: answer,
       explanation: q.explanation,
       chapter: chapterTitle,
-      figure: q.figure || null
+      figure: q.figure || null,
+      passage: q.passage || null
     };
   }
 
@@ -249,7 +250,12 @@
       var card = document.createElement("div");
       card.className = "qcard";
       card.id = "qcard-" + i;
-      var html = '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + escapeHtml(q.question) + "</p>";
+      var html = "";
+      if (q.passage) {
+        html += '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
+          escapeHtml(q.passage) + "</div>";
+      }
+      html += '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + escapeHtml(q.question) + "</p>";
       if (q.figure) {
         html += '<div class="qfig"><img src="' + escapeHtml(q.figure) + '" alt="Circuit diagram for question ' + (i + 1) + '" loading="lazy"></div>';
       }
@@ -313,6 +319,7 @@
         wrong.push({
           n: i + 1,
           question: q.question,
+          passage: q.passage,
           yourIdx: state.picked[i],
           yourText: state.picked[i] === null ? null : q.options[state.picked[i]],
           correctText: q.options[q.answer],
@@ -350,6 +357,8 @@
           ? '<p class="review-your">Your answer: <span class="na">Not answered</span></p>'
           : '<p class="review-your">Your answer: <span>' + escapeHtml(w.yourText) + "</span></p>";
         div.innerHTML =
+          (w.passage ? '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
+            escapeHtml(w.passage) + "</div>" : "") +
           '<p class="review-q"><span class="qnum">Q' + w.n + ".</span> " + escapeHtml(w.question) + "</p>" +
           yourLine +
           '<p class="review-correct">Correct answer: <span>' + escapeHtml(w.correctText) + "</span></p>" +
