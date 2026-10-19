@@ -2,8 +2,9 @@
    25 questions, 20-minute timer, instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=27",   title: "NCTB HSC ICT" },
-    olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" }
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=28",   title: "NCTB HSC ICT" },
+    olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=1", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
@@ -53,17 +54,27 @@
     subject = key;
     bank = null;
     $("setup-title").textContent = SUBJECTS[key].title;
+    $("setup-sub").textContent = key === "board"
+      ? "Timed like the real exam: 1 minute per question. Counts show questions per paper."
+      : "25 questions. 20 minutes. Pick how you want to be tested.";
     $("chapter-picker").hidden = true;
+    $("paper-picker").hidden = true;
     show("view-setup");
     loadBank(function () {});
   }
 
   function afterBankLoad() {
     $("setup-loading").hidden = true;
-    $("setup-types").hidden = false;
-    $("wholebook-desc").textContent =
-      "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
-    renderChapterGrid();
+    if (subject === "board") {
+      $("setup-types").hidden = true;
+      renderPaperPicker();
+      $("paper-picker").hidden = false;
+    } else {
+      $("setup-types").hidden = false;
+      $("wholebook-desc").textContent =
+        "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
+      renderChapterGrid();
+    }
   }
 
   function loadBank(cb) {
@@ -92,6 +103,43 @@
     return "Chapter " + ch.number + ": " + ch.title;
   }
 
+  function paperTitle(ch) {
+    return ch.board + " Board " + ch.year;
+  }
+
+  function renderPaperPicker() {
+    var wrap = $("paper-groups");
+    wrap.innerHTML = "";
+    var byYear = {};
+    bank.chapters.forEach(function (ch) {
+      (byYear[ch.year] = byYear[ch.year] || []).push(ch);
+    });
+    Object.keys(byYear).sort(function (a, b) { return b - a; }).forEach(function (year) {
+      var h = document.createElement("h3");
+      h.className = "picker-title";
+      h.textContent = year;
+      wrap.appendChild(h);
+      var grid = document.createElement("div");
+      grid.className = "chapter-grid";
+      byYear[year].forEach(function (ch) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "chapter-btn";
+        b.innerHTML = "<strong>" + ch.question_count + "</strong><span>" +
+          escapeHtml(ch.board) + " Board</span>";
+        b.setAttribute("aria-label", paperTitle(ch) + ", " + ch.question_count + " questions");
+        b.addEventListener("click", function () { startPaperTest(ch); });
+        grid.appendChild(b);
+      });
+      wrap.appendChild(grid);
+    });
+  }
+
+  function startPaperTest(ch) {
+    var pool = ch.questions.map(function (q) { return prepQuestion(q, paperTitle(ch)); });
+    startTest(paperTitle(ch), pool, "paper", ch.number, pool.length * 60, true);
+  }
+
   function renderChapterGrid() {
     var grid = $("chapter-grid");
     grid.innerHTML = "";
@@ -116,15 +164,18 @@
     return shuffle(pool.slice()).slice(0, Math.min(TEST_LEN, pool.length));
   }
 
-  function startTest(title, pool, chapterwise, chapterNo) {
+  function startTest(title, pool, kind, refNo, secs, full) {
     stopTimer();
+    var nSecs = secs || TEST_SECS;
     state = {
       title: title,
-      chapterwise: !!chapterwise,
-      chapterNo: chapterNo || null,
-      questions: sample(pool),
+      kind: kind === "paper" ? "paper" : (kind ? "chapter" : "whole"),
+      chapterwise: kind === "paper" ? false : !!kind,
+      chapterNo: refNo || null,
+      questions: full ? shuffle(pool.slice()) : sample(pool),
       picked: [],
-      deadline: Date.now() + TEST_SECS * 1000,
+      secs: nSecs,
+      deadline: Date.now() + nSecs * 1000,
       timerId: null,
       submitted: false,
       warned: false,
@@ -171,7 +222,7 @@
   function renderTest() {
     $("exam-title").textContent = state.title;
     $("exam-progress").textContent = "Answered 0/" + state.questions.length;
-    $("exam-timer").textContent = fmt(TEST_SECS);
+    $("exam-timer").textContent = fmt(state.secs);
     $("exam-timer").classList.remove("danger");
     $("exam-warn").hidden = true;
     state.warned = false;
@@ -270,7 +321,7 @@
       }
     });
     var pct = Math.round((correct / total) * 100);
-    var usedSecs = TEST_SECS - remainingSecs();
+    var usedSecs = state.secs - remainingSecs();
 
     $("result-score").textContent = correct;
     document.querySelector(".result-total").textContent = "/" + total;
@@ -309,7 +360,10 @@
 
     $("result-retake").onclick = function () {
       // Rebuild a fresh test of the same kind.
-      if (state.chapterwise) {
+      if (state.kind === "paper") {
+        var pc = bank.chapters.filter(function (c) { return c.number === state.chapterNo; })[0];
+        startPaperTest(pc);
+      } else if (state.kind === "chapter") {
         var ch = bank.chapters.filter(function (c) { return c.number === state.chapterNo; })[0];
         var pool = ch.questions.map(function (q) { return prepQuestion(q, chapterTitle(ch)); });
         startTest(chapterTitle(ch) + " Test", pool, true, ch.number);
@@ -333,9 +387,14 @@
       e.preventDefault();
       showSetup("olevel");
     });
+    $("start-board").addEventListener("click", function (e) {
+      e.preventDefault();
+      showSetup("board");
+    });
     $("setup-back").addEventListener("click", function (e) {
       e.preventDefault();
       $("chapter-picker").hidden = true;
+      $("paper-picker").hidden = true;
       show("view-landing");
     });
 

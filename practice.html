@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan</title>
-  <meta name="description" content="MCQ practice tests for HSC ICT and Cambridge O Level Computer Science. Chapterwise or whole book, 25 questions, 20 minutes, instant results with explanations.">
+  <meta name="description" content="MCQ practice tests for HSC ICT and Cambridge O Level Computer Science, plus timed HSC board-exam papers 2016–2026. Instant results with explanations.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan">
@@ -772,7 +772,7 @@ img { max-width: 100%; }
 
     <!-- LANDING: pick a subject -->
     <section class="section" id="view-landing">
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         <div class="card reveal practice-subject">
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
           <h3>NCTB HSC ICT</h3>
@@ -785,6 +785,12 @@ img { max-width: 100%; }
           <p>Chapter-wise and whole book MCQ tests from a bank of 2000 questions covering all ten chapters.</p>
           <a class="card-link" href="#" id="start-olevel">Start practising →</a>
         </div>
+        <div class="card reveal practice-subject">
+          <span class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <h3>Board Papers · HSC ICT</h3>
+          <p>912 board-exam questions from 45 papers (2016–2026). Sit a full paper, timed at 1 minute per question.</p>
+          <a class="card-link" href="#" id="start-board">Start practising →</a>
+        </div>
       </div>
     </section>
 
@@ -793,7 +799,7 @@ img { max-width: 100%; }
       <a class="card-link" href="#" id="setup-back" style="margin-bottom:24px;">← All practice tests</a>
       <div class="section-head">
         <h2 id="setup-title">Cambridge O Level CS</h2>
-        <p>25 questions. 20 minutes. Pick how you want to be tested.</p>
+        <p id="setup-sub">25 questions. 20 minutes. Pick how you want to be tested.</p>
       </div>
       <div id="setup-loading" class="practice-loading" hidden>Loading question bank…</div>
       <div class="grid grid-2" id="setup-types" hidden>
@@ -813,6 +819,10 @@ img { max-width: 100%; }
       <div id="chapter-picker" hidden>
         <h3 class="picker-title">Choose a chapter</h3>
         <div class="chapter-grid" id="chapter-grid"></div>
+      </div>
+      <div id="paper-picker" hidden>
+        <h3 class="picker-title">Choose a board paper</h3>
+        <div id="paper-groups"></div>
       </div>
     </section>
 
@@ -901,6 +911,6 @@ img { max-width: 100%; }
   </footer>
 
   <script defer src="js/main.js?v=2"></script>
-  <script defer src="js/practice.js?v=9"></script>
+  <script defer src="js/practice.js?v=10"></script>
 </body>
 </html>
