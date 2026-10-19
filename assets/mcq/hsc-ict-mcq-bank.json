@@ -4291,7 +4291,7 @@
           ],
           "answer": 0,
           "explanation": "চিত্রের পদার্থটি ন্যানোপার্টিকেল।",
-          "figure": "assets/mcq/figures/hsc1-q358-q359.png"
+          "figure": "assets/mcq/figures/hsc1-q358-q359-v2.png"
         },
         {
           "id": "hsc1-q359",
@@ -4304,7 +4304,7 @@
           ],
           "answer": 2,
           "explanation": "পৃষ্ঠদেশ বেশি ও রাসায়নিকভাবে ক্রিয়াশীল।",
-          "figure": "assets/mcq/figures/hsc1-q358-q359.png"
+          "figure": "assets/mcq/figures/hsc1-q358-q359-v2.png"
         },
         {
           "id": "hsc1-q360",
@@ -8070,7 +8070,7 @@
           ],
           "answer": 1,
           "explanation": "চিত্রটি বাস টপোলজি নির্দেশ করে।",
-          "figure": "assets/mcq/figures/hsc2-q231-q232.png"
+          "figure": "assets/mcq/figures/hsc2-q231-v2.png"
         },
         {
           "id": "hsc2-q232",
@@ -8083,7 +8083,7 @@
           ],
           "answer": 3,
           "explanation": "চিত্রে ৪টি টপোলজি রয়েছে।",
-          "figure": "assets/mcq/figures/hsc2-q231-q232.png"
+          "figure": "assets/mcq/figures/hsc2-q232-v2.png"
         },
         {
           "id": "hsc2-q233",
@@ -8300,7 +8300,7 @@
           ],
           "answer": 0,
           "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।",
-          "figure": "assets/mcq/figures/hsc2-q250.png"
+          "figure": "assets/mcq/figures/hsc2-q250-v2.png"
         },
         {
           "id": "hsc2-q251",
@@ -8313,7 +8313,7 @@
           ],
           "answer": 1,
           "explanation": "অপটিক্যাল ফাইবারে গতি বাড়ে।",
-          "figure": "assets/mcq/figures/hsc2-q250.png"
+          "figure": "assets/mcq/figures/hsc2-q250-v2.png"
         },
         {
           "id": "hsc2-q252",
@@ -8376,7 +8376,7 @@
           ],
           "answer": 0,
           "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।",
-          "figure": "assets/mcq/figures/hsc2-q256.png"
+          "figure": "assets/mcq/figures/hsc2-q256-v2.png"
         },
         {
           "id": "hsc2-q257",
@@ -8389,7 +8389,7 @@
           ],
           "answer": 1,
           "explanation": "সুইচ ও অপটিক্যাল ফাইবারে গতি বাড়ে।",
-          "figure": "assets/mcq/figures/hsc2-q256.png"
+          "figure": "assets/mcq/figures/hsc2-q256-v2.png"
         },
         {
           "id": "hsc2-q258",
@@ -9693,7 +9693,7 @@
           ],
           "answer": 0,
           "explanation": "বইয়ের তরঙ্গচিত্র অনুযায়ী বাইনারি মান: 100110।",
-          "figure": "assets/mcq/figures/hsc3-q064.png"
+          "figure": "assets/mcq/figures/hsc3-q064-v2.png"
         },
         {
           "id": "hsc3-q065",
@@ -10090,7 +10090,7 @@
           ],
           "answer": 0,
           "explanation": "বইয়ের ৪-বিট তরঙ্গচিত্রের দশমিক মান ১০।",
-          "figure": "assets/mcq/figures/hsc3-q097.png"
+          "figure": "assets/mcq/figures/hsc3-q097-v2.png"
         },
         {
           "id": "hsc3-q098",
@@ -10103,7 +10103,7 @@
           ],
           "answer": 3,
           "explanation": "বইয়ের চিত্র B-এর সিগন্যালের অক্টাল মান ১৩।",
-          "figure": "assets/mcq/figures/hsc3-q098.png"
+          "figure": "assets/mcq/figures/hsc3-q098-v2.png"
         },
         {
           "id": "hsc3-q099",
@@ -12884,7 +12884,7 @@
           ],
           "answer": 3,
           "explanation": "বর্তনীটি AND গেইটের সমতুল্য, Y = AB।",
-          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
+          "figure": "assets/mcq/figures/hsc32-q45-q46-v2.png"
         },
         {
           "id": "hsc32-q046",
@@ -12897,7 +12897,7 @@
           ],
           "answer": 3,
           "explanation": "AND-এ Y=১ পেতে A=১, B=১ দিতে হয়।",
-          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
+          "figure": "assets/mcq/figures/hsc32-q45-q46-v2.png"
         },
         {
           "id": "hsc32-q047",
@@ -13858,7 +13858,7 @@
           ],
           "answer": 0,
           "explanation": "৩-ইনপুট XNOR-এ জোড় সংখ্যক ১ থাকলে X=১ হয়। i (১,১,০) ও ii (১,০,১)-এ দুটি করে ১ আছে, iii (১,১,১)-এ তিনটি ১। তাই i ও ii সঠিক। (বইয়ে ভুলভাবে NOR ছাপা ছিল; সংশোধিত।)",
-          "figure": "assets/mcq/figures/hsc32-q124.png"
+          "figure": "assets/mcq/figures/hsc32-q124-v2.png"
         },
         {
           "id": "hsc32-q125",
@@ -13921,7 +13921,7 @@
           ],
           "answer": 3,
           "explanation": "বর্তনীটি XOR বাস্তবায়ন করে।",
-          "figure": "assets/mcq/figures/hsc32-q129.png"
+          "figure": "assets/mcq/figures/hsc32-q129-v2.png"
         },
         {
           "id": "hsc32-q130",
@@ -13958,7 +13958,7 @@
           ],
           "answer": 2,
           "explanation": "XOR = ĀB+AB̄ = A⊕B।",
-          "figure": "assets/mcq/figures/hsc32-q132.png"
+          "figure": "assets/mcq/figures/hsc32-q132-v2.png"
         },
         {
           "id": "hsc32-q133",
@@ -14007,7 +14007,7 @@
           ],
           "answer": 2,
           "explanation": "বর্তনীটি XOR-এর।",
-          "figure": "assets/mcq/figures/hsc32-q136.png"
+          "figure": "assets/mcq/figures/hsc32-q136-v2.png"
         },
         {
           "id": "hsc32-q137",
@@ -14628,7 +14628,7 @@
           ],
           "answer": 0,
           "explanation": "Y = A+B।",
-          "figure": "assets/mcq/figures/hsc32-q187-q188.png"
+          "figure": "assets/mcq/figures/hsc32-q187-q188-v2.png"
         },
         {
           "id": "hsc32-q188",
@@ -14641,7 +14641,7 @@
           ],
           "answer": 0,
           "explanation": "OR-এ ০ পেতে উভয় ০।",
-          "figure": "assets/mcq/figures/hsc32-q187-q188.png"
+          "figure": "assets/mcq/figures/hsc32-q187-q188-v2.png"
         },
         {
           "id": "hsc32-q189",
@@ -14718,7 +14718,7 @@
           ],
           "answer": 0,
           "explanation": "F = P⊕Q।",
-          "figure": "assets/mcq/figures/hsc32-q194-q195.png"
+          "figure": "assets/mcq/figures/hsc32-q194-q195-v2.png"
         },
         {
           "id": "hsc32-q195",
@@ -14731,7 +14731,7 @@
           ],
           "answer": 1,
           "explanation": "৩টি মৌলিক গেইট।",
-          "figure": "assets/mcq/figures/hsc32-q194-q195.png"
+          "figure": "assets/mcq/figures/hsc32-q194-q195-v2.png"
         },
         {
           "id": "hsc32-q196",
@@ -14817,7 +14817,7 @@
           ],
           "answer": 1,
           "explanation": "(Ā+B̄)̄ = AB।",
-          "figure": "assets/mcq/figures/hsc32-q202.png"
+          "figure": "assets/mcq/figures/hsc32-q202-v2.png"
         },
         {
           "id": "hsc32-q203",
@@ -14843,7 +14843,7 @@
           ],
           "answer": 0,
           "explanation": "Y = C(B+C)(A+B+C)।",
-          "figure": "assets/mcq/figures/hsc32-q204.png"
+          "figure": "assets/mcq/figures/hsc32-q204-circuit.png"
         },
         {
           "id": "hsc32-q205",
