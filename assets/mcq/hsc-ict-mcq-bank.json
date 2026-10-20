@@ -10740,7 +10740,7 @@
         },
         {
           "id": "hsc3-q142",
-          "question": "[উদ্দীপক: ক্লাসে শিক্ষক আতিককে তার বয়স জিজ্ঞেস করেন। আতিক বলল, তার বয়স (10100)₂।] আতিকের বয়সের সমকক্ষ সংখ্যা হলো– [ঢা. বো. ২০২৩]",
+          "question": "আতিকের বয়সের সমকক্ষ সংখ্যা হলো– [ঢা. বো. ২০২৩]",
           "options": [
             "(20)₈",
             "(24)₈",
@@ -10748,11 +10748,12 @@
             "(24)₁₆"
           ],
           "answer": 1,
-          "explanation": "(১০১০০)₂ = ২০ = (২৪)₈।"
+          "explanation": "(১০১০০)₂ = ২০ = (২৪)₈।",
+          "passage": "ক্লাসে শিক্ষক আতিককে তার বয়স জিজ্ঞেস করেন। আতিক বলল, তার বয়স (10100)₂।"
         },
         {
           "id": "hsc3-q143",
-          "question": "[উদ্দীপক: আতিকের বয়স (10100)₂।] দশ বছর পর আতিকের বয়স হেক্সাডেসিমালে কত হবে? [ঢা. বো. ২০২৩]",
+          "question": "দশ বছর পর আতিকের বয়স হেক্সাডেসিমালে কত হবে? [ঢা. বো. ২০২৩]",
           "options": [
             "(1D)₁₆",
             "(1E)₁₆",
@@ -10760,11 +10761,12 @@
             "(2D)₁₆"
           ],
           "answer": 1,
-          "explanation": "২০+১০=৩০ = (১E)₁₆।"
+          "explanation": "২০+১০=৩০ = (১E)₁₆।",
+          "passage": "ক্লাসে শিক্ষক আতিককে তার বয়স জিজ্ঞেস করেন। আতিক বলল, তার বয়স (10100)₂।"
         },
         {
           "id": "hsc3-q144",
-          "question": "[উদ্দীপক: শিক্ষক করিমকে জিজ্ঞেস করলেন, তোমার ক্লাস রোল কত? করিম উত্তর দিল 3D।] উদ্দীপকের সংখ্যাটির সমকক্ষ দশমিক সংখ্যা কত? [কু. বো. ২০২৩]",
+          "question": "উদ্দীপকের সংখ্যাটির সমকক্ষ দশমিক সংখ্যা কত? [কু. বো. ২০২৩]",
           "options": [
             "৬১",
             "৭১",
@@ -10772,11 +10774,12 @@
             "৯১"
           ],
           "answer": 0,
-          "explanation": "(৩D)₁₆ = ৬১।"
+          "explanation": "(৩D)₁₆ = ৬১।",
+          "passage": "শিক্ষক করিমকে জিজ্ঞেস করলেন, তোমার ক্লাস রোল কত? করিম উত্তর দিল 3D।"
         },
         {
           "id": "hsc3-q145",
-          "question": "[উদ্দীপক: করিমের রোল 3D।] উদ্দীপকে করিমের রোলের সাথে (৫)₁₀ যোগ করলে সংখ্যাটি কত হবে? [কু. বো. ২০২৩]",
+          "question": "উদ্দীপকে করিমের রোলের সাথে (৫)₁₀ যোগ করলে সংখ্যাটি কত হবে? [কু. বো. ২০২৩]",
           "options": [
             "(২৮)₈",
             "(৬৬)₁₀",
@@ -10784,11 +10787,12 @@
             "(২৪)₁₆"
           ],
           "answer": 1,
-          "explanation": "৬১+৫ = ৬৬।"
+          "explanation": "৬১+৫ = ৬৬।",
+          "passage": "শিক্ষক করিমকে জিজ্ঞেস করলেন, তোমার ক্লাস রোল কত? করিম উত্তর দিল 3D।"
         },
         {
           "id": "hsc3-q146",
-          "question": "[উদ্দীপক: একজন ফল বিক্রেতা (৫A)₁₆ টাকার আপেল ও (৫০)₈ টাকার কমলা বিক্রয় করে সর্বমোট (২০)₈ টাকা লাভ করে।] দশমিক পদ্ধতিতে বিক্রেতার লাভের পরিমাণ কত? [ঢ. বো. ২০২৩]",
+          "question": "দশমিক পদ্ধতিতে বিক্রেতার লাভের পরিমাণ কত? [ঢ. বো. ২০২৩]",
           "options": [
             "১০",
             "১৬",
@@ -10796,11 +10800,12 @@
             "২২"
           ],
           "answer": 1,
-          "explanation": "(২০)₈ = ১৬।"
+          "explanation": "(২০)₈ = ১৬।",
+          "passage": "একজন ফল বিক্রেতা (৫A)₁₆ টাকার আপেল ও (৫০)₈ টাকার কমলা বিক্রয় করে সর্বমোট (২০)₈ টাকা লাভ করে।"
         },
         {
           "id": "hsc3-q147",
-          "question": "[উদ্দীপক: ফল বিক্রেতা, (৫A)₁₆ আপেল + (৫০)₈ কমলা, লাভ (২০)₈।] বিক্রেতার মোট বিক্রয় মূল্য অক্টাল পদ্ধতিতে কত? [ঢ. বো. ২০২৩]",
+          "question": "বিক্রেতার মোট বিক্রয় মূল্য অক্টাল পদ্ধতিতে কত? [ঢ. বো. ২০২৩]",
           "options": [
             "২৮",
             "১১০",
@@ -10808,11 +10813,12 @@
             "২০২"
           ],
           "answer": 3,
-          "explanation": "৯০+৪০ = ১৩০ = (২০২)₈।"
+          "explanation": "৯০+৪০ = ১৩০ = (২০২)₈।",
+          "passage": "একজন ফল বিক্রেতা (৫A)₁₆ টাকার আপেল ও (৫০)₈ টাকার কমলা বিক্রয় করে সর্বমোট (২০)₈ টাকা লাভ করে।"
         },
         {
           "id": "hsc3-q148",
-          "question": "[উদ্দীপক: কম্পিউটার শিক্ষক জনাব সফিক স্যার বোর্ডে (77)₈ সংখ্যা লিখলেন।] উদ্দীপকে উল্লিখিত সংখ্যাটির দশমিক সংখ্যা হলো– [ব.বো. ২০১৭]",
+          "question": "উদ্দীপকে উল্লিখিত সংখ্যাটির দশমিক সংখ্যা হলো– [ব.বো. ২০১৭]",
           "options": [
             "56",
             "63",
@@ -10820,11 +10826,12 @@
             "77"
           ],
           "answer": 1,
-          "explanation": "(৭৭)₈ = ৬৩।"
+          "explanation": "(৭৭)₈ = ৬৩।",
+          "passage": "কম্পিউটার শিক্ষক জনাব সফিক স্যার বোর্ডে (77)₈ সংখ্যা লিখলেন।"
         },
         {
           "id": "hsc3-q149",
-          "question": "[উদ্দীপক: বোর্ডে (77)₈।] উদ্দীপকের সংখ্যাটির পরবর্তী সংখ্যা কোনটি? [ব. বো. ২০১৭]",
+          "question": "উদ্দীপকের সংখ্যাটির পরবর্তী সংখ্যা কোনটি? [ব. বো. ২০১৭]",
           "options": [
             "(78)₈",
             "(100)₈",
@@ -10832,11 +10839,12 @@
             "(777)₈"
           ],
           "answer": 1,
-          "explanation": "(৭৭)₈ = ৬৩; পরের ৬৪ = (১০০)₈।"
+          "explanation": "(৭৭)₈ = ৬৩; পরের ৬৪ = (১০০)₈।",
+          "passage": "কম্পিউটার শিক্ষক জনাব সফিক স্যার বোর্ডে (77)₈ সংখ্যা লিখলেন।"
         },
         {
           "id": "hsc3-q150",
-          "question": "[উদ্দীপক: 'Q' নির্বাচনী পরীক্ষায় ICT বিষয়ে (100)₈ নম্বর পেয়েছে।] উদ্দীপকে বর্ণিত সংখ্যাটির হেক্সাডেসিমাল সংখ্যা হলো- [ব. বো. ২০১৯]",
+          "question": "উদ্দীপকে বর্ণিত সংখ্যাটির হেক্সাডেসিমাল সংখ্যা হলো- [ব. বো. ২০১৯]",
           "options": [
             "40",
             "10",
@@ -10844,11 +10852,12 @@
             "4"
           ],
           "answer": 0,
-          "explanation": "(১০০)₈ = ৬৪ = ৪০₁₆।"
+          "explanation": "(১০০)₈ = ৬৪ = ৪০₁₆।",
+          "passage": "'Q' নির্বাচনী পরীক্ষায় ICT বিষয়ে (100)₈ নম্বর পেয়েছে।"
         },
         {
           "id": "hsc3-q151",
-          "question": "[উদ্দীপক: (100)₈ নম্বর।] উদ্দীপকে বর্ণিত সংখ্যাটির আগের সংখ্যা কত? [ব. বো. ২০১৯]",
+          "question": "উদ্দীপকে বর্ণিত সংখ্যাটির আগের সংখ্যা কত? [ব. বো. ২০১৯]",
           "options": [
             "(55)₈",
             "(64)₈",
@@ -10856,7 +10865,8 @@
             "(77)₈"
           ],
           "answer": 3,
-          "explanation": "৬৪−১ = ৬৩ = (৭৭)₈।"
+          "explanation": "৬৪−১ = ৬৩ = (৭৭)₈।",
+          "passage": "'Q' নির্বাচনী পরীক্ষায় ICT বিষয়ে (100)₈ নম্বর পেয়েছে।"
         },
         {
           "id": "hsc3-q152",
@@ -11100,7 +11110,7 @@
         },
         {
           "id": "hsc3-q172",
-          "question": "[উদ্দীপক: ক্লাসে শিক্ষক (1011.11)₂ ও (1101.10)₂ এর যোগফল নির্ণয় করতে বললেন। একজন শিক্ষার্থী (11011.11)₂ লিখল।] সে কত বেশি লিখল? [ঢ. বো. ২০১৯]",
+          "question": "সে কত বেশি লিখল? [ঢ. বো. ২০১৯]",
           "options": [
             "10.10",
             "11.10",
@@ -11108,7 +11118,8 @@
             "101.10"
           ],
           "answer": 0,
-          "explanation": "সঠিক যোগফল ১১০০১.০১₂; বেশি লিখেছে ১০.১০₂।"
+          "explanation": "সঠিক যোগফল ১১০০১.০১₂; বেশি লিখেছে ১০.১০₂।",
+          "passage": "ক্লাসে শিক্ষক (1011.11)₂ ও (1101.10)₂ এর যোগফল নির্ণয় করতে বললেন। একজন শিক্ষার্থী (11011.11)₂ লিখল।"
         },
         {
           "id": "hsc3-q173",
@@ -11160,7 +11171,7 @@
         },
         {
           "id": "hsc3-q177",
-          "question": "[উদ্দীপক: শিক্ষক ছাত্রকে রোল নং জিজ্ঞাসা করল। ছাত্রটি বাইনারি পদ্ধতিতে রোল নং 1101 বলল।] উদ্দীপকে উল্লিখিত সংখ্যার সাথে (1001)₂ এর যোগফল কত? [কু. বো. ২০১৬]",
+          "question": "উদ্দীপকে উল্লিখিত সংখ্যার সাথে (1001)₂ এর যোগফল কত? [কু. বো. ২০১৬]",
           "options": [
             "(01100)₂",
             "(10110)₂",
@@ -11168,11 +11179,12 @@
             "(11110)₂"
           ],
           "answer": 1,
-          "explanation": "১৩+৯ = ২২ = (১০১১০)₂।"
+          "explanation": "১৩+৯ = ২২ = (১০১১০)₂।",
+          "passage": "শিক্ষক ছাত্রকে রোল নং জিজ্ঞাসা করল। ছাত্রটি বাইনারি পদ্ধতিতে রোল নং 1101 বলল।"
         },
         {
           "id": "hsc3-q178",
-          "question": "[উদ্দীপক: রোল 1101 (প্রশ্ন ১৭৭ দ্রষ্টব্য)।] উদ্দীপকের রোল নং এর সমকক্ষ সংখ্যা হলো– [কু. বো. ২০১৬] i. (13)₁₀ ii. (11)₁₆ iii. (15)₈। নিচের কোনটি সঠিক?",
+          "question": "উদ্দীপকের রোল নং এর সমকক্ষ সংখ্যা হলো– [কু. বো. ২০১৬] i. (13)₁₀ ii. (11)₁₆ iii. (15)₈। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -11180,11 +11192,12 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "১১০১₂ = ১৩; (১১)₁₆ = ১৭ ≠ ১৩, তাই i ও iii সঠিক। (বইয়ে ভুলভাবে ঘ চিহ্নিত ছিল; সংশোধিত।)"
+          "explanation": "১১০১₂ = ১৩; (১১)₁₆ = ১৭ ≠ ১৩, তাই i ও iii সঠিক। (বইয়ে ভুলভাবে ঘ চিহ্নিত ছিল; সংশোধিত।)",
+          "passage": "শিক্ষক ছাত্রকে রোল নং জিজ্ঞাসা করল। ছাত্রটি বাইনারি পদ্ধতিতে রোল নং 1101 বলল।"
         },
         {
           "id": "hsc3-q179",
-          "question": "[উদ্দীপক: মি. আতিক কামালকে বলল, \"তোমার বয়স কত?\" কামাল বলল যে, তার বয়স (101101)₂।] কামালের বয়সের সমকক্ষ সংখ্যা হলো– [দি. বো. ২০১৭]",
+          "question": "কামালের বয়সের সমকক্ষ সংখ্যা হলো– [দি. বো. ২০১৭]",
           "options": [
             "(25)₈",
             "(35)₈",
@@ -11192,11 +11205,12 @@
             "(65)₈"
           ],
           "answer": 2,
-          "explanation": "(১০১১০১)₂ = ৪৫ = (৫৫)₈।"
+          "explanation": "(১০১১০১)₂ = ৪৫ = (৫৫)₈।",
+          "passage": "মি. আতিক কামালকে বলল, \"তোমার বয়স কত?\" কামাল বলল যে, তার বয়স (101101)₂।"
         },
         {
           "id": "hsc3-q180",
-          "question": "[উদ্দীপক: কামালের বয়স (101101)₂।] দশ বছর পর কামালের বয়স বাইনারিতে কত হবে? [দি. বো. ২০১৭]",
+          "question": "দশ বছর পর কামালের বয়স বাইনারিতে কত হবে? [দি. বো. ২০১৭]",
           "options": [
             "(101011)₂",
             "(101110)₂",
@@ -11204,7 +11218,8 @@
             "(110111)₂"
           ],
           "answer": 3,
-          "explanation": "৪৫ + ১০ = ৫৫ = (১১০১১১)₂। (বইয়ে ভুলভাবে খ চিহ্নিত ছিল; সংশোধিত।)"
+          "explanation": "৪৫ + ১০ = ৫৫ = (১১০১১১)₂। (বইয়ে ভুলভাবে খ চিহ্নিত ছিল; সংশোধিত।)",
+          "passage": "মি. আতিক কামালকে বলল, \"তোমার বয়স কত?\" কামাল বলল যে, তার বয়স (101101)₂।"
         },
         {
           "id": "hsc3-q181",
@@ -14531,7 +14546,7 @@
         },
         {
           "id": "hsc32-q170",
-          "question": "উদ্দীপক: A ও B দুটি বর্তনীর প্রথমটি দুটি সংখ্যা কম্পিউটারে বোধগম্যভাবে উপস্থাপন করে এবং অপরটি সংখ্যা দুটির গুণফল বের করতে সহায়তা করে। B বর্তনীটি হলো– [ব. বো. ২০১৭]",
+          "question": "B বর্তনীটি হলো– [ব. বো. ২০১৭]",
           "options": [
             "অ্যাডার",
             "এনকোডার",
@@ -14539,11 +14554,12 @@
             "কাউন্টার"
           ],
           "answer": 0,
-          "explanation": "গুণফল বের করে অ্যাডার বর্তনী।"
+          "explanation": "গুণফল বের করে অ্যাডার বর্তনী।",
+          "passage": "A ও B দুটি বর্তনীর প্রথমটি দুটি সংখ্যা কম্পিউটারে বোধগম্যভাবে উপস্থাপন করে এবং অপরটি সংখ্যা দুটির গুণফল বের করতে সহায়তা করে।"
         },
         {
           "id": "hsc32-q171",
-          "question": "A বর্তনীটি কোথায় যুক্ত থাকে? [ব. বো. ২০১৭] [উদ্দীপক: A ও B দুটি বর্তনীর প্রথমটি দুটি সংখ্যা কম্পিউটারে বোধগম্যভাবে উপস্থাপন করে এবং অপরটি সংখ্যা দুটির গুণফল বের করতে সহায়তা করে।]",
+          "question": "A বর্তনীটি কোথায় যুক্ত থাকে? [ব. বো. ২০১৭]",
           "options": [
             "মনিটরে",
             "কী বোর্ডে",
@@ -14551,7 +14567,8 @@
             "স্পিকারে"
           ],
           "answer": 1,
-          "explanation": "কী বোর্ডে (এনকোডার)।"
+          "explanation": "কী বোর্ডে (এনকোডার)।",
+          "passage": "A ও B দুটি বর্তনীর প্রথমটি দুটি সংখ্যা কম্পিউটারে বোধগম্যভাবে উপস্থাপন করে এবং অপরটি সংখ্যা দুটির গুণফল বের করতে সহায়তা করে।"
         },
         {
           "id": "hsc32-q172",
@@ -16175,7 +16192,7 @@
         },
         {
           "id": "hsc4-q047",
-          "question": "উদ্দীপক: তমালের তৈরিকৃত ওয়েবপেইজটি লোডিং করার পরও ডেটার মান পরিবর্তন করতে পারছে না। এ সমস্যা সমাধানের জন্য শিক্ষক তাকে কয়েকটি ভাষা ব্যবহার করার পরামর্শ দিলেন। তমালের তৈরিকৃত ওয়েবপেইজটি কোন ধরনের? [ঢা. বো-১৯]",
+          "question": "তমালের তৈরিকৃত ওয়েবপেইজটি কোন ধরনের? [ঢা. বো-১৯]",
           "options": [
             "ডাইনামিক ওয়েবপেইজ",
             "স্ট্যাটিক ওয়েবপেইজ",
@@ -16183,7 +16200,8 @@
             "রিমোট ওয়েবপেইজ"
           ],
           "answer": 1,
-          "explanation": "ডেটা না বদলালে সেটি স্ট্যাটিক ওয়েবপেইজ।"
+          "explanation": "ডেটা না বদলালে সেটি স্ট্যাটিক ওয়েবপেইজ।",
+          "passage": "তমালের তৈরিকৃত ওয়েবপেইজটি লোডিং করার পরও ডেটার মান পরিবর্তন করতে পারছে না। এ সমস্যা সমাধানের জন্য শিক্ষক তাকে কয়েকটি ভাষা ব্যবহার করার পরামর্শ দিলেন।"
         },
         {
           "id": "hsc4-q048",
@@ -16226,7 +16244,7 @@
         },
         {
           "id": "hsc4-q051",
-          "question": "উদ্দীপক: দিদার ও বন্ধুরা ওয়েবপেইজসমূহ বহুস্তরে বিন্যস্ত করে ওয়েবসাইট তৈরি করল। ওয়েবসাইটটির স্ট্রাকচার কোনটি? [বোর্ড ১৮]",
+          "question": "ওয়েবসাইটটির স্ট্রাকচার কোনটি? [বোর্ড ১৮]",
           "options": [
             "লিনিয়ার",
             "হায়ারারকিক্যাল",
@@ -16234,7 +16252,8 @@
             "নেটওয়ার্ক"
           ],
           "answer": 1,
-          "explanation": "বহুস্তর বিন্যাস = হায়ারারকিক্যাল।"
+          "explanation": "বহুস্তর বিন্যাস = হায়ারারকিক্যাল।",
+          "passage": "দিদার ও বন্ধুরা ওয়েবপেইজসমূহ বহুস্তরে বিন্যস্ত করে ওয়েবসাইট তৈরি করল।"
         },
         {
           "id": "hsc4-q052",
@@ -16683,7 +16702,7 @@
           ],
           "answer": 1,
           "explanation": "হাইপারলিংক ও ফরমেটিং ট্যাগ আছে।",
-          "passage": "<body> <p><i> My page </i> </p> <a href = \"pic.html\" > picture </a> <body>"
+          "passage": "<body>\n<p><i> My page </i> </p>\n<a href = \"pic.html\" > picture </a>\n<body>"
         },
         {
           "id": "hsc4-q089",
@@ -16817,7 +16836,7 @@
           ],
           "answer": 3,
           "explanation": "type=\"disc\" হলে ● বুলেট আসে।",
-          "passage": "<ul type = \"disc\"> <li> Book </li> </ul>"
+          "passage": "<ul type = \"disc\"> <li> Book </li>\n</ul>"
         },
         {
           "id": "hsc4-q100",
@@ -16869,7 +16888,7 @@
           ],
           "answer": 0,
           "explanation": "HTML লিখতে সিনটেক্স ও টেক্সট এডিটর লাগে।",
-          "passage": "দৃশ্যকল্প-২: <html> <body> This is first website </body> </html>"
+          "passage": "দৃশ্যকল্প-২:\n<html>\n<body> This is first website </body>\n</html>"
         },
         {
           "id": "hsc4-q104",
@@ -16882,7 +16901,7 @@
           ],
           "answer": 2,
           "explanation": "<u> ট্যাগে আন্ডারলাইন হয়।",
-          "passage": "<html> <head> <title> This is My First Web Page</title> </head> <body> <p><h1> This is My Website</h1></p> <p><u>This is my Personal Website</u></p> </body> </html>"
+          "passage": "<html>\n<head>\n<title> This is My First Web Page</title>\n</head>\n<body>\n<p>\n<h1> This is My Website</h1></p>\n<p><u>This is my Personal Website</u></p>\n</body>\n</html>"
         },
         {
           "id": "hsc4-q105",
@@ -16895,7 +16914,7 @@
           ],
           "answer": 0,
           "explanation": "লিংকের জন্য <a> ট্যাগ।",
-          "passage": "<html> <head> <title> This is My First Web Page</title> </head> <body> <p><h1> This is My Website</h1></p> <p><u>This is my Personal Website</u></p> </body> </html>"
+          "passage": "<html>\n<head>\n<title> This is My First Web Page</title>\n</head>\n<body>\n<p>\n<h1> This is My Website</h1></p>\n<p><u>This is my Personal Website</u></p>\n</body>\n</html>"
         },
         {
           "id": "hsc4-q106",
@@ -16973,7 +16992,7 @@
           ],
           "answer": 2,
           "explanation": "<font>-এ face ও size অ্যাট্রিবিউট থাকে।",
-          "passage": "<html> <body> <font color = \"Red\"> HSC Exam </font> </body> </html>"
+          "passage": "<html>\n<body> <font color = \"Red\"> HSC Exam </font>\n</body>\n</html>"
         },
         {
           "id": "hsc4-q112",
@@ -16986,7 +17005,7 @@
           ],
           "answer": 0,
           "explanation": "তিনটিই ইনলাইন ট্যাগ, এক লাইনে দেখাবে।",
-          "passage": "<html> <head> <title> Test </title> </head> <body> <b> Bangladesh </b> <big> Bangladesh </big> <i> Bangladesh </i> </body> </html>"
+          "passage": "<html>\n<head>\n<title> Test </title>\n</head>\n<body> <b> Bangladesh </b> <big> Bangladesh </big> <i> Bangladesh </i>\n</body>\n</html>"
         },
         {
           "id": "hsc4-q113",
@@ -16999,7 +17018,7 @@
           ],
           "answer": 1,
           "explanation": "বড় হাতের লেখা চাইলে টেক্সটই বদলে দিতে হবে।",
-          "passage": "<html> <head> <title> Test </title> </head> <body> <b> Bangladesh </b> <big> Bangladesh </big> <i> Bangladesh </i> </body> </html>"
+          "passage": "<html>\n<head>\n<title> Test </title>\n</head>\n<body> <b> Bangladesh </b> <big> Bangladesh </big> <i> Bangladesh </i>\n</body>\n</html>"
         },
         {
           "id": "hsc4-q114",
@@ -17196,7 +17215,7 @@
         },
         {
           "id": "hsc4-q130",
-          "question": "উদ্দীপক: <p><b> COLLEGE RESULT </b> </p> <a href = \"test.html\">Test Website</a>। নিচের কোনটি সঠিক? [NCTB বই প্রশ্ন ৪] i. ফরমেটিং ii. হাইপারলিংক iii. ইমেজ।",
+          "question": "নিচের কোনটি সঠিক? [NCTB বই প্রশ্ন ৪] i. ফরমেটিং ii. হাইপারলিংক iii. ইমেজ।",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -17204,7 +17223,8 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "ফরমেটিং ও হাইপারলিংক আছে, ইমেজ নেই।"
+          "explanation": "ফরমেটিং ও হাইপারলিংক আছে, ইমেজ নেই।",
+          "passage": "<p><b> COLLEGE RESULT </b> </p>\n<a href = \"test.html\">Test Website</a>"
         },
         {
           "id": "hsc4-q131",
@@ -17234,7 +17254,7 @@
         },
         {
           "id": "hsc4-q133",
-          "question": "উদ্দীপক: <span style = \"color : red\">Text</span>। উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [ম. বো. ২০২৩]",
+          "question": "উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [ম. বো. ২০২৩]",
           "options": [
             "Style",
             "color : red",
@@ -17242,7 +17262,8 @@
             "Text"
           ],
           "answer": 3,
-          "explanation": "Text হলো কন্টেন্ট।"
+          "explanation": "Text হলো কন্টেন্ট।",
+          "passage": "<span style = \"color : red\">Text</span>"
         },
         {
           "id": "hsc4-q134",
@@ -19111,7 +19132,7 @@
           ],
           "answer": 3,
           "explanation": "b = 2*3 = 6।",
-          "passage": "#include <stdio.h> main(){ int a = 3, b; b = 2 * a; printf(\"%d\", b); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = 2 * a;\nprintf(\"%d\", b);\n}"
         },
         {
           "id": "hsc5-q115",
@@ -19124,7 +19145,7 @@
           ],
           "answer": 1,
           "explanation": "5, 6 ছাপে তারপর break।",
-          "passage": "#include <stdio.h> main(){ int x; for (x = 5; x <= 10; x++) { printf(\"%d\", x); if (x == 6) break; } }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint x;\nfor (x = 5; x <= 10; x++)\n{\nprintf(\"%d\", x);\nif (x == 6) break;\n}\n}"
         },
         {
           "id": "hsc5-q116",
@@ -19425,7 +19446,7 @@
           ],
           "answer": 0,
           "explanation": "Primary ডেটা টাইপ।",
-          "passage": "main () { int n; scanf (\"%d\", & n); printf (\"%d\", sqrt (n)); }"
+          "passage": "main ()\n{\nint n;\nscanf (\"%d\", & n);\nprintf (\"%d\", sqrt (n));\n}"
         },
         {
           "id": "hsc5-q141",
@@ -19438,7 +19459,7 @@
           ],
           "answer": 1,
           "explanation": "stdio.h ও math.h।",
-          "passage": "main () { int n; scanf (\"%d\", & n); printf (\"%d\", sqrt (n)); }"
+          "passage": "main ()\n{\nint n;\nscanf (\"%d\", & n);\nprintf (\"%d\", sqrt (n));\n}"
         },
         {
           "id": "hsc5-q142",
@@ -19451,7 +19472,7 @@
           ],
           "answer": 3,
           "explanation": "b = 6।",
-          "passage": "#include <stdio.h> main(){ int a = 3, b; b = 2 * a; printf(\"%d\", b); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = 2 * a;\nprintf(\"%d\", b);\n}"
         },
         {
           "id": "hsc5-q143",
@@ -19464,7 +19485,7 @@
           ],
           "answer": 0,
           "explanation": "i ও ii-তে b=3।",
-          "passage": "#include <stdio.h> main(){ int a = 3, b; b = 2 * a; printf(\"%d\", b); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = 2 * a;\nprintf(\"%d\", b);\n}"
         },
         {
           "id": "hsc5-q144",
@@ -19683,7 +19704,7 @@
           ],
           "answer": 2,
           "explanation": "b=3।",
-          "passage": "{ int a = 2, b; b = ++a; printf(\"%d\",b); }"
+          "passage": "{\nint a = 2, b;\nb = ++a;\nprintf(\"%d\",b);\n}"
         },
         {
           "id": "hsc5-q162",
@@ -19696,7 +19717,7 @@
           ],
           "answer": 3,
           "explanation": "b = a+3 = 5।",
-          "passage": "{ int a = 2, b; b = ++a; printf(\"%d\",b); }"
+          "passage": "{\nint a = 2, b;\nb = ++a;\nprintf(\"%d\",b);\n}"
         },
         {
           "id": "hsc5-q163",
@@ -19977,7 +19998,7 @@
           ],
           "answer": 1,
           "explanation": "b=4।",
-          "passage": "#include <stdio.h> main(){ int a = 3, b; b = ++a; printf(\"%d\", b); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = ++a;\nprintf(\"%d\", b);\n}"
         },
         {
           "id": "hsc5-q186",
@@ -19990,7 +20011,7 @@
           ],
           "answer": 3,
           "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; a=3 হলে b=a+5 → 8 হয় (বইয়ে ঘ চিহ্নিত); অন্য অপশনে b=3, 3, -2 আসে — কোনোটিতেই 4 নয়।",
-          "passage": "#include <stdio.h> main(){ int a = 3, b; b = ++a; printf(\"%d\", b); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = ++a;\nprintf(\"%d\", b);\n}"
         },
         {
           "id": "hsc5-q187",
@@ -20003,7 +20024,7 @@
           ],
           "answer": 2,
           "explanation": "9 8 ছাপবে।",
-          "passage": "#include <stdio.h> #include <conio.h> int main () { int i, k; i = 8; k = i++; printf (\"i and k: %d%d\", i, k); getch (); }"
+          "passage": "#include <stdio.h>\n#include <conio.h>\nint main ()\n{\nint i, k;\ni = 8;\nk = i++;\nprintf (\"i and k: %d%d\", i, k);\ngetch ();\n}"
         },
         {
           "id": "hsc5-q188",
@@ -20016,7 +20037,7 @@
           ],
           "answer": 0,
           "explanation": "50%25=0।",
-          "passage": "#include <stdio.h> main(){ int a, b; b = 50; a = b% 25; printf(\"%d\",a); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a, b;\nb = 50;\na = b% 25;\nprintf(\"%d\",a);\n}"
         },
         {
           "id": "hsc5-q189",
@@ -20029,7 +20050,7 @@
           ],
           "answer": 3,
           "explanation": "তিনটিই সঠিক।",
-          "passage": "#include <stdio.h> main () { int a, b; b = 50; a = b% 25; printf (\"%d\", a); }"
+          "passage": "#include <stdio.h>\nmain ()\n{\nint a, b;\nb = 50;\na = b% 25;\nprintf (\"%d\", a);\n}"
         },
         {
           "id": "hsc5-q190",
@@ -20042,7 +20063,7 @@
           ],
           "answer": 3,
           "explanation": "1+..+6=21।",
-          "passage": "#include <stdio.h> main(){ int s, i; s = 0; for (i = 1; i<=6; i++) s = s+i; printf(\"%d\",s); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint s, i;\ns = 0;\nfor (i = 1; i<=6; i++)\ns = s+i;\nprintf(\"%d\",s);\n}"
         },
         {
           "id": "hsc5-q191",
@@ -20055,7 +20076,7 @@
           ],
           "answer": 3,
           "explanation": "i=2,i=i+2।",
-          "passage": "#include <stdio.h> main(){ int s, i; s = 0; for (i = 1; i<=6; i++) s = s+i; printf(\"%d\",s); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint s, i;\ns = 0;\nfor (i = 1; i<=6; i++)\ns = s+i;\nprintf(\"%d\",s);\n}"
         },
         {
           "id": "hsc5-q192",
@@ -20068,7 +20089,7 @@
           ],
           "answer": 3,
           "explanation": "তিনটিই।",
-          "passage": "# include <stdio.h> # include<conio.h> main () { int a, b, c; printf (\"Enter Value;\"); scanf (\"%d%d\", &a,&b); c = a + b; printf (\"\\nc≡%d\", c); getch (); }"
+          "passage": "# include <stdio.h>\n# include<conio.h>\nmain ()\n{\nint a, b, c;\nprintf (\"Enter Value;\");\nscanf (\"%d%d\", &a,&b);\nc = a + b;\nprintf (\"\\nc≡%d\", c);\ngetch ();\n}"
         },
         {
           "id": "hsc5-q193",
@@ -20081,7 +20102,7 @@
           ],
           "answer": 3,
           "explanation": "তিনটিই।",
-          "passage": "#include<stdio.h> main () { float x; print (\"Enter the number\") scanf(\"%d\",&x); }"
+          "passage": "#include<stdio.h>\nmain ()\n{\nfloat x;\nprint (\"Enter the number\") scanf(\"%d\",&x);\n}"
         },
         {
           "id": "hsc5-q194",
@@ -20094,7 +20115,7 @@
           ],
           "answer": 0,
           "explanation": "x ভেরিয়েবল।",
-          "passage": "main(){ float x; print(\"Enter the number\") scanf(\"%d\", &x); }"
+          "passage": "main()\n{\nfloat x;\nprint(\"Enter the number\") scanf(\"%d\", &x);\n}"
         },
         {
           "id": "hsc5-q195",
@@ -20107,7 +20128,7 @@
           ],
           "answer": 0,
           "explanation": "⚠️ float-এ %f ও %.2f চলে; বইয়ে ভুলভাবে ঘ চিহ্নিত।",
-          "passage": "main(){ float x; print(\"Enter the number\") scanf(\"%d\", &x); }"
+          "passage": "main()\n{\nfloat x;\nprint(\"Enter the number\") scanf(\"%d\", &x);\n}"
         },
         {
           "id": "hsc5-q196",
@@ -20120,7 +20141,7 @@
           ],
           "answer": 3,
           "explanation": "<stdio.h> সঠিক।",
-          "passage": "int x, y, s; printf(\"Enter Value :\"); scanf(\"%d%d\", &x, &y); s = x+y; printf(\"uns =%d\", s); getch();"
+          "passage": "int x, y, s;\nprintf(\"Enter Value :\");\nscanf(\"%d%d\", &x, &y);\ns = x+y;\nprintf(\"uns =%d\", s);\ngetch();"
         },
         {
           "id": "hsc5-q197",
@@ -20133,7 +20154,7 @@
           ],
           "answer": 0,
           "explanation": "i ও ii সঠিক।",
-          "passage": "int x, y, s; printf(\"Enter Value :\"); scanf(\"%d%d\", &x, &y); s = x+y; printf(\"uns =%d\", s); getch();"
+          "passage": "int x, y, s;\nprintf(\"Enter Value :\");\nscanf(\"%d%d\", &x, &y);\ns = x+y;\nprintf(\"uns =%d\", s);\ngetch();"
         },
         {
           "id": "hsc5-q198",
@@ -20146,7 +20167,7 @@
           ],
           "answer": 1,
           "explanation": "int ২ বাইট।",
-          "passage": "#include <stdio.h> main() { int m; printf(\"Enter your marks\"); scanf(\"%d\", &m); printf(\"%d\", &m); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint m;\nprintf(\"Enter your marks\");\nscanf(\"%d\", &m);\nprintf(\"%d\", &m);\n}"
         },
         {
           "id": "hsc5-q199",
@@ -20159,7 +20180,7 @@
           ],
           "answer": 2,
           "explanation": "Scan f ভুল (ছোট হাতের scanf)।",
-          "passage": "#include <stdio.h> main() { int m; printf(\"Enter your marks\"); scanf(\"%d\", &m); printf(\"%d\", &m); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint m;\nprintf(\"Enter your marks\");\nscanf(\"%d\", &m);\nprintf(\"%d\", &m);\n}"
         },
         {
           "id": "hsc5-q200",
@@ -20172,7 +20193,7 @@
           ],
           "answer": 1,
           "explanation": "2,4,6,8।",
-          "passage": "for(i=2; i<10; i = i+2) printf(\"%d\",i);"
+          "passage": "for(i=2; i<10; i = i+2)\nprintf(\"%d\",i);"
         },
         {
           "id": "hsc5-q201",
@@ -20209,7 +20230,7 @@
           ],
           "answer": 0,
           "explanation": "শুধু i=3-এ ১ বার।",
-          "passage": "for (i=2;i<=5;i++) {if(i==3) printf(\"Welcome to University!\")}"
+          "passage": "for (i=2;i<=5;i++)\n{\nif(i==3) printf(\"Welcome to University!\")\n}"
         },
         {
           "id": "hsc5-q204",
@@ -20235,7 +20256,7 @@
           ],
           "answer": 1,
           "explanation": "1 3 5 7।",
-          "passage": "for (i = 1; i < 8; i+ = 2) printf(\"%d\"; i)"
+          "passage": "for (i = 1; i < 8; i+ = 2)\nprintf(\"%d\"; i)"
         },
         {
           "id": "hsc5-q206",
@@ -20248,7 +20269,7 @@
           ],
           "answer": 0,
           "explanation": "for ও do while।",
-          "passage": "#include <stdio.h> void main(){ int i; for (i = 1; i<5; i++) }"
+          "passage": "#include <stdio.h>\nvoid main()\n{\nint i;\nfor (i = 1; i<5; i++)\n}"
         },
         {
           "id": "hsc5-q207",
@@ -20261,7 +20282,7 @@
           ],
           "answer": 3,
           "explanation": "i++ কাউন্টার।",
-          "passage": "int x; for (x = 5; x < 14; x = x + 3) if (x == 11) break; printf (\"ICT\");"
+          "passage": "int x;\nfor (x = 5; x < 14; x = x + 3)\nif (x == 11) break;\nprintf (\"ICT\");"
         },
         {
           "id": "hsc5-q208",
@@ -20274,7 +20295,7 @@
           ],
           "answer": 3,
           "explanation": "তিনটিতেই করা যায়।",
-          "passage": "int x; for (x = 5; x < 14; x = x + 3) if (x == 11) break; printf (\"ICT\");"
+          "passage": "int x;\nfor (x = 5; x < 14; x = x + 3)\nif (x == 11) break;\nprintf (\"ICT\");"
         },
         {
           "id": "hsc5-q209",
@@ -20287,7 +20308,7 @@
           ],
           "answer": 0,
           "explanation": "⚠️ x=5,8 ছাপে, 11-এ break = ২ বার; বইয়ে ভুলভাবে খ (3) চিহ্নিত।",
-          "passage": "int x; for (x = 5; x <= 14; x = x + 3) { if (x == 11) break; printf(\"ICT\"); }"
+          "passage": "int x;\nfor (x = 5; x <= 14; x = x + 3)\n{\nif (x == 11) break;\nprintf(\"ICT\");\n}"
         },
         {
           "id": "hsc5-q210",
@@ -20300,7 +20321,7 @@
           ],
           "answer": 0,
           "explanation": "⚠️ 5,8,14 ছাপে = ৩ বার; বইয়ে ভুলভাবে খ (4) চিহ্নিত।",
-          "passage": "int x; for (x = 5; x <= 14; x = x + 3) { if (x == 11) break; printf(\"ICT\"); }"
+          "passage": "int x;\nfor (x = 5; x <= 14; x = x + 3)\n{\nif (x == 11) break;\nprintf(\"ICT\");\n}"
         },
         {
           "id": "hsc5-q211",
@@ -20313,7 +20334,7 @@
           ],
           "answer": 2,
           "explanation": "০-১০ = ১১ বার।",
-          "passage": "#include<stdio.h> int main(){ int p; for (p=0; p<=10; p++) { printf(\"\\n Dhaka\"); } return 0; }"
+          "passage": "#include<stdio.h>\nint main()\n{\nint p;\nfor (p=0; p<=10; p++)\n{\nprintf(\"\\n Dhaka\");\n}\nreturn 0;\n}"
         },
         {
           "id": "hsc5-q212",
@@ -20326,7 +20347,7 @@
           ],
           "answer": 0,
           "explanation": "⚠️ p=1,3,5,7,9 = ৫ বার; বইয়ে ভুলভাবে ঘ চিহ্নিত।",
-          "passage": "#include<stdio.h> int main(){ int p; for (p=0; p<=10; p++) { printf(\"\\n Dhaka\"); } return 0; }"
+          "passage": "#include<stdio.h>\nint main()\n{\nint p;\nfor (p=0; p<=10; p++)\n{\nprintf(\"\\n Dhaka\");\n}\nreturn 0;\n}"
         },
         {
           "id": "hsc5-q213",
@@ -20339,7 +20360,7 @@
           ],
           "answer": 2,
           "explanation": "1+2+3+4+5=15।",
-          "passage": "#include <stdio.h> main(){ int n, i, s; scanf(\"%d\",&n); s = 0; for (i = 1; i<=n; i=i+1) s = s+i; printf(\"%d\",s); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint n, i, s;\nscanf(\"%d\",&n);\ns = 0;\nfor (i = 1; i<=n; i=i+1)\ns = s+i;\nprintf(\"%d\",s);\n}"
         },
         {
           "id": "hsc5-q214",
@@ -20352,7 +20373,7 @@
           ],
           "answer": 1,
           "explanation": "বর্গের যোগ = 55।",
-          "passage": "#include <stdio.h> main(){ int n, i, s; scanf(\"%d\",&n); s = 0; for (i = 1; i<=n; i=i+1) s = s+i; printf(\"%d\",s); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint n, i, s;\nscanf(\"%d\",&n);\ns = 0;\nfor (i = 1; i<=n; i=i+1)\ns = s+i;\nprintf(\"%d\",s);\n}"
         },
         {
           "id": "hsc5-q215",
@@ -20365,7 +20386,7 @@
           ],
           "answer": 2,
           "explanation": "1+..+8=36।",
-          "passage": "# include <stdio.h> int main(){ int sum = 0; int i = 1; while (i <= 8) { sum = sum + i; i = i + 1; } printf(\"%d\",sum); return 0; }"
+          "passage": "# include <stdio.h>\nint main()\n{\nint sum = 0;\nint i = 1;\nwhile (i <= 8)\n{\nsum = sum + i;\ni = i + 1;\n}\nprintf(\"%d\",sum);\nreturn 0;\n}"
         },
         {
           "id": "hsc5-q216",
@@ -20378,7 +20399,7 @@
           ],
           "answer": 3,
           "explanation": "i=2,i=i+2।",
-          "passage": "# include <stdio.h> int main(){ int sum = 0; int i = 1; while (i <= 8) { sum = sum + i; i = i + 1; } printf(\"%d\",sum); return 0; }"
+          "passage": "# include <stdio.h>\nint main()\n{\nint sum = 0;\nint i = 1;\nwhile (i <= 8)\n{\nsum = sum + i;\ni = i + 1;\n}\nprintf(\"%d\",sum);\nreturn 0;\n}"
         },
         {
           "id": "hsc5-q217",
@@ -20391,7 +20412,7 @@
           ],
           "answer": 2,
           "explanation": "2,4,6 ছাপে = ৩ বার।",
-          "passage": "for(c = 2; c<=10; c=c+2) {printf(\"ICT\"); if (c == 6) break;}"
+          "passage": "for(c = 2; c<=10; c=c+2)\n{\nprintf(\"ICT\");\nif (c == 6) break;\n}"
         },
         {
           "id": "hsc5-q218",
@@ -20404,7 +20425,7 @@
           ],
           "answer": 3,
           "explanation": "2,4,6,8,10 = ৫ বার।",
-          "passage": "for(c = 2; c<=10; c=c+2) {printf(\"ICT\"); if (c == 6) break;}"
+          "passage": "for(c = 2; c<=10; c=c+2)\n{\nprintf(\"ICT\");\nif (c == 6) break;\n}"
         },
         {
           "id": "hsc5-q219",
@@ -20417,7 +20438,7 @@
           ],
           "answer": 3,
           "explanation": "1+..+10=55।",
-          "passage": "# include <stdio.h> # include <conio.h> void main(){ int n, i, s; scanf(\"%d\", &n); s = 0; for(i=1; i<=n, i++) s = s + i; printf(\"%d\", s); getch(); }"
+          "passage": "# include <stdio.h>\n# include <conio.h>\nvoid main()\n{\nint n, i, s;\nscanf(\"%d\", &n);\ns = 0;\nfor(i=1; i<=n, i++)\ns = s + i;\nprintf(\"%d\", s);\ngetch();\n}"
         },
         {
           "id": "hsc5-q220",
@@ -20430,7 +20451,7 @@
           ],
           "answer": 1,
           "explanation": "বর্গের যোগ = 385।",
-          "passage": "# include <stdio.h> # include <conio.h> void main(){ int n, i, s; scanf(\"%d\", &n); s = 0; for(i=1; i<=n, i++) s = s + i; printf(\"%d\", s); getch(); }"
+          "passage": "# include <stdio.h>\n# include <conio.h>\nvoid main()\n{\nint n, i, s;\nscanf(\"%d\", &n);\ns = 0;\nfor(i=1; i<=n, i++)\ns = s + i;\nprintf(\"%d\", s);\ngetch();\n}"
         },
         {
           "id": "hsc5-q221",
@@ -20443,7 +20464,7 @@
           ],
           "answer": 3,
           "explanation": "15।",
-          "passage": "#include <stdio.h> main(){ int a, s = 0; for(a = 1; a <= 5; a++) s = s + a; printf (\"%d\", s); }"
+          "passage": "#include <stdio.h>\nmain()\n{\nint a, s = 0;\nfor(a = 1; a <= 5; a++)\ns = s + a;\nprintf (\"%d\", s);\n}"
         },
         {
           "id": "hsc5-q222",
@@ -20456,7 +20477,7 @@
           ],
           "answer": 2,
           "explanation": "৩ বাদে ৪ বার।",
-          "passage": "for (i=1;i<=5;i++) {if(i==3) continue;}"
+          "passage": "for (i=1;i<=5;i++)\n{\nif(i==3) continue;\n}"
         },
         {
           "id": "hsc5-q223",
@@ -20529,7 +20550,7 @@
           ],
           "answer": 2,
           "explanation": "৩+null = ৪।",
-          "passage": "char name [ ? ]; int K, length; scanf (\"%s\", name);"
+          "passage": "char name [ ? ];\nint K, length;\nscanf (\"%s\", name);"
         },
         {
           "id": "hsc5-q229",
@@ -20542,7 +20563,7 @@
           ],
           "answer": 3,
           "explanation": "তিনটিই।",
-          "passage": "{ char name [ ? ]; int K, length; scanf (\"%s\", name); }"
+          "passage": "{\nchar name [ ? ];\nint K, length;\nscanf (\"%s\", name);\n}"
         },
         {
           "id": "hsc5-q230",
@@ -20603,7 +20624,7 @@
           ],
           "answer": 2,
           "explanation": "1 3 5 7 9।",
-          "passage": "for(i=1; i<=10; i+=2) printf"
+          "passage": "for(i=1; i<=10; i+=2)\nprintf"
         },
         {
           "id": "hsc5-q236",
