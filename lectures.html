@@ -510,7 +510,7 @@ img { max-width: 100%; }
   });
 })();
   </script>
-  <script defer src="js/site-config.js?v=4"></script>
+  <script defer src="js/site-config.js?v=6"></script>
   <script defer src="js/videos.js?v=2"></script>
 </head>
 <body>
@@ -565,9 +565,21 @@ img { max-width: 100%; }
         <h3 style="margin:0;">Get notified on WhatsApp</h3>
         <button class="modal-close" id="notify-close" aria-label="Close">✕</button>
       </div>
-      <p style="color:var(--color-slate-gray); font-size:15px;">Enter your WhatsApp number below. You will receive a message from me whenever a new lecture is published.</p>
-      <label for="notify-phone">Your WhatsApp number</label>
-      <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel">
+      <p style="color:var(--color-slate-gray); font-size:15px;">Enter your details below. You will receive a message from me whenever a new lecture is published.</p>
+      <label for="notify-name" style="display:block; font-weight:500; font-size:14px; margin:16px 0 6px;">Your name</label>
+      <input id="notify-name" type="text" placeholder="Your full name" autocomplete="name" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+      <label for="notify-batch" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your batch</label>
+      <select id="notify-batch" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+        <option value="">Select your batch</option>
+        <option value="HSC 2026">HSC 2026</option>
+        <option value="HSC 2027">HSC 2027</option>
+        <option value="HSC 2028">HSC 2028</option>
+        <option value="HSC 2029">HSC 2029</option>
+        <option value="O Level / IGCSE">O Level / IGCSE</option>
+        <option value="Other">Other</option>
+      </select>
+      <label for="notify-phone" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your WhatsApp number</label>
+      <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
       <div class="field-err" id="notify-err"></div>
       <button class="btn btn-primary" id="notify-submit" style="margin-top:14px; width:100%;">Subscribe</button>
     </div>
@@ -789,17 +801,20 @@ img { max-width: 100%; }
       render();
 
       // ---- WhatsApp notify subscription ----
-      // Static sites cannot store visitor data, so subscribing sends the
-      // visitor's number to the site owner as a WhatsApp message instead.
+      // Subscribing logs the student's details to the owner's subscriber
+      // sheet (when SITE.notifySheetUrl is set) and then opens WhatsApp
+      // with the same details as a prefilled message, as a backup record.
       var notifyBtn = document.getElementById("notify-btn");
       var notifyModal = document.getElementById("notify-modal");
+      var notifyName = document.getElementById("notify-name");
+      var notifyBatch = document.getElementById("notify-batch");
       var notifyPhone = document.getElementById("notify-phone");
       var notifyErr = document.getElementById("notify-err");
       function openNotify() {
         notifyErr.textContent = "";
         notifyModal.classList.add("open");
         document.body.style.overflow = "hidden";
-        setTimeout(function () { notifyPhone.focus(); }, 60);
+        setTimeout(function () { notifyName.focus(); }, 60);
       }
       function closeNotify() {
         notifyModal.classList.remove("open");
@@ -810,13 +825,40 @@ img { max-width: 100%; }
       notifyModal.addEventListener("click", function (e) { if (e.target === notifyModal) closeNotify(); });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNotify(); });
       document.getElementById("notify-submit").addEventListener("click", function () {
+        var name = notifyName.value.trim();
+        var batch = notifyBatch.value;
         var raw = notifyPhone.value.trim();
+        if (!name) {
+          notifyErr.textContent = "Please enter your name.";
+          notifyName.focus();
+          return;
+        }
+        if (!batch) {
+          notifyErr.textContent = "Please select your batch.";
+          notifyBatch.focus();
+          return;
+        }
         if (raw.replace(/\D/g, "").length < 7) {
           notifyErr.textContent = "Please enter a valid WhatsApp number.";
           notifyPhone.focus();
           return;
         }
-        var msg = "Hi! Please notify me when new ICT video lectures are published. My WhatsApp number is: " + raw;
+        // Save to the subscriber sheet first (silent, best effort), then
+        // open WhatsApp. The sheet link lives in js/site-config.js.
+        var sheetUrl = (typeof SITE !== "undefined" && SITE.notifySheetUrl) || "";
+        if (sheetUrl) {
+          try {
+            fetch(sheetUrl, {
+              method: "POST",
+              mode: "no-cors",
+              keepalive: true,
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify({ name: name, batch: batch, chapter: "All chapters", phone: raw })
+            }).catch(function () {});
+          } catch (e) {}
+        }
+        var msg = "Hi! Please notify me when new ICT video lectures are published.\nName: " + name +
+          "\nBatch: " + batch + "\nMy WhatsApp number is: " + raw;
         var base = (typeof SITE !== "undefined" && SITE.whatsapp) || "https://wa.me/8801832202600";
         window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
         closeNotify();

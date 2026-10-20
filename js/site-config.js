@@ -29,6 +29,11 @@ var SITE = {
   phone: "+8801832202600",
   phoneLink: "tel:+8801832202600",
   whatsapp: "https://wa.me/8801832202600",
+
+  // Subscriber sheet logger for the Lectures page "Notify me" box: paste
+  // your Google Apps Script web app link here (see the setup guide).
+  // While this is empty, subscribing only opens WhatsApp, as before.
+  notifySheetUrl: "https://script.google.com/macros/s/AKfycbxXiw1CSYeA4IJ1_qGsBgxLuAVdvfmEe_jd2BjqkSjRLHpkFFP--Nsz4kcEavRHtnqvcw/exec",
   facebook: "", // paste your Facebook profile link here, e.g. "https://facebook.com/yourname"
 
   // Dashboard passcode for admin.html: CHANGE THIS to something only you know.
