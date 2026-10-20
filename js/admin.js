@@ -11,7 +11,7 @@
     var dashboard = document.getElementById("dashboard");
 
     // ---- Passcode gate (casual lock only; see site-config.js note) ----
-    var PASS = (typeof SITE !== "undefined" && SITE.adminPasscode) || "sakib123";
+    var PASS = (typeof SITE !== "undefined" && SITE.adminPasscode) || "";
     function isUnlocked() {
       try { return sessionStorage.getItem("admin-unlocked") === "yes"; } catch (e) { return false; }
     }
@@ -25,7 +25,7 @@
     var passInput = document.getElementById("passcode");
     var lockErr = document.getElementById("lock-err");
     function tryUnlock() {
-      if (passInput.value === PASS) {
+      if (PASS && passInput.value === PASS) {
         try { sessionStorage.setItem("admin-unlocked", "yes"); } catch (e) {}
         showDashboard();
       } else {

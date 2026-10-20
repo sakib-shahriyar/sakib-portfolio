@@ -35,7 +35,7 @@ var SITE = {
   // NOTE: this is a casual lock, not real security. A static site cannot have
   // true logins; anyone with the site files could bypass it. Your real
   // protection is that only you can push updates to your GitHub repository.
-  adminPasscode: "PaTHaN@1993",
+  adminPasscode: "@PaTHaN@1993",
 
   // ---- About ----
   experienceSummary: "8 years of teaching experience",
