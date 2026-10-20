@@ -192,7 +192,7 @@
           ],
           "answer": 1,
           "explanation": "উদ্দীপকের চিত্রটি মেশ টপোলজির (প্রতিটি নোড প্রতিটি নোডের সাথে সরাসরি সংযুক্ত)। nটি নোডের প্রতিটি জোড়ার মধ্যে একটি সংযোগ থাকায় মোট তারের সংখ্যা = n(n−1)/2। চিত্রের ৫টি নোডের জন্য ৫×৪/২ = ১০টি।",
-          "figure": "assets/mcq/figures/board/dhaka-q16-mesh.png"
+          "figure": "assets/mcq/figures/board/dhaka-q16-mesh-v2.png"
         },
         {
           "id": "board-2026-dhaka-q17",
@@ -205,7 +205,7 @@
           ],
           "answer": 1,
           "explanation": "মেশ টপোলজির কাঠামো শক্তিশালী এবং একটি লিংক নষ্ট হলেও বিকল্প পথে ডেটা চলাচল করে — i ও iii সঠিক। তবে মেশ টপোলজির ইনস্টলেশন ও কনফিগারেশন জটিল ও ব্যয়বহুল, সহজ নয় — তাই ii ভুল।",
-          "figure": "assets/mcq/figures/board/dhaka-q16-mesh.png"
+          "figure": "assets/mcq/figures/board/dhaka-q16-mesh-v2.png"
         },
         {
           "id": "board-2026-dhaka-q18",
@@ -6106,7 +6106,7 @@
           ],
           "answer": 2,
           "explanation": "বোর্ডের চিহ্নিত উত্তর XOR (বর্তনী অস্পষ্ট)।",
-          "figure": "assets/mcq/figures/board/barishal-q17.png"
+          "figure": "assets/mcq/figures/board/barishal-q17-v2.png"
         },
         {
           "id": "board-2024-barishal-q18",
@@ -7314,8 +7314,7 @@
           ],
           "answer": 2,
           "explanation": "Y=0,1,1,0 (ইনপুট 00,01,10,11 ক্রমে) = XOR গেইট।",
-          "passage": "সত্যক সারণি:\nA B | Y\n0 0 | 1\n0 1 | 1\n1 0 | 1\n1 1 | 0",
-          "figure": "assets/mcq/figures/board/barishal-q15.png"
+          "passage": "সত্যক সারণি:\nA B | Y\n0 0 | 1\n0 1 | 1\n1 0 | 1\n1 1 | 0"
         },
         {
           "id": "board-2023-barishal-q16",
@@ -9737,7 +9736,7 @@
           ],
           "answer": 1,
           "explanation": "প্রক্রিয়াকরণ = আয়তক্ষেত্র।",
-          "figure": "assets/mcq/figures/board/cumilla-2016-q08-symbols.png"
+          "figure": "assets/mcq/figures/board/cumilla-2016-q08-symbols-v2.png"
         },
         {
           "id": "board-2016-cumilla-q09",
@@ -11130,7 +11129,7 @@
           "answer": 3,
           "explanation": "ট্রি থেকে ৫ ও ৭ বাদে ১,২,৩,৪,৬ সচল; বিকল্পে ২ নেই (মুদ্রণ ত্রুটি), নিকটতম ঘ।",
           "passage": "ট্রি: ১→(২,৩); ২→(৪,৫); ৩→(৬,৭)।",
-          "figure": "assets/mcq/figures/board/sylhet-2016-q15-tree.png"
+          "figure": "assets/mcq/figures/board/sylhet-2016-q15-tree-v2.png"
         },
         {
           "id": "board-2016-sylhet-q16",
@@ -11475,7 +11474,7 @@
           ],
           "answer": 2,
           "explanation": "ফ্লোচার্টে সংযোগ (connector) প্রতীক বৃত্ত; রম্বস = সিদ্ধান্ত, আয়তক্ষেত্র = প্রক্রিয়া।",
-          "figure": "assets/mcq/figures/board/dinajpur-2016-q09-symbols.png"
+          "figure": "assets/mcq/figures/board/dinajpur-2016-q09-symbols-v2.png"
         },
         {
           "id": "board-2016-dinajpur-q11",
@@ -11661,7 +11660,7 @@
           ],
           "answer": 1,
           "explanation": "সার্কিটে X ও Z OR গেইটে → (X+Z), তারপর Y-এর সাথে AND → P = (X+Z)Y।",
-          "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit.png"
+          "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v2.png"
         },
         {
           "id": "board-2016-dinajpur-q30",
@@ -11674,7 +11673,7 @@
           ],
           "answer": 1,
           "explanation": "P = (X+Z)Y = (0+1)·1 = 1; P' = NOT P = 0।",
-          "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit.png"
+          "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v2.png"
         },
         {
           "id": "board-2016-dinajpur-q31",

@@ -1,12 +1,12 @@
 {
   "title": "NCTB HSC ICT MCQ Bank",
   "description": "",
-  "total_questions": 1814,
+  "total_questions": 1798,
   "chapters": [
     {
       "number": 1,
       "title": "তথ্য ও যোগাযোগ প্রযুক্তি ও আমাদের বাংলাদেশ",
-      "question_count": 442,
+      "question_count": 441,
       "questions": [
         {
           "id": "hsc1-q001",
@@ -4599,19 +4599,6 @@
           "passage": "'ক' শিক্ষার্থী কলেজে পড়াশুনা করে। তথ্যের উৎস উল্লেখ করে পড়াশুনার প্রয়োজনে কম্পিউটার এবং ইন্টারনেটের সহায়তায় টার্মপেপার তৈরি করে। কিন্তু 'খ' শিক্ষার্থী কোনো অনুমতি ছাড়াই লাইব্রেরির কম্পিউটার থেকে ফাইল কপি করে নেয়। এমনকি ইন্টারনেট থেকে প্রাপ্ত তথ্যের কোনোরূপ কৃতজ্ঞতা ছাড়াই নিজের নামে প্রকাশ করে।"
         },
         {
-          "id": "hsc1-q379",
-          "question": "উদ্দীপকের আলোকে 'ক' শিক্ষার্থীর কর্মকাণ্ড- [ঢা. বো. ২০১৭] i. কপিরাইট আইন না মানা ii. টেলনেট iii. কম্পিউটার এথিকস। নিচের কোনটি সঠিক?",
-          "options": [
-            "i ও ii",
-            "i ও iii",
-            "ii ও iii",
-            "i, ii ও iii"
-          ],
-          "answer": 1,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; 'ক' শিক্ষার্থী তথ্যের উৎস উল্লেখ করে টার্মপেপার তৈরি করেছে, ফলে কেবল iii (কম্পিউটার এথিকস) প্রযোজ্য, কিন্তু কোনো অপশনে শুধু iii নেই।",
-          "passage": "'ক' শিক্ষার্থী কলেজে পড়াশুনা করে। তথ্যের উৎস উল্লেখ করে পড়াশুনার প্রয়োজনে কম্পিউটার এবং ইন্টারনেটের সহায়তায় টার্মপেপার তৈরি করে। কিন্তু 'খ' শিক্ষার্থী কোনো অনুমতি ছাড়াই লাইব্রেরির কম্পিউটার থেকে ফাইল কপি করে নেয়। এমনকি ইন্টারনেট থেকে প্রাপ্ত তথ্যের কোনোরূপ কৃতজ্ঞতা ছাড়াই নিজের নামে প্রকাশ করে।"
-        },
-        {
           "id": "hsc1-q380",
           "question": "দুষ্কৃতকারীর কর্মকাণ্ডটি হচ্ছে- [মা. বো. ২০১৭]",
           "options": [
@@ -5388,7 +5375,7 @@
     {
       "number": 2,
       "title": "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
-      "question_count": 299,
+      "question_count": 298,
       "questions": [
         {
           "id": "hsc2-q001",
@@ -5893,7 +5880,7 @@
           ],
           "answer": 3,
           "explanation": "এক থেকে অনেকের দিকে মাল্টিকাস্ট।",
-          "figure": "assets/mcq/figures/hsc2-q042.png"
+          "figure": "assets/mcq/figures/hsc2-q042-v2.png"
         },
         {
           "id": "hsc2-q043",
@@ -5906,7 +5893,7 @@
           ],
           "answer": 0,
           "explanation": "এক থেকে সবার দিকে ব্রডকাস্ট।",
-          "figure": "assets/mcq/figures/hsc2-q043.png"
+          "figure": "assets/mcq/figures/hsc2-q043-v2.png"
         },
         {
           "id": "hsc2-q044",
@@ -6027,7 +6014,7 @@
           ],
           "answer": 1,
           "explanation": "ব্রডকাস্ট ও সিমপ্লেক্স হতে পারে।",
-          "figure": "assets/mcq/figures/hsc2-q053.png"
+          "figure": "assets/mcq/figures/hsc2-q053-v2.png"
         },
         {
           "id": "hsc2-q054",
@@ -7422,19 +7409,6 @@
           "passage": "রাসেল 4G মোবাইল ফোন ব্যবহার করে তার নির্দিষ্ট কিছু বন্ধুকে SMS এর মাধ্যমে একটি বার্তা প্রেরণ করে।"
         },
         {
-          "id": "hsc2-q169",
-          "question": "রাসেলের মোবাইল ফোনের প্রযুক্তি দিয়ে সম্ভব— i. সার্কিট সুইচিং পদ্ধতিতে ডেটা প্রেরণ ii. IP নির্ভর ওয়্যারলেস নেটওয়ার্ক স্থাপন iii. ত্রিমাত্রিক পরিবেশে ডেটা স্থানান্তর। নিচের কোনটি সঠিক?",
-          "options": [
-            "i ও ii",
-            "i ও iii",
-            "ii ও iii",
-            "i, ii ও iii"
-          ],
-          "answer": 1,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; 4G অল-IP প্যাকেট সুইচিংভিত্তিক বলে ডেটা প্রেরণে সার্কিট সুইচিং (i) ভুল এবং ত্রিমাত্রিক স্থানান্তর (iii) 4G-এর বৈশিষ্ট্য নয়—সঠিক বিবৃতি শুধু (ii), যার একক অপশন নেই।",
-          "passage": "রাসেল 4G মোবাইল ফোন ব্যবহার করে তার নির্দিষ্ট কিছু বন্ধুকে SMS এর মাধ্যমে একটি বার্তা প্রেরণ করে।"
-        },
-        {
           "id": "hsc2-q170",
           "question": "ওয়েবসাইট সার্চের মাধ্যমে কোন ধরনের রিসোর্স শেয়ার বেশি করা যায়?",
           "options": [
@@ -8407,7 +8381,7 @@
           ],
           "answer": 0,
           "explanation": "হাবকেন্দ্রিক সংযোগ স্টার টপোলজি।",
-          "figure": "assets/mcq/figures/hsc2-q250-v2.png"
+          "figure": "assets/mcq/figures/hsc2-q250-v3.png"
         },
         {
           "id": "hsc2-q251",
@@ -8420,7 +8394,7 @@
           ],
           "answer": 1,
           "explanation": "অপটিক্যাল ফাইবারে গতি বাড়ে।",
-          "figure": "assets/mcq/figures/hsc2-q250-v2.png"
+          "figure": "assets/mcq/figures/hsc2-q250-v3.png"
         },
         {
           "id": "hsc2-q252",
@@ -9041,7 +9015,7 @@
     {
       "number": 3,
       "title": "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস (১ম অংশ: সংখ্যা পদ্ধতি)",
-      "question_count": 284,
+      "question_count": 281,
       "questions": [
         {
           "id": "hsc3-q001",
@@ -11390,18 +11364,6 @@
           "explanation": "−১২ = ১১১১০১০০।"
         },
         {
-          "id": "hsc3-q195",
-          "question": "−13 এর 2 এর পরিপূরক মান কত? (বইয়ের চিহ্নিত উত্তর)",
-          "options": [
-            "11110001",
-            "10110001",
-            "11010001",
-            "00001101"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: ৮-বিটে −১৩ = ১১১১০০১১, যা অপশনগুলোর মধ্যে নেই। বইয়ের চিহ্নিত উত্তর (ক) রাখা হয়েছে।"
-        },
-        {
           "id": "hsc3-q196",
           "question": "2'S Complement পদ্ধতিতে বিয়োগ করা হয়–",
           "options": [
@@ -12002,18 +11964,6 @@
           "explanation": "প্রথম ৩২টি কোড যান্ত্রিক নিয়ন্ত্রণে ব্যবহৃত হয়।"
         },
         {
-          "id": "hsc3-q247",
-          "question": "কোনটি 4 বিটের কোড? [য.বো. ২০১৯] i. ASCII Code ii. EBCDIC Code iii. BCD Code। নিচের কোনটি সঠিক? (বইয়ের চিহ্নিত উত্তর)",
-          "options": [
-            "i ও ii",
-            "i ও iii",
-            "ii ও iii",
-            "i, ii ও iii"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: ৪-বিটের কোড শুধু BCD (iii), কিন্তু 'শুধু iii' অপশন নেই। বইয়ের চিহ্নিত উত্তর (ক) রাখা হয়েছে।"
-        },
-        {
           "id": "hsc3-q248",
           "question": "প্যারিটি বিট হলো– i. ভগ্নাংশ প্যারিটি ii. জোড় প্যারিটি iii. বিজোড় প্যারিটি। নিচের কোনটি সঠিক?",
           "options": [
@@ -12410,18 +12360,6 @@
           "explanation": "২'s Complement-এ বিয়োগ যোগ করে করা হয়।"
         },
         {
-          "id": "hsc3-q281",
-          "question": "−54 এর 2 এর পরিপূরক কত? [জাককানইবি 'বি' ইউনিট ২০১৭-২০১৮] (বইয়ের চিহ্নিত উত্তর)",
-          "options": [
-            "(00110110)₂",
-            "(10010001)₂",
-            "(10101010)₂",
-            "(11101010)₂"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: ৮-বিটে −৫৪ = ১১০০১০১০, যা অপশনগুলোর মধ্যে নেই। বইয়ের চিহ্নিত উত্তর (ক) রাখা হয়েছে।"
-        },
-        {
           "id": "hsc3-q282",
           "question": "(11011000)₂-এর 2 এর পরিপূরক কোনটি? [চবি অ ইউনিট ২০১৭-২০১৮] (বইয়ে ক ও ঘ উভয়ে '00100111' ছাপা — মুদ্রণ ত্রুটি)",
           "options": [
@@ -12474,7 +12412,7 @@
     {
       "number": 3,
       "title": "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস (২য় অংশ: ডিজিটাল ডিভাইস)",
-      "question_count": 255,
+      "question_count": 245,
       "questions": [
         {
           "id": "hsc32-q001",
@@ -13421,7 +13359,7 @@
           ],
           "answer": 3,
           "explanation": "ঘ নং চিত্রটি AND গেইটের বর্তনী।",
-          "figure": "assets/mcq/figures/hsc32-q078.png"
+          "figure": "assets/mcq/figures/hsc32-q078-v2.png"
         },
         {
           "id": "hsc32-q079",
@@ -13556,7 +13494,7 @@
           ],
           "answer": 2,
           "explanation": "বর্তনীটি NOT গেইটের।",
-          "figure": "assets/mcq/figures/hsc32-q089.png"
+          "figure": "assets/mcq/figures/hsc32-q089-v2.png"
         },
         {
           "id": "hsc32-q090",
@@ -13842,7 +13780,7 @@
           ],
           "answer": 2,
           "explanation": "NAND বসালে Y = A+B।",
-          "figure": "assets/mcq/figures/hsc32-q112.png"
+          "figure": "assets/mcq/figures/hsc32-q112-v2.png"
         },
         {
           "id": "hsc32-q113",
@@ -14093,18 +14031,6 @@
           "figure": "assets/mcq/figures/hsc32-q132-v2.png"
         },
         {
-          "id": "hsc32-q133",
-          "question": "(x + ȳ)(x̄ + y) এই সমীকরণটির সরলকৃত মান কোনটি? i. X⊕Y ii. X̄Y + XȲ iii. (X⊕Y)̄",
-          "options": [
-            "i ও ii",
-            "i ও iii",
-            "ii ও iii",
-            "i, ii ও iii"
-          ],
-          "answer": 3,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: (x+ȳ)(x̄+y) = XNOR (শুধু iii), কিন্তু 'শুধু iii' অপশন নেই।"
-        },
-        {
           "id": "hsc32-q134",
           "question": "কোন গেইটের সকল ইনপুট 0 হলে, আউটপুট 1 হবে? [সকল বোর্ড-২০১৮] i. NAND ii. NOR iii. X-NOR",
           "options": [
@@ -14202,7 +14128,7 @@
           ],
           "answer": 2,
           "explanation": "XNOR = (A⊕B)̄ = ĀB̄+AB।",
-          "figure": "assets/mcq/figures/hsc32-q141.png"
+          "figure": "assets/mcq/figures/hsc32-q141-v2.png"
         },
         {
           "id": "hsc32-q142",
@@ -14802,7 +14728,7 @@
           ],
           "answer": 0,
           "explanation": "P⊕Q = P̄Q+PQ̄।",
-          "figure": "assets/mcq/figures/hsc32-q190-q191-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q190-q191-v3.png"
         },
         {
           "id": "hsc32-q191",
@@ -14815,7 +14741,7 @@
           ],
           "answer": 1,
           "explanation": "৩নং গেইটে NAND বসালে।",
-          "figure": "assets/mcq/figures/hsc32-q190-q191-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q190-q191-v3.png"
         },
         {
           "id": "hsc32-q192",
@@ -14828,19 +14754,6 @@
           ],
           "answer": 3,
           "explanation": "X-NOR-এর সমতুল্য।",
-          "figure": "assets/mcq/figures/hsc32-q192-q193.png"
-        },
-        {
-          "id": "hsc32-q193",
-          "question": "উদ্দীপকে সার্কিটের ইনপুট A, B ও C হলে কখন X = 1 হবে? [খ. বো. ২০২৩]",
-          "options": [
-            "A=0, B=0, C=0",
-            "A=0, B=0, C=1",
-            "A=0, B=1, C=0",
-            "A=1, B=0, C=0"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই এককভাবে সঠিক নয়; X = XNOR(A,B), A=B হলেই X=১ হয়, তাই ক (০,০,০) ও খ (০,০,১) উভয়ই সঠিক।",
           "figure": "assets/mcq/figures/hsc32-q192-q193.png"
         },
         {
@@ -14882,18 +14795,6 @@
           "explanation": "x=১ হতে (c+b)̄=১ ও (a+b+c)=১ লাগে → a=১,b=০,c=০। (বইয়ে ভুলভাবে ঘ চিহ্নিত ছিল; সংশোধিত।)"
         },
         {
-          "id": "hsc32-q197",
-          "question": "F = (AB)̄.(BC)̄ এর সরলীকৃত মান কোনটি? [ঢা. বো. ২০১৭]",
-          "options": [
-            "AB.BC",
-            "ABC",
-            "AB+AC",
-            "(ABC)̄"
-          ],
-          "answer": 1,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: (AB)̄(BC)̄ = B̄+ĀC̄, যা অপশনগুলোর মধ্যে নেই।"
-        },
-        {
           "id": "hsc32-q198",
           "question": "((ABC)̄ + (ABC)̄)̄ এর সরলীকৃত মান কোনটি? [চ. বো. ২০১৬]",
           "options": [
@@ -14904,19 +14805,6 @@
           ],
           "answer": 2,
           "explanation": "X=(ABC)̄ ধরলে, (X+X)̄ = X̄ = ABC। (আগে রাশিমালা ভুল পড়া হয়েছিল; বইয়ের চিহ্নিত উত্তরই সঠিক।)"
-        },
-        {
-          "id": "hsc32-q199",
-          "question": "XOR-NOR বর্তনীতে X=1 পেতে হলে A ও B এর মান কত হবে? [মা. বো. '১৬]",
-          "options": [
-            "A=0,B=1",
-            "A=1,B=0",
-            "A=1,B=1",
-            "A=0,B=0"
-          ],
-          "answer": 3,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই এককভাবে সঠিক নয়; X = XNOR(A⊕B, A⊕B) = ১ সর্বদা, চারটি বিকল্পেই X=১ হয়।",
-          "figure": "assets/mcq/figures/hsc32-q199-v2.png"
         },
         {
           "id": "hsc32-q200",
@@ -14993,7 +14881,7 @@
           ],
           "answer": 0,
           "explanation": "F = ০।",
-          "figure": "assets/mcq/figures/hsc32-q205.png"
+          "figure": "assets/mcq/figures/hsc32-q205-v2.png"
         },
         {
           "id": "hsc32-q206",
@@ -15083,7 +14971,7 @@
           ],
           "answer": 2,
           "explanation": "গ নং চিত্রটি।",
-          "figure": "assets/mcq/figures/hsc32-q212-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q212-v3.png"
         },
         {
           "id": "hsc32-q213",
@@ -15138,19 +15026,6 @@
           "figure": "assets/mcq/figures/hsc32-q215-v3.png"
         },
         {
-          "id": "hsc32-q217",
-          "question": "উদ্দীপকের (A,B,C→NOT→AND→F) আউটপুট F এর সরলীকৃত মান কোনটি? [চ. বো. '১৬]",
-          "options": [
-            "(A+B+C)̄",
-            "Ā+B̄+C̄",
-            "ABC",
-            "(ĀB̄C̄)̄"
-          ],
-          "answer": 2,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; বর্তনীতে F = NAND(Ā,B̄,C̄) = (ĀB̄C̄)̄, যা কোনো বিকল্পের সমান নয়।",
-          "figure": "assets/mcq/figures/hsc32-q217-q218-v2.png"
-        },
-        {
           "id": "hsc32-q218",
           "question": "উদ্দীপকে AND-এর স্থলে OR বসালে F এর সরলীকৃত মান নিচের কোন গেইটকে সমর্থন করে? [চ. বো. ২০১৬]",
           "options": [
@@ -15175,32 +15050,6 @@
           "answer": 0,
           "explanation": "Y = ((AB)(A+B))̄; (AB)(A+B) = AB, তাই Y = (AB)̄। (বইয়ে ভুলভাবে খ চিহ্নিত ছিল; সংশোধিত।)",
           "figure": "assets/mcq/figures/hsc32-q219-q220-v3.png"
-        },
-        {
-          "id": "hsc32-q220",
-          "question": "উদ্দীপকের বর্তনীর আউটপুট Y = 1 হলে, A ও B এর মান কত হবে? [মা. বো. ২০১৬]",
-          "options": [
-            "A=0 ও B=0",
-            "A=0 ও B=1",
-            "A=1 ও B=0",
-            "A=1 ও B=1"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ Y=(AB)̄=১ হয় (০,০), (০,১), (১,০) তিনটিতেই; একক সঠিক উত্তর নেই। বইয়ের (০,০) ভুল।",
-          "figure": "assets/mcq/figures/hsc32-q219-q220-v3.png"
-        },
-        {
-          "id": "hsc32-q221",
-          "question": "এখানে, P = ? [সি. বো. ২০১৬] (X,Y,Z বর্তনী)",
-          "options": [
-            "X+Y+Z",
-            "(X+Z)Y",
-            "XY+XZ",
-            "XYZ"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; বর্তনী ট্রেস করলে P = Z+XZ+XY = Z+XY পাওয়া যায়, যা কোনো বিকল্পের সমান নয়।",
-          "figure": "assets/mcq/figures/hsc32-q221-q222-v2.png"
         },
         {
           "id": "hsc32-q223",
@@ -15265,7 +15114,7 @@
           ],
           "answer": 0,
           "explanation": "শ্রেণি সংযোগে দুটি সুইচ = AND গেইট (দুটি বন্ধ হলেই বাতি জ্বলে)। (বইয়ে ভুলভাবে গ চিহ্নিত ছিল; সংশোধিত।)",
-          "figure": "assets/mcq/figures/hsc32-q228-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q228-v3.png"
         },
         {
           "id": "hsc32-q228",
@@ -15278,20 +15127,7 @@
           ],
           "answer": 1,
           "explanation": "NAND।",
-          "figure": "assets/mcq/figures/hsc32-q228-v2.png"
-        },
-        {
-          "id": "hsc32-q229",
-          "question": "উদ্দীপকের লজিক সার্কিটের সরলীকৃত সমীকরণ কোনটি? [খ. বো. ২০১৭]",
-          "options": [
-            "((AB̄+B+C̄))̄̄",
-            "((ĀB+B+C̄))̄̄",
-            "((Ā+B+B+C̄))̄̄",
-            "((A+B+B+C̄))̄̄"
-          ],
-          "answer": 3,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; বর্তনীতে Y = (Ā+B+B+C̄)̄ (একক ওভারলাইন), কিন্তু সব বিকল্পে দ্বৈত ওভারলাইন দেওয়া।",
-          "figure": "assets/mcq/figures/hsc32-q229-q230.png"
+          "figure": "assets/mcq/figures/hsc32-q228-v3.png"
         },
         {
           "id": "hsc32-q230",
@@ -15369,20 +15205,7 @@
           ],
           "answer": 2,
           "explanation": "XOR।",
-          "figure": "assets/mcq/figures/hsc32-q235-q236-v3.png"
-        },
-        {
-          "id": "hsc32-q236",
-          "question": "উদ্দীপকের বর্তনীর আউটপুট শূন্য পেতে হলে কোন দুইটি গেইট বিনিময় করতে হবে? [খ. বো. ২০১৯] (নোট: সব গেইট NOR, সঠিক অপশন নেই)",
-          "options": [
-            "1 ও 3",
-            "1 ও 4",
-            "1 ও 5",
-            "2 ও 3"
-          ],
-          "answer": 0,
-          "explanation": "⚠️ বইয়ের নিজের নোট: সব গেইট NOR হওয়ায় বিনিময়ে ফল বদলায় না; সঠিক অপশন নেই।",
-          "figure": "assets/mcq/figures/hsc32-q235-q236-v3.png"
+          "figure": "assets/mcq/figures/hsc32-q235-q236-v4.png"
         },
         {
           "id": "hsc32-q237",
@@ -15395,7 +15218,7 @@
           ],
           "answer": 3,
           "explanation": "F = AB + ĀB̄।",
-          "figure": "assets/mcq/figures/hsc32-q237-q238-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q237-q238-v3.png"
         },
         {
           "id": "hsc32-q238",
@@ -15408,7 +15231,7 @@
           ],
           "answer": 2,
           "explanation": "F = ০।",
-          "figure": "assets/mcq/figures/hsc32-q237-q238-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q237-q238-v3.png"
         },
         {
           "id": "hsc32-q239",
@@ -15545,18 +15368,6 @@
           ],
           "answer": 1,
           "explanation": "(Ā+B̄)(A+B) = ĀB+AB̄ = A⊕B।"
-        },
-        {
-          "id": "hsc32-q250",
-          "question": "Y = (Ā + B)(A + B̄) এর সরলীকৃত মান কত? [ঢাবি খ ইউনিট]",
-          "options": [
-            "ĀB̄ + B",
-            "Ā",
-            "B̄",
-            "A"
-          ],
-          "answer": 3,
-          "explanation": "⚠️ এই প্রশ্নে কোনো সঠিক অপশন নেই: (Ā+B)(A+B̄) = ĀB̄+AB (XNOR), যা অপশনে নেই।"
         },
         {
           "id": "hsc32-q251",
@@ -16227,7 +16038,7 @@
           ],
           "answer": 2,
           "explanation": "একটার পর একটা পেইজ: লিনিয়ার কাঠামো।",
-          "figure": "assets/mcq/figures/hsc4-q049.png"
+          "figure": "assets/mcq/figures/hsc4-q049-v2.png"
         },
         {
           "id": "hsc4-q050",
@@ -16240,7 +16051,7 @@
           ],
           "answer": 0,
           "explanation": "কাঠামো বদলাবে ও নতুন কোড লিখতে হবে।",
-          "figure": "assets/mcq/figures/hsc4-q049.png"
+          "figure": "assets/mcq/figures/hsc4-q049-v2.png"
         },
         {
           "id": "hsc4-q051",
@@ -17752,7 +17563,7 @@
     {
       "number": 5,
       "title": "প্রোগ্রামিং ভাষা",
-      "question_count": 241,
+      "question_count": 240,
       "questions": [
         {
           "id": "hsc5-q001",
@@ -19998,19 +19809,6 @@
           ],
           "answer": 1,
           "explanation": "b=4।",
-          "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = ++a;\nprintf(\"%d\", b);\n}"
-        },
-        {
-          "id": "hsc5-q186",
-          "question": "b এর মান 4 হবে কী পরিবর্তন করলে? [চ. বো.-১৬]",
-          "options": [
-            "b = a++",
-            "b = a--",
-            "b = a - 5",
-            "b = a + 5"
-          ],
-          "answer": 3,
-          "explanation": "⚠️ বইয়ের চারটি অপশনের কোনোটিই সঠিক নয়; a=3 হলে b=a+5 → 8 হয় (বইয়ে ঘ চিহ্নিত); অন্য অপশনে b=3, 3, -2 আসে — কোনোটিতেই 4 নয়।",
           "passage": "#include <stdio.h>\nmain()\n{\nint a = 3, b;\nb = ++a;\nprintf(\"%d\", b);\n}"
         },
         {
