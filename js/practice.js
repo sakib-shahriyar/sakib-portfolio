@@ -2,7 +2,7 @@
    Instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=31",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=33",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
     board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=4", title: "Board Papers · HSC ICT" }
   };

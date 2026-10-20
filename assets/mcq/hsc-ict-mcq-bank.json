@@ -5884,7 +5884,7 @@
         },
         {
           "id": "hsc2-q042",
-          "question": "নিচের চিত্রটি কোন মোডের? [সি.বো. ২০১৭] (A থেকে B, C, D, E-তে তীর)",
+          "question": "নিচের চিত্রটি কোন মোডের? [সি.বো. ২০১৭]",
           "options": [
             "সিমপ্লেক্স",
             "হাফ ডুপ্লেক্স",
@@ -5892,11 +5892,12 @@
             "মাল্টিকাস্ট"
           ],
           "answer": 3,
-          "explanation": "এক থেকে অনেকের দিকে মাল্টিকাস্ট।"
+          "explanation": "এক থেকে অনেকের দিকে মাল্টিকাস্ট।",
+          "figure": "assets/mcq/figures/hsc2-q042.png"
         },
         {
           "id": "hsc2-q043",
-          "question": "নিচের চিত্রটি কোন ডেটা ডেলিভারি মোডের? [কু. বো. ২০১৭] (A থেকে B, C, D-তে তীর)",
+          "question": "নিচের চিত্রটি কোন ডেটা ডেলিভারি মোডের? [কু. বো. ২০১৭]",
           "options": [
             "ব্রডকাস্ট",
             "ফুল ডুপ্লেক্স",
@@ -5904,7 +5905,8 @@
             "সিমপ্লেক্স"
           ],
           "answer": 0,
-          "explanation": "এক থেকে সবার দিকে ব্রডকাস্ট।"
+          "explanation": "এক থেকে সবার দিকে ব্রডকাস্ট।",
+          "figure": "assets/mcq/figures/hsc2-q043.png"
         },
         {
           "id": "hsc2-q044",
@@ -6016,7 +6018,7 @@
         },
         {
           "id": "hsc2-q053",
-          "question": "নিচের চিত্রটি হতে পারে- [রা. বো. ২০২৩] (P থেকে x, y, z-তে তীর) i. ব্রড কাস্ট ii. মাল্টি কাস্ট iii. সিম প্লেক্স। নিচের কোনটি সঠিক?",
+          "question": "নিচের চিত্রটি হতে পারে- [রা. বো. ২০২৩] i. ব্রড কাস্ট ii. মাল্টি কাস্ট iii. সিম প্লেক্স। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -6024,7 +6026,8 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "ব্রডকাস্ট ও সিমপ্লেক্স হতে পারে।"
+          "explanation": "ব্রডকাস্ট ও সিমপ্লেক্স হতে পারে।",
+          "figure": "assets/mcq/figures/hsc2-q053.png"
         },
         {
           "id": "hsc2-q054",
@@ -14347,7 +14350,7 @@
         },
         {
           "id": "hsc32-q155",
-          "question": "চিত্রের (A→NOT→AND) আউটপুট হবে– [কু. বো. ২০২৩]",
+          "question": "চিত্রের আউটপুট হবে– [কু. বো. ২০২৩]",
           "options": [
             "AB",
             "ĀB",
@@ -14355,7 +14358,8 @@
             "AB̄"
           ],
           "answer": 1,
-          "explanation": "Ā AND B = ĀB।"
+          "explanation": "Ā AND B = ĀB।",
+          "figure": "assets/mcq/figures/hsc32-q155.png"
         },
         {
           "id": "hsc32-q156",
@@ -14899,7 +14903,7 @@
         },
         {
           "id": "hsc32-q200",
-          "question": "চিত্রের (A→NOT→AND) আউটপুট হবে– [দি. বো. ২০১৬]",
+          "question": "চিত্রের আউটপুট হবে– [দি. বো. ২০১৬]",
           "options": [
             "AB",
             "ĀB",
@@ -14907,7 +14911,8 @@
             "AB̄"
           ],
           "answer": 1,
-          "explanation": "ĀB।"
+          "explanation": "ĀB।",
+          "figure": "assets/mcq/figures/hsc32-q200.png"
         },
         {
           "id": "hsc32-q201",
@@ -15182,15 +15187,16 @@
         },
         {
           "id": "hsc32-q223",
-          "question": "চিত্রে Z এর সমীকরণ কোনটি? [ঢা. বো. ২০১৬] (x,y→NOT→AND→OR→Z)",
+          "question": "চিত্রে Z এর সমীকরণ কোনটি? [ঢা. বো. ২০১৬]",
           "options": [
             "X̄Y + XȲ",
             "XȲ + XY",
             "X̄Y + XY",
             "X̄Ȳ + XY"
           ],
-          "answer": 3,
-          "explanation": "Z = X̄Ȳ + XY (XNOR)।"
+          "answer": 0,
+          "explanation": "চিত্রে উপরের AND গেইটের আউটপুট X̄Y এবং নিচের AND গেইটের আউটপুট XȲ; দুটি OR গেইটে যুক্ত হয়ে Z = X̄Y + XȲ (XOR)। (বইয়ে ঘ চিহ্নিত ছিল; সার্কিট অনুযায়ী সঠিক উত্তর ক।)",
+          "figure": "assets/mcq/figures/hsc32-q223.png"
         },
         {
           "id": "hsc32-q224",
@@ -15569,7 +15575,8 @@
             "(A+B)̄"
           ],
           "answer": 0,
-          "explanation": "NAND+NOT = AND = AB।"
+          "explanation": "NAND+NOT = AND = AB।",
+          "figure": "assets/mcq/figures/hsc32-q253.png"
         },
         {
           "id": "hsc32-q254",
@@ -16193,7 +16200,7 @@
         },
         {
           "id": "hsc4-q049",
-          "question": "উদ্দীপক: Page-1 → Page-2 → Page-3; Page-4 → Page-5। উদ্দীপকের চিত্রটির সাথে ওয়েবসাইটের কোন কাঠামোর মিল রয়েছে? [রা. বো-১৬]",
+          "question": "উদ্দীপকের চিত্রটির সাথে ওয়েবসাইটের কোন কাঠামোর মিল রয়েছে? [রা. বো-১৬]",
           "options": [
             "হায়ারারকিক্যাল",
             "ওয়েব লিংকড",
@@ -16201,7 +16208,8 @@
             "হাইব্রিড"
           ],
           "answer": 2,
-          "explanation": "একটার পর একটা পেইজ: লিনিয়ার কাঠামো।"
+          "explanation": "একটার পর একটা পেইজ: লিনিয়ার কাঠামো।",
+          "figure": "assets/mcq/figures/hsc4-q049.png"
         },
         {
           "id": "hsc4-q050",
@@ -16214,7 +16222,7 @@
           ],
           "answer": 0,
           "explanation": "কাঠামো বদলাবে ও নতুন কোড লিখতে হবে।",
-          "passage": "Page-1 → Page-2 → Page-3; Page-4 → Page-5।"
+          "figure": "assets/mcq/figures/hsc4-q049.png"
         },
         {
           "id": "hsc4-q051",
@@ -16411,7 +16419,7 @@
         },
         {
           "id": "hsc4-q067",
-          "question": "এইচটিএমএল কোড <p>H<sup>2</sup>0</p> এর ফলাফল কোনটি? [ঢা. বো-১৭]",
+          "question": "এইচটিএমএল কোডটির ফলাফল কোনটি? [ঢা. বো-১৭]",
           "options": [
             "H2O",
             "H₂O",
@@ -16419,7 +16427,8 @@
             "HO²"
           ],
           "answer": 2,
-          "explanation": "<sup> দিয়ে 2 উপরে উঠে: H²O। (বইয়ে ভুলভাবে খ চিহ্নিত ছিল; সংশোধিত।)"
+          "explanation": "<sup> দিয়ে 2 উপরে উঠে: H²O। (বইয়ে ভুলভাবে খ চিহ্নিত ছিল; সংশোধিত।)",
+          "passage": "<p>H<sup>2</sup>0</p>"
         },
         {
           "id": "hsc4-q068",
@@ -16543,7 +16552,7 @@
         },
         {
           "id": "hsc4-q078",
-          "question": "HTML কোড <p>CH<sub>3</sub>CH</p> এর ফলাফল কোনটি? [জবি (ক) ২১]",
+          "question": "HTML কোডটির ফলাফল কোনটি? [জবি (ক) ২১]",
           "options": [
             "CH3CH",
             "CH₃CH",
@@ -16551,11 +16560,12 @@
             "CH-CH"
           ],
           "answer": 1,
-          "explanation": "<sub> দিয়ে 3 নিচে নামে: CH₃CH।"
+          "explanation": "<sub> দিয়ে 3 নিচে নামে: CH₃CH।",
+          "passage": "<p>CH<sub>3</sub>CH</p>"
         },
         {
           "id": "hsc4-q079",
-          "question": "HTML কোড <p>H<sup>2</sup>O/p>-এর ফলাফল কোনটি? [জবি (A) ১৭-১৮]",
+          "question": "HTML কোডটির ফলাফল কোনটি? [জবি (A) ১৭-১৮]",
           "options": [
             "H₂O",
             "H²O",
@@ -16563,7 +16573,8 @@
             "HO²"
           ],
           "answer": 1,
-          "explanation": "<sup> দিয়ে 2 উপরে উঠে: H²O। (বইয়ে খ ও গ অভিন্ন ছাপা ছিল; গ ঠিক করা হয়েছে।)"
+          "explanation": "<sup> দিয়ে 2 উপরে উঠে: H²O। (বইয়ে খ ও গ অভিন্ন ছাপা ছিল; গ ঠিক করা হয়েছে।)",
+          "passage": "<p>H<sup>2</sup>O/p>"
         },
         {
           "id": "hsc4-q080",
@@ -16663,7 +16674,7 @@
         },
         {
           "id": "hsc4-q088",
-          "question": "কোড: <body> <p><i> My page </i> </p> <a href = \"pic.html\" > picture </a> <body>। ব্যবহৃত ট্যাগের ধরন হলো– [চ. বো. ২০২৩] i. টেবিল ii. হাইপার লিংক iii. ফরমেটিং। নিচের কোনটি সঠিক?",
+          "question": "ব্যবহৃত ট্যাগের ধরন হলো– [চ. বো. ২০২৩] i. টেবিল ii. হাইপার লিংক iii. ফরমেটিং। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "ii ও iii",
@@ -16671,7 +16682,8 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "হাইপারলিংক ও ফরমেটিং ট্যাগ আছে।"
+          "explanation": "হাইপারলিংক ও ফরমেটিং ট্যাগ আছে।",
+          "passage": "<body> <p><i> My page </i> </p> <a href = \"pic.html\" > picture </a> <body>"
         },
         {
           "id": "hsc4-q089",
@@ -16783,7 +16795,7 @@
         },
         {
           "id": "hsc4-q098",
-          "question": "উদ্দীপক: <font size = \"7\"> Bangladesh</font>। উদ্দীপকের অ্যাট্রিবিউট কোনটি? [রা. বো. ২০২৩]",
+          "question": "উদ্দীপকের অ্যাট্রিবিউট কোনটি? [রা. বো. ২০২৩]",
           "options": [
             "font",
             "size",
@@ -16791,11 +16803,12 @@
             "Bangladesh"
           ],
           "answer": 1,
-          "explanation": "size হলো অ্যাট্রিবিউট।"
+          "explanation": "size হলো অ্যাট্রিবিউট।",
+          "passage": "<font size = \"7\"> Bangladesh</font>"
         },
         {
           "id": "hsc4-q099",
-          "question": "উদ্দীপক: <ul type = \"disc\"> <li> Book </li> </ul>। উদ্দীপকটির আউটপুট হবে– [চ. বো. ২০২৩]",
+          "question": "উদ্দীপকটির আউটপুট হবে– [চ. বো. ২০২৩]",
           "options": [
             "■ Book",
             "○ Book",
@@ -16803,11 +16816,12 @@
             "● Book"
           ],
           "answer": 3,
-          "explanation": "type=\"disc\" হলে ● বুলেট আসে।"
+          "explanation": "type=\"disc\" হলে ● বুলেট আসে।",
+          "passage": "<ul type = \"disc\"> <li> Book </li> </ul>"
         },
         {
           "id": "hsc4-q100",
-          "question": "উদ্দীপক: <span style = \"color : red\"> Text </span>। উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [সি. বো. ২০২৩]",
+          "question": "উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [সি. বো. ২০২৩]",
           "options": [
             "Style",
             "Color : red",
@@ -16815,7 +16829,8 @@
             "Text"
           ],
           "answer": 3,
-          "explanation": "ট্যাগের ভেতরের লেখা Text হলো কন্টেন্ট।"
+          "explanation": "ট্যাগের ভেতরের লেখা Text হলো কন্টেন্ট।",
+          "passage": "<span style = \"color : red\"> Text </span>"
         },
         {
           "id": "hsc4-q101",
@@ -16910,7 +16925,7 @@
         },
         {
           "id": "hsc4-q108",
-          "question": "উদ্দীপক: <p align = \"center\"> Bangladesh </p>। উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [য. বো-১৯]",
+          "question": "উদ্দীপকে এলিমেন্ট কন্টেন্ট কোনটি? [য. বো-১৯]",
           "options": [
             "align",
             "center",
@@ -16918,7 +16933,8 @@
             "p"
           ],
           "answer": 2,
-          "explanation": "Bangladesh হলো কন্টেন্ট।"
+          "explanation": "Bangladesh হলো কন্টেন্ট।",
+          "passage": "<p align = \"center\"> Bangladesh </p>"
         },
         {
           "id": "hsc4-q109",
@@ -16935,7 +16951,7 @@
         },
         {
           "id": "hsc4-q110",
-          "question": "উদ্দীপক: <font color = \"Red\" > HSC Exam </font>। ব্যবহৃত রঙের সমতুল্য হেক্সাডেসিমাল কোড হচ্ছে– [সি. বো-১৯]",
+          "question": "ব্যবহৃত রঙের সমতুল্য হেক্সাডেসিমাল কোড হচ্ছে– [সি. বো-১৯]",
           "options": [
             "# FF0000",
             "#00FF00",
@@ -16943,7 +16959,8 @@
             "#FFF000"
           ],
           "answer": 0,
-          "explanation": "লাল = #FF0000।"
+          "explanation": "লাল = #FF0000।",
+          "passage": "<font color = \"Red\" > HSC Exam </font>"
         },
         {
           "id": "hsc4-q111",
@@ -16998,7 +17015,7 @@
         },
         {
           "id": "hsc4-q115",
-          "question": "HTML কোড <P align = \"center\"> ICT </P> এ অ্যাট্রিবিউট ভ্যালু কোনটি? [দি. বো. ২০২৩]",
+          "question": "HTML কোডটিতে অ্যাট্রিবিউট ভ্যালু কোনটি? [দি. বো. ২০২৩]",
           "options": [
             "P",
             "align",
@@ -17006,7 +17023,8 @@
             "ICT"
           ],
           "answer": 2,
-          "explanation": "center হলো ভ্যালু।"
+          "explanation": "center হলো ভ্যালু।",
+          "passage": "<P align = \"center\"> ICT </P>"
         },
         {
           "id": "hsc4-q116",
@@ -17563,7 +17581,7 @@
         },
         {
           "id": "hsc4-q162",
-          "question": "উদ্দীপকের html এ কোডের আউটপুট কোনটি? [রা. বো-১৭] (<table><tr><td>A</td><td>B</td></tr><tr><td>C</td><td>D</td></tr></table>)",
+          "question": "উদ্দীপকের html এ কোডের আউটপুট কোনটি? [রা. বো-১৭]",
           "options": [
             "A B / C D (প্রথম টেবিল)",
             "A C / B D",
@@ -17571,7 +17589,8 @@
             "A B / C D (চতুর্থ)"
           ],
           "answer": 0,
-          "explanation": "প্রথম রো-তে A, B; দ্বিতীয় রো-তে C, D।"
+          "explanation": "প্রথম রো-তে A, B; দ্বিতীয় রো-তে C, D।",
+          "passage": "<table>\n<tr><td>A</td><td>B</td></tr>\n<tr><td>C</td><td>D</td></tr>\n</table>"
         },
         {
           "id": "hsc4-q163",
@@ -19642,7 +19661,7 @@
         },
         {
           "id": "hsc5-q160",
-          "question": "x = 10; y = x * 5; y = y % 3; [ম. বো. ২০২৩] y চলকের সর্বশেষ মান কত?",
+          "question": "[ম. বো. ২০২৩] y চলকের সর্বশেষ মান কত?",
           "options": [
             "0",
             "1",
@@ -19650,7 +19669,8 @@
             "3"
           ],
           "answer": 2,
-          "explanation": "y=50, 50%3=2।"
+          "explanation": "y=50, 50%3=2।",
+          "passage": "x = 10;\ny = x * 5;\ny = y % 3;"
         },
         {
           "id": "hsc5-q161",
@@ -20143,7 +20163,7 @@
         },
         {
           "id": "hsc5-q200",
-          "question": "for(i=2; i<10; i = i+2) printf(\"%d\",i); ফলাফল কোনটি? [য. বো.-১৭]",
+          "question": "ফলাফল কোনটি? [য. বো.-১৭]",
           "options": [
             "1,3,5,7,9",
             "2,4,6,8",
@@ -20151,7 +20171,8 @@
             "1,2,3,4,5,6,7,8,9,10"
           ],
           "answer": 1,
-          "explanation": "2,4,6,8।"
+          "explanation": "2,4,6,8।",
+          "passage": "for(i=2; i<10; i = i+2) printf(\"%d\",i);"
         },
         {
           "id": "hsc5-q201",
@@ -20179,7 +20200,7 @@
         },
         {
           "id": "hsc5-q203",
-          "question": "for (i=2;i<=5;i++) {if(i==3) printf(\"Welcome to University!\")} 'printf()' কতবার এক্সিকিউট হবে? [জবি (ক)-২১]",
+          "question": "'printf()' কতবার এক্সিকিউট হবে? [জবি (ক)-২১]",
           "options": [
             "1",
             "2",
@@ -20187,11 +20208,12 @@
             "5"
           ],
           "answer": 0,
-          "explanation": "শুধু i=3-এ ১ বার।"
+          "explanation": "শুধু i=3-এ ১ বার।",
+          "passage": "for (i=2;i<=5;i++) {if(i==3) printf(\"Welcome to University!\")}"
         },
         {
           "id": "hsc5-q204",
-          "question": "for(i = 2; i < = 10; i = i + 2) এর printf(\"%d\", i) ধারা কোনটি? [য.বো.-১৭]",
+          "question": "এর printf(\"%d\", i) ধারা কোনটি? [য.বো.-১৭]",
           "options": [
             "1,2,3,4,5,6,7,8,9,10",
             "2, 4, 6, 8, 10",
@@ -20199,11 +20221,12 @@
             "2, 3, 4 5, 6, 7, 8, 9, 10"
           ],
           "answer": 1,
-          "explanation": "2,4,6,8,10।"
+          "explanation": "2,4,6,8,10।",
+          "passage": "for(i = 2; i < = 10; i = i + 2)"
         },
         {
           "id": "hsc5-q205",
-          "question": "for (i = 1; i < 8; i+ = 2) printf(\"%d\"; i) ফলাফল?",
+          "question": "ফলাফল?",
           "options": [
             "1 2 3 4 5 6 7",
             "1 3 5 7",
@@ -20211,7 +20234,8 @@
             "1 2 3 4 5 6 7 8"
           ],
           "answer": 1,
-          "explanation": "1 3 5 7।"
+          "explanation": "1 3 5 7।",
+          "passage": "for (i = 1; i < 8; i+ = 2) printf(\"%d\"; i)"
         },
         {
           "id": "hsc5-q206",
@@ -20423,7 +20447,7 @@
         },
         {
           "id": "hsc5-q222",
-          "question": "for (i=1;i<=5;i++) {if(i==3) continue;} \"HSC Exam\" কতবার?",
+          "question": "\"HSC Exam\" কতবার?",
           "options": [
             "1",
             "2",
@@ -20431,7 +20455,8 @@
             "5"
           ],
           "answer": 2,
-          "explanation": "৩ বাদে ৪ বার।"
+          "explanation": "৩ বাদে ৪ বার।",
+          "passage": "for (i=1;i<=5;i++) {if(i==3) continue;}"
         },
         {
           "id": "hsc5-q223",
@@ -20569,7 +20594,7 @@
         },
         {
           "id": "hsc5-q234",
-          "question": "প্রোগ্রামটির আউটপুট কোনটি? (for(i=1;i<=10;i+=2) printf)",
+          "question": "প্রোগ্রামটির আউটপুট কোনটি?",
           "options": [
             "1 2 3 4 5 6 7 8 9 10",
             "1 2 3 4 5 6 7 8 9",
@@ -20577,7 +20602,8 @@
             "2 4 6 8 10"
           ],
           "answer": 2,
-          "explanation": "1 3 5 7 9।"
+          "explanation": "1 3 5 7 9।",
+          "passage": "for(i=1; i<=10; i+=2) printf"
         },
         {
           "id": "hsc5-q236",
@@ -21277,7 +21303,7 @@
         },
         {
           "id": "hsc6-q051",
-          "question": "উদ্দীপকের \"A\" কে কী বলে? [দি. বো. ২০১৭] (টেবিল: Roll, Name, Marks; 701, A, 80; 702, B, 85)",
+          "question": "উদ্দীপকের \"A\" কে কী বলে? [দি. বো. ২০১৭]",
           "options": [
             "রেকর্ড",
             "ফিল্ড",
@@ -21285,11 +21311,12 @@
             "টেবিল"
           ],
           "answer": 2,
-          "explanation": "\"A\" একটি ডেটা।"
+          "explanation": "\"A\" একটি ডেটা।",
+          "passage": "টেবিল:\nRoll | Name | Marks\n701 | A | 80\n702 | B | 85"
         },
         {
           "id": "hsc6-q052",
-          "question": "টেবিলের শেষ ফিল্ডের ডেটা টাইপ কোন ধরনের? [দি. বো. ২০১৭] (উদ্দীপক টেবিল: Roll, Name, Marks | 701, A, 80 | 702, B, 85)",
+          "question": "টেবিলের শেষ ফিল্ডের ডেটা টাইপ কোন ধরনের? [দি. বো. ২০১৭]",
           "options": [
             "Text",
             "Number",
@@ -21297,7 +21324,8 @@
             "Memo"
           ],
           "answer": 1,
-          "explanation": "Number ধরনের।"
+          "explanation": "Number ধরনের।",
+          "passage": "উদ্দীপক টেবিল:\nRoll | Name | Marks\n701 | A | 80\n702 | B | 85"
         },
         {
           "id": "hsc6-q053",
@@ -21593,7 +21621,7 @@
         },
         {
           "id": "hsc6-q077",
-          "question": "উদ্দীপকের টেবিল হতে যাদের GPA = 5.00, তাদের নাম দেখতে SQL কমান্ড \"SELECT NAME FROM Student\" এর পরের অংশ কোনটি? [NCTB বই প্রশ্ন-২] (উদ্দীপক টেবিল: Roll, Name, GPA | 01, X, 5.00 | 02, Y, 4.50 | 03, Z, 5.00)",
+          "question": "উদ্দীপকের টেবিল হতে যাদের GPA = 5.00, তাদের নাম দেখতে SQL কমান্ড \"SELECT NAME FROM Student\" এর পরের অংশ কোনটি? [NCTB বই প্রশ্ন-২]",
           "options": [
             "WHERE \"GPA\", = \"5.00\";",
             "WHERE \"GPA\", \"5.00\";",
@@ -21601,11 +21629,12 @@
             "WHERE \"GPA\" = \"5.00\""
           ],
           "answer": 3,
-          "explanation": "WHERE \"GPA\" = \"5.00\"।"
+          "explanation": "WHERE \"GPA\" = \"5.00\"।",
+          "passage": "উদ্দীপক টেবিল:\nRoll | Name | GPA\n01 | X | 5.00\n02 | Y | 4.50\n03 | Z | 5.00"
         },
         {
           "id": "hsc6-q078",
-          "question": "কুয়েরি হলো– (উদ্দীপক টেবিল: Roll, Name, GPA | 01, A, 5.00 | 02, C, 4.50 | 03, M, 5.00)",
+          "question": "কুয়েরি হলো–",
           "options": [
             "ডেটাবেজ আপডেট রাখা",
             "ডেটাবেজ ফাইল সংরক্ষণ করা",
@@ -21613,11 +21642,12 @@
             "ডেটাবেজ ফাইল সাজানো"
           ],
           "answer": 2,
-          "explanation": "ডেটাবেজ থেকে কিছু খুঁজে বের করা।"
+          "explanation": "ডেটাবেজ থেকে কিছু খুঁজে বের করা।",
+          "passage": "উদ্দীপক টেবিল:\nRoll | Name | GPA\n01 | A | 5.00\n02 | C | 4.50\n03 | M | 5.00"
         },
         {
           "id": "hsc6-q079",
-          "question": "উদ্দীপকের টেবিল হতে যাদের GPA=5.00 তাদের নাম দেখতে SQL কমান্ড \"SELECT NAME FROM\" এর পরের অংশ কোনটি? (উদ্দীপক টেবিল: Roll, Name, GPA | 01, A, 5.00 | 02, C, 4.50 | 03, M, 5.00)",
+          "question": "উদ্দীপকের টেবিল হতে যাদের GPA=5.00 তাদের নাম দেখতে SQL কমান্ড \"SELECT NAME FROM\" এর পরের অংশ কোনটি?",
           "options": [
             "WHERE \"GPA\" = \"5.00\";",
             "WHERE \"GPA\",\"5.00\"",
@@ -21625,7 +21655,8 @@
             "WHERE \"GPA\" = \"5.00\""
           ],
           "answer": 3,
-          "explanation": "WHERE \"GPA\" = \"5.00\"।"
+          "explanation": "WHERE \"GPA\" = \"5.00\"।",
+          "passage": "উদ্দীপক টেবিল:\nRoll | Name | GPA\n01 | A | 5.00\n02 | C | 4.50\n03 | M | 5.00"
         },
         {
           "id": "hsc6-q080",
@@ -21679,7 +21710,7 @@
         },
         {
           "id": "hsc6-q084",
-          "question": "নিচের কোনটি ফরেন কী? (টেবিলে Roll, Academic Year; অন্য টেবিলে Roll, Marks, Grade)",
+          "question": "নিচের কোনটি ফরেন কী?",
           "options": [
             "Marks",
             "Academic Year",
@@ -21687,7 +21718,8 @@
             "Grade"
           ],
           "answer": 2,
-          "explanation": "Roll ফরেন কী।"
+          "explanation": "Roll ফরেন কী।",
+          "passage": "টেবিলে: Roll | Academic Year\nঅন্য টেবিলে: Roll | Marks | Grade"
         },
         {
           "id": "hsc6-q085",
@@ -21799,7 +21831,7 @@
         },
         {
           "id": "hsc6-q094",
-          "question": "উদ্দীপকের যে ফিল্ডগুলো প্রাইমারি কী হতে পারে– [দি. বো. ২০১৬] i. নাম ii. রোল নং iii. রেজিঃ নং। নিচের কোনটি সঠিক? (উদ্দীপক টেবিল: রোল নং, নাম, রেজিঃ নং, ফলাফল | ১০০০০১, জাহিদ, ৬৩২৫৫০, A+ | ১০০০০২, নেহাল, ৬৩২৫৫১, A | ১০০০০৩, লাবনী, ৬৩২৫৫২, B | ১০০০০৪, সাদার্ন, ৬৩২৫৫৩, A)",
+          "question": "উদ্দীপকের যে ফিল্ডগুলো প্রাইমারি কী হতে পারে– [দি. বো. ২০১৬] i. নাম ii. রোল নং iii. রেজিঃ নং। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -21807,11 +21839,12 @@
             "i, ii ও iii"
           ],
           "answer": 2,
-          "explanation": "ii ও iii সঠিক।"
+          "explanation": "ii ও iii সঠিক।",
+          "passage": "উদ্দীপক টেবিল:\nরোল নং | নাম | রেজিঃ নং | ফলাফল\n১০০০০১ | জাহিদ | ৬৩২৫৫০ | A+\n১০০০০২ | নেহাল | ৬৩২৫৫১ | A\n১০০০০৩ | লাবনী | ৬৩২৫৫২ | B\n১০০০০৪ | সাদার্ন | ৬৩২৫৫৩ | A"
         },
         {
           "id": "hsc6-q095",
-          "question": "যে রোল নম্বরগুলো A পেয়েছে, তাদের দ্রুত খুঁজে বের করা যায় কোন পদ্ধতিতে? [দি. বো. ২০১৬] (উদ্দীপক টেবিল: রোল নং, নাম, রেজিঃ নং, ফলাফল | ১০০০০১, জাহিদ, ৬৩২৫৫০, A+ | ১০০০০২, নেহাল, ৬৩২৫৫১, A | ১০০০০৩, লাবনী, ৬৩২৫৫২, B | ১০০০০৪, সাদার্ন, ৬৩২৫৫৩, A)",
+          "question": "যে রোল নম্বরগুলো A পেয়েছে, তাদের দ্রুত খুঁজে বের করা যায় কোন পদ্ধতিতে? [দি. বো. ২০১৬]",
           "options": [
             "সর্টিং",
             "সার্চিং",
@@ -21819,11 +21852,12 @@
             "কুয়েরি"
           ],
           "answer": 3,
-          "explanation": "কুয়েরি পদ্ধতিতে।"
+          "explanation": "কুয়েরি পদ্ধতিতে।",
+          "passage": "উদ্দীপক টেবিল:\nরোল নং | নাম | রেজিঃ নং | ফলাফল\n১০০০০১ | জাহিদ | ৬৩২৫৫০ | A+\n১০০০০২ | নেহাল | ৬৩২৫৫১ | A\n১০০০০৩ | লাবনী | ৬৩২৫৫২ | B\n১০০০০৪ | সাদার্ন | ৬৩২৫৫৩ | A"
         },
         {
           "id": "hsc6-q096",
-          "question": "টেবিল দুটির মধ্যে কি ধরনের রিলেশন বিদ্যমান? [ব. বো. ২০১৬] (টেবিল-১: রোল, নাম, জন্ম তারিখ | 1, A, 11 মে 99 | 2, B, 13 জুন 99 | 3, C, 23 জুন 99; টেবিল-২: রোল, নাম, জিপিএ | 1, A, 5.00 | 2, B, 4.75 | 3, C, 4.89)",
+          "question": "টেবিল দুটির মধ্যে কি ধরনের রিলেশন বিদ্যমান? [ব. বো. ২০১৬]",
           "options": [
             "One to One",
             "One to Many",
@@ -21831,11 +21865,12 @@
             "Many to Many"
           ],
           "answer": 0,
-          "explanation": "One to One।"
+          "explanation": "One to One।",
+          "passage": "টেবিল-১:\nরোল | নাম | জন্ম তারিখ\n1 | A | 11 মে 99\n2 | B | 13 জুন 99\n3 | C | 23 জুন 99\n\nটেবিল-২:\nরোল | নাম | জিপিএ\n1 | A | 5.00\n2 | B | 4.75\n3 | C | 4.89"
         },
         {
           "id": "hsc6-q097",
-          "question": "১ম টেবিলটির শেষ ফিল্ডের ডেটা টাইপ কোনটি? [ব. বো. ২০১৬] i. Text ii. Number iii. Date/Time। নিচের কোনটি সঠিক? (উদ্দীপক টেবিল-১: রোল, নাম, জন্ম তারিখ | 1, A, 11 মে 99 | 2, B, 13 জুন 99 | 3, C, 23 জুন 99)",
+          "question": "১ম টেবিলটির শেষ ফিল্ডের ডেটা টাইপ কোনটি? [ব. বো. ২০১৬] i. Text ii. Number iii. Date/Time। নিচের কোনটি সঠিক?",
           "options": [
             "i",
             "iii",
@@ -21843,11 +21878,12 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "Date/Time।"
+          "explanation": "Date/Time।",
+          "passage": "উদ্দীপক টেবিল-১:\nরোল | নাম | জন্ম তারিখ\n1 | A | 11 মে 99\n2 | B | 13 জুন 99\n3 | C | 23 জুন 99"
         },
         {
           "id": "hsc6-q099",
-          "question": "Table-A এর Dist ফিল্ডের উপর A → Z সর্টিং করলে Roll ফিল্ডের মানের ক্রম হবে– [ব. বো. ২০১৭] (টেবিল-A: Roll, Name, Dist | 1, Zafar, Dhaka | 2, Ali, Cumilla | 3, Kamal, Rangpur | 4, Bijoy, Chittagong)",
+          "question": "Table-A এর Dist ফিল্ডের উপর A → Z সর্টিং করলে Roll ফিল্ডের মানের ক্রম হবে– [ব. বো. ২০১৭]",
           "options": [
             "2, 3, 4, 1",
             "4, 2, 1, 3",
@@ -21855,7 +21891,8 @@
             "4, 3, 2, 1"
           ],
           "answer": 1,
-          "explanation": "4, 2, 1, 3।"
+          "explanation": "4, 2, 1, 3।",
+          "passage": "টেবিল-A:\nRoll | Name | Dist\n1 | Zafar | Dhaka\n2 | Ali | Cumilla\n3 | Kamal | Rangpur\n4 | Bijoy | Chittagong"
         },
         {
           "id": "hsc6-q100",
@@ -21911,7 +21948,7 @@
         },
         {
           "id": "hsc6-q104",
-          "question": "উদ্দীপকের ১নং টেবিলের ১নং ফিল্ডের বৈশিষ্ট্য হতে পারে– [ঢা. বো. ২০১৬] i. ডুপ্লিকেট মান বিরুদ্ধ ii. ডেটা টাইপ অটো নাম্বার iii. ইনডেক্সিং সুবিধা সম্বলিত। নিচের কোনটি সঠিক? (উদ্দীপক টেবিল: টেবিল-১: Roll, Name, Date of Birth | টেবিল-২: Script No, Roll, Subject)",
+          "question": "উদ্দীপকের ১নং টেবিলের ১নং ফিল্ডের বৈশিষ্ট্য হতে পারে– [ঢা. বো. ২০১৬] i. ডুপ্লিকেট মান বিরুদ্ধ ii. ডেটা টাইপ অটো নাম্বার iii. ইনডেক্সিং সুবিধা সম্বলিত। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -21919,11 +21956,12 @@
             "i, ii ও iii"
           ],
           "answer": 3,
-          "explanation": "তিনটিই।"
+          "explanation": "তিনটিই।",
+          "passage": "উদ্দীপক টেবিল:\nটেবিল-১: Roll | Name | Date of Birth\nটেবিল-২: Script No | Roll | Subject"
         },
         {
           "id": "hsc6-q105",
-          "question": "উদ্দীপকের টেবিলদ্বয়ের রিলেশনশিপের ক্ষেত্রে কোনটি প্রযোজ্য? [ঢা. বো. ২০১৬] (উদ্দীপক টেবিল: টেবিল-১: Roll, Name, Date of Birth | টেবিল-২: Script No, Roll, Subject)",
+          "question": "উদ্দীপকের টেবিলদ্বয়ের রিলেশনশিপের ক্ষেত্রে কোনটি প্রযোজ্য? [ঢা. বো. ২০১৬]",
           "options": [
             "টেবিলদ্বয়ের ১ নং ফিল্ড সমজাতীয় হতে হবে",
             "Roll ফিল্ডদ্বয় সমবৈশিষ্ট্যের হতে হবে",
@@ -21931,11 +21969,12 @@
             "টেবিল-২ তে নতুন ফিল্ড যুক্ত করতে হবে"
           ],
           "answer": 0,
-          "explanation": "১ নং ফিল্ড সমজাতীয় হতে হবে।"
+          "explanation": "১ নং ফিল্ড সমজাতীয় হতে হবে।",
+          "passage": "উদ্দীপক টেবিল:\nটেবিল-১: Roll | Name | Date of Birth\nটেবিল-২: Script No | Roll | Subject"
         },
         {
           "id": "hsc6-q106",
-          "question": "উদ্দীপকে যাদের বেতন 30,000 টাকা-এর উপরে তাদের দ্রুত খুঁজে বের করা যায় কোন পদ্ধতিতে? [কু. বো. ২০১৭] (উদ্দীপক টেবিল: E-ID, NAME, ADDRESS, MOBILE NO, SALARY (Tk.) | 1001, BIR, SYLHET, 01712673, 20,000 | 1002, RAJ, DHAKA, 0152390, 30,000 | 1003, RICHI, SYLHET, 0182341, 35,000 | 1004, ARJUN, SUNAMGONJ, 0192311, 40,000)",
+          "question": "উদ্দীপকে যাদের বেতন 30,000 টাকা-এর উপরে তাদের দ্রুত খুঁজে বের করা যায় কোন পদ্ধতিতে? [কু. বো. ২০১৭]",
           "options": [
             "সার্চিং",
             "সর্টিং",
@@ -21943,11 +21982,12 @@
             "কুয়েরি"
           ],
           "answer": 3,
-          "explanation": "কুয়েরি পদ্ধতিতে।"
+          "explanation": "কুয়েরি পদ্ধতিতে।",
+          "passage": "উদ্দীপক টেবিল:\nE-ID | NAME | ADDRESS | MOBILE NO | SALARY (Tk.)\n1001 | BIR | SYLHET | 01712673 | 20,000\n1002 | RAJ | DHAKA | 0152390 | 30,000\n1003 | RICHI | SYLHET | 0182341 | 35,000\n1004 | ARJUN | SUNAMGONJ | 0192311 | 40,000"
         },
         {
           "id": "hsc6-q107",
-          "question": "উদ্দীপক টেবিলের ফিল্ড রিলেশনে ভূমিকা রাখতে পারে– [কু. বো. ২০১৭] i. E_ID ii. NAME iii. MOBILE No। নিচের কোনটি সঠিক? (উদ্দীপক টেবিল: E-ID, NAME, ADDRESS, MOBILE NO, SALARY (Tk.) | 1001, BIR, SYLHET, 01712673, 20,000 | 1002, RAJ, DHAKA, 0152390, 30,000 | 1003, RICHI, SYLHET, 0182341, 35,000 | 1004, ARJUN, SUNAMGONJ, 0192311, 40,000)",
+          "question": "উদ্দীপক টেবিলের ফিল্ড রিলেশনে ভূমিকা রাখতে পারে– [কু. বো. ২০১৭] i. E_ID ii. NAME iii. MOBILE No। নিচের কোনটি সঠিক?",
           "options": [
             "i ও ii",
             "i ও iii",
@@ -21955,7 +21995,8 @@
             "i, ii ও iii"
           ],
           "answer": 1,
-          "explanation": "i ও iii সঠিক।"
+          "explanation": "i ও iii সঠিক।",
+          "passage": "উদ্দীপক টেবিল:\nE-ID | NAME | ADDRESS | MOBILE NO | SALARY (Tk.)\n1001 | BIR | SYLHET | 01712673 | 20,000\n1002 | RAJ | DHAKA | 0152390 | 30,000\n1003 | RICHI | SYLHET | 0182341 | 35,000\n1004 | ARJUN | SUNAMGONJ | 0192311 | 40,000"
         },
         {
           "id": "hsc6-q108",
