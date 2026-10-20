@@ -352,6 +352,10 @@
     else verdict = "Every expert was once a beginner. Study the explanations and retake the test.";
     $("result-verdict").textContent = verdict;
 
+    var shareText = "I scored " + correct + "/" + total + " (" + pct + "%) in the " + state.title +
+      " on Sakib Sir's practice page. Try it yourself: https://lecturer-pathan.vercel.app/practice.html";
+    $("result-share").href = "https://wa.me/?text=" + encodeURIComponent(shareText);
+
     var wrap = $("result-review-wrap");
     var review = $("result-review");
     review.innerHTML = "";
