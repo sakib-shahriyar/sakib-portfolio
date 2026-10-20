@@ -1,10 +1,10 @@
-/* Practice tests: chapterwise and whole-book MCQ exams.
-   25 questions, 20-minute timer, instant results with explanations. */
+/* Practice tests: chapterwise, whole-book and board-paper MCQ exams.
+   Instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=28",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=31",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=2", title: "Board Papers · HSC ICT" }
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=4", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
@@ -60,6 +60,16 @@
       : "25 questions. 20 minutes. Pick how you want to be tested.";
     $("chapter-picker").hidden = true;
     $("paper-picker").hidden = true;
+    var types = $("setup-types");
+    if (key === "hsc") {
+      types.classList.remove("grid-2");
+      types.classList.add("grid-3");
+      $("type-boardpapers").hidden = false;
+    } else {
+      types.classList.remove("grid-3");
+      types.classList.add("grid-2");
+      $("type-boardpapers").hidden = true;
+    }
     show("view-setup");
     loadBank(function () {});
   }
@@ -384,7 +394,9 @@
         startTest("Whole Book Test", all, false, null);
       }
     };
-    $("result-choose").onclick = function () { show("view-setup"); };
+    $("result-choose").onclick = function () {
+      if (state.kind === "paper") { showSetup("board"); } else { show("view-setup"); }
+    };
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -396,9 +408,12 @@
       e.preventDefault();
       showSetup("olevel");
     });
-    $("start-board").addEventListener("click", function (e) {
-      e.preventDefault();
+    function pickBoardPapers() {
       showSetup("board");
+    }
+    $("type-boardpapers").addEventListener("click", pickBoardPapers);
+    $("type-boardpapers").addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickBoardPapers(); }
     });
     $("setup-back").addEventListener("click", function (e) {
       e.preventDefault();
