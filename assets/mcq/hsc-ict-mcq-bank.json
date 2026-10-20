@@ -13016,7 +13016,7 @@
           ],
           "answer": 3,
           "explanation": "বর্তনীটি AND গেইটের সমতুল্য, Y = AB।",
-          "figure": "assets/mcq/figures/hsc32-q45-q46-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
         },
         {
           "id": "hsc32-q046",
@@ -13029,7 +13029,7 @@
           ],
           "answer": 3,
           "explanation": "AND-এ Y=১ পেতে A=১, B=১ দিতে হয়।",
-          "figure": "assets/mcq/figures/hsc32-q45-q46-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q45-q46.png"
         },
         {
           "id": "hsc32-q047",
