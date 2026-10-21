@@ -455,6 +455,17 @@
     };
   }
 
+  function refreshToTop() {
+    var btn = $("to-top");
+    if (!btn) return;
+    var showIt = false;
+    if (!$("view-result").hidden) {
+      // Show only once the result card has scrolled out of the screen.
+      showIt = $("result-card").getBoundingClientRect().bottom <= 0;
+    }
+    btn.classList.toggle("show", showIt);
+  }
+
   function openEndModal() {
     if (!state || state.submitted) return;
     $("end-modal").classList.add("open");
@@ -530,6 +541,10 @@
     $("exam-submit").addEventListener("click", function () { submit(); });
     $("exam-submit-bottom").addEventListener("click", function () { submit(); });
     $("start-warn-ok").addEventListener("click", beginTest);
+    $("to-top").addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    window.addEventListener("scroll", refreshToTop, { passive: true });
     $("exam-end").addEventListener("click", openEndModal);
     $("exam-end-bottom").addEventListener("click", openEndModal);
     $("end-modal-cancel").addEventListener("click", closeEndModal);

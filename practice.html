@@ -742,6 +742,31 @@ img { max-width: 100%; }
 .result-meta { color: var(--color-slate-gray); font-size: 15px; margin: 0 0 10px; }
 .result-verdict { font-size: 18px; font-weight: 500; margin: 0 0 28px; }
 .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 65;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-electric-cobalt);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { filter: brightness(1.1); }
+.to-top svg { width: 22px; height: 22px; }
+
 
 .review-item {
   background: var(--color-surface-ivory);
@@ -933,7 +958,7 @@ img { max-width: 100%; }
 
     <!-- RESULT -->
     <section class="section" id="view-result" hidden>
-      <div class="result-card">
+      <div class="result-card" id="result-card">
         <span class="eyebrow">Your result</span>
         <div class="result-score"><span id="result-score">0</span><span class="result-total">/25</span></div>
         <p class="result-meta" id="result-meta"></p>
@@ -948,6 +973,9 @@ img { max-width: 100%; }
         <h3 class="picker-title" id="review-title">Review your wrong answers</h3>
         <div id="result-review"></div>
       </div>
+      <button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"/><path d="M5 11l7-7 7 7"/></svg>
+      </button>
     </section>
 
   </main>
@@ -999,7 +1027,7 @@ img { max-width: 100%; }
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=20"></script>
+  <script defer src="js/practice.js?v=21"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

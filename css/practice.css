@@ -235,6 +235,31 @@
 .result-meta { color: var(--color-slate-gray); font-size: 15px; margin: 0 0 10px; }
 .result-verdict { font-size: 18px; font-weight: 500; margin: 0 0 28px; }
 .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 65;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-electric-cobalt);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { filter: brightness(1.1); }
+.to-top svg { width: 22px; height: 22px; }
+
 
 .review-item {
   background: var(--color-surface-ivory);
