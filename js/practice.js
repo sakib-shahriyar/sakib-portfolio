@@ -205,6 +205,19 @@
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  // Boolean overlines are drawn with CSS, not combining macron characters:
+  // some fonts and devices drop or render the combining mark invisibly, so a
+  // barred letter reads as a plain letter and changes the question's meaning
+  // (this is how hsc32-q201's final B-bar vanished on a student's screen).
+  function overlineize(html) {
+    return html
+      .replace(/Ā/g, '<span class="ovl">A</span>')
+      .replace(/ā/g, '<span class="ovl">a</span>')
+      .replace(/([A-Za-z])[\u0304\u0305]/g, '<span class="ovl">$1</span>');
+  }
+
+  function fmtText(s) { return overlineize(escapeHtml(s)); }
+
   function sample(pool) {
     return shuffle(pool.slice()).slice(0, Math.min(TEST_LEN, pool.length));
   }
@@ -333,9 +346,9 @@
       var html = "";
       if (q.passage) {
         html += '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
-          escapeHtml(q.passage) + "</div>";
+          fmtText(q.passage) + "</div>";
       }
-      html += '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + escapeHtml(q.question) + "</p>";
+      html += '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + fmtText(q.question) + "</p>";
       if (q.figure) {
         html += '<div class="qfig"><img src="' + escapeHtml(q.figure) + '" alt="Circuit diagram for question ' + (i + 1) + '" loading="lazy"></div>';
       }
@@ -345,7 +358,7 @@
         html += '<label class="qopt" for="' + oid + '">' +
           '<input type="radio" name="q' + i + '" id="' + oid + '" value="' + oi + '">' +
           '<span class="qletter">' + LETTERS[oi] + "</span>" +
-          '<span class="qtext">' + escapeHtml(opt) + "</span></label>";
+          '<span class="qtext">' + fmtText(opt) + "</span></label>";
       });
       html += "</div>";
       card.innerHTML = html;
@@ -443,14 +456,14 @@
         div.className = "review-item";
         var yourLine = w.yourText === null
           ? '<p class="review-your">Your answer: <span class="na">Not answered</span></p>'
-          : '<p class="review-your">Your answer: <span>' + escapeHtml(w.yourText) + "</span></p>";
+          : '<p class="review-your">Your answer: <span>' + fmtText(w.yourText) + "</span></p>";
         div.innerHTML =
           (w.passage ? '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
-            escapeHtml(w.passage) + "</div>" : "") +
-          '<p class="review-q"><span class="qnum">Q' + w.n + ".</span> " + escapeHtml(w.question) + "</p>" +
+            fmtText(w.passage) + "</div>" : "") +
+          '<p class="review-q"><span class="qnum">Q' + w.n + ".</span> " + fmtText(w.question) + "</p>" +
           yourLine +
-          '<p class="review-correct">Correct answer: <span>' + escapeHtml(w.correctText) + "</span></p>" +
-          '<div class="review-why"><strong>Why:</strong> ' + escapeHtml(w.explanation) + "</div>";
+          '<p class="review-correct">Correct answer: <span>' + fmtText(w.correctText) + "</span></p>" +
+          '<div class="review-why"><strong>Why:</strong> ' + fmtText(w.explanation) + "</div>";
         review.appendChild(div);
       });
     }
