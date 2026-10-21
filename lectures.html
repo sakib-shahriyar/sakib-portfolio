@@ -571,12 +571,23 @@ img { max-width: 100%; }
       <label for="notify-batch" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your batch</label>
       <select id="notify-batch" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
         <option value="">Select your batch</option>
-        <option value="HSC 2026">HSC 2026</option>
         <option value="HSC 2027">HSC 2027</option>
         <option value="HSC 2028">HSC 2028</option>
         <option value="HSC 2029">HSC 2029</option>
         <option value="O Level / IGCSE">O Level / IGCSE</option>
         <option value="Other">Other</option>
+      </select>
+      <label for="notify-chapter" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Which chapter do you want notifications for?</label>
+      <select id="notify-chapter" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+        <option value="">Select a chapter</option>
+        <option value="All Chapters">All Chapters</option>
+        <option value="Chapter 1 - ICT: World &amp; Bangladesh Perspective">Chapter 1 - ICT: World &amp; Bangladesh Perspective</option>
+        <option value="Chapter 2 - Communication Systems &amp; Networking">Chapter 2 - Communication Systems &amp; Networking</option>
+        <option value="Chapter 3 (Part 1) - Number System">Chapter 3 (Part 1) - Number System</option>
+        <option value="Chapter 3 (Part 2) - Digital Devices">Chapter 3 (Part 2) - Digital Devices</option>
+        <option value="Chapter 4 - Web Design &amp; HTML">Chapter 4 - Web Design &amp; HTML</option>
+        <option value="Chapter 5 - Programming Language">Chapter 5 - Programming Language</option>
+        <option value="Chapter 6 - Database Management System">Chapter 6 - Database Management System</option>
       </select>
       <label for="notify-phone" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your WhatsApp number</label>
       <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
@@ -808,6 +819,7 @@ img { max-width: 100%; }
       var notifyModal = document.getElementById("notify-modal");
       var notifyName = document.getElementById("notify-name");
       var notifyBatch = document.getElementById("notify-batch");
+      var notifyChapter = document.getElementById("notify-chapter");
       var notifyPhone = document.getElementById("notify-phone");
       var notifyErr = document.getElementById("notify-err");
       function openNotify() {
@@ -827,6 +839,7 @@ img { max-width: 100%; }
       document.getElementById("notify-submit").addEventListener("click", function () {
         var name = notifyName.value.trim();
         var batch = notifyBatch.value;
+        var chapter = notifyChapter.value;
         var raw = notifyPhone.value.trim();
         if (!name) {
           notifyErr.textContent = "Please enter your name.";
@@ -836,6 +849,11 @@ img { max-width: 100%; }
         if (!batch) {
           notifyErr.textContent = "Please select your batch.";
           notifyBatch.focus();
+          return;
+        }
+        if (!chapter) {
+          notifyErr.textContent = "Please select a chapter.";
+          notifyChapter.focus();
           return;
         }
         if (raw.replace(/\D/g, "").length < 7) {
@@ -853,12 +871,12 @@ img { max-width: 100%; }
               mode: "no-cors",
               keepalive: true,
               headers: { "Content-Type": "text/plain;charset=utf-8" },
-              body: JSON.stringify({ name: name, batch: batch, chapter: "All chapters", phone: raw })
+              body: JSON.stringify({ name: name, batch: batch, chapter: chapter, phone: raw })
             }).catch(function () {});
           } catch (e) {}
         }
         var msg = "Hi! Please notify me when new ICT video lectures are published.\nName: " + name +
-          "\nBatch: " + batch + "\nMy WhatsApp number is: " + raw;
+          "\nBatch: " + batch + "\nChapter: " + chapter + "\nMy WhatsApp number is: " + raw;
         var base = (typeof SITE !== "undefined" && SITE.whatsapp) || "https://wa.me/8801832202600";
         window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
         closeNotify();
