@@ -505,6 +505,18 @@ img { max-width: 100%; }
 .practice-type { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .practice-type:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .practice-type:focus-visible { outline: 2px solid var(--color-electric-cobalt); outline-offset: 3px; }
+.practice-type.is-expanded { grid-column: 1 / -1; cursor: default; }
+.practice-type.is-expanded:hover { transform: none; }
+.picker-inside { margin-top: 20px; border-top: 1px solid var(--color-hairline); padding-top: 18px; cursor: default; }
+.picker-inside .picker-title { margin: 0 0 14px; font-size: 20px; }
+.picker-inside #paper-groups .picker-title { margin: 22px 0 12px; font-size: 18px; }
+.picker-inside #paper-groups .picker-title:first-child { margin-top: 2px; }
+.picker-loading { color: var(--color-slate-gray); font-size: 15px; margin: 4px 0; }
+.exam-end { white-space: nowrap; }
+.end-modal-card { max-width: 440px; }
+.end-modal-card h3 { font-size: 22px; font-weight: 600; margin: 0 0 10px; }
+.end-modal-card p { color: var(--color-slate-gray); line-height: 1.6; margin: 0; }
+.end-modal-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 
 .practice-loading { text-align: center; padding: 48px 0; color: var(--color-slate-gray); font-size: 17px; }
 
@@ -823,7 +835,11 @@ img { max-width: 100%; }
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
           <h3>Chapterwise test</h3>
           <p>Pick one chapter. All 25 questions come from that chapter.</p>
-          <span class="card-link">Choose chapter →</span>
+          <span class="card-link" id="chapterwise-link">Choose chapter →</span>
+          <div class="picker-inside" id="chapter-picker" hidden>
+            <h3 class="picker-title">Choose a chapter</h3>
+            <div class="chapter-grid" id="chapter-grid"></div>
+          </div>
         </div>
         <div class="card reveal practice-type" id="type-wholebook" role="button" tabindex="0">
           <span class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
@@ -835,16 +851,12 @@ img { max-width: 100%; }
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8"/></svg></span>
           <h3>Board papers</h3>
           <p>Sit a real past paper from Dhaka, Rajshahi and 7 other boards. 45 papers, 913 questions, timed at 1 minute per question.</p>
-          <span class="card-link">Choose a paper →</span>
+          <span class="card-link" id="boardpapers-link">Choose a paper →</span>
+          <div class="picker-inside" id="paper-picker" hidden>
+            <h3 class="picker-title">Choose a board paper</h3>
+            <div id="paper-groups"></div>
+          </div>
         </div>
-      </div>
-      <div id="chapter-picker" hidden>
-        <h3 class="picker-title">Choose a chapter</h3>
-        <div class="chapter-grid" id="chapter-grid"></div>
-      </div>
-      <div id="paper-picker" hidden>
-        <h3 class="picker-title">Choose a board paper</h3>
-        <div id="paper-groups"></div>
       </div>
     </section>
 
@@ -855,6 +867,7 @@ img { max-width: 100%; }
           <span class="exam-title" id="exam-title">Test</span>
           <span class="exam-progress" id="exam-progress">Answered 0/25</span>
           <span class="exam-timer" id="exam-timer" aria-label="Time remaining">20:00</span>
+          <button class="btn btn-ghost exam-end" id="exam-end">End test</button>
           <button class="btn btn-primary exam-submit" id="exam-submit">Submit</button>
         </div>
         <div class="exam-warn" id="exam-warn" hidden></div>
@@ -863,6 +876,17 @@ img { max-width: 100%; }
       <div id="questions"></div>
       <div class="exam-foot">
         <button class="btn btn-primary" id="exam-submit-bottom">Submit answers</button>
+        <button class="btn btn-ghost" id="exam-end-bottom" style="margin-left:12px;">End test</button>
+      </div>
+      <div class="modal-backdrop" id="end-modal" role="dialog" aria-modal="true" aria-labelledby="end-modal-title">
+        <div class="modal end-modal-card">
+          <h3 id="end-modal-title">End this test?</h3>
+          <p>If you end now, your answers will not be saved and you will not get a result. You will go back to the test choices.</p>
+          <div class="end-modal-actions">
+            <button class="btn btn-primary" id="end-modal-cancel">Keep taking the test</button>
+            <button class="btn btn-ghost" id="end-modal-confirm">Yes, end the test</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -934,7 +958,7 @@ img { max-width: 100%; }
   </footer>
 
   <script defer src="js/main.js?v=2"></script>
-  <script defer src="js/practice.js?v=16"></script>
+  <script defer src="js/practice.js?v=18"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

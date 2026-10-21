@@ -17,6 +17,18 @@
 .practice-type { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .practice-type:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .practice-type:focus-visible { outline: 2px solid var(--color-electric-cobalt); outline-offset: 3px; }
+.practice-type.is-expanded { grid-column: 1 / -1; cursor: default; }
+.practice-type.is-expanded:hover { transform: none; }
+.picker-inside { margin-top: 20px; border-top: 1px solid var(--color-hairline); padding-top: 18px; cursor: default; }
+.picker-inside .picker-title { margin: 0 0 14px; font-size: 20px; }
+.picker-inside #paper-groups .picker-title { margin: 22px 0 12px; font-size: 18px; }
+.picker-inside #paper-groups .picker-title:first-child { margin-top: 2px; }
+.picker-loading { color: var(--color-slate-gray); font-size: 15px; margin: 4px 0; }
+.exam-end { white-space: nowrap; }
+.end-modal-card { max-width: 440px; }
+.end-modal-card h3 { font-size: 22px; font-weight: 600; margin: 0 0 10px; }
+.end-modal-card p { color: var(--color-slate-gray); line-height: 1.6; margin: 0; }
+.end-modal-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 
 .practice-loading { text-align: center; padding: 48px 0; color: var(--color-slate-gray); font-size: 17px; }
 

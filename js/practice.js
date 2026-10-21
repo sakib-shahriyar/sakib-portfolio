@@ -2,15 +2,16 @@
    Instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=40",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=42",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=5", title: "Board Papers · HSC ICT" }
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=7", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
   var LETTERS = ["A", "B", "C", "D"];
 
   var banks = {};  // subject key -> bank JSON (cached)
+  var boardBank = null; // board papers bank, loaded into the Board papers card
   var bank = null; // current subject's bank
   var subject = null; // current subject key
   var state = null; // { title, chapterwise, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto }
@@ -51,15 +52,51 @@
     };
   }
 
+  function collapsePickers(except) {
+    if (except !== "chapter") {
+      $("chapter-picker").hidden = true;
+      $("type-chapterwise").classList.remove("is-expanded");
+      $("chapterwise-link").textContent = "Choose chapter \u2192";
+    }
+    if (except !== "paper") {
+      $("paper-picker").hidden = true;
+      $("type-boardpapers").classList.remove("is-expanded");
+      $("boardpapers-link").textContent = "Choose a paper \u2192";
+    }
+  }
+
+  function openChapterPicker() {
+    collapsePickers("chapter");
+    $("chapter-picker").hidden = false;
+    $("type-chapterwise").classList.add("is-expanded");
+    $("chapterwise-link").textContent = "Hide chapters \u2191";
+  }
+
+  function openPaperPicker() {
+    collapsePickers("paper");
+    $("paper-picker").hidden = false;
+    $("type-boardpapers").classList.add("is-expanded");
+    $("boardpapers-link").textContent = "Hide papers \u2191";
+    if (boardBank) { renderPaperPicker(); return; }
+    $("paper-groups").innerHTML = '<p class="picker-loading">Loading board papers\u2026</p>';
+    fetch(SUBJECTS.board.bankUrl).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (data) {
+      boardBank = data;
+      banks.board = data;
+      renderPaperPicker();
+    }).catch(function () {
+      $("paper-groups").innerHTML = '<p class="picker-loading">Could not load the board papers. Please check your connection and try again.</p>';
+    });
+  }
+
   function showSetup(key) {
     subject = key;
     bank = null;
     $("setup-title").textContent = SUBJECTS[key].title;
-    $("setup-sub").textContent = key === "board"
-      ? "Timed like the real exam: 1 minute per question. Counts show questions per paper."
-      : "25 questions. 20 minutes. Pick how you want to be tested.";
-    $("chapter-picker").hidden = true;
-    $("paper-picker").hidden = true;
+    $("setup-sub").textContent = "25 questions. 20 minutes. Pick how you want to be tested.";
+    collapsePickers();
     var types = $("setup-types");
     if (key === "hsc") {
       types.classList.remove("grid-2");
@@ -76,16 +113,10 @@
 
   function afterBankLoad() {
     $("setup-loading").hidden = true;
-    if (subject === "board") {
-      $("setup-types").hidden = true;
-      renderPaperPicker();
-      $("paper-picker").hidden = false;
-    } else {
-      $("setup-types").hidden = false;
-      $("wholebook-desc").textContent =
-        "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
-      renderChapterGrid();
-    }
+    $("setup-types").hidden = false;
+    $("wholebook-desc").textContent =
+      "25 questions drawn from all " + bank.chapters.length + " chapters, mixed together.";
+    renderChapterGrid();
   }
 
   function loadBank(cb) {
@@ -122,7 +153,7 @@
     var wrap = $("paper-groups");
     wrap.innerHTML = "";
     var byYear = {};
-    bank.chapters.forEach(function (ch) {
+    boardBank.chapters.forEach(function (ch) {
       (byYear[ch.year] = byYear[ch.year] || []).push(ch);
     });
     Object.keys(byYear).sort(function (a, b) { return b - a; }).forEach(function (year) {
@@ -139,7 +170,7 @@
         b.innerHTML = "<strong>" + ch.question_count + "</strong><span>" +
           escapeHtml(ch.board) + " Board</span>";
         b.setAttribute("aria-label", paperTitle(ch) + ", " + ch.question_count + " questions");
-        b.addEventListener("click", function () { startPaperTest(ch); });
+        b.addEventListener("click", function (e) { e.stopPropagation(); startPaperTest(ch); });
         grid.appendChild(b);
       });
       wrap.appendChild(grid);
@@ -147,6 +178,8 @@
   }
 
   function startPaperTest(ch) {
+    subject = "board";
+    bank = boardBank;
     var pool = ch.questions.map(function (q) { return prepQuestion(q, paperTitle(ch)); });
     startTest(paperTitle(ch), pool, "paper", ch.number, pool.length * 60, true);
   }
@@ -159,7 +192,8 @@
       b.type = "button";
       b.className = "chapter-btn";
       b.innerHTML = "<strong>" + ch.number + "</strong><span>" + escapeHtml(ch.title) + "</span>";
-      b.addEventListener("click", function () {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
         var pool = ch.questions.map(function (q) { return prepQuestion(q, chapterTitle(ch)); });
         startTest(chapterTitle(ch) + " Test", pool, true, ch.number);
       });
@@ -231,6 +265,7 @@
   }
 
   function renderTest() {
+    closeEndModal();
     $("exam-title").textContent = state.title;
     $("exam-progress").textContent = "Answered 0/" + state.questions.length;
     $("exam-timer").textContent = fmt(state.secs);
@@ -314,6 +349,7 @@
       return;
     }
     state.submitted = true;
+    closeEndModal();
     stopTimer();
     renderResult();
     show("view-result");
@@ -399,8 +435,30 @@
       }
     };
     $("result-choose").onclick = function () {
-      if (state.kind === "paper") { showSetup("board"); } else { show("view-setup"); }
+      if (state.kind === "paper") { showSetup("hsc"); openPaperPicker(); }
+      else { show("view-setup"); }
     };
+  }
+
+  function openEndModal() {
+    if (!state || state.submitted) return;
+    $("end-modal").classList.add("open");
+  }
+
+  function closeEndModal() {
+    var m = $("end-modal");
+    if (m) m.classList.remove("open");
+  }
+
+  function endTest() {
+    if (!state) return;
+    closeEndModal();
+    stopTimer();
+    var origin = state.kind === "paper" ? "hsc" : subject;
+    state = null;
+    subject = origin;
+    bank = banks[origin] || null;
+    show("view-setup");
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -413,21 +471,23 @@
       showSetup("olevel");
     });
     function pickBoardPapers() {
-      showSetup("board");
+      if (!$("paper-picker").hidden) { collapsePickers(); return; }
+      openPaperPicker();
     }
     $("type-boardpapers").addEventListener("click", pickBoardPapers);
     $("type-boardpapers").addEventListener("keydown", function (e) {
+      if (e.target !== $("type-boardpapers")) return;
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickBoardPapers(); }
     });
     $("setup-back").addEventListener("click", function (e) {
       e.preventDefault();
-      $("chapter-picker").hidden = true;
-      $("paper-picker").hidden = true;
+      collapsePickers();
       show("view-landing");
     });
 
     function pickChapterwise() {
-      loadBank(function () { $("chapter-picker").hidden = false; });
+      if (!$("chapter-picker").hidden) { collapsePickers(); return; }
+      loadBank(function () { openChapterPicker(); });
     }
     function pickWholeBook() {
       loadBank(function () {
@@ -442,12 +502,24 @@
     $("type-wholebook").addEventListener("click", pickWholeBook);
     [$("type-chapterwise"), $("type-wholebook")].forEach(function (el, idx) {
       el.addEventListener("keydown", function (e) {
+        if (e.target !== el) return;
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (idx === 0 ? pickChapterwise : pickWholeBook)(); }
       });
     });
 
+    // Clicks inside a picker must not toggle the card behind it.
+    $("chapter-picker").addEventListener("click", function (e) { e.stopPropagation(); });
+    $("paper-picker").addEventListener("click", function (e) { e.stopPropagation(); });
+
     $("exam-submit").addEventListener("click", function () { submit(); });
     $("exam-submit-bottom").addEventListener("click", function () { submit(); });
+    $("exam-end").addEventListener("click", openEndModal);
+    $("exam-end-bottom").addEventListener("click", openEndModal);
+    $("end-modal-cancel").addEventListener("click", closeEndModal);
+    $("end-modal-confirm").addEventListener("click", endTest);
+    $("end-modal").addEventListener("click", function (e) {
+      if (e.target === $("end-modal")) closeEndModal();
+    });
 
     // Test hook only: ?debug=1 exposes state for automated checks.
     if (window.location.search.indexOf("debug=1") !== -1) {
