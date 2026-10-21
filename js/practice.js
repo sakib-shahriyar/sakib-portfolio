@@ -320,6 +320,9 @@
           state.picked[i] = parseInt(radio.value, 10);
           state.warned = false;
           $("exam-warn").hidden = true;
+          // One chance only: lock this question so the answer cannot be changed.
+          card.classList.add("locked");
+          card.querySelectorAll('input[type="radio"]').forEach(function (r) { r.disabled = true; });
           updateProgress();
         });
       });
