@@ -159,7 +159,8 @@ img { max-width: 100%; }
   color: var(--color-ink-charcoal); font-weight: 500; font-size: 15px;
   padding: 8px 16px; border-radius: 48px;
 }
-.nav-links a:hover { text-decoration: none; background: var(--color-surface-ivory); }
+.nav-links a:hover { text-decoration: none; background: #e8effc; }
+[data-theme="dark"] .nav-links a:hover { background: var(--color-surface-ivory); }
 .nav-links a.active:not(.btn) { background: #dbeafe; color: #1e40af; }
 .nav-links a.btn-primary.active { background: var(--color-deep-cobalt); }
 .nav-links a.btn-primary { color: #ffffff; }
