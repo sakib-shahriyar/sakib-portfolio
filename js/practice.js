@@ -232,11 +232,34 @@
     show("view-test");
     // The test and its timer start only after the student reads the
     // warning popup and clicks "I understand" (beginTest).
-    $("start-warn-modal").classList.add("open");
+    setWarnOpen(true);
+  }
+
+  function blockScrollEvent(e) { e.preventDefault(); }
+  function blockScrollKeys(e) {
+    if (e.target && e.target.id === "start-warn-ok") return;
+    if ([" ", "PageUp", "PageDown", "ArrowUp", "ArrowDown", "Home", "End"].indexOf(e.key) !== -1) {
+      e.preventDefault();
+    }
+  }
+
+  function setWarnOpen(open) {
+    $("start-warn-modal").classList.toggle("open", open);
+    document.documentElement.classList.toggle("warn-open", open);
+    document.body.classList.toggle("warn-open", open);
+    if (open) {
+      window.addEventListener("wheel", blockScrollEvent, { passive: false });
+      window.addEventListener("touchmove", blockScrollEvent, { passive: false });
+      window.addEventListener("keydown", blockScrollKeys, false);
+    } else {
+      window.removeEventListener("wheel", blockScrollEvent);
+      window.removeEventListener("touchmove", blockScrollEvent);
+      window.removeEventListener("keydown", blockScrollKeys, false);
+    }
   }
 
   function beginTest() {
-    $("start-warn-modal").classList.remove("open");
+    setWarnOpen(false);
     if (!state || state.submitted || state.started) return;
     state.started = true;
     state.deadline = Date.now() + state.secs * 1000;
@@ -478,7 +501,7 @@
 
   function endTest() {
     if (!state) return;
-    $("start-warn-modal").classList.remove("open");
+    setWarnOpen(false);
     closeEndModal();
     stopTimer();
     var origin = state.kind === "paper" ? "hsc" : subject;

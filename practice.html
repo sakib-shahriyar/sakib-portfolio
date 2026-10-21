@@ -617,6 +617,20 @@ img { max-width: 100%; }
 .start-warn-card p { font-size: 16.5px; line-height: 1.65; margin: 0 0 24px; }
 .start-warn-card p strong { color: #b45309; }
 #start-warn-ok { min-width: 210px; padding: 13px 28px; font-size: 16px; }
+/* While the start warning popup is open: blur the whole page behind it, lock scroll. */
+.warn-open { overflow: hidden; }
+body.warn-open { position: fixed; inset: 0; width: 100%; }
+.nav, .page-head, .footer, .wa-float, #view-test > *:not(.modal-backdrop) { transition: filter 0.25s ease; }
+body.warn-open .nav,
+body.warn-open .page-head,
+body.warn-open .footer,
+body.warn-open .wa-float,
+body.warn-open #view-test > *:not(.modal-backdrop) {
+  filter: blur(16px);
+  pointer-events: none;
+  user-select: none;
+}
+
 .qcard.locked .qopt { cursor: default; }
 .qcard.locked .qopt:not(:has(input:checked)) { opacity: 0.72; }
 .qcard.locked .qopt:not(:has(input:checked)):hover { border-color: var(--color-hairline); }
@@ -1027,7 +1041,7 @@ img { max-width: 100%; }
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=21"></script>
+  <script defer src="js/practice.js?v=22"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
