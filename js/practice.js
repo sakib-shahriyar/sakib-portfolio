@@ -220,7 +220,8 @@
       questions: full ? shuffle(pool.slice()) : sample(pool),
       picked: [],
       secs: nSecs,
-      deadline: Date.now() + nSecs * 1000,
+      started: false,
+      deadline: null,
       timerId: null,
       submitted: false,
       warned: false,
@@ -229,6 +230,16 @@
     for (var i = 0; i < state.questions.length; i++) state.picked.push(null);
     renderTest();
     show("view-test");
+    // The test and its timer start only after the student reads the
+    // warning popup and clicks "I understand" (beginTest).
+    $("start-warn-modal").classList.add("open");
+  }
+
+  function beginTest() {
+    $("start-warn-modal").classList.remove("open");
+    if (!state || state.submitted || state.started) return;
+    state.started = true;
+    state.deadline = Date.now() + state.secs * 1000;
     tick();
     state.timerId = setInterval(tick, 250);
   }
@@ -238,6 +249,7 @@
   }
 
   function remainingSecs() {
+    if (!state.deadline) return state.secs;
     return Math.max(0, Math.round((state.deadline - Date.now()) / 1000));
   }
 
@@ -247,7 +259,7 @@
   }
 
   function tick() {
-    if (!state || state.submitted) return;
+    if (!state || state.submitted || !state.started) return;
     var s = remainingSecs();
     var el = $("exam-timer");
     el.textContent = fmt(s);
@@ -455,6 +467,7 @@
 
   function endTest() {
     if (!state) return;
+    $("start-warn-modal").classList.remove("open");
     closeEndModal();
     stopTimer();
     var origin = state.kind === "paper" ? "hsc" : subject;
@@ -516,6 +529,7 @@
 
     $("exam-submit").addEventListener("click", function () { submit(); });
     $("exam-submit-bottom").addEventListener("click", function () { submit(); });
+    $("start-warn-ok").addEventListener("click", beginTest);
     $("exam-end").addEventListener("click", openEndModal);
     $("exam-end-bottom").addEventListener("click", openEndModal);
     $("end-modal-cancel").addEventListener("click", closeEndModal);
@@ -528,7 +542,7 @@
     if (window.location.search.indexOf("debug=1") !== -1) {
       window.__practice = {
         getState: function () { return state; },
-        forceTimeout: function () { if (state) { state.deadline = Date.now() - 1; tick(); } },
+        forceTimeout: function () { if (state && state.started) { state.deadline = Date.now() - 1; tick(); } },
         submit: submit
       };
     }
