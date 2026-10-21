@@ -2,7 +2,7 @@
    Instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=42",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=43",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
     board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=7", title: "Board Papers · HSC ICT" }
   };
@@ -210,10 +210,65 @@
   // barred letter reads as a plain letter and changes the question's meaning
   // (this is how hsc32-q201's final B-bar vanished on a student's screen).
   function overlineize(html) {
-    return html
-      .replace(/Ā/g, '<span class="ovl">A</span>')
-      .replace(/ā/g, '<span class="ovl">a</span>')
-      .replace(/([A-Za-z])[\u0304\u0305]/g, '<span class="ovl">$1</span>');
+    // Build units first: precomposed barred letters (Ā, ā) become barred
+    // letter units, and a combining macron bars the unit before it. When
+    // that unit is a closing bracket, the whole bracketed group is barred,
+    // so (AB)\u0304 and (A+B)\u0304 get one full-width bar like the printed
+    // book instead of a stub over the bracket alone. Letter bars and a
+    // plain group bar share level 1 (in print they sit at the same height
+    // and merge). A group that contains an already barred GROUP takes the
+    // next level up (.ovl-hi, drawn higher), so nested complements such as
+    // ((ABC)\u0304 + (ABC)\u0304)\u0304 keep their inner and outer bars distinct.
+    var units = [];
+    for (var i = 0; i < html.length; i++) {
+      var ch = html.charAt(i);
+      if (ch === "Ā") { units.push({ t: "A", lv: [1], g: 0 }); continue; }
+      if (ch === "ā") { units.push({ t: "a", lv: [1], g: 0 }); continue; }
+      if (ch === "\u0304" || ch === "\u0305") {
+        var u = units[units.length - 1];
+        if (u) {
+          if (u.t === ")") {
+            var depth = 0, j = -1, k2;
+            for (k2 = units.length - 1; k2 >= 0; k2--) {
+              if (units[k2].t === ")") depth++;
+              else if (units[k2].t === "(") { depth--; if (depth === 0) { j = k2; break; } }
+            }
+            if (j < 0) { if (u.lv.indexOf(1) === -1) u.lv.push(1); }
+            else {
+              var gm = 0;
+              for (k2 = j; k2 < units.length; k2++) if (units[k2].g > gm) gm = units[k2].g;
+              var L = gm + 1;
+              for (k2 = j; k2 < units.length; k2++) {
+                if (units[k2].lv.indexOf(L) === -1) units[k2].lv.push(L);
+                if (units[k2].g < L) units[k2].g = L;
+              }
+            }
+          } else if (u.lv.indexOf(1) === -1) {
+            u.lv.push(1);
+          }
+        }
+        continue;
+      }
+      units.push({ t: ch, lv: [], g: 0 });
+    }
+    // Render with a span stack: higher levels nest outside lower ones.
+    var out = "", stack = [];
+    function sameSet(a, b) {
+      return a.length === b.length && a.every(function (x) { return b.indexOf(x) !== -1; });
+    }
+    units.forEach(function (un) {
+      var want = un.lv.slice().sort(function (a, b) { return b - a; });
+      if (!sameSet(want, stack)) {
+        var keep = 0;
+        while (keep < stack.length && keep < want.length && stack[keep] === want[keep]) keep++;
+        for (var c = stack.length - 1; c >= keep; c--) out += "</span>";
+        for (var o = keep; o < want.length; o++) out += '<span class="ovl' + (want[o] > 1 ? " ovl-hi" : "") + '">';
+        stack = want;
+      }
+      out += un.t;
+    });
+    for (var c2 = stack.length - 1; c2 >= 0; c2--) out += "</span>";
+    return out;
   }
 
   function fmtText(s) { return overlineize(escapeHtml(s)); }
