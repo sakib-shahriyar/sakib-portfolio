@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1220">
   <title>Contact | Sakib Shahriyar Pathan</title>
   <meta name="description" content="Contact Sakib Shahriyar Pathan. Request complete study documents or ask a question.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -10,6 +12,7 @@
   <meta property="og:title" content="Contact | Sakib Shahriyar Pathan">
   <meta property="og:description" content="Contact Sakib Shahriyar Pathan. Request complete study documents or ask a question.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/contact.html">
+  <link rel="canonical" href="https://lecturer-pathan.vercel.app/contact.html">
   <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact | Sakib Shahriyar Pathan">
@@ -483,6 +486,20 @@ img { max-width: 100%; }
   .preview-frame { height: 320px; }
 }
 
+/* ---------- Accessibility: keyboard focus + skip link ---------- */
+:focus-visible { outline: 3px solid var(--color-deep-cobalt); outline-offset: 2px; border-radius: 4px; }
+.skip-link { position: absolute; left: 16px; top: -60px; z-index: 200; background: var(--color-deep-cobalt); color: #ffffff; padding: 10px 18px; border-radius: 999px; font-weight: 600; transition: top 0.15s ease; }
+.skip-link:focus { top: 12px; }
+</style>
+  <style>
+/* Contact page only: FAQ accordion. Mirrored inline in contact.html. */
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--color-pure-white); border: 1px solid var(--color-hairline); border-radius: 14px; padding: 4px 22px; box-shadow: var(--shadow-subtle); }
+.faq-item summary { cursor: pointer; font-weight: 600; font-size: 16px; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; font-size: 20px; font-weight: 400; color: var(--color-deep-cobalt); flex: none; }
+.faq-item[open ] summary::after { content: "\2212"; }
+.faq-item p { color: var(--color-slate-gray); font-size: 15px; margin: 0 0 16px; }
   </style>
   <script>
 /* Theme toggle: runs early to avoid a flash of the wrong theme. */
@@ -515,6 +532,7 @@ img { max-width: 100%; }
   <script defer src="js/site-config.js?v=6"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="nav">
     <div class="container nav-inner">
@@ -525,6 +543,7 @@ img { max-width: 100%; }
       <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="courses.html">Courses</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html">Lectures</a>
         <a href="practice.html">Practice</a>
@@ -543,7 +562,7 @@ img { max-width: 100%; }
     <p class="reveal">Questions about a topic, or want the complete copy of a document? Send a message. I read every one.</p>
   </header>
 
-  <main class="container" style="padding-top:56px;">
+  <main id="main" class="container" style="padding-top:56px;">
     <section class="section">
       <div class="contact-grid">
         <div class="card contact-item reveal">
@@ -580,6 +599,58 @@ img { max-width: 100%; }
         </form>
       </div>
     </section>
+    <section class="section">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions from parents and students</h2>
+        <p>The answers to what I am asked most often. Anything else, send a message above.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>How do I join an HSC ICT batch?</summary>
+          <p>Go to the <a href="courses.html">Courses page</a>, choose Batch 2027 or Batch 2028, and tap Join on WhatsApp. Classes are held online on Google Meet on Sunday, Tuesday and Thursday, and admission is open now.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How do I get the complete notes for a chapter?</summary>
+          <p>Open the <a href="notes.html">Notes page</a> and preview the first 4 pages of any document free. For the complete copy, send a message through the form above or on WhatsApp, and I will send it to you personally.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Are the practice tests free?</summary>
+          <p>Yes. The <a href="practice.html">Practice page</a> is free for everyone: chapter-wise tests and real board papers, a timer, instant scores, and explanations for the questions you get wrong.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Which levels and subjects do you teach?</summary>
+          <p>HSC ICT; SSC Mathematics, Physics, Chemistry and Higher Mathematics; and Cambridge O Level, Edexcel IGCSE and A Level ICT and Computer Science.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Where are the classes held?</summary>
+          <p>The current HSC ICT batches are fully online on Google Meet, so you can join from anywhere. For O Level, IGCSE and A Level arrangements, message me on WhatsApp.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How will I know when a new video lecture is published?</summary>
+          <p>On the <a href="lectures.html">Lectures page</a>, fill in the Notify me box with your name, batch, chapter and WhatsApp number. You will get a WhatsApp message when a new video for your chapter comes out.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What are the batch fees?</summary>
+          <p>Fees are shared on WhatsApp rather than listed here. Send a message naming the batch you are interested in, and I will reply with the details.</p>
+        </details>
+      </div>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "How do I join an HSC ICT batch?", "acceptedAnswer": {"@type": "Answer", "text": "Go to the Courses page, choose Batch 2027 or Batch 2028, and tap Join on WhatsApp. Classes are held online on Google Meet on Sunday, Tuesday and Thursday, and admission is open now."}},
+          {"@type": "Question", "name": "How do I get the complete notes for a chapter?", "acceptedAnswer": {"@type": "Answer", "text": "Open the Notes page and preview the first 4 pages of any document free. For the complete copy, send a message through the contact form or on WhatsApp, and it will be sent to you personally."}},
+          {"@type": "Question", "name": "Are the practice tests free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Practice page is free for everyone: chapter-wise tests and real board papers, a timer, instant scores, and explanations for the questions you get wrong."}},
+          {"@type": "Question", "name": "Which levels and subjects do you teach?", "acceptedAnswer": {"@type": "Answer", "text": "HSC ICT; SSC Mathematics, Physics, Chemistry and Higher Mathematics; and Cambridge O Level, Edexcel IGCSE and A Level ICT and Computer Science."}},
+          {"@type": "Question", "name": "Where are the classes held?", "acceptedAnswer": {"@type": "Answer", "text": "The current HSC ICT batches are fully online on Google Meet. For O Level, IGCSE and A Level arrangements, message on WhatsApp."}},
+          {"@type": "Question", "name": "How will I know when a new video lecture is published?", "acceptedAnswer": {"@type": "Answer", "text": "On the Lectures page, fill in the Notify me box with your name, batch, chapter and WhatsApp number. You will get a WhatsApp message when a new video for your chapter comes out."}},
+          {"@type": "Question", "name": "What are the batch fees?", "acceptedAnswer": {"@type": "Answer", "text": "Fees are shared on WhatsApp rather than listed on the site. Send a message naming the batch you are interested in to receive the details."}}
+        ]
+      }
+      </script>
+    </section>
   </main>
 
   <footer class="footer">
@@ -597,6 +668,7 @@ img { max-width: 100%; }
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="notes.html">Notes</a></li>
             <li><a href="lectures.html">Lectures</a></li>
             <li><a href="practice.html">Practice</a></li>

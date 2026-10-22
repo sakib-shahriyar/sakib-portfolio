@@ -1,0 +1,14 @@
+/* Courses page only: batch cards. Mirrored inline in courses.html. */
+.course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px; }
+.course-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.course-top h3 { margin: 0; }
+.course-badge { flex: none; padding: 5px 12px; border-radius: 999px; background: #e7f6ec; color: #14713c; font-size: 13px; font-weight: 600; }
+[data-theme="dark"] .course-badge { background: #123524; color: #6fd598; }
+.course-rows { list-style: none; margin: 0 0 20px; padding: 0; }
+.course-rows li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--color-hairline); font-size: 15px; }
+.course-rows span { color: var(--color-slate-gray); }
+.course-rows strong { font-weight: 600; text-align: right; }
+.course-join { margin-top: auto; text-align: center; }
+.course-note { text-align: center; align-items: center; }
+.course-note p { max-width: 560px; }
+@media (max-width: 639px) { .course-grid { grid-template-columns: 1fr; } }

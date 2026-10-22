@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1220">
   <title>Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan</title>
   <meta name="description" content="MCQ practice tests for HSC ICT and Cambridge O Level Computer Science, plus timed HSC board-exam papers 2016–2026. Instant results with explanations.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -10,6 +12,7 @@
   <meta property="og:title" content="Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan">
   <meta property="og:description" content="MCQ practice tests for HSC ICT and Cambridge O Level Computer Science. 25 questions, 20 minutes, instant results with explanations.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/practice.html">
+  <link rel="canonical" href="https://lecturer-pathan.vercel.app/practice.html">
   <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan">
@@ -483,7 +486,11 @@ img { max-width: 100%; }
   .preview-frame { height: 320px; }
 }
 
-  </style>
+/* ---------- Accessibility: keyboard focus + skip link ---------- */
+:focus-visible { outline: 3px solid var(--color-deep-cobalt); outline-offset: 2px; border-radius: 4px; }
+.skip-link { position: absolute; left: 16px; top: -60px; z-index: 200; background: var(--color-deep-cobalt); color: #ffffff; padding: 10px 18px; border-radius: 999px; font-weight: 600; transition: top 0.15s ease; }
+.skip-link:focus { top: 12px; }
+</style>
   <style>
 /* Practice tests: subject cards, setup, exam UI, results. Dock tokens. */
 .card[hidden] { display: none !important; }
@@ -849,6 +856,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   <script defer src="js/site-config.js?v=6"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="nav">
     <div class="container nav-inner">
@@ -859,6 +867,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
       <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="courses.html">Courses</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html">Lectures</a>
         <a href="practice.html">Practice</a>
@@ -877,7 +886,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
     <p class="reveal">Timed MCQ tests, just like the real exam. 25 questions, 20 minutes, instant results with explanations.</p>
   </header>
 
-  <main class="container" style="padding-top:56px;">
+  <main id="main" class="container" style="padding-top:56px;">
 
     <!-- LANDING: pick a subject -->
     <section class="section" id="view-landing">
@@ -1013,6 +1022,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="notes.html">Notes</a></li>
             <li><a href="lectures.html">Lectures</a></li>
             <li><a href="practice.html">Practice</a></li>

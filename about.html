@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1220">
   <title>About | Sakib Shahriyar Pathan</title>
   <meta name="description" content="About Sakib Shahriyar Pathan: education, teaching philosophy and expertise in the HSC ICT curriculum.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -10,6 +12,7 @@
   <meta property="og:title" content="About | Sakib Shahriyar Pathan">
   <meta property="og:description" content="MSc CSE (BUET), BSc CSE (SEU). 8 years teaching HSC ICT & Physics, SSC Math, Physics, Chemistry and O/A Level ICT & CS.">
   <meta property="og:url" content="https://lecturer-pathan.vercel.app/about.html">
+  <link rel="canonical" href="https://lecturer-pathan.vercel.app/about.html">
   <meta property="og:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About | Sakib Shahriyar Pathan">
@@ -483,7 +486,11 @@ img { max-width: 100%; }
   .preview-frame { height: 320px; }
 }
 
-  </style>
+/* ---------- Accessibility: keyboard focus + skip link ---------- */
+:focus-visible { outline: 3px solid var(--color-deep-cobalt); outline-offset: 2px; border-radius: 4px; }
+.skip-link { position: absolute; left: 16px; top: -60px; z-index: 200; background: var(--color-deep-cobalt); color: #ffffff; padding: 10px 18px; border-radius: 999px; font-weight: 600; transition: top 0.15s ease; }
+.skip-link:focus { top: 12px; }
+</style>
   <script>
 /* Theme toggle: runs early to avoid a flash of the wrong theme. */
 (function () {
@@ -515,6 +522,7 @@ img { max-width: 100%; }
   <script defer src="js/site-config.js?v=6"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="nav">
     <div class="container nav-inner">
@@ -525,6 +533,7 @@ img { max-width: 100%; }
       <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
+        <a href="courses.html">Courses</a>
         <a href="notes.html">Notes</a>
         <a href="lectures.html">Lectures</a>
         <a href="practice.html">Practice</a>
@@ -542,7 +551,7 @@ img { max-width: 100%; }
     <h1 class="reveal">Teacher first, technologist always.</h1>
   </header>
 
-  <main class="container" style="padding-top:56px;">
+  <main id="main" class="container" style="padding-top:56px;">
     <section class="section">
       <div class="card bio reveal">
         <h2 style="margin-top:0; font-size:24px; font-weight:600;">Biography</h2>
@@ -586,6 +595,7 @@ img { max-width: 100%; }
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="notes.html">Notes</a></li>
             <li><a href="lectures.html">Lectures</a></li>
             <li><a href="practice.html">Practice</a></li>
