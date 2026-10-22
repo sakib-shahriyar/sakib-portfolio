@@ -215,15 +215,19 @@
     // that unit is a closing bracket, the whole bracketed group is barred,
     // so (AB)\u0304 and (A+B)\u0304 get one full-width bar like the printed
     // book instead of a stub over the bracket alone. Letter bars and a
-    // plain group bar share level 1 (in print they sit at the same height
-    // and merge). A group that contains an already barred GROUP takes the
-    // next level up (.ovl-hi, drawn higher), so nested complements such as
+    // plain group bar share level 1 (in print they sit at the same height).
+    // Two ADJACENT letters that each carry their OWN bar (ĀB̄ = Ā·B̄) are
+    // rendered as separate spans with a small gap (.ovl-gap): in print
+    // those are two separate NOT bars, and one continuous line would read
+    // as a group complement (AB)\u0304, a different expression. A group that
+    // contains an already barred GROUP takes the next level up (.ovl-hi,
+    // drawn higher), so nested complements such as
     // ((ABC)\u0304 + (ABC)\u0304)\u0304 keep their inner and outer bars distinct.
     var units = [];
     for (var i = 0; i < html.length; i++) {
       var ch = html.charAt(i);
-      if (ch === "Ā") { units.push({ t: "A", lv: [1], g: 0 }); continue; }
-      if (ch === "ā") { units.push({ t: "a", lv: [1], g: 0 }); continue; }
+      if (ch === "Ā") { units.push({ t: "A", lv: [1], g: 0, own: 1 }); continue; }
+      if (ch === "ā") { units.push({ t: "a", lv: [1], g: 0, own: 1 }); continue; }
       if (ch === "\u0304" || ch === "\u0305") {
         var u = units[units.length - 1];
         if (u) {
@@ -243,8 +247,9 @@
                 if (units[k2].g < L) units[k2].g = L;
               }
             }
-          } else if (u.lv.indexOf(1) === -1) {
-            u.lv.push(1);
+          } else {
+            if (u.lv.indexOf(1) === -1) u.lv.push(1);
+            u.own = 1;
           }
         }
         continue;
@@ -252,20 +257,28 @@
       units.push({ t: ch, lv: [], g: 0 });
     }
     // Render with a span stack: higher levels nest outside lower ones.
-    var out = "", stack = [];
+    // An own-barred letter directly after another own-barred letter forces
+    // a span break and a small left margin (.ovl-gap), so the two bars
+    // stay visibly separate instead of painting as one continuous line.
+    var out = "", stack = [], prevOwn = false;
     function sameSet(a, b) {
       return a.length === b.length && a.every(function (x) { return b.indexOf(x) !== -1; });
     }
     units.forEach(function (un) {
       var want = un.lv.slice().sort(function (a, b) { return b - a; });
-      if (!sameSet(want, stack)) {
+      var ownBar = !!un.own && un.lv.indexOf(1) !== -1;
+      var brk = ownBar && prevOwn;
+      if (brk || !sameSet(want, stack)) {
         var keep = 0;
-        while (keep < stack.length && keep < want.length && stack[keep] === want[keep]) keep++;
+        if (!brk) {
+          while (keep < stack.length && keep < want.length && stack[keep] === want[keep]) keep++;
+        }
         for (var c = stack.length - 1; c >= keep; c--) out += "</span>";
-        for (var o = keep; o < want.length; o++) out += '<span class="ovl' + (want[o] > 1 ? " ovl-hi" : "") + '">';
+        for (var o = keep; o < want.length; o++) out += '<span class="ovl' + (want[o] > 1 ? " ovl-hi" : "") + (brk && o === keep ? " ovl-gap" : "") + '">';
         stack = want;
       }
       out += un.t;
+      prevOwn = ownBar;
     });
     for (var c2 = stack.length - 1; c2 >= 0; c2--) out += "</span>";
     return out;

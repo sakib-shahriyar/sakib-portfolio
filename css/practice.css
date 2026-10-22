@@ -194,8 +194,9 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
 .qstem { font-size: 17px; font-weight: 500; margin: 0 0 16px; line-height: 1.55; }
 .qnum { color: var(--color-electric-cobalt); font-weight: 700; margin-right: 6px; }
 .ovl { text-decoration: overline; text-decoration-thickness: max(2px, 0.08em); }
-.ovl-hi { border-top: max(2px, 0.08em) solid currentColor; padding-top: 2px; }
+.ovl-hi { border-top: max(2px, 0.08em) solid currentColor; padding-top: 0.26em; }
 .ovl.ovl-hi { text-decoration-line: none; }
+.ovl-gap { margin-left: 0.09em; }
 .qfig { margin: 0 0 16px; text-align: center; }
 .qfig img {
   max-width: 100%;
