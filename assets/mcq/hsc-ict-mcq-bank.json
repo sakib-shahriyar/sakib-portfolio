@@ -1,7 +1,7 @@
 {
   "title": "NCTB HSC ICT MCQ Bank",
   "description": "",
-  "total_questions": 1826,
+  "total_questions": 1816,
   "chapters": [
     {
       "number": 1,
@@ -12627,7 +12627,7 @@
     {
       "number": 3,
       "title": "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস (২য় অংশ: ডিজিটাল ডিভাইস)",
-      "question_count": 247,
+      "question_count": 237,
       "questions": [
         {
           "id": "hsc32-q001",
@@ -13051,18 +13051,6 @@
           "explanation": "বিভাজন সূত্র: A+BC = (A+B)(A+C)।"
         },
         {
-          "id": "hsc32-q036",
-          "question": "নিচের সত্যক সারণি (A B → X: 00→0, 01→1, 10→1, 11→0) কোন গেইটকে নির্দেশ করে? [গ. বো. ২০২৩]",
-          "options": [
-            "NOR",
-            "EX-OR",
-            "EX-NOR",
-            "NAND"
-          ],
-          "answer": 1,
-          "explanation": "এটি XOR-এর সত্যক সারণি।"
-        },
-        {
           "id": "hsc32-q037",
           "question": "সত্যক-সারণির কাজ কোনটি?",
           "options": [
@@ -13392,19 +13380,6 @@
           "explanation": "OR-এ উভয় ০ হলে আউটপুট ০।"
         },
         {
-          "id": "hsc32-q064",
-          "question": "নিচের OR গেইটের আউটপুট হবে– (সত্যক সারণি: ক. 0001, খ. 0011, গ. 0101, ঘ. 0111)",
-          "options": [
-            "0001",
-            "0011",
-            "0101",
-            "0111"
-          ],
-          "answer": 3,
-          "explanation": "OR-এর আউটপুট: ০,১,১,১।",
-          "figure": "assets/mcq/figures/hsc32-q064.png"
-        },
-        {
           "id": "hsc32-q065",
           "question": "F = (A + B) + C সমীকরণটি কোন গেইট নির্দেশ করে?",
           "options": [
@@ -13452,18 +13427,6 @@
           ],
           "answer": 2,
           "explanation": "ii ও iii-তে আউটপুট ১।"
-        },
-        {
-          "id": "hsc32-q069",
-          "question": "সত্যক সারণিটিতে (00→0, 01→1, 10→1, 11→1) কোন গেইটের আউটপুট দেয়া আছে?",
-          "options": [
-            "NOT গেইট",
-            "AND গেইট",
-            "OR গেইট",
-            "NAND গেইট"
-          ],
-          "answer": 2,
-          "explanation": "এটি OR-এর সত্যক সারণি।"
         },
         {
           "id": "hsc32-q070",
@@ -13541,19 +13504,6 @@
           "explanation": "AND-এ উভয় ১ হলে আউটপুট ১।"
         },
         {
-          "id": "hsc32-q076",
-          "question": "নিচের AND গেইটের আউটপুট Y হবে– (সত্যক সারণি: ক. 0001, খ. 0011, গ. 0101, ঘ. 0111)",
-          "options": [
-            "0001",
-            "0011",
-            "0101",
-            "0111"
-          ],
-          "answer": 0,
-          "explanation": "AND-এর আউটপুট: ০,০,০,১।",
-          "figure": "assets/mcq/figures/hsc32-q076.png"
-        },
-        {
           "id": "hsc32-q077",
           "question": "X = ABC সমীকরণটি কোন গেইট নির্দেশ করে?",
           "options": [
@@ -13617,18 +13567,6 @@
           "explanation": "AND-এ ১ পেতে সব ইনপুট ১।"
         },
         {
-          "id": "hsc32-q082",
-          "question": "সত্যক সারণিটিতে (00→0, 01→0, 10→0, 11→1) কোন গেইটের আউটপুট দেয়া আছে?",
-          "options": [
-            "NOT গেইট",
-            "OR গেইট",
-            "AND গেইট",
-            "NAND গেইট"
-          ],
-          "answer": 2,
-          "explanation": "এটি AND-এর সত্যক সারণি।"
-        },
-        {
           "id": "hsc32-q083",
           "question": "নিচের কোনটি মৌলিক gate? [খ. বো. ২০১৬]",
           "options": [
@@ -13651,18 +13589,6 @@
           ],
           "answer": 2,
           "explanation": "NOT-এর ১ ইনপুট, ১ আউটপুট।"
-        },
-        {
-          "id": "hsc32-q085",
-          "question": "নিচের সত্যক সারণিটি (0→1, 1→0) কোন গেইট নির্দেশ করে?",
-          "options": [
-            "AND",
-            "OR",
-            "NOT",
-            "NOR"
-          ],
-          "answer": 2,
-          "explanation": "এটি NOT-এর সত্যক সারণি।"
         },
         {
           "id": "hsc32-q086",
@@ -13802,18 +13728,6 @@
           "figure": "assets/mcq/figures/hsc32-q096-v2.png"
         },
         {
-          "id": "hsc32-q097",
-          "question": "উপরের সত্যক সারণি (00→1, 01→1, 10→1, 11→0) কোন গেইটকে নির্দেশ করে?",
-          "options": [
-            "NAND",
-            "NOR",
-            "EX-OR",
-            "EX-NOR"
-          ],
-          "answer": 0,
-          "explanation": "এটি NAND-এর সত্যক সারণি।"
-        },
-        {
           "id": "hsc32-q098",
           "question": "একটি লজিক গেট-এর আউটপুট 1 হয় যখন এর সব ইনপুট 0 থাকে। এই গেটটি- [৩৮তম বিসিএস]",
           "options": [
@@ -13909,18 +13823,6 @@
           ],
           "answer": 0,
           "explanation": "NAND ও NOR-এ (০,০)→১।"
-        },
-        {
-          "id": "hsc32-q106",
-          "question": "উদ্দীপকের সত্যক সারণি (00→1, 01→1, 10→1, 11→0) যে গেইট নির্দেশ করে তা হলো–[ব. বো. ২০২৩]",
-          "options": [
-            "NOR",
-            "NAND",
-            "XOR",
-            "XNOR"
-          ],
-          "answer": 1,
-          "explanation": "NAND গেইট।"
         },
         {
           "id": "hsc32-q107",
@@ -14063,18 +13965,6 @@
           "answer": 3,
           "explanation": "বর্তনীটি নর গেইটের।",
           "figure": "assets/mcq/figures/hsc32-q117.png"
-        },
-        {
-          "id": "hsc32-q118",
-          "question": "উপরের সত্যক সারণি (00→1, 01→0, 10→0, 11→0) কোন গেইটকে নির্দেশ করে?",
-          "options": [
-            "NAND",
-            "NOR",
-            "EX-OR",
-            "EX-NOR"
-          ],
-          "answer": 1,
-          "explanation": "এটি NOR-এর সত্যক সারণি।"
         },
         {
           "id": "hsc32-q119",
@@ -15564,18 +15454,6 @@
           ],
           "answer": 2,
           "explanation": "XOR যৌগিক গেইট।"
-        },
-        {
-          "id": "hsc32-q246",
-          "question": "নিচের সত্যক সারণি (00→0, 01→1, 10→1, 11→0) কোন গেইটকে প্রতিনিধিত্ব করে? [কৃষি A ইউনিট ২০১৭-২০১৮]",
-          "options": [
-            "AND",
-            "OR",
-            "XOR",
-            "NAND"
-          ],
-          "answer": 2,
-          "explanation": "XOR-এর সত্যক সারণি।"
         },
         {
           "id": "hsc32-q247",

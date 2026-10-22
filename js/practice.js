@@ -2,9 +2,9 @@
    Instant results with explanations. */
 (function () {
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=47",   title: "NCTB HSC ICT" },
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=48",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=8", title: "Board Papers · HSC ICT" }
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=9", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
