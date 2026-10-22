@@ -6106,7 +6106,7 @@
      ],
      "answer": 2,
      "explanation": "বোর্ডের চিহ্নিত উত্তর XOR (বর্তনী অস্পষ্ট)।",
-     "figure": "assets/mcq/figures/board/barishal-q17-v2.png"
+     "figure": "assets/mcq/figures/board/barishal-q17-v3.png"
     },
     {
      "id": "board-2024-barishal-q18",
@@ -6501,7 +6501,7 @@
      ],
      "answer": 0,
      "explanation": "NAND ও NOR সার্বজনীন গেইট — এদের দিয়ে সব গেইট তৈরি করা যায়; NOT মৌলিক গেইট, সার্বজনীন নয়।",
-     "figure": "assets/mcq/figures/board/rajshahi-q19.png"
+     "figure": "assets/mcq/figures/board/rajshahi-q19-v2.png"
     },
     {
      "id": "board-2023-rajshahi-q20",
@@ -11660,7 +11660,7 @@
      ],
      "answer": 1,
      "explanation": "সার্কিটে X ও Z OR গেইটে → (X+Z), তারপর Y-এর সাথে AND → P = (X+Z)Y।",
-     "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v2.png"
+     "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v3.png"
     },
     {
      "id": "board-2016-dinajpur-q30",
@@ -11673,7 +11673,7 @@
      ],
      "answer": 1,
      "explanation": "P = (X+Z)Y = (0+1)·1 = 1; P' = NOT P = 0।",
-     "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v2.png"
+     "figure": "assets/mcq/figures/board/dinajpur-2016-q29-q30-circuit-v3.png"
     },
     {
      "id": "board-2016-dinajpur-q31",
