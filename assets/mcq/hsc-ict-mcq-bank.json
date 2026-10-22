@@ -12748,7 +12748,7 @@
           ],
           "answer": 3,
           "explanation": "ওয়েভফর্ম থেকে প্রাপ্ত মান ০১০০১১০১০।",
-          "figure": "assets/mcq/figures/hsc32-q010.png"
+          "figure": "assets/mcq/figures/hsc32-q010-v2.png"
         },
         {
           "id": "hsc32-q011",
@@ -13401,7 +13401,8 @@
             "0111"
           ],
           "answer": 3,
-          "explanation": "OR-এর আউটপুট: ০,১,১,১।"
+          "explanation": "OR-এর আউটপুট: ০,১,১,১।",
+          "figure": "assets/mcq/figures/hsc32-q064.png"
         },
         {
           "id": "hsc32-q065",
@@ -13549,7 +13550,8 @@
             "0111"
           ],
           "answer": 0,
-          "explanation": "AND-এর আউটপুট: ০,০,০,১।"
+          "explanation": "AND-এর আউটপুট: ০,০,০,১।",
+          "figure": "assets/mcq/figures/hsc32-q076.png"
         },
         {
           "id": "hsc32-q077",
@@ -13784,7 +13786,7 @@
           ],
           "answer": 1,
           "explanation": "খ নং প্রতীকটি NAND।",
-          "figure": "assets/mcq/figures/hsc32-q095.png"
+          "figure": "assets/mcq/figures/hsc32-q095-v2.png"
         },
         {
           "id": "hsc32-q096",
@@ -14195,7 +14197,7 @@
           ],
           "answer": 3,
           "explanation": "ঘ নং প্রতীকটি XOR-এর।",
-          "figure": "assets/mcq/figures/hsc32-q128.png"
+          "figure": "assets/mcq/figures/hsc32-q128-v2.png"
         },
         {
           "id": "hsc32-q129",
@@ -15123,7 +15125,7 @@
           ],
           "answer": 2,
           "explanation": "Y = AB।",
-          "figure": "assets/mcq/figures/hsc32-q206-v2.png"
+          "figure": "assets/mcq/figures/hsc32-q206-v3.png"
         },
         {
           "id": "hsc32-q207",
