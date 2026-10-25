@@ -173,7 +173,7 @@ img { max-width: 100%; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--color-ink-charcoal); font-weight: 600; }
 .brand:hover { text-decoration: none; }
-.brand-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center 20%; flex: none; border: 1px solid var(--color-hairline); }
+.brand-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; object-position: center 20%; flex: none; border: 1px solid var(--color-hairline); }
 .brand .name { font-size: 16px; white-space: nowrap; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a {
@@ -209,7 +209,7 @@ img { max-width: 100%; }
 }
 .hero-photo {
   width: 175px; height: 175px; border-radius: 50%;
-  object-fit: cover; object-position: center 20%;
+  object-fit: contain; object-position: center 20%;
   border: 4px solid var(--color-pure-white);
   box-shadow: var(--shadow-lg);
   margin-bottom: 24px;
@@ -753,11 +753,16 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   border: 1px solid var(--color-hairline);
   background: var(--color-surface-ivory);
 }
-#setup-notes-guide { display: grid; grid-template-columns: 1fr 210px; gap: 20px; align-items: start; margin: 0 0 24px; }
+#setup-notes-guide { display: grid; grid-template-columns: 1fr 180px; gap: 20px; align-items: stretch; margin: 0 0 24px; }
 #setup-notes-guide[hidden] { display: none !important; }
-#setup-notes-guide .notes-warn { margin: 0; }
-#setup-notes-guide .setup-guide-link { margin: 0; }
-#setup-notes-guide .setup-guide-link img { width: 100%; }
+/* Equal heights: both columns stretch to the same row height. The
+   warning text is vertically centred in its stretched box, and the
+   thumbnail fills its column at full page aspect (contained, never
+   cropped). The full page is unchanged in the popup. */
+#setup-notes-guide .notes-warn { margin: 0; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+#setup-notes-guide .setup-guide-link { margin: 0; height: 100%; display: flex; flex-direction: column; min-height: 0; }
+#setup-notes-guide .setup-guide-link img { width: 100%; flex: 1 1 auto; min-height: 0; height: 100%; object-fit: contain; object-position: top center; }
+#setup-notes-guide .setup-guide-link span { flex: none; }
 @media (max-width: 639px) {
   #setup-notes-guide { grid-template-columns: 1fr; }
   #setup-notes-guide .setup-guide-link img { width: 168px; }
@@ -1136,7 +1141,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=34"></script>
+  <script defer src="js/practice.js?v=35"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
