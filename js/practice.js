@@ -4,7 +4,7 @@
   var SUBJECTS = {
     hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=48",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    newhsc: { bankUrl: "assets/mcq/hsc-ict-new-mcq-bank.json?v=1", title: "HSC ICT Notes Bank" },
+    newhsc: { bankUrl: "assets/mcq/hsc-ict-new-mcq-bank.json?v=3", title: "HSC ICT Notes Bank" },
     board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=9", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
