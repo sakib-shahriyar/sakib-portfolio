@@ -220,7 +220,7 @@ var OLEVEL_DOCUMENTS = [
     id: "ol8",
     chapter: "Chapter 8 - Programming",
     title: "O Level CS Chapter 8 Detailed Notes",
-    desc: "Variables, data types, selection, loops, procedures, arrays and file handling.",
+    desc: "Variables, data types, selection, loops, procedures, arrays and file handling. Updated for syllabus v6: ROUND now takes an identifier or an expression.",
     preview: "assets/previews/olevel-ch8-preview.pdf"
   },
   {
