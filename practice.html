@@ -753,6 +753,15 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   border: 1px solid var(--color-hairline);
   background: var(--color-surface-ivory);
 }
+#setup-notes-guide { display: grid; grid-template-columns: 1fr 210px; gap: 20px; align-items: start; margin: 0 0 24px; }
+#setup-notes-guide[hidden] { display: none !important; }
+#setup-notes-guide .notes-warn { margin: 0; }
+#setup-notes-guide .setup-guide-link { margin: 0; }
+#setup-notes-guide .setup-guide-link img { width: 100%; }
+@media (max-width: 639px) {
+  #setup-notes-guide { grid-template-columns: 1fr; }
+  #setup-notes-guide .setup-guide-link img { width: 168px; }
+}
 .notes-guide-link { display: block; margin: 16px 0 12px; text-align: center; text-decoration: none; color: inherit; }
 .notes-guide-link img {
   width: 168px; height: auto; display: block; margin: 0 auto 8px;
@@ -944,10 +953,6 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
           <h3>HSC ICT Notes Bank</h3>
           <p>Chapter-wise and whole book tests from a bank of 2594 questions built from the detailed chapter notes, with diagrams, tables and code questions.</p>
-          <a class="notes-guide-link" href="#" id="notes-guide-link" data-full="assets/notes-symbol-guide-v1.png" aria-label="Open the symbol guide page: logic gates and diagrams">
-            <img src="assets/notes-symbol-guide-thumb-v1.webp" alt="Symbol guide page: logic gate, ER diagram and flowchart symbols" loading="lazy">
-            <span>View symbol guide: gates and diagrams →</span>
-          </a>
           <a class="card-link" href="#" id="start-newhsc">Start practising →</a>
         </div>
         <div class="card reveal practice-subject">
@@ -966,9 +971,15 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
         <h2 id="setup-title">Cambridge O Level CS</h2>
         <p id="setup-sub">25 questions. 20 minutes. Pick how you want to be tested.</p>
       </div>
-      <div id="setup-notes-warn" class="notes-warn" hidden>
-        <strong>Before you start: figures in this bank are text diagrams, not pictures.</strong>
-        Logic gates are drawn by shape: a flat back with a D-shaped front is AND, a curved back with a pointed front is OR, a triangle is NOT, and a small circle (bubble) on an output adds NOT. ER diagrams use boxes for entities, ovals for attributes and diamonds for relationships. Flowcharts use ovals for start and end, parallelograms for input and output, rectangles for process and diamonds for decisions. A ? in a figure or table was hidden on purpose: work that cell out. If a diagram looks unfamiliar, read the symbol guide on the first page of the PDF first: প্রতীক ও চিহ্ন পরিচিতি.
+      <div id="setup-notes-guide" hidden>
+        <div id="setup-notes-warn" class="notes-warn">
+          <strong>Before you start: figures in this bank are text diagrams, not pictures.</strong>
+          Logic gates are drawn by shape: a flat back with a D-shaped front is AND, a curved back with a pointed front is OR, a triangle is NOT, and a small circle (bubble) on an output adds NOT. ER diagrams use boxes for entities, ovals for attributes and diamonds for relationships. Flowcharts use ovals for start and end, parallelograms for input and output, rectangles for process and diamonds for decisions. A ? in a figure or table was hidden on purpose: work that cell out. If a diagram looks unfamiliar, read the symbol guide on the first page of the PDF first: প্রতীক ও চিহ্ন পরিচিতি.
+        </div>
+        <a class="notes-guide-link setup-guide-link" href="#" id="notes-guide-link" data-full="assets/notes-symbol-guide-v1.png" aria-label="Open the symbol guide page: logic gates and diagrams">
+          <img src="assets/notes-symbol-guide-thumb-v1.webp" alt="Symbol guide page: logic gate, ER diagram and flowchart symbols" loading="lazy">
+          <span>View symbol guide: gates and diagrams →</span>
+        </a>
       </div>
       <div id="setup-loading" class="practice-loading" hidden>Loading question bank…</div>
       <div class="grid grid-2" id="setup-types" hidden>
@@ -1125,7 +1136,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=33"></script>
+  <script defer src="js/practice.js?v=34"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

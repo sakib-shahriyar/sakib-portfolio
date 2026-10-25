@@ -103,9 +103,10 @@
     bank = null;
     $("setup-title").textContent = SUBJECTS[key].title;
     $("setup-sub").textContent = "25 questions. 20 minutes. Pick how you want to be tested.";
-    // The Notes Bank warning in the setup view applies to that subject
-    // only; every other subject keeps the plain setup view.
-    $("setup-notes-warn").hidden = (key !== "newhsc");
+    // The Notes Bank warning plus the guide image beside it, in the
+    // setup view, apply to that subject only; every other subject
+    // keeps the plain setup view.
+    $("setup-notes-guide").hidden = (key !== "newhsc");
     collapsePickers();
     var types = $("setup-types");
     if (key === "hsc") {

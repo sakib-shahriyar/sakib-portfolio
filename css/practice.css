@@ -239,6 +239,15 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   border: 1px solid var(--color-hairline);
   background: var(--color-surface-ivory);
 }
+#setup-notes-guide { display: grid; grid-template-columns: 1fr 210px; gap: 20px; align-items: start; margin: 0 0 24px; }
+#setup-notes-guide[hidden] { display: none !important; }
+#setup-notes-guide .notes-warn { margin: 0; }
+#setup-notes-guide .setup-guide-link { margin: 0; }
+#setup-notes-guide .setup-guide-link img { width: 100%; }
+@media (max-width: 639px) {
+  #setup-notes-guide { grid-template-columns: 1fr; }
+  #setup-notes-guide .setup-guide-link img { width: 168px; }
+}
 .notes-guide-link { display: block; margin: 16px 0 12px; text-align: center; text-decoration: none; color: inherit; }
 .notes-guide-link img {
   width: 168px; height: auto; display: block; margin: 0 auto 8px;
