@@ -720,6 +720,39 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   background: #fff;
   padding: 12px;
 }
+.qfig-text {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface-ivory);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.notes-warn {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #f5c518;
+  border-left: 4px solid #e8930c;
+  background: #fff7e6;
+  color: #4a2c00;
+  font-size: 15px;
+  line-height: 1.6;
+}
+[data-theme="dark"] .notes-warn { background: #2a2111; border-color: #8a6d1a; color: #f5d67b; }
+.start-warn-card .start-warn-notes {
+  text-align: left;
+  font-size: 14.5px;
+  line-height: 1.6;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface-ivory);
+}
 .qopts { display: grid; gap: 10px; }
 .qopt {
   display: flex;
@@ -890,7 +923,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
 
     <!-- LANDING: pick a subject -->
     <section class="section" id="view-landing">
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         <div class="card reveal practice-subject">
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
           <h3>NCTB HSC ICT</h3>
@@ -903,6 +936,12 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <p>Chapter-wise and whole book MCQ tests from a bank of 2000 questions covering all ten chapters.</p>
           <a class="card-link" href="#" id="start-olevel">Start practising →</a>
         </div>
+        <div class="card reveal practice-subject">
+          <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
+          <h3>HSC ICT Notes Bank</h3>
+          <p>Chapter-wise and whole book tests from a bank of 2594 questions built from the detailed chapter notes, with diagrams, tables and code questions.</p>
+          <a class="card-link" href="#" id="start-newhsc">Start practising →</a>
+        </div>
       </div>
     </section>
 
@@ -912,6 +951,10 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
       <div class="section-head">
         <h2 id="setup-title">Cambridge O Level CS</h2>
         <p id="setup-sub">25 questions. 20 minutes. Pick how you want to be tested.</p>
+      </div>
+      <div id="setup-notes-warn" class="notes-warn" hidden>
+        <strong>Before you start: figures in this bank are text diagrams, not pictures.</strong>
+        Logic gates are drawn by shape: a flat back with a D-shaped front is AND, a curved back with a pointed front is OR, a triangle is NOT, and a small circle (bubble) on an output adds NOT. ER diagrams use boxes for entities, ovals for attributes and diamonds for relationships. Flowcharts use ovals for start and end, parallelograms for input and output, rectangles for process and diamonds for decisions. A ? in a figure or table was hidden on purpose: work that cell out. If a diagram looks unfamiliar, read the symbol guide on the first page of the PDF first: প্রতীক ও চিহ্ন পরিচিতি.
       </div>
       <div id="setup-loading" class="practice-loading" hidden>Loading question bank…</div>
       <div class="grid grid-2" id="setup-types" hidden>
@@ -968,6 +1011,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span>
           <h3 id="start-warn-title">Please read before you start</h3>
           <p>Once you select an answer, you <strong>cannot change it</strong>. So please think carefully before choosing your answer.</p>
+          <p id="start-warn-notes" class="start-warn-notes" hidden>Figures in this bank are text diagrams, not pictures: gates by shape, ER diagrams by boxes, ovals and diamonds, flowcharts by ovals, parallelograms, rectangles and diamonds. A ? in a figure or table was hidden on purpose, so work that cell out. See the PDF first page, প্রতীক ও চিহ্ন পরিচিতি, if a diagram looks unfamiliar.</p>
           <button class="btn btn-primary" id="start-warn-ok">I understand</button>
         </div>
       </div>
@@ -1055,7 +1099,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=30"></script>
+  <script defer src="js/practice.js?v=32"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
   var SUBJECTS = {
     hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=48",   title: "NCTB HSC ICT" },
     olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
+    newhsc: { bankUrl: "assets/mcq/hsc-ict-new-mcq-bank.json?v=1", title: "HSC ICT Notes Bank" },
     board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=9", title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
@@ -14,7 +15,12 @@
   var boardBank = null; // board papers bank, loaded into the Board papers card
   var bank = null; // current subject's bank
   var subject = null; // current subject key
-  var state = null; // { title, chapterwise, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto }
+  // Chapter identity is the chapter's INDEX in bank.chapters, never its
+  // number: the HSC bank has two chapters numbered 3 (Number System and
+  // Digital Devices), so a number lookup always returned the first one.
+  // state.chapterNo below is display-only and must never be used to look
+  // a chapter up again.
+  var state = null; // { title, chapterwise, chapterIdx, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto }
 
   function $(id) { return document.getElementById(id); }
 
@@ -48,6 +54,7 @@
       explanation: q.explanation,
       chapter: chapterTitle,
       figure: q.figure || null,
+      figureText: q.figureText || null,
       passage: q.passage || null
     };
   }
@@ -96,6 +103,9 @@
     bank = null;
     $("setup-title").textContent = SUBJECTS[key].title;
     $("setup-sub").textContent = "25 questions. 20 minutes. Pick how you want to be tested.";
+    // The Notes Bank warning in the setup view applies to that subject
+    // only; every other subject keeps the plain setup view.
+    $("setup-notes-warn").hidden = (key !== "newhsc");
     collapsePickers();
     var types = $("setup-types");
     if (key === "hsc") {
@@ -141,8 +151,38 @@
     });
   }
 
+  // Display number for a chapter. Two chapters sharing a number get
+  // ".1" / ".2" suffixes in bank order, so the grid never shows two
+  // buttons both labelled "3". A future bank with ch31/ch32-style ids
+  // gets the same labels from its ids.
+  function chapterDisplayNo(ch) {
+    var m = /^ch(\d)(\d)$/.exec(String(ch.id || ""));
+    if (m) return m[1] + "." + m[2];
+    if (bank && bank.chapters) {
+      var same = bank.chapters.filter(function (c) { return c.number === ch.number; });
+      if (same.length > 1) {
+        var pos = same.indexOf(ch);
+        if (pos >= 0) return ch.number + "." + (pos + 1);
+      }
+    }
+    return String(ch.number);
+  }
+
   function chapterTitle(ch) {
-    return "Chapter " + ch.number + ": " + ch.title;
+    return "Chapter " + chapterDisplayNo(ch) + ": " + ch.title;
+  }
+
+  // Look a chapter up by the index stored in state, with a number
+  // lookup only as a defensive fallback (never as the primary key).
+  function chapterByState() {
+    if (bank && bank.chapters && typeof state.chapterIdx === "number" &&
+        bank.chapters[state.chapterIdx]) {
+      return bank.chapters[state.chapterIdx];
+    }
+    if (bank && bank.chapters) {
+      return bank.chapters.filter(function (c) { return c.number === state.chapterNo; })[0];
+    }
+    return undefined;
   }
 
   function paperTitle(ch) {
@@ -181,21 +221,21 @@
     subject = "board";
     bank = boardBank;
     var pool = ch.questions.map(function (q) { return prepQuestion(q, paperTitle(ch)); });
-    startTest(paperTitle(ch), pool, "paper", ch.number, pool.length * 60, true);
+    startTest(paperTitle(ch), pool, "paper", boardBank.chapters.indexOf(ch), pool.length * 60, true);
   }
 
   function renderChapterGrid() {
     var grid = $("chapter-grid");
     grid.innerHTML = "";
-    bank.chapters.forEach(function (ch) {
+    bank.chapters.forEach(function (ch, idx) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "chapter-btn";
-      b.innerHTML = "<strong>" + ch.number + "</strong><span>" + escapeHtml(ch.title) + "</span>";
+      b.innerHTML = "<strong>" + chapterDisplayNo(ch) + "</strong><span>" + escapeHtml(ch.title) + "</span>";
       b.addEventListener("click", function (e) {
         e.stopPropagation();
         var pool = ch.questions.map(function (q) { return prepQuestion(q, chapterTitle(ch)); });
-        startTest(chapterTitle(ch) + " Test", pool, true, ch.number);
+        startTest(chapterTitle(ch) + " Test", pool, true, idx);
       });
       grid.appendChild(b);
     });
@@ -290,14 +330,18 @@
     return shuffle(pool.slice()).slice(0, Math.min(TEST_LEN, pool.length));
   }
 
-  function startTest(title, pool, kind, refNo, secs, full) {
+  function startTest(title, pool, kind, chapterIdx, secs, full) {
     stopTimer();
     var nSecs = secs || TEST_SECS;
     state = {
       title: title,
       kind: kind === "paper" ? "paper" : (kind ? "chapter" : "whole"),
       chapterwise: kind === "paper" ? false : !!kind,
-      chapterNo: refNo || null,
+      chapterIdx: (typeof chapterIdx === "number" ? chapterIdx : null),
+      // Display only: the chapter's printed number, kept for debugging.
+      // Never use this to find the chapter (two chapters share number 3).
+      chapterNo: (typeof chapterIdx === "number" && bank && bank.chapters &&
+        bank.chapters[chapterIdx]) ? bank.chapters[chapterIdx].number : null,
       questions: full ? shuffle(pool.slice()) : sample(pool),
       picked: [],
       secs: nSecs,
@@ -312,7 +356,10 @@
     renderTest();
     show("view-test");
     // The test and its timer start only after the student reads the
-    // warning popup and clicks "I understand" (beginTest).
+    // warning popup and clicks "I understand" (beginTest). The extra
+    // Notes Bank paragraph in that popup shows for Notes Bank tests
+    // only, and is hidden again for every other test.
+    $("start-warn-notes").hidden = (subject !== "newhsc");
     setWarnOpen(true);
   }
 
@@ -420,6 +467,9 @@
       if (q.figure) {
         html += '<div class="qfig"><img src="' + escapeHtml(q.figure) + '" alt="Circuit diagram for question ' + (i + 1) + '" loading="lazy"></div>';
       }
+      if (q.figureText) {
+        html += '<pre class="qfig-text">' + fmtText(q.figureText) + "</pre>";
+      }
       html += '<div class="qopts" role="radiogroup" aria-label="Question ' + (i + 1) + ' options">';
       q.options.forEach(function (opt, oi) {
         var oid = "q" + i + "o" + oi;
@@ -485,6 +535,7 @@
           n: i + 1,
           question: q.question,
           passage: q.passage,
+          figureText: q.figureText,
           yourIdx: state.picked[i],
           yourText: state.picked[i] === null ? null : q.options[state.picked[i]],
           correctText: q.options[q.answer],
@@ -528,6 +579,7 @@
         div.innerHTML =
           (w.passage ? '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
             fmtText(w.passage) + "</div>" : "") +
+          (w.figureText ? '<pre class="qfig-text">' + fmtText(w.figureText) + "</pre>" : "") +
           '<p class="review-q"><span class="qnum">Q' + w.n + ".</span> " + fmtText(w.question) + "</p>" +
           yourLine +
           '<p class="review-correct">Correct answer: <span>' + fmtText(w.correctText) + "</span></p>" +
@@ -537,14 +589,16 @@
     }
 
     $("result-retake").onclick = function () {
-      // Rebuild a fresh test of the same kind.
+      // Rebuild a fresh test of the same kind. The chapter is found by
+      // its stored index, not its number: filtering by number returned
+      // Chapter 3 Part 1 for a Part 2 test.
       if (state.kind === "paper") {
-        var pc = bank.chapters.filter(function (c) { return c.number === state.chapterNo; })[0];
+        var pc = chapterByState();
         startPaperTest(pc);
       } else if (state.kind === "chapter") {
-        var ch = bank.chapters.filter(function (c) { return c.number === state.chapterNo; })[0];
+        var ch = chapterByState();
         var pool = ch.questions.map(function (q) { return prepQuestion(q, chapterTitle(ch)); });
-        startTest(chapterTitle(ch) + " Test", pool, true, ch.number);
+        startTest(chapterTitle(ch) + " Test", pool, true, bank.chapters.indexOf(ch));
       } else {
         var all = [];
         bank.chapters.forEach(function (ch) {
@@ -600,6 +654,10 @@
     $("start-olevel").addEventListener("click", function (e) {
       e.preventDefault();
       showSetup("olevel");
+    });
+    $("start-newhsc").addEventListener("click", function (e) {
+      e.preventDefault();
+      showSetup("newhsc");
     });
     function pickBoardPapers() {
       if (!$("paper-picker").hidden) { collapsePickers(); return; }
