@@ -239,6 +239,16 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   border: 1px solid var(--color-hairline);
   background: var(--color-surface-ivory);
 }
+.notes-guide-link { display: block; margin: 16px 0 12px; text-align: center; text-decoration: none; color: inherit; }
+.notes-guide-link img {
+  width: 168px; height: auto; display: block; margin: 0 auto 8px;
+  border-radius: 10px; border: 1px solid var(--color-hairline); background: #fff; padding: 6px;
+}
+.notes-guide-link span { font-size: 14px; font-weight: 600; color: var(--color-electric-cobalt); text-decoration: underline; text-underline-offset: 3px; }
+.notes-guide-link:hover img { border-color: var(--color-electric-cobalt); }
+.guide-modal-card { width: min(1100px, 100%); }
+.guide-modal-card img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--color-hairline); background: #fff; }
+.guide-modal-note { font-size: 14.5px; color: var(--color-slate-gray); margin: 0 0 16px; line-height: 1.6; }
 .qopts { display: grid; gap: 10px; }
 .qopt {
   display: flex;

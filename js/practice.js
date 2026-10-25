@@ -659,6 +659,27 @@
       e.preventDefault();
       showSetup("newhsc");
     });
+    // Symbol guide popup: the full page image loads only on first open,
+    // so the landing page carries only the small thumbnail.
+    var guideLink = $("notes-guide-link");
+    function closeGuide() { $("guide-modal").classList.remove("open"); }
+    if (guideLink) {
+      guideLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        var img = $("guide-modal-img");
+        if (img && !img.getAttribute("src")) {
+          img.setAttribute("src", guideLink.getAttribute("data-full"));
+        }
+        $("guide-modal").classList.add("open");
+      });
+    }
+    $("guide-modal-close").addEventListener("click", closeGuide);
+    $("guide-modal").addEventListener("click", function (e) {
+      if (e.target === $("guide-modal")) closeGuide();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && $("guide-modal").classList.contains("open")) closeGuide();
+    });
     function pickBoardPapers() {
       if (!$("paper-picker").hidden) { collapsePickers(); return; }
       openPaperPicker();

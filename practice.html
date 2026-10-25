@@ -753,6 +753,16 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   border: 1px solid var(--color-hairline);
   background: var(--color-surface-ivory);
 }
+.notes-guide-link { display: block; margin: 16px 0 12px; text-align: center; text-decoration: none; color: inherit; }
+.notes-guide-link img {
+  width: 168px; height: auto; display: block; margin: 0 auto 8px;
+  border-radius: 10px; border: 1px solid var(--color-hairline); background: #fff; padding: 6px;
+}
+.notes-guide-link span { font-size: 14px; font-weight: 600; color: var(--color-electric-cobalt); text-decoration: underline; text-underline-offset: 3px; }
+.notes-guide-link:hover img { border-color: var(--color-electric-cobalt); }
+.guide-modal-card { width: min(1100px, 100%); }
+.guide-modal-card img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--color-hairline); background: #fff; }
+.guide-modal-note { font-size: 14.5px; color: var(--color-slate-gray); margin: 0 0 16px; line-height: 1.6; }
 .qopts { display: grid; gap: 10px; }
 .qopt {
   display: flex;
@@ -931,16 +941,20 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <a class="card-link" href="#" id="start-hsc">Start practising →</a>
         </div>
         <div class="card reveal practice-subject">
+          <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
+          <h3>HSC ICT Notes Bank</h3>
+          <p>Chapter-wise and whole book tests from a bank of 2594 questions built from the detailed chapter notes, with diagrams, tables and code questions.</p>
+          <a class="notes-guide-link" href="#" id="notes-guide-link" data-full="assets/notes-symbol-guide-v1.png" aria-label="Open the symbol guide page: logic gates and diagrams">
+            <img src="assets/notes-symbol-guide-thumb-v1.webp" alt="Symbol guide page: logic gate, ER diagram and flowchart symbols" loading="lazy">
+            <span>View symbol guide: gates and diagrams →</span>
+          </a>
+          <a class="card-link" href="#" id="start-newhsc">Start practising →</a>
+        </div>
+        <div class="card reveal practice-subject">
           <span class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
           <h3>Cambridge O Level CS</h3>
           <p>Chapter-wise and whole book MCQ tests from a bank of 2000 questions covering all ten chapters.</p>
           <a class="card-link" href="#" id="start-olevel">Start practising →</a>
-        </div>
-        <div class="card reveal practice-subject">
-          <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
-          <h3>HSC ICT Notes Bank</h3>
-          <p>Chapter-wise and whole book tests from a bank of 2594 questions built from the detailed chapter notes, with diagrams, tables and code questions.</p>
-          <a class="card-link" href="#" id="start-newhsc">Start practising →</a>
         </div>
       </div>
     </section>
@@ -1049,6 +1063,18 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
       </button>
     </section>
 
+    <!-- SYMBOL GUIDE POPUP: page 2 of the Notes Bank PDF -->
+    <div class="modal-backdrop" id="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title">
+      <div class="modal guide-modal-card">
+        <div class="modal-head">
+          <h3 id="guide-modal-title">Symbol guide: gates and diagrams</h3>
+          <button class="modal-close" id="guide-modal-close" aria-label="Close symbol guide">✕</button>
+        </div>
+        <p class="guide-modal-note">Page 2 of the Notes Bank PDF: প্রতীক ও চিহ্ন পরিচিতি. The full-size image loads only when this popup is opened.</p>
+        <img id="guide-modal-img" alt="Symbol guide page: logic gate, ER diagram and flowchart symbols">
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer">
@@ -1099,7 +1125,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=32"></script>
+  <script defer src="js/practice.js?v=33"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
