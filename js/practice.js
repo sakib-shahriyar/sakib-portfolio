@@ -222,7 +222,11 @@
     subject = "board";
     bank = boardBank;
     var pool = ch.questions.map(function (q) { return prepQuestion(q, paperTitle(ch)); });
-    startTest(paperTitle(ch), pool, "paper", boardBank.chapters.indexOf(ch), pool.length * 60, true);
+    // Board papers keep their full question count (6 to 33 questions),
+    // so the timer is proportional, not 1 minute per question: 20 minutes
+    // for 25 questions means 48 seconds per question. A 25-question paper
+    // gets exactly 20:00, and Jashore Board 2023 (9 questions) gets 7:12.
+    startTest(paperTitle(ch), pool, "paper", boardBank.chapters.indexOf(ch), Math.round(pool.length * TEST_SECS / TEST_LEN), true);
   }
 
   function renderChapterGrid() {
