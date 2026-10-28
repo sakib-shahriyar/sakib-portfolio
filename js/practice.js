@@ -268,6 +268,10 @@
     // contains an already barred GROUP takes the next level up (.ovl-hi,
     // drawn higher), so nested complements such as
     // ((ABC)\u0304 + (ABC)\u0304)\u0304 keep their inner and outer bars distinct.
+    // A group that contains an already barred LETTER takes the next level
+    // up for the same reason: without it, the letter's own bar and the
+    // group bar collide at level 1 and the C\u0304 in (A+B+C\u0304)\u0304 looks
+    // like a plain C under the group bar, changing the question's meaning.
     var units = [];
     for (var i = 0; i < html.length; i++) {
       var ch = html.charAt(i);
@@ -284,9 +288,13 @@
             }
             if (j < 0) { if (u.lv.indexOf(1) === -1) u.lv.push(1); }
             else {
-              var gm = 0;
-              for (k2 = j; k2 < units.length; k2++) if (units[k2].g > gm) gm = units[k2].g;
+              var gm = 0, hasOwn = false;
+              for (k2 = j; k2 < units.length; k2++) {
+                if (units[k2].g > gm) gm = units[k2].g;
+                if (units[k2].own) hasOwn = true;
+              }
               var L = gm + 1;
+              if (hasOwn && L < 2) L = 2;
               for (k2 = j; k2 < units.length; k2++) {
                 if (units[k2].lv.indexOf(L) === -1) units[k2].lv.push(L);
                 if (units[k2].g < L) units[k2].g = L;
