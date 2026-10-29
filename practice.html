@@ -637,6 +637,13 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   pointer-events: none;
   user-select: none;
 }
+/* While the tab or window is not focused, blur the test so a
+   screenshot taken after switching away shows a blurred test. */
+body.tab-hidden #view-test > *:not(.modal-backdrop) {
+  filter: blur(16px);
+  pointer-events: none;
+  user-select: none;
+}
 
 .qcard.locked .qopt { cursor: default; }
 .qcard.locked .qopt:not(:has(input:checked)) { opacity: 0.72; }
@@ -1028,6 +1035,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <button class="btn btn-primary exam-submit" id="exam-submit">Submit</button>
         </div>
         <div class="exam-notice" id="exam-notice"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><span>Once you select an answer, you cannot change it. So please think carefully before choosing your answer.</span></div>
+        <div class="exam-notice" id="exam-tab-notice"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><span>Switching tabs is prohibited. After 3 tab switches, your test will be submitted automatically. (Tab switches used: <span id="exam-tab-count">0</span>/3)</span></div>
         <div class="exam-warn" id="exam-warn" hidden></div>
       </div>
       <nav class="qnav" id="qnav" aria-label="Question navigator"></nav>
@@ -1041,6 +1049,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
           <span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span>
           <h3 id="start-warn-title">Please read before you start</h3>
           <p>Once you select an answer, you <strong>cannot change it</strong>. So please think carefully before choosing your answer.</p>
+          <p>Switching tabs is prohibited. After 3 tab switches, your test will be submitted automatically. Your timer keeps running while you are away. If you refresh the page, your test resumes where you left off, with the same answers and the same timer.</p>
           <p id="start-warn-notes" class="start-warn-notes" hidden>Figures in this bank are text diagrams, not pictures: gates by shape, ER diagrams by boxes, ovals and diamonds, flowcharts by ovals, parallelograms, rectangles and diamonds. A ? in a figure or table was hidden on purpose, so work that cell out. See the PDF first page, প্রতীক ও চিহ্ন পরিচিতি, if a diagram looks unfamiliar.</p>
           <button class="btn btn-primary" id="start-warn-ok">I understand</button>
         </div>
@@ -1053,6 +1062,14 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
             <button class="btn btn-primary" id="end-modal-cancel">Keep taking the test</button>
             <button class="btn btn-ghost" id="end-modal-confirm">Yes, end the test</button>
           </div>
+        </div>
+      </div>
+      <div class="modal-backdrop" id="tab-warn-modal" role="dialog" aria-modal="true" aria-labelledby="tab-warn-title">
+        <div class="modal start-warn-card">
+          <span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span>
+          <h3 id="tab-warn-title">You left the test tab</h3>
+          <p id="tab-warn-text">You left the test tab.</p>
+          <button class="btn btn-primary" id="tab-warn-ok">Continue the test</button>
         </div>
       </div>
     </section>
@@ -1141,7 +1158,7 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=3"></script>
-  <script defer src="js/practice.js?v=39"></script>
+  <script defer src="js/practice.js?v=41"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -10,6 +10,14 @@
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
   var LETTERS = ["A", "B", "C", "D"];
+  // Exam hardening, chosen by Sakib 2026-10-29: a tab switch is a
+  // warning, the third switch auto-submits, and an unfinished test
+  // resumes after a refresh. Screenshots cannot be blocked by a web
+  // page, so the deterrent here is blurring the test while the tab
+  // or window is not focused, on top of the existing right-click
+  // and text-selection blocks in main.js.
+  var SAVE_KEY = "practice-in-progress-v1";
+  var MAX_TAB_SWITCHES = 3;
 
   var banks = {};  // subject key -> bank JSON (cached)
   var boardBank = null; // board papers bank, loaded into the Board papers card
@@ -20,7 +28,7 @@
   // Digital Devices), so a number lookup always returned the first one.
   // state.chapterNo below is display-only and must never be used to look
   // a chapter up again.
-  var state = null; // { title, chapterwise, chapterIdx, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto }
+  var state = null; // { title, chapterwise, chapterIdx, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto, switches, tabWarnPending }
 
   function $(id) { return document.getElementById(id); }
 
@@ -363,9 +371,12 @@
       timerId: null,
       submitted: false,
       warned: false,
-      auto: false
+      auto: false,
+      switches: 0,
+      tabWarnPending: false
     };
     for (var i = 0; i < state.questions.length; i++) state.picked.push(null);
+    saveProgress();
     renderTest();
     show("view-test");
     // The test and its timer start only after the student reads the
@@ -374,6 +385,201 @@
     // only, and is hidden again for every other test.
     $("start-warn-notes").hidden = (subject !== "newhsc");
     setWarnOpen(true);
+  }
+
+  // ---- Test resume (refresh) and tab-switch handling ----
+  // The saved test holds the already shuffled questions, so a resume
+  // never reshuffles options or re-samples a chapter test. The timer
+  // is an absolute deadline, so a refresh never pauses or resets it:
+  // remaining time is always deadline minus now. Storage is per
+  // browser and device, so resume works on the same browser only,
+  // and a cleared site data or private window has nothing to restore.
+  function saveProgress() {
+    if (!state || state.submitted) { clearProgress(); return; }
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify({
+        v: 1,
+        subject: state.kind === "paper" ? "board" : subject,
+        kind: state.kind,
+        chapterIdx: state.chapterIdx,
+        chapterNo: state.chapterNo,
+        title: state.title,
+        secs: state.secs,
+        started: state.started,
+        deadline: state.deadline,
+        switches: state.switches || 0,
+        tabWarnPending: !!state.tabWarnPending,
+        questions: state.questions,
+        picked: state.picked
+      }));
+    } catch (e) { /* storage unavailable: test still works, resume just cannot */ }
+  }
+
+  function clearProgress() {
+    try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
+  }
+
+  function loadSavedProgress() {
+    var raw;
+    try { raw = localStorage.getItem(SAVE_KEY); } catch (e) { return null; }
+    if (!raw) return null;
+    var saved;
+    try { saved = JSON.parse(raw); } catch (e) { clearProgress(); return null; }
+    if (!saved || saved.v !== 1 || !saved.questions || !saved.questions.length ||
+        !saved.picked || saved.picked.length !== saved.questions.length ||
+        typeof saved.secs !== "number" || saved.secs <= 0 ||
+        ["chapter", "whole", "paper"].indexOf(saved.kind) === -1 ||
+        ["hsc", "olevel", "newhsc", "board"].indexOf(saved.subject) === -1) {
+      clearProgress();
+      return null;
+    }
+    var okQs = saved.questions.every(function (q) {
+      return q && typeof q.question === "string" && q.options && q.options.length >= 2 &&
+        typeof q.answer === "number" && q.answer >= 0 && q.answer < q.options.length;
+    });
+    var okPicked = saved.picked.every(function (p, i) {
+      return p === null || (typeof p === "number" && p >= 0 && p < saved.questions[i].options.length);
+    });
+    if (!okQs || !okPicked) { clearProgress(); return null; }
+    return saved;
+  }
+
+  function restoreProgress(saved) {
+    // An expired test never resumes: the deadline, not the page load,
+    // decides whether time is left.
+    if (saved.started && saved.deadline && Date.now() >= saved.deadline) {
+      clearProgress();
+      return false;
+    }
+    subject = saved.subject;
+    bank = null;
+    state = {
+      title: saved.title,
+      kind: saved.kind,
+      chapterwise: saved.kind === "chapter",
+      chapterIdx: saved.chapterIdx,
+      chapterNo: saved.chapterNo || null,
+      questions: saved.questions,
+      picked: saved.picked.slice(),
+      secs: saved.secs,
+      started: !!saved.started,
+      deadline: saved.deadline || null,
+      timerId: null,
+      submitted: false,
+      warned: false,
+      auto: false,
+      switches: saved.switches || 0,
+      tabWarnPending: !!saved.tabWarnPending
+    };
+    renderTest();
+    // Re-lock every answered question exactly as it was.
+    state.questions.forEach(function (q, i) {
+      if (state.picked[i] === null) return;
+      var card = $("qcard-" + i);
+      if (!card) return;
+      card.classList.add("locked");
+      card.querySelectorAll('input[type="radio"]').forEach(function (r) {
+        if (parseInt(r.value, 10) === state.picked[i]) r.checked = true;
+        r.disabled = true;
+      });
+    });
+    updateProgress();
+    show("view-test");
+    // Load the bank in the background so Retake and Choose another
+    // test still work after a resume, even though the test itself
+    // does not need the bank (its questions are saved).
+    fetch(SUBJECTS[subject].bankUrl).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (data) {
+      banks[subject] = data;
+      if (subject === "board") boardBank = data;
+      bank = data;
+    }).catch(function () {});
+    if (state.started) {
+      tick();
+      state.timerId = setInterval(tick, 250);
+      if (state.tabWarnPending) showTabWarning();
+    } else {
+      $("start-warn-notes").hidden = (subject !== "newhsc");
+      setWarnOpen(true);
+    }
+    return true;
+  }
+
+  function setTabWarnOpen(open) {
+    $("tab-warn-modal").classList.toggle("open", open);
+  }
+
+  function updateTabNotice() {
+    var el = $("exam-tab-count");
+    if (el && state) el.textContent = String(state.switches || 0);
+  }
+
+  function showTabWarning() {
+    if (!state || state.submitted) return;
+    state.tabWarnPending = true;
+    updateTabNotice();
+    saveProgress();
+    $("tab-warn-text").textContent =
+      "You left the test tab. This is warning " + state.switches + " of " + MAX_TAB_SWITCHES + ". " +
+      "If you switch tabs " + MAX_TAB_SWITCHES + " times, your test will be submitted automatically. " +
+      "Your timer kept running while you were away.";
+    setTabWarnOpen(true);
+  }
+
+  function hideTabWarning() {
+    if (!state) return;
+    state.tabWarnPending = false;
+    updateTabNotice();
+    saveProgress();
+    setTabWarnOpen(false);
+  }
+
+  var tabSeenHidden = false;
+  function onTabHidden() {
+    // Blur only. A switch is counted on return, not on hide: a
+    // refresh also fires visibilitychange to hidden, and counting
+    // it would punish a refresh, which is exactly what resume is
+    // for. Switches before the test starts, or after it is
+    // submitted, are not exam switches at all.
+    if (!state || state.submitted || !state.started) return;
+    tabSeenHidden = true;
+    document.body.classList.add("tab-hidden");
+    saveProgress();
+  }
+
+  function onTabVisible() {
+    document.body.classList.remove("tab-hidden");
+    if (!state || state.submitted || !state.started) return;
+    // A return after a real tab switch counts here, but only if
+    // this page actually saw the hide first. A resumed page can
+    // start hidden and then become visible on load, and that
+    // first visible event is not a switch, so it must not count.
+    // A pending warning (for example, restored after a refresh
+    // while the warning was open) is shown without counting again.
+    if (state.tabWarnPending) {
+      tabSeenHidden = false;
+      tick();
+      if (!state.submitted) showTabWarning();
+      return;
+    }
+    if (!tabSeenHidden) { tick(); return; }
+    tabSeenHidden = false;
+    state.switches = (state.switches || 0) + 1;
+    state.tabWarnPending = true;
+    saveProgress();
+    if (state.switches >= MAX_TAB_SWITCHES) {
+      // Third switch: submit on return, so the student sees the
+      // result instead of being allowed to keep answering.
+      state.tabWarnPending = false;
+      state.auto = true;
+      submit();
+      return;
+    }
+    tick();
+    if (state.submitted) return;
+    if (state.tabWarnPending) showTabWarning();
   }
 
   function blockScrollEvent(e) { e.preventDefault(); }
@@ -404,6 +610,7 @@
     if (!state || state.submitted || state.started) return;
     state.started = true;
     state.deadline = Date.now() + state.secs * 1000;
+    saveProgress();
     tick();
     state.timerId = setInterval(tick, 250);
   }
@@ -498,6 +705,7 @@
         radio.addEventListener("change", function () {
           state.picked[i] = parseInt(radio.value, 10);
           state.warned = false;
+          saveProgress();
           $("exam-warn").hidden = true;
           // One chance only: lock this question so the answer cannot be changed.
           card.classList.add("locked");
@@ -507,6 +715,7 @@
       });
     });
     updateProgress();
+    updateTabNotice();
   }
 
   function updateProgress() {
@@ -532,6 +741,9 @@
     }
     state.submitted = true;
     closeEndModal();
+    setTabWarnOpen(false);
+    document.body.classList.remove("tab-hidden");
+    clearProgress();
     stopTimer();
     renderResult();
     show("view-result");
@@ -650,6 +862,9 @@
   function endTest() {
     if (!state) return;
     setWarnOpen(false);
+    setTabWarnOpen(false);
+    document.body.classList.remove("tab-hidden");
+    clearProgress();
     closeEndModal();
     stopTimer();
     var origin = state.kind === "paper" ? "hsc" : subject;
@@ -737,6 +952,26 @@
     $("exam-submit").addEventListener("click", function () { submit(); });
     $("exam-submit-bottom").addEventListener("click", function () { submit(); });
     $("start-warn-ok").addEventListener("click", beginTest);
+    $("tab-warn-ok").addEventListener("click", hideTabWarning);
+    // Tab switches count only on a real tab/app switch, not on a
+    // window blur alone (clicking the address bar or a notification
+    // must not cost a warning). A window blur still blurs the test
+    // content, so a screenshot taken after switching away shows a
+    // blurred test; a screenshot taken while the test is on screen
+    // cannot be blocked by any web page.
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) onTabHidden();
+      else onTabVisible();
+    });
+    window.addEventListener("blur", function () {
+      if (state && state.started && !state.submitted) {
+        document.body.classList.add("tab-hidden");
+      }
+    });
+    window.addEventListener("focus", function () {
+      if (!document.hidden) document.body.classList.remove("tab-hidden");
+    });
+    window.addEventListener("pagehide", function () { saveProgress(); });
     $("to-top").addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -748,6 +983,13 @@
     $("end-modal").addEventListener("click", function (e) {
       if (e.target === $("end-modal")) closeEndModal();
     });
+
+    // If an unfinished test was saved, resume it instead of showing
+    // the landing page. Ending a test, submitting it, or letting its
+    // deadline pass already cleared the saved copy, so a finished
+    // test never comes back here.
+    var savedTest = loadSavedProgress();
+    if (savedTest) restoreProgress(savedTest);
 
     // Test hook only: ?debug=1 exposes state for automated checks.
     if (window.location.search.indexOf("debug=1") !== -1) {

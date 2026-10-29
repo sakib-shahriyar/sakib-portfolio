@@ -142,6 +142,13 @@ body.warn-open #view-test > *:not(.modal-backdrop) {
   pointer-events: none;
   user-select: none;
 }
+/* While the tab or window is not focused, blur the test so a
+   screenshot taken after switching away shows a blurred test. */
+body.tab-hidden #view-test > *:not(.modal-backdrop) {
+  filter: blur(16px);
+  pointer-events: none;
+  user-select: none;
+}
 
 .qcard.locked .qopt { cursor: default; }
 .qcard.locked .qopt:not(:has(input:checked)) { opacity: 0.72; }
