@@ -513,7 +513,7 @@
 
   function updateTabNotice() {
     var el = $("exam-tab-count");
-    if (el && state) el.textContent = String(state.switches || 0);
+    if (el && state) el.textContent = String(state.switches || 0) + "/3";
   }
 
   function showTabWarning() {

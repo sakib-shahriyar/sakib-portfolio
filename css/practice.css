@@ -125,9 +125,16 @@
 .exam-notice .warn-ico svg { width: 25px; height: 25px; }
 .start-warn-card { max-width: 460px; text-align: center; }
 .start-warn-card .warn-ico svg { width: 58px; height: 58px; }
-.start-warn-card h3 { font-size: 23px; font-weight: 700; margin: 16px 0 10px; }
+.start-warn-card h3 { font-size: 23px; font-weight: 700; margin: 0 0 18px; }
 .start-warn-card p { font-size: 16.5px; line-height: 1.65; margin: 0 0 24px; }
 .start-warn-card p strong { color: #b45309; }
+.start-warn-box { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 14px 16px; border-radius: 12px; border: 2px solid; margin: 0 0 16px; }
+.start-warn-box .warn-ico svg { width: 28px; height: 28px; flex: none; }
+.start-warn-box p { margin: 0; font-size: 16px; line-height: 1.6; }
+.start-warn-box p strong { color: inherit; }
+.start-warn-amber { background: #ffcf3f; border-color: #e8930c; color: #4a2c00; }
+.start-warn-red { background: #dc2626; border-color: #991b1b; color: #ffffff; }
+#exam-tab-count { color: #dc2626; font-weight: 900; font-size: 18px; }
 #start-warn-ok { min-width: 210px; padding: 13px 28px; font-size: 16px; }
 /* While the start warning popup is open: blur the whole page behind it, lock scroll. */
 .warn-open { overflow: hidden; }
