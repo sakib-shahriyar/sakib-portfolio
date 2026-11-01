@@ -294,9 +294,9 @@ img { max-width: 100%; }
 .t-avatar {
   width: 48px; height: 48px; border-radius: 50%; flex: none;
   display: grid; place-items: center; color: #ffffff;
+  font-size: 20px; font-weight: 700;
   margin-bottom: 16px;
 }
-.t-avatar svg { width: 26px; height: 26px; fill: #ffffff; display: block; }
 .t-avatar.cobalt { background: var(--color-electric-cobalt); }
 .t-avatar.violet { background: var(--color-vivid-violet); }
 .t-card blockquote { margin: 0 0 16px; font-size: 16px; line-height: 1.6; flex: 1; }
@@ -687,7 +687,10 @@ img { max-width: 100%; }
   <script>
     // Testimonials carousel: 3 visible on desktop, sliding one by one.
     // Rendered only when SITE.testimonials is non-empty.
-    (function () {
+    // Must wait for DOMContentLoaded: js/site-config.js is deferred,
+    // so it loads after this inline script runs, and SITE is still
+    // undefined at parse time. That is why the section went missing.
+    document.addEventListener("DOMContentLoaded", function () {
       var list = (typeof SITE !== "undefined" && Array.isArray(SITE.testimonials))
         ? SITE.testimonials : [];
       if (!list.length) return;
@@ -716,8 +719,6 @@ img { max-width: 100%; }
       view.className = "t-carousel";
       var track = document.createElement("div");
       track.className = "t-track";
-      var MALE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21v-2.5C5 14.6 8 12 12 12s7 2.6 7 6.5V21H5z"/></svg>';
-      var FEMALE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.6"/><path d="M12 11.5c-2.2 0-3.8 1-4.2 2.6L5.5 21h13l-2.3-6.9c-.4-1.6-2-2.6-4.2-2.6z"/></svg>';
       var slides = list.map(function (t, i) {
         var s = document.createElement("div");
         s.className = "t-slide";
@@ -725,8 +726,7 @@ img { max-width: 100%; }
         card.className = "card t-card";
         var av = document.createElement("div");
         av.className = "t-avatar " + (i % 2 === 0 ? "cobalt" : "violet");
-        var sex = String(t.sex || "M").trim().toLowerCase();
-        av.innerHTML = (sex === "f" || sex === "female") ? FEMALE_ICON : MALE_ICON;
+        av.textContent = (t.name || "?").trim().charAt(0);
         av.setAttribute("aria-hidden", "true");
         var bq = document.createElement("blockquote");
         bq.textContent = t.text;
@@ -826,7 +826,7 @@ img { max-width: 100%; }
       mount.appendChild(sec);
       layout();
       restart();
-    })();
+    });
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>

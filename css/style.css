@@ -255,9 +255,9 @@ img { max-width: 100%; }
 .t-avatar {
   width: 48px; height: 48px; border-radius: 50%; flex: none;
   display: grid; place-items: center; color: #ffffff;
+  font-size: 20px; font-weight: 700;
   margin-bottom: 16px;
 }
-.t-avatar svg { width: 26px; height: 26px; fill: #ffffff; display: block; }
 .t-avatar.cobalt { background: var(--color-electric-cobalt); }
 .t-avatar.violet { background: var(--color-vivid-violet); }
 .t-card blockquote { margin: 0 0 16px; font-size: 16px; line-height: 1.6; flex: 1; }
