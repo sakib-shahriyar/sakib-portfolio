@@ -1,11 +1,11 @@
-/* Shared CSS for every public page. Linked from each HTML page as
-   css/style.css?v=N. This file is the part that used to be inlined
-   identically into every page; page-specific CSS stays inline in
-   its own page (courses, contact and practice have a second
-   <style> block, index and practice have a small override block
-   right after this link, see below). Font URLs are relative to
-   this css/ folder, not to the page. When you change this file,
-   bump the ?v= number in every HTML page. */
+/* Shared CSS for every public page. INLINED into each HTML page (not
+   linked): this file is the source of truth. When you change it,
+   re-inline it into all 8 pages. Font URLs here are relative to
+   this css/ folder (../assets/fonts/...); the inlined copies rewrite
+   them to assets/fonts/... because the pages sit at the site root.
+   Page-specific CSS stays inline in its own page (courses, contact
+   and practice have a second <style> block, index and practice have
+   a small override block right after the inlined shared block). */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -464,13 +464,13 @@ img { max-width: 100%; }
 /* ---------- Floating WhatsApp button (kept recognizable green) ---------- */
 .wa-float {
   position: fixed; right: 24px; bottom: 24px; z-index: 60;
-  width: 60px; height: 60px; border-radius: 50%;
+  width: 52px; height: 52px; border-radius: 50%;
   background: #25d366; display: grid; place-items: center;
   box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
   transition: transform 0.18s ease;
 }
 .wa-float:hover { transform: translateY(-3px) scale(1.04); text-decoration: none; }
-.wa-float svg { width: 32px; height: 32px; fill: #ffffff; }
+.wa-float svg { width: 28px; height: 28px; fill: #ffffff; }
 
 /* ---------- Scroll reveal ---------- */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }

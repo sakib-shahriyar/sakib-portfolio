@@ -161,8 +161,8 @@ will NOT reach visitors unless its version changes:
   Current numbers:
     js/site-config.js ?v=8  (all 8 HTML pages)
     js/main.js        ?v=5  (all 8 HTML pages)
-    js/theme.js       ?v=1  (all 8 HTML pages, in the head)
-    css/style.css     ?v=3  (all 8 HTML pages)
+    js/theme.js       inlined into all 8 HTML pages (head, no ?v=; edit js/theme.js, then re-inline)
+    css/style.css     inlined into all 8 HTML pages (no ?v=; edit css/style.css, then re-inline)
     js/practice.js    ?v=45 (practice.html only)
     js/courses.js     ?v=2  (courses.html and index.html)
     js/videos.js      ?v=2  (lectures.html only)
@@ -183,21 +183,25 @@ will NOT reach visitors unless its version changes:
   common cause; view the deployed URL, not a local file
   copy, because browsers block bank JSON over file://.
 
-SHARED CSS AND THEME (Phase 3 structure)
+SHARED CSS AND THEME (inlined into every page)
 -----------------------------------------
-- css/style.css is the shared CSS for every public page,
-  linked from each HTML page as css/style.css?v=3. It is
-  the CSS that used to be inlined identically into every
-  page. Do not copy it back into the pages.
+ - css/style.css is the shared CSS source for every public page,
+  inlined into each HTML page (not linked, no ?v=). It is the CSS
+  that used to be linked as css/style.css?v=3. Edit css/style.css,
+  then re-inline it into all 8 pages, rewriting font URLs from
+  ../assets/fonts/... to assets/fonts/... (pages are at root, the
+  file sits in css/). Do not edit the inlined copies directly, or
+  the pages will diverge.
 - Page-specific CSS stays inline in its own page: courses
   (batch cards), contact (FAQ accordion), practice (exam
   UI, in its second <style> block), plus two small override
   blocks: index (grid-4 and testimonial avatar initials)
   and practice (hero-photo object-fit, kept for exactness).
-- js/theme.js is the theme script, loaded in the head of
-  every public page without defer, so the saved theme is
-  applied before the page paints and there is no flash of
-  the wrong theme. It uses the same localStorage key as
+- js/theme.js is the theme script, inlined into the head of
+  every public page (not loaded via <script src>), so the
+  saved theme is applied before the page paints and there
+  is no flash of the wrong theme. Edit js/theme.js, then
+  re-inline it into all 8 pages. It uses the same localStorage key as
   before, so saved preferences survive this change.
 - The old external twins css/contact.css, css/courses.css
   and css/practice.css were deleted in Phase 3, because
@@ -344,13 +348,13 @@ lectures.html, practice.html, contact.html, 404.html
   — public pages (HTML is no-cache)
 google8f982dce7b31a9f7.html
   — Google Search Console verification file, do not delete
-css/style.css — shared CSS for every public page (?v=2)
+css/style.css — shared CSS source, inlined into all 8 pages (no ?v=; re-inline after editing)
 js/site-config.js — all site text, documents, testimonials,
   notifySheetUrl, siteUrl (?v=8)
 js/videos.js — YouTube lecture data (?v=2)
 js/courses.js — batch data, plus optional syllabus, classSize, recordingsIncluded, demoClass (shown only when filled in) (?v=2)
 js/main.js — menu, reveals, config fill, WhatsApp button (?v=5)
-js/theme.js — theme toggle, loaded in the head (?v=1)
+js/theme.js — theme toggle source, inlined into the head of all 8 pages (no ?v=; re-inline after editing)
 js/practice.js — practice test engine, BANK_VERSION = 50 (?v=45)
 assets/photo-*.webp — circular photos (nav + hero)
 assets/favicon.svg — site icon
