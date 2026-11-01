@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Practice Tests | MCQ পরীক্ষা | Sakib Shahriyar Pathan">
   <meta name="twitter:description" content="MCQ practice tests for HSC ICT and Cambridge O Level Computer Science. 25 questions, 20 minutes, instant results with explanations.">
   <meta name="twitter:image" content="https://lecturer-pathan.vercel.app/assets/photo-og.jpg">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
   <style>
     /* Practice page only: the one rule that differed inside the shared
        block on practice.html (.hero-photo object-fit: contain, not
@@ -128,7 +128,6 @@
   border: 1px solid var(--color-hairline);
 }
 .exam-timer.danger { color: #d92d20; border-color: #d92d20; animation: pulse 1s ease-in-out infinite; }
-.exam-timer.paused { color: var(--color-slate-gray); border-color: var(--color-slate-gray); animation: none; }
 @keyframes pulse { 50% { opacity: 0.55; } }
 .exam-submit { white-space: nowrap; }
 .exam-notice {
@@ -165,17 +164,6 @@
 .start-warn-box p strong { color: inherit; }
 .start-warn-amber { background: #ffcf3f; border-color: #e8930c; color: #4a2c00; }
 .start-warn-red { background: #dc2626; border-color: #991b1b; color: #ffffff; }
-.start-warn-practice { background: #e6f4ea; border-color: #34a853; color: #14532d; }
-[data-theme="dark"] .start-warn-practice { background: #14291a; border-color: #2e7d32; color: #a5d6a7; }
-.exam-notice.practice-note { background: #e6f4ea; border-color: #34a853; color: #14532d; animation: none; }
-[data-theme="dark"] .exam-notice.practice-note { background: #14291a; border-color: #2e7d32; color: #a5d6a7; }
-.progress-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--color-hairline); font-size: 14.5px; }
-.progress-row:last-child { border-bottom: none; }
-.progress-date { color: var(--color-slate-gray); }
-.progress-title { font-weight: 600; }
-.progress-subject { color: var(--color-slate-gray); }
-.progress-score { font-weight: 700; margin-left: auto; }
-.progress-time { color: var(--color-slate-gray); }
 #exam-tab-count { color: #dc2626; font-weight: 900; font-size: 18px; }
 #start-warn-ok { min-width: 210px; padding: 13px 28px; font-size: 16px; }
 /* While the start warning popup is open: blur the whole page behind it, lock scroll. */
@@ -501,26 +489,6 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
           <a class="card-link" href="#" id="start-olevel">Start practising →</a>
         </div>
       </div>
-      <div id="my-progress" style="margin-top:32px;">
-        <div class="section-head">
-          <h2>My progress</h2>
-          <p>Your past tests on this device only. Nothing is sent to a server.</p>
-        </div>
-        <div id="progress-empty" hidden>
-          <p style="color:var(--color-slate-gray);">No tests yet. Take a test to see your progress here.</p>
-        </div>
-        <div id="progress-content" hidden>
-          <h3 style="font-size:17px;">Last 10 results</h3>
-          <div id="progress-list"></div>
-          <h3 style="font-size:17px; margin-top:24px;">Average score by subject</h3>
-          <div id="progress-by-subject"></div>
-          <h3 style="font-size:17px; margin-top:24px;">Average score by test</h3>
-          <div id="progress-by-test"></div>
-          <div style="margin-top:24px;">
-            <button class="btn btn-ghost" type="button" id="progress-clear">Clear history</button>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- SETUP: pick chapterwise or whole book -->
@@ -541,14 +509,6 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
         </a>
       </div>
       <div id="setup-loading" class="practice-loading" hidden>Loading question bank…</div>
-      <div id="mode-picker" style="margin-bottom:24px;">
-        <h3 style="font-size:17px; margin-bottom:12px;">Choose how you want to take the test</h3>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <button class="btn btn-primary mode-btn" type="button" id="mode-practice" aria-pressed="true">Practice mode</button>
-          <button class="btn btn-ghost mode-btn" type="button" id="mode-exam" aria-pressed="false">Exam mode</button>
-        </div>
-        <p id="mode-desc" style="color:var(--color-slate-gray); font-size:14.5px; margin-top:12px;">Practice mode: you can change your answers before submitting. No tab penalty. Timer shown, with Pause.</p>
-      </div>
       <div class="grid grid-2" id="setup-types" hidden>
         <div class="card reveal practice-type" id="type-chapterwise" role="button" tabindex="0">
           <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
@@ -586,13 +546,11 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
           <span class="exam-title" id="exam-title">Test</span>
           <span class="exam-progress" id="exam-progress">Answered 0/25</span>
           <span class="exam-timer" id="exam-timer" aria-label="Time remaining">20:00</span>
-          <button class="btn btn-ghost" id="exam-pause" hidden>Pause</button>
           <button class="btn btn-ghost exam-end" id="exam-end">End test</button>
           <button class="btn btn-primary exam-submit" id="exam-submit">Submit</button>
         </div>
         <div class="exam-notice" id="exam-notice"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><span>Once you select an answer, you cannot change it. So please think carefully before choosing your answer.</span></div>
         <div class="exam-notice" id="exam-tab-notice"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><span>Switching tabs is prohibited. After 3 tab switches, your test will be submitted automatically. (Tab switches used: <span id="exam-tab-count">0/3</span>)</span></div>
-        <div class="exam-notice practice-note" id="exam-practice-notice" hidden><span>Practice mode: you can change your answers before submitting. No tab penalty. Use Pause to stop the timer.</span></div>
         <div class="exam-warn" id="exam-warn" hidden></div>
       </div>
       <nav class="qnav" id="qnav" aria-label="Question navigator"></nav>
@@ -606,7 +564,6 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
           <h3 id="start-warn-title">Please read before you start</h3>
           <div class="start-warn-box start-warn-amber"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><p>Once you select an answer, you <strong>cannot change it</strong>. So please think carefully before choosing your answer.</p></div>
           <div class="start-warn-box start-warn-red"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#ffffff"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#dc2626"/><circle cx="12" cy="18" r="1.25" fill="#dc2626"/></svg></span><p><strong>Switching tabs is prohibited.</strong> After 3 tab switches, your test will be submitted automatically. Your timer keeps running while you are away. If you refresh the page, your test resumes where you left off, with the same answers and the same timer.</p></div>
-          <div class="start-warn-box start-warn-practice" id="start-warn-practice" hidden><p>Practice mode: you can change your answers before submitting. There is no tab penalty, and you can pause the timer. Your score and review still work the same way. If you refresh the page, your test resumes where you left off, with the same answers and the same timer.</p></div>
           <p id="start-warn-notes" class="start-warn-notes" hidden>Figures in this bank are text diagrams, not pictures: gates by shape, ER diagrams by boxes, ovals and diamonds, flowcharts by ovals, parallelograms, rectangles and diamonds. A ? in a figure or table was hidden on purpose, so work that cell out. See the PDF first page, <span lang="bn">প্রতীক ও চিহ্ন পরিচিতি</span>, if a diagram looks unfamiliar.</p>
           <button class="btn btn-primary" id="start-warn-ok">I understand</button>
         </div>
@@ -715,7 +672,7 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
   </footer>
 
   <script defer src="js/main.js?v=5"></script>
-  <script defer src="js/practice.js?v=44"></script>
+  <script defer src="js/practice.js?v=45"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

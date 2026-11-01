@@ -276,8 +276,20 @@ img { max-width: 100%; }
 }
 .t-arrow:hover { transform: translateY(-2px); border-color: var(--color-electric-cobalt); color: var(--color-electric-cobalt); }
 .t-dots { display: flex; gap: 8px; }
-.t-dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: var(--color-faint-gray); cursor: pointer; padding: 0; transition: transform 0.2s ease, background 0.2s ease; }
-.t-dot.active { background: var(--color-electric-cobalt); transform: scale(1.3); }
+/* Testimonial dots: the visible dot stays 9px, but the button itself is
+   48px so it passes the tap-target size check (PageSpeed flagged the 9px
+   buttons on mobile and desktop, the only failing Accessibility audit).
+   The dot is drawn with ::after so enlarging the button does not change
+   the look, and the active scale moves to ::after so the button rect
+   never grows into its neighbours. Dots keep an 8px gap, which also
+   passes the spacing check. On narrow screens (under 640px) 9 dots at
+   48px cannot fit beside the arrows, so the dots hide there and a
+   "1 / 9" counter shows instead (see .t-counter and index.html). */
+.t-dot { width: 48px; height: 48px; border: none; background: transparent; cursor: pointer; padding: 0; display: grid; place-items: center; }
+.t-dot::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--color-faint-gray); transition: transform 0.2s ease, background 0.2s ease; }
+.t-dot.active::after { background: var(--color-electric-cobalt); transform: scale(1.3); }
+.t-counter { display: none; min-width: 48px; text-align: center; font-size: 15px; font-weight: 600; color: var(--color-slate-gray); }
+@media (max-width: 639px) { .t-dots { display: none; } .t-counter { display: block; } }
 @media (prefers-reduced-motion: reduce) { .t-track { transition: none; } }
 .t-card { background: var(--color-surface-ivory); display: flex; flex-direction: column; }
 .t-avatar {

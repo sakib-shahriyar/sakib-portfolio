@@ -36,7 +36,7 @@
   </script>
   <link rel="preload" as="font" href="assets/fonts/inter-latin-v1.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/photo-hero-200-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
   <style>
     /* Homepage only: rules that used to live inside the shared block
        on index.html alone. Kept here so the shared file stays identical
@@ -281,16 +281,29 @@
       next.innerHTML = "&#8594;";
       var dots = document.createElement("div");
       dots.className = "t-dots";
+      // Counter shown on narrow screens where the dots hide (see style.css).
+      var counter = document.createElement("div");
+      counter.className = "t-counter";
+      counter.textContent = "1 / " + list.length;
       nav.appendChild(prev);
       nav.appendChild(dots);
+      nav.appendChild(counter);
       nav.appendChild(next);
 
       var idx = 0, timer = null;
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+      // Visible slides from viewport breakpoints, not from view.clientWidth:
+      // reading clientWidth right after inserting the section forced a
+      // synchronous layout on load (PageSpeed forced reflow, 81ms).
+      // matchMedia never reads layout. The container has 24px padding on
+      // each side, so the viewport breakpoints are the old container
+      // breakpoints (1024/640) plus 48, which keeps the exact same
+      // slide counts at every viewport width.
       function visible() {
-        var w = view.clientWidth || window.innerWidth;
-        return w >= 1024 ? 3 : w >= 640 ? 2 : 1;
+        if (window.matchMedia("(min-width: 1072px)").matches) return 3;
+        if (window.matchMedia("(min-width: 688px)").matches) return 2;
+        return 1;
       }
       function maxIdx() { return Math.max(0, list.length - visible()); }
       function step() {
@@ -299,6 +312,7 @@
       }
       function go(i, instant) {
         idx = i;
+        counter.textContent = (idx + 1) + " / " + list.length;
         if (instant) track.style.transition = "none";
         track.style.transform = "translateX(" + (-idx * step()) + "px)";
         if (instant) { void track.offsetWidth; track.style.transition = ""; }
@@ -314,6 +328,7 @@
             var b = document.createElement("button");
             b.className = "t-dot" + (di === idx ? " active" : "");
             b.setAttribute("aria-label", "Go to slide " + (di + 1));
+            b.setAttribute("aria-current", di === idx ? "true" : "false");
             b.addEventListener("click", function () { go(di); restart(); });
             dots.appendChild(b);
           })(d);
@@ -325,14 +340,22 @@
         slides.forEach(function (s) { s.style.flex = "0 0 " + basis; });
         if (idx > maxIdx()) idx = maxIdx();
         renderDots();
-        go(idx, true);
+        counter.textContent = (idx + 1) + " / " + list.length;
+        // Slide 0 sits at translateX(0) whatever the slide width is, so
+        // there is nothing to measure here. Measuring it (step() reads
+        // getBoundingClientRect, go() flushes offsetWidth) right after
+        // the section was inserted was the forced reflow on load. On
+        // resize with idx > 0 the exact pixel step is still needed, so
+        // go() measures it then (a user action, not initial load).
+        if (idx === 0) { track.style.transform = "translateX(0px)"; }
+        else { go(idx, true); }
         nav.style.display = maxIdx() === 0 ? "none" : "";
       }
       function restart() {
         if (timer) clearInterval(timer);
         if (!reduceMotion && maxIdx() > 0) timer = setInterval(function () {
           go(idx >= maxIdx() ? 0 : idx + 1);
-        }, 5000);
+        }, 3000);
       }
       prev.addEventListener("click", function () { go(idx <= 0 ? maxIdx() : idx - 1); restart(); });
       next.addEventListener("click", function () { go(idx >= maxIdx() ? 0 : idx + 1); restart(); });

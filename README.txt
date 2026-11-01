@@ -67,7 +67,7 @@ THE PRACTICE BANKS (Practice page)
 Chapterwise and whole-book tests are 25 questions in 20
 minutes. Board papers keep their real question count and use
 48 seconds per question (20 minutes per 25 questions).
-Answers lock after selection in Exam mode; see practice.html
+Answers lock after selection; see practice.html
 for the current test rules. The practice engine shuffles
 each question's options at runtime, so the order students
 see is not the order in the bank file.
@@ -124,19 +124,13 @@ HOW IT WORKS
   sheet (Requests tab), best-effort, before the message
   opens; general messages are not stored. A privacy
   sentence under the form says so, in English and Bangla.
-- Practice page: the setup screen offers Practice mode
-  (default: answers changeable before submitting, no tab
-  penalty, timer shown with a Pause button, time up does
-  not submit) and Exam mode (the old behaviour exactly:
-  answers lock, 3 tab switches auto-submit, timer
-  auto-submits on expiry). The mode is saved with the
-  test, so a refresh resumes in the same mode. After each
-  submitted test, a record (date, subject, test title,
-  score, percentage, time used) is saved on that device
-  only, last 50, and shown on the landing page as "My
-  progress": last 10 results, average by subject and by
-  test, plus a Clear history button. Nothing is sent to a
-  server.
+ - Practice page: answers lock after selection. Tab switches
+  are counted, 3 switches auto-submit, and the timer
+  auto-submits on expiry. The test blurs while the tab or
+  window is not focused. A refresh resumes the same test on
+  the same browser and device, with the same questions,
+  locked answers, switch count and remaining time. Nothing
+  is stored on a server.
 - Homepage: an admission banner is built from COURSES in
   js/courses.js and hidden when no course has status
   "Admission open". "Join a Batch" is the single primary
@@ -168,8 +162,8 @@ will NOT reach visitors unless its version changes:
     js/site-config.js ?v=8  (all 8 HTML pages)
     js/main.js        ?v=5  (all 8 HTML pages)
     js/theme.js       ?v=1  (all 8 HTML pages, in the head)
-    css/style.css     ?v=2  (all 8 HTML pages)
-    js/practice.js    ?v=44 (practice.html only)
+    css/style.css     ?v=3  (all 8 HTML pages)
+    js/practice.js    ?v=45 (practice.html only)
     js/courses.js     ?v=2  (courses.html and index.html)
     js/videos.js      ?v=2  (lectures.html only)
   Question banks: there is only ONE number now, in
@@ -192,7 +186,7 @@ will NOT reach visitors unless its version changes:
 SHARED CSS AND THEME (Phase 3 structure)
 -----------------------------------------
 - css/style.css is the shared CSS for every public page,
-  linked from each HTML page as css/style.css?v=2. It is
+  linked from each HTML page as css/style.css?v=3. It is
   the CSS that used to be inlined identically into every
   page. Do not copy it back into the pages.
 - Page-specific CSS stays inline in its own page: courses
@@ -357,7 +351,7 @@ js/videos.js — YouTube lecture data (?v=2)
 js/courses.js — batch data, plus optional syllabus, classSize, recordingsIncluded, demoClass (shown only when filled in) (?v=2)
 js/main.js — menu, reveals, config fill, WhatsApp button (?v=5)
 js/theme.js — theme toggle, loaded in the head (?v=1)
-js/practice.js — practice test engine, BANK_VERSION = 50 (?v=44)
+js/practice.js — practice test engine, BANK_VERSION = 50 (?v=45)
 assets/photo-*.webp — circular photos (nav + hero)
 assets/favicon.svg — site icon
 assets/fonts/inter-latin-v1.woff2 — self-hosted Inter font
