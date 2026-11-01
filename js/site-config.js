@@ -36,11 +36,6 @@ var SITE = {
   notifySheetUrl: "https://script.google.com/macros/s/AKfycbxXiw1CSYeA4IJ1_qGsBgxLuAVdvfmEe_jd2BjqkSjRLHpkFFP--Nsz4kcEavRHtnqvcw/exec",
   facebook: "", // paste your Facebook profile link here, e.g. "https://facebook.com/yourname"
 
-  // Dashboard passcode for admin.html: CHANGE THIS to something only you know.
-  // NOTE: this is a casual lock, not real security. A static site cannot have
-  // true logins; anyone with the site files could bypass it. Your real
-  // protection is that only you can push updates to your GitHub repository.
-  adminPasscode: "@PaTHaN@1993",
 
   // ---- About ----
   experienceSummary: "8 years of teaching experience",

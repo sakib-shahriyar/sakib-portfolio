@@ -1,7 +1,7 @@
 {
   "title": "HSC ICT Board Papers",
   "description": "Real HSC ICT board exam MCQ papers, 2016-2026.",
-  "total_questions": 909,
+  "total_questions": 905,
   "chapters": [
     {
       "number": 1,
@@ -4007,7 +4007,7 @@
       "year": 2024,
       "board": "Dinajpur",
       "title": "Dinajpur Board 2024",
-      "question_count": 25,
+      "question_count": 24,
       "questions": [
         {
           "id": "board-2024-dinajpur-q01",
@@ -4106,18 +4106,6 @@
           ],
           "answer": 1,
           "explanation": "!= (not equal) রিলেশনাল/ইকুয়ালিটি অপারেটর। << ও >> বিটওয়াইজ শিফট অপারেটর।"
-        },
-        {
-          "id": "board-2024-dinajpur-q09",
-          "question": "প্রোগ্রামের ভুলত্রুটি সংশোধনের পদ্ধতিকে বলা হয়—",
-          "options": [
-            "ডিবাগিং",
-            "এনকোডিং",
-            "ডিবাগিং",
-            "কারেকশন"
-          ],
-          "answer": 2,
-          "explanation": "প্রোগ্রামের ভুল (বাগ) খুঁজে সংশোধন করার পদ্ধতিই ডিবাগিং। (প্রশ্নপত্রে (ক) ও (গ) দুটোতেই 'ডিবাগিং' ছাপা হয়েছে।)"
         },
         {
           "id": "board-2024-dinajpur-q10",
@@ -5582,7 +5570,7 @@
       "year": 2024,
       "board": "Sylhet",
       "title": "Sylhet Board 2024",
-      "question_count": 22,
+      "question_count": 21,
       "questions": [
         {
           "id": "board-2024-sylhet-q01",
@@ -5806,19 +5794,6 @@
           ],
           "answer": 1,
           "explanation": "HTML ট্যাগ < > চিহ্নে লেখা হয়।"
-        },
-        {
-          "id": "board-2024-sylhet-q21",
-          "question": "উদ্দীপকটির আউটপুট হবে—",
-          "options": [
-            "○ ict",
-            "□ ict",
-            "□ ict",
-            "○ ict"
-          ],
-          "answer": 3,
-          "explanation": "type=\"circle\" হলে ফাঁপা বৃত্ত (○) বুলেট আসে।",
-          "passage": "<ul type = \"circle\">\n<li> ict </li>\n</ul>"
         },
         {
           "id": "board-2024-sylhet-q22",
@@ -6533,7 +6508,7 @@
       "year": 2023,
       "board": "Cumilla",
       "title": "Cumilla Board 2023",
-      "question_count": 15,
+      "question_count": 14,
       "questions": [
         {
           "id": "board-2023-cumilla-q01",
@@ -6674,19 +6649,6 @@
           ],
           "answer": 0,
           "explanation": "ব্যান্ডউইথ = ডেটা ট্রান্সমিশন স্পিড = ব্যান্ড স্পিড।"
-        },
-        {
-          "id": "board-2023-cumilla-q21",
-          "question": "চিত্রের আউটপুট হবে—",
-          "options": [
-            "AB",
-            "ĀB",
-            "ĀB",
-            "AB̄"
-          ],
-          "answer": 1,
-          "explanation": "A NOT গেট হয়ে Ā হয়; AND গেটে B-এর সাথে গুণ → আউটপুট ĀB।",
-          "figure": "assets/mcq/figures/board/cumilla-q21.png"
         },
         {
           "id": "board-2023-cumilla-q22",
@@ -10915,7 +10877,7 @@
       "year": 2016,
       "board": "Sylhet",
       "title": "Sylhet Board 2016",
-      "question_count": 33,
+      "question_count": 32,
       "questions": [
         {
           "id": "board-2016-sylhet-q01",
@@ -11062,20 +11024,6 @@
           ],
           "answer": 2,
           "explanation": "টেলিফোনে টুইস্টেড পেয়ার।"
-        },
-        {
-          "id": "board-2016-sylhet-q15",
-          "question": "5 ও 7 নং কম্পিউটার নষ্ট হলে কোন কম্পিউটারগুলোর মধ্যে নেটওয়ার্ক সচল থাকবে?",
-          "options": [
-            "1, 3 এবং 6",
-            "4 এবং 6",
-            "1, 3 এবং 6",
-            "1, 3, 4 এবং 6"
-          ],
-          "answer": 3,
-          "explanation": "ট্রি থেকে ৫ ও ৭ বাদে ১,২,৩,৪,৬ সচল; বিকল্পে ২ নেই (মুদ্রণ ত্রুটি), নিকটতম ঘ।",
-          "passage": "ট্রি: ১→(২,৩); ২→(৪,৫); ৩→(৬,৭)।",
-          "figure": "assets/mcq/figures/board/sylhet-2016-q15-tree-v2.png"
         },
         {
           "id": "board-2016-sylhet-q16",

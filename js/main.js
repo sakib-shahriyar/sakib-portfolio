@@ -103,3 +103,48 @@
     }
   });
 })();
+
+/* Bangla language marking (Phase 4.1): mark elements whose own text
+   contains Bengali characters (U+0980-U+09FF) with lang="bn", so
+   screen readers pronounce them correctly and the Bengali font
+   applies. Only the smallest element holding the Bengali text is
+   marked (direct text nodes only), so containers like <main> are
+   not marked just because a descendant is Bengali. Runs once on
+   DOMContentLoaded and again for anything added later (testimonials,
+   document cards, practice questions) via MutationObserver. The
+   observer watches childList only, not attributes, so setting lang
+   never triggers itself. Exposed as window.markBanglaLang for page
+   scripts that render after load. */
+(function () {
+  var BN = /[\u0980-\u09FF]/;
+  function markEl(el) {
+    if (!el || el.nodeType !== 1 || el.hasAttribute("lang")) return;
+    var nodes = el.childNodes;
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].nodeType === 3 && BN.test(nodes[i].nodeValue)) {
+        el.setAttribute("lang", "bn");
+        return;
+      }
+    }
+  }
+  function markRoot(root) {
+    if (!root) return;
+    if (root.nodeType === 1) markEl(root);
+    if (root.querySelectorAll) {
+      var els = root.querySelectorAll("*");
+      for (var i = 0; i < els.length; i++) markEl(els[i]);
+    }
+  }
+  window.markBanglaLang = markRoot;
+  document.addEventListener("DOMContentLoaded", function () {
+    markRoot(document.body);
+    if ("MutationObserver" in window && document.body) {
+      var mo = new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          m.addedNodes.forEach(function (n) { markRoot(n); });
+        });
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+    }
+  });
+})();

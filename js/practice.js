@@ -1,11 +1,19 @@
 /* Practice tests: chapterwise, whole-book and board-paper MCQ exams.
    Instant results with explanations. */
 (function () {
+  // Cache version for ALL question banks, in one place. Bump this
+  // single number whenever any bank file changes, and every bank
+  // URL below changes with it, so browsers cannot keep serving an
+  // old cached bank. It starts at 49, one above the highest
+  // per-bank version used before this change (48), and from now
+  // on the old per-bank numbers (48, 3, 9, and none for O Level)
+  // are gone: there is only this number.
+  var BANK_VERSION = 50;
   var SUBJECTS = {
-    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=48",   title: "NCTB HSC ICT" },
-    olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json", title: "Cambridge O Level CS" },
-    newhsc: { bankUrl: "assets/mcq/hsc-ict-new-mcq-bank.json?v=3", title: "HSC ICT Notes Bank" },
-    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=9", title: "Board Papers · HSC ICT" }
+    hsc:    { bankUrl: "assets/mcq/hsc-ict-mcq-bank.json?v=" + BANK_VERSION,   title: "NCTB HSC ICT" },
+    olevel: { bankUrl: "assets/mcq/olevel-cs-mcq-bank.json?v=" + BANK_VERSION, title: "Cambridge O Level CS" },
+    newhsc: { bankUrl: "assets/mcq/hsc-ict-new-mcq-bank.json?v=" + BANK_VERSION, title: "HSC ICT Notes Bank" },
+    board:  { bankUrl: "assets/mcq/hsc-board-papers.json?v=" + BANK_VERSION, title: "Board Papers · HSC ICT" }
   };
   var TEST_LEN = 25;
   var TEST_SECS = 20 * 60;
@@ -14,10 +22,17 @@
   // warning, the third switch auto-submits, and an unfinished test
   // resumes after a refresh. Screenshots cannot be blocked by a web
   // page, so the deterrent here is blurring the test while the tab
-  // or window is not focused, on top of the existing right-click
-  // and text-selection blocks in main.js.
+  // or window is not focused, on top of the right-click and keyboard
+  // blocks in main.js and the text-selection CSS on the public pages.
+  // (The JS blocks were removed in Phase 3 and restored at Sakib's
+  // direction; the CSS block was kept throughout.)
   var SAVE_KEY = "practice-in-progress-v1";
+  var HIST_KEY = "practice-history-v1";
   var MAX_TAB_SWITCHES = 3;
+  // Practice mode is the default (Phase 4.2). The setup screen sets
+  // testMode; startTest copies it into state.mode, and resume restores
+  // the saved mode. Retake keeps testMode, so it keeps the same mode.
+  var testMode = "practice";
 
   var banks = {};  // subject key -> bank JSON (cached)
   var boardBank = null; // board papers bank, loaded into the Board papers card
@@ -28,7 +43,7 @@
   // Digital Devices), so a number lookup always returned the first one.
   // state.chapterNo below is display-only and must never be used to look
   // a chapter up again.
-  var state = null; // { title, chapterwise, chapterIdx, chapterNo, questions, picked, deadline, timerId, submitted, warned, auto, switches, tabWarnPending }
+  var state = null; // { title, kind, chapterwise, chapterIdx, chapterNo, questions, picked, secs, started, deadline, timerId, submitted, warned, auto, switches, tabWarnPending, mode, paused, pausedSecs, startedAt, pausedTotalMs, pauseStartedAt, timeUp }
 
   function $(id) { return document.getElementById(id); }
 
@@ -37,6 +52,7 @@
       $(id).hidden = (id !== viewId);
     });
     window.scrollTo(0, 0);
+    if (viewId === "view-landing") renderProgress();
   }
 
   function shuffle(arr) {
@@ -127,6 +143,7 @@
       $("type-boardpapers").hidden = true;
     }
     show("view-setup");
+    updateModeUI();
     loadBank(function () {});
   }
 
@@ -373,7 +390,14 @@
       warned: false,
       auto: false,
       switches: 0,
-      tabWarnPending: false
+      tabWarnPending: false,
+      mode: testMode,
+      paused: false,
+      pausedSecs: null,
+      startedAt: null,
+      pausedTotalMs: 0,
+      pauseStartedAt: null,
+      timeUp: false
     };
     for (var i = 0; i < state.questions.length; i++) state.picked.push(null);
     saveProgress();
@@ -382,8 +406,10 @@
     // The test and its timer start only after the student reads the
     // warning popup and clicks "I understand" (beginTest). The extra
     // Notes Bank paragraph in that popup shows for Notes Bank tests
-    // only, and is hidden again for every other test.
-    $("start-warn-notes").hidden = (subject !== "newhsc");
+    // only, and is hidden again for every other test. The warning
+    // boxes themselves depend on the mode: Exam shows the two
+    // warnings, Practice shows the Practice note instead.
+    updateStartWarnBoxes();
     setWarnOpen(true);
   }
 
@@ -409,6 +435,14 @@
         deadline: state.deadline,
         switches: state.switches || 0,
         tabWarnPending: !!state.tabWarnPending,
+        mode: state.mode || "exam",
+        paused: !!state.paused,
+        pausedSecs: (typeof state.pausedSecs === "number" ? state.pausedSecs : null),
+        startedAt: (typeof state.startedAt === "number" ? state.startedAt : null),
+        pausedTotalMs: (typeof state.pausedTotalMs === "number" ? state.pausedTotalMs : 0),
+        pauseStartedAt: (typeof state.pauseStartedAt === "number" ? state.pauseStartedAt : null),
+        timeUp: !!state.timeUp,
+        savedAt: Date.now(),
         questions: state.questions,
         picked: state.picked
       }));
@@ -433,6 +467,12 @@
       clearProgress();
       return null;
     }
+    // Old saves (before Phase 4.2) have no mode and resume as Exam,
+    // which is exactly the behaviour they were taken under.
+    if (saved.mode !== undefined && saved.mode !== "practice" && saved.mode !== "exam") {
+      clearProgress();
+      return null;
+    }
     var okQs = saved.questions.every(function (q) {
       return q && typeof q.question === "string" && q.options && q.options.length >= 2 &&
         typeof q.answer === "number" && q.answer >= 0 && q.answer < q.options.length;
@@ -446,13 +486,35 @@
 
   function restoreProgress(saved) {
     // An expired test never resumes: the deadline, not the page load,
-    // decides whether time is left.
-    if (saved.started && saved.deadline && Date.now() >= saved.deadline) {
+    // decides whether time is left. Except in Practice mode, where
+    // running out of time does not end the test: it resumes as
+    // time-up (timer 00:00, still submittable) instead of clearing.
+    if (saved.started && saved.deadline && Date.now() >= saved.deadline &&
+        saved.mode !== "practice") {
       clearProgress();
       return false;
     }
     subject = saved.subject;
     bank = null;
+    var restoredMode = (saved.mode === "practice" || saved.mode === "exam") ? saved.mode : "exam";
+    var restoredTimeUp = !!saved.timeUp ||
+      (restoredMode === "practice" && saved.started && saved.deadline && Date.now() >= saved.deadline);
+    var restoredStartedAt = (typeof saved.startedAt === "number" ? saved.startedAt : null);
+    var restoredPausedTotal = (typeof saved.pausedTotalMs === "number" ? saved.pausedTotalMs : 0);
+    var restoredPauseStartedAt = null;
+    var restoredPaused = !!saved.paused;
+    if (restoredPaused && restoredStartedAt && typeof saved.savedAt === "number") {
+      // Paused test reopened: the timer was stopped while the page
+      // was closed, so that gap must not count as time used. Rebase
+      // the start time so only pre-save work counts, and start a
+      // fresh pause interval at restore time.
+      var pauseElapsedAtSave = (typeof saved.pauseStartedAt === "number")
+        ? Math.max(0, saved.savedAt - saved.pauseStartedAt) : 0;
+      var usedBeforeSave = Math.max(0, saved.savedAt - restoredStartedAt - restoredPausedTotal - pauseElapsedAtSave);
+      restoredStartedAt = Date.now() - usedBeforeSave;
+      restoredPausedTotal = 0;
+      restoredPauseStartedAt = Date.now();
+    }
     state = {
       title: saved.title,
       kind: saved.kind,
@@ -469,19 +531,34 @@
       warned: false,
       auto: false,
       switches: saved.switches || 0,
-      tabWarnPending: !!saved.tabWarnPending
+      tabWarnPending: !!saved.tabWarnPending,
+      mode: restoredMode,
+      paused: restoredPaused,
+      pausedSecs: (typeof saved.pausedSecs === "number" ? saved.pausedSecs : null),
+      startedAt: restoredStartedAt,
+      pausedTotalMs: restoredPausedTotal,
+      pauseStartedAt: restoredPauseStartedAt,
+      timeUp: restoredTimeUp
     };
     renderTest();
-    // Re-lock every answered question exactly as it was.
+    // Re-lock every answered question exactly as it was, in Exam
+    // mode only. In Practice mode answers stay changeable, so a
+    // restored answer is checked but never disabled or locked.
     state.questions.forEach(function (q, i) {
       if (state.picked[i] === null) return;
       var card = $("qcard-" + i);
       if (!card) return;
-      card.classList.add("locked");
-      card.querySelectorAll('input[type="radio"]').forEach(function (r) {
-        if (parseInt(r.value, 10) === state.picked[i]) r.checked = true;
-        r.disabled = true;
-      });
+      if (state.mode === "exam") {
+        card.classList.add("locked");
+        card.querySelectorAll('input[type="radio"]').forEach(function (r) {
+          if (parseInt(r.value, 10) === state.picked[i]) r.checked = true;
+          r.disabled = true;
+        });
+      } else {
+        card.querySelectorAll('input[type="radio"]').forEach(function (r) {
+          if (parseInt(r.value, 10) === state.picked[i]) r.checked = true;
+        });
+      }
     });
     updateProgress();
     show("view-test");
@@ -497,11 +574,21 @@
       bank = data;
     }).catch(function () {});
     if (state.started) {
-      tick();
-      state.timerId = setInterval(tick, 250);
-      if (state.tabWarnPending) showTabWarning();
+      if (state.paused) {
+        // Paused Practice test: timer stays frozen, no interval.
+        $("exam-timer").textContent = fmt(state.pausedSecs);
+        updatePauseUI();
+      } else if (state.timeUp) {
+        // Practice test whose time ran out: timer 00:00, still submittable.
+        $("exam-timer").textContent = "00:00";
+        showTimeUpNote();
+      } else {
+        tick();
+        state.timerId = setInterval(tick, 250);
+        if (state.mode === "exam" && state.tabWarnPending) showTabWarning();
+      }
     } else {
-      $("start-warn-notes").hidden = (subject !== "newhsc");
+      updateStartWarnBoxes();
       setWarnOpen(true);
     }
     return true;
@@ -542,8 +629,10 @@
     // refresh also fires visibilitychange to hidden, and counting
     // it would punish a refresh, which is exactly what resume is
     // for. Switches before the test starts, or after it is
-    // submitted, are not exam switches at all.
+    // submitted, are not exam switches at all. Practice mode has
+    // no tab penalty at all, so it does not even blur.
     if (!state || state.submitted || !state.started) return;
+    if (state.mode !== "exam") return;
     tabSeenHidden = true;
     document.body.classList.add("tab-hidden");
     saveProgress();
@@ -552,6 +641,7 @@
   function onTabVisible() {
     document.body.classList.remove("tab-hidden");
     if (!state || state.submitted || !state.started) return;
+    if (state.mode !== "exam") return;
     // A return after a real tab switch counts here, but only if
     // this page actually saw the hide first. A resumed page can
     // start hidden and then become visible on load, and that
@@ -609,6 +699,10 @@
     setWarnOpen(false);
     if (!state || state.submitted || state.started) return;
     state.started = true;
+    state.startedAt = Date.now();
+    state.pausedTotalMs = 0;
+    state.pauseStartedAt = null;
+    state.timeUp = false;
     state.deadline = Date.now() + state.secs * 1000;
     saveProgress();
     tick();
@@ -620,6 +714,7 @@
   }
 
   function remainingSecs() {
+    if (state.paused && typeof state.pausedSecs === "number") return state.pausedSecs;
     if (!state.deadline) return state.secs;
     return Math.max(0, Math.round((state.deadline - Date.now()) / 1000));
   }
@@ -630,12 +725,21 @@
   }
 
   function tick() {
-    if (!state || state.submitted || !state.started) return;
+    if (!state || state.submitted || !state.started || state.paused) return;
     var s = remainingSecs();
     var el = $("exam-timer");
     el.textContent = fmt(s);
     el.classList.toggle("danger", s <= 120);
     if (s <= 0) {
+      if (state.mode === "practice") {
+        // Practice mode: time up does not submit. The test stays
+        // open at 00:00 until the student submits manually.
+        state.timeUp = true;
+        stopTimer();
+        showTimeUpNote();
+        saveProgress();
+        return;
+      }
       state.auto = true;
       submit();
     }
@@ -680,7 +784,7 @@
       card.id = "qcard-" + i;
       var html = "";
       if (q.passage) {
-        html += '<div class="qpassage"><span class="qpassage-label">উদ্দীপক</span>' +
+        html += '<div class="qpassage"><span class="qpassage-label" lang="bn">উদ্দীপক</span>' +
           fmtText(q.passage) + "</div>";
       }
       html += '<p class="qstem"><span class="qnum">Q' + (i + 1) + ".</span> " + fmtText(q.question) + "</p>";
@@ -706,16 +810,21 @@
           state.picked[i] = parseInt(radio.value, 10);
           state.warned = false;
           saveProgress();
-          $("exam-warn").hidden = true;
-          // One chance only: lock this question so the answer cannot be changed.
-          card.classList.add("locked");
-          card.querySelectorAll('input[type="radio"]').forEach(function (r) { r.disabled = true; });
+          // Keep the time-up note visible in Practice mode; only the
+          // unanswered-submit warning is cleared by answering.
+          if (!state.timeUp) $("exam-warn").hidden = true;
+          if (state.mode === "exam") {
+            // One chance only: lock this question so the answer cannot be changed.
+            card.classList.add("locked");
+            card.querySelectorAll('input[type="radio"]').forEach(function (r) { r.disabled = true; });
+          }
           updateProgress();
         });
       });
     });
     updateProgress();
     updateTabNotice();
+    applyModeUI();
   }
 
   function updateProgress() {
@@ -769,7 +878,33 @@
       }
     });
     var pct = Math.round((correct / total) * 100);
-    var usedSecs = state.secs - remainingSecs();
+    // Time used, excluding paused time and excluding any gap while
+    // a paused test was closed. Falls back to the old deadline
+    // maths for tests resumed from a pre-Phase-4 save without a
+    // start timestamp.
+    var usedSecs;
+    if (state.startedAt) {
+      var pausedNow = (state.paused && state.pauseStartedAt)
+        ? (Date.now() - state.pauseStartedAt) : 0;
+      usedSecs = Math.max(0, Math.round(
+        (Date.now() - state.startedAt - (state.pausedTotalMs || 0) - pausedNow) / 1000));
+    } else {
+      usedSecs = state.secs - remainingSecs();
+    }
+    // History is local only (Phase 4.3): one record per submitted
+    // test, newest first, capped at 50. Never sent to a server.
+    recordHistory({
+      date: new Date().toISOString(),
+      dateLabel: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+      subject: state.kind === "paper" ? "board" : subject,
+      subjectTitle: (SUBJECTS[state.kind === "paper" ? "board" : subject] || {}).title || subject,
+      title: state.title,
+      mode: state.mode || "exam",
+      score: correct,
+      total: total,
+      pct: pct,
+      usedSecs: usedSecs
+    });
 
     $("result-score").textContent = correct;
     document.querySelector(".result-total").textContent = "/" + total;
@@ -783,8 +918,9 @@
     else verdict = "Every expert was once a beginner. Study the explanations and retake the test.";
     $("result-verdict").textContent = verdict;
 
+    var practiceUrl = ((typeof SITE !== "undefined" && SITE.siteUrl) || "https://lecturer-pathan.vercel.app") + "/practice.html";
     var shareText = "I scored " + correct + "/" + total + " (" + pct + "%) in the " + state.title +
-      " on Sakib Sir's practice page. Try it yourself: https://lecturer-pathan.vercel.app/practice.html";
+      " on Sakib Sir's practice page. Try it yourself: " + practiceUrl;
     $("result-share").href = "https://wa.me/?text=" + encodeURIComponent(shareText);
 
     var wrap = $("result-review-wrap");
@@ -814,9 +950,13 @@
     }
 
     $("result-retake").onclick = function () {
-      // Rebuild a fresh test of the same kind. The chapter is found by
-      // its stored index, not its number: filtering by number returned
-      // Chapter 3 Part 1 for a Part 2 test.
+      // Rebuild a fresh test of the same kind, keeping the same mode.
+      // This matters after a resume: the setup picker was never shown
+      // in this session, so testMode would otherwise fall back to
+      // the Practice default instead of the resumed test's mode.
+      // The chapter is found by its stored index, not its number:
+      // filtering by number returned Chapter 3 Part 1 for a Part 2 test.
+      if (state.mode) testMode = state.mode;
       if (state.kind === "paper") {
         var pc = chapterByState();
         startPaperTest(pc);
@@ -836,6 +976,153 @@
       if (state.kind === "paper") { showSetup("hsc"); openPaperPicker(); }
       else { show("view-setup"); }
     };
+  }
+
+  // ---- Phase 4.2: modes ----
+  function updateModeUI() {
+    var prac = $("mode-practice"), exam = $("mode-exam"), desc = $("mode-desc");
+    if (!prac || !exam) return;
+    var isPrac = testMode === "practice";
+    prac.className = "btn " + (isPrac ? "btn-primary" : "btn-ghost") + " mode-btn";
+    exam.className = "btn " + (isPrac ? "btn-ghost" : "btn-primary") + " mode-btn";
+    prac.setAttribute("aria-pressed", isPrac ? "true" : "false");
+    exam.setAttribute("aria-pressed", isPrac ? "false" : "true");
+    if (desc) {
+      desc.textContent = isPrac
+        ? "Practice mode: you can change your answers before submitting. No tab penalty. Timer shown, with Pause."
+        : "Exam mode: answers lock after selection. Tab switches are counted, 3 switches submit automatically. Timer auto-submits on expiry.";
+    }
+  }
+
+  function updateStartWarnBoxes() {
+    var amber = document.querySelector(".start-warn-amber");
+    var red = document.querySelector(".start-warn-red");
+    var prac = $("start-warn-practice");
+    var isPrac = state && state.mode === "practice";
+    if (amber) amber.hidden = !!isPrac;
+    if (red) red.hidden = !!isPrac;
+    if (prac) prac.hidden = !isPrac;
+    $("start-warn-notes").hidden = (subject !== "newhsc");
+  }
+
+  function applyModeUI() {
+    if (!state) return;
+    var isPrac = state.mode === "practice";
+    var notice = $("exam-notice"), tabNotice = $("exam-tab-notice"), pracNotice = $("exam-practice-notice");
+    if (notice) notice.hidden = !!isPrac;
+    if (tabNotice) tabNotice.hidden = !!isPrac;
+    if (pracNotice) pracNotice.hidden = !isPrac;
+    var pauseBtn = $("exam-pause");
+    if (pauseBtn) {
+      pauseBtn.hidden = !isPrac;
+      if (isPrac) updatePauseUI();
+    }
+  }
+
+  function updatePauseUI() {
+    var btn = $("exam-pause"), timer = $("exam-timer");
+    if (!btn || !state) return;
+    btn.textContent = state.paused ? "Resume" : "Pause";
+    if (timer) timer.classList.toggle("paused", !!state.paused);
+  }
+
+  function showTimeUpNote() {
+    var w = $("exam-warn");
+    if (!w) return;
+    w.textContent = "Time is up. You can still submit when you are ready.";
+    w.hidden = false;
+  }
+
+  function togglePause() {
+    if (!state || state.submitted || !state.started || state.mode !== "practice") return;
+    if (state.paused) {
+      // Resume: the timer restarts from the frozen remaining time.
+      // Paused time so far joins the accumulated paused total, so
+      // it never counts as time used.
+      if (state.pauseStartedAt) {
+        state.pausedTotalMs = (state.pausedTotalMs || 0) + (Date.now() - state.pauseStartedAt);
+      }
+      state.pauseStartedAt = null;
+      state.paused = false;
+      state.deadline = Date.now() + (state.pausedSecs || 0) * 1000;
+      state.pausedSecs = null;
+      updatePauseUI();
+      saveProgress();
+      tick();
+      state.timerId = setInterval(tick, 250);
+    } else {
+      // Pause: freeze the remaining time and stop the interval.
+      // The deadline is cleared so a paused test never expires
+      // while paused, including across a refresh.
+      state.pausedSecs = remainingSecs();
+      state.pauseStartedAt = Date.now();
+      state.paused = true;
+      stopTimer();
+      state.deadline = null;
+      $("exam-timer").textContent = fmt(state.pausedSecs);
+      updatePauseUI();
+      saveProgress();
+    }
+  }
+
+  // ---- Phase 4.3: history (localStorage only) ----
+  function loadHistory() {
+    try {
+      var raw = localStorage.getItem(HIST_KEY);
+      var arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+
+  function recordHistory(rec) {
+    try {
+      var arr = loadHistory();
+      arr.unshift(rec);
+      localStorage.setItem(HIST_KEY, JSON.stringify(arr.slice(0, 50)));
+    } catch (e) { /* storage unavailable: history just cannot persist */ }
+  }
+
+  function renderProgress() {
+    var list = $("progress-list");
+    if (!list) return;
+    var hist = loadHistory();
+    $("progress-empty").hidden = hist.length !== 0;
+    $("progress-content").hidden = hist.length === 0;
+    if (hist.length === 0) return;
+    var html = "";
+    hist.slice(0, 10).forEach(function (r) {
+      html += '<div class="progress-row"><span class="progress-date">' + escapeHtml(r.dateLabel || r.date) + "</span> " +
+        '<span class="progress-title">' + escapeHtml(r.title) + "</span> " +
+        '<span class="progress-subject">' + escapeHtml(r.subjectTitle || r.subject) + "</span> " +
+        '<span class="progress-score">' + r.score + "/" + r.total + " (" + r.pct + "%)</span> " +
+        '<span class="progress-time">' + fmt(r.usedSecs) + " used</span></div>";
+    });
+    list.innerHTML = html;
+    var bySub = {};
+    hist.forEach(function (r) {
+      var k = r.subjectTitle || r.subject;
+      if (!bySub[k]) bySub[k] = { sum: 0, n: 0 };
+      bySub[k].sum += r.pct; bySub[k].n++;
+    });
+    var subHtml = "";
+    Object.keys(bySub).forEach(function (k) {
+      var a = bySub[k];
+      subHtml += '<div class="progress-row"><span>' + escapeHtml(k) + "</span> " +
+        '<span class="progress-score">' + Math.round(a.sum / a.n) + "% average (" + a.n + " test" + (a.n === 1 ? "" : "s") + ")</span></div>";
+    });
+    $("progress-by-subject").innerHTML = subHtml;
+    var byTest = {};
+    hist.forEach(function (r) {
+      if (!byTest[r.title]) byTest[r.title] = { sum: 0, n: 0 };
+      byTest[r.title].sum += r.pct; byTest[r.title].n++;
+    });
+    var testHtml = "";
+    Object.keys(byTest).forEach(function (k) {
+      var a = byTest[k];
+      testHtml += '<div class="progress-row"><span>' + escapeHtml(k) + "</span> " +
+        '<span class="progress-score">' + Math.round(a.sum / a.n) + "% average (" + a.n + " test" + (a.n === 1 ? "" : "s") + ")</span></div>";
+    });
+    $("progress-by-test").innerHTML = testHtml;
   }
 
   function refreshToTop() {
@@ -964,7 +1251,9 @@
       else onTabVisible();
     });
     window.addEventListener("blur", function () {
-      if (state && state.started && !state.submitted) {
+      // Blur the test only in Exam mode. Practice mode has no tab
+      // penalty, so a window blur must not hide the questions.
+      if (state && state.started && !state.submitted && state.mode === "exam") {
         document.body.classList.add("tab-hidden");
       }
     });
@@ -984,20 +1273,28 @@
       if (e.target === $("end-modal")) closeEndModal();
     });
 
+    // Mode picker (Phase 4.2): Practice is the default; the choice
+    // is kept until the student changes it, including across tests.
+    var modePracBtn = $("mode-practice"), modeExamBtn = $("mode-exam");
+    if (modePracBtn) modePracBtn.addEventListener("click", function () { testMode = "practice"; updateModeUI(); });
+    if (modeExamBtn) modeExamBtn.addEventListener("click", function () { testMode = "exam"; updateModeUI(); });
+    updateModeUI();
+    // Pause (Practice mode only) and history clear.
+    var pauseBtn = $("exam-pause");
+    if (pauseBtn) pauseBtn.addEventListener("click", togglePause);
+    var clearBtn = $("progress-clear");
+    if (clearBtn) clearBtn.addEventListener("click", function () {
+      if (!window.confirm("Clear all practice history on this device? This cannot be undone.")) return;
+      try { localStorage.removeItem(HIST_KEY); } catch (e) {}
+      renderProgress();
+    });
+    renderProgress();
+
     // If an unfinished test was saved, resume it instead of showing
     // the landing page. Ending a test, submitting it, or letting its
     // deadline pass already cleared the saved copy, so a finished
     // test never comes back here.
     var savedTest = loadSavedProgress();
     if (savedTest) restoreProgress(savedTest);
-
-    // Test hook only: ?debug=1 exposes state for automated checks.
-    if (window.location.search.indexOf("debug=1") !== -1) {
-      window.__practice = {
-        getState: function () { return state; },
-        forceTimeout: function () { if (state && state.started) { state.deadline = Date.now() - 1; tick(); } },
-        submit: submit
-      };
-    }
   });
 })();

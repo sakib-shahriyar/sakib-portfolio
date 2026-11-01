@@ -1,0 +1,14 @@
+# Safety net only: the local admin tool now lives OUTSIDE this
+# site folder, next to it, so Vercel never sees it anyway. This
+# line protects the case where the folder is ever copied inside.
+_local-admin
+# Developer and review files: they are not part of the website
+# and must not be served on the live site. They stay in the
+# repository folder for your own use, but Vercel will not deploy
+# them. Note: .vercelignore only affects the Vercel deployment;
+# these files are still visible in the GitHub repository itself
+# if you push the whole folder.
+tools
+data-review-board.md
+data-review-olevel.md
+apps-script-notify.gs

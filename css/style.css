@@ -1,9 +1,38 @@
+/* Shared CSS for every public page. Linked from each HTML page as
+   css/style.css?v=N. This file is the part that used to be inlined
+   identically into every page; page-specific CSS stays inline in
+   its own page (courses, contact and practice have a second
+   <style> block, index and practice have a small override block
+   right after this link, see below). Font URLs are relative to
+   this css/ folder, not to the page. When you change this file,
+   bump the ?v= number in every HTML page. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url('../fonts/inter-latin-v1.woff2') format('woff2');
+  src: url('../assets/fonts/inter-latin-v1.woff2') format('woff2');
+}
+/* Bengali, self-hosted, subset only: Hind Siliguri 400 + 700.
+   The unicode-range below is Google Fonts' Bengali subset, so the
+   browser only downloads these files when Bengali text is present.
+   They sit after Inter in the font stack, so Latin text still uses
+   Inter and Bengali text falls through to Hind Siliguri. */
+@font-face {
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/hind-siliguri-bengali-v1-400.woff2') format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1, U+11DF0-11DF1;
+}
+@font-face {
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/hind-siliguri-bengali-v1-700.woff2') format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1, U+11DF0-11DF1;
 }
 /* ============================================================
    DOCK design system: light + dark themes.
@@ -31,8 +60,8 @@
   --color-vivid-violet: #6736eb;
   --color-forest: #046645;
 
-  --font-main: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-bn: "Nirmala UI", "Noto Sans Bengali", sans-serif;
+  --font-main: 'Inter', 'Hind Siliguri', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-bn: 'Hind Siliguri', "Nirmala UI", "Noto Sans Bengali", sans-serif;
 
   --shadow-subtle: rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.04) 0px -1px 1px 0px inset, rgba(0, 0, 0, 0.14) 0px 0px 0px 0.5px inset;
   --shadow-lg: rgba(0, 0, 0, 0.04) 0px 20px 20px -8px;
@@ -226,7 +255,6 @@ img { max-width: 100%; }
 .card-link { font-size: 15px; margin-top: auto; padding-top: 12px; }
 .grid { display: grid; gap: 24px; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 
 /* ---------- Page headers (inner pages) ---------- */
@@ -255,9 +283,9 @@ img { max-width: 100%; }
 .t-avatar {
   width: 48px; height: 48px; border-radius: 50%; flex: none;
   display: grid; place-items: center; color: #ffffff;
-  font-size: 20px; font-weight: 700;
   margin-bottom: 16px;
 }
+.t-avatar svg { width: 26px; height: 26px; fill: #ffffff; display: block; }
 .t-avatar.cobalt { background: var(--color-electric-cobalt); }
 .t-avatar.violet { background: var(--color-vivid-violet); }
 .t-card blockquote { margin: 0 0 16px; font-size: 16px; line-height: 1.6; flex: 1; }
@@ -443,7 +471,7 @@ img { max-width: 100%; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1023px) {
-  .grid-3, .grid-4, .t-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .t-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 860px) {
@@ -459,7 +487,7 @@ img { max-width: 100%; }
   .brand .name { display: none; }
 }
 @media (max-width: 639px) {
-  .grid-3, .grid-4, .grid-2, .t-grid, .video-grid, .contact-grid { grid-template-columns: 1fr; }
+  .grid-3, .grid-2, .t-grid, .video-grid, .contact-grid { grid-template-columns: 1fr; }
   .section { margin-bottom: 64px; }
   .hero { padding: 72px 20px 64px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
