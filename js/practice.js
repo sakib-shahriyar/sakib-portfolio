@@ -1,3 +1,4 @@
+/* v141: Minified version is js/practice.min.js (loaded by practice.html). Edit this source, then minify (terser) + bump ?v= in practice.html. Do not edit practice.min.js directly. */
 /* Practice tests: chapterwise, whole-book and board-paper MCQ exams.
    Instant results with explanations. */
 (function () {
@@ -897,6 +898,17 @@
     $("start-newhsc").addEventListener("click", function (e) {
       e.preventDefault();
       showSetup("newhsc");
+    });
+    // Whole subject cards are clickable (v140): clicking anywhere on a card
+    // starts that subject, except clicks on a link inside the card (the Start
+    // link itself, or any other link), which keep their own behaviour.
+    document.querySelectorAll(".practice-subject").forEach(function (card) {
+      var startLink = card.querySelector("a.card-link");
+      if (!startLink) return;
+      card.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;
+        startLink.click();
+      });
     });
     // Symbol guide popup: the full page image loads only on first open,
     // so the landing page carries only the small thumbnail.

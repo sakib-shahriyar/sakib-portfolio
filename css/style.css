@@ -1,11 +1,9 @@
-/* Shared CSS for every public page. INLINED into each HTML page (not
-   linked): this file is the source of truth. When you change it,
-   re-inline it into all 8 pages. Font URLs here are relative to
-   this css/ folder (../assets/fonts/...); the inlined copies rewrite
-   them to assets/fonts/... because the pages sit at the site root.
-   Page-specific CSS stays inline in its own page (courses, contact
-   and practice have a second <style> block, index and practice have
-   a small override block right after the inlined shared block). */
+/* Shared stylesheet (readable source).
+   Inlined MINIFIED into all 8 pages: edit this file, then minify
+   (clean-css) + re-inline the minified output (with font URLs rewritten
+   from ../assets/fonts/ to assets/fonts/) into all 8 pages.
+   Do not edit inlined copies directly (they are minified, one line).
+   Do not re-inline unminified: that regresses PageSpeed minify CSS. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
