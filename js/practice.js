@@ -864,9 +864,12 @@
     var showIt = false;
     var tv = $("view-test");
     if (tv && !tv.hidden) {
-      // During a test the button is always available, so a student
-      // can jump back to the top whenever they want.
-      showIt = true;
+      // During a test the button appears only once the first
+      // screenful has scrolled above the viewport: scrolling past
+      // one viewport height means everything initially visible is
+      // now above the screen, so that is exactly when going back
+      // to the top becomes useful.
+      showIt = window.scrollY > window.innerHeight;
     } else {
       var rv = $("view-result");
       if (rv && !rv.hidden) {

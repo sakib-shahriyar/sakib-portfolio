@@ -273,12 +273,12 @@
       view.className = "t-carousel";
       var track = document.createElement("div");
       track.className = "t-track";
-      // Generic boy/girl profile icons (stroke style, white on the
-      // coloured circle). The girl icon has long hair falling beside
-      // the face; the boy icon has a short cap. Inline styles override
-      // the shared .t-avatar svg fill rule.
-      var BOY_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true" style="width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round"><circle cx="24" cy="20" r="8"/><path d="M15 19Q15 10 24 10t9 9"/><path d="M11 42q1-9 13-9t13 9"/></svg>';
-      var GIRL_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true" style="width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round"><circle cx="24" cy="20" r="8"/><path d="M15 18Q12 10 24 10t9 8"/><path d="M15 18q-2 8 0 16"/><path d="M33 18q2 8 0 16"/><path d="M11 42q1-9 13-9t13 9"/></svg>';
+      // Boy/girl avatar photos supplied by Sakib (assets/avatar-boy.png,
+      // assets/avatar-girl.png, resized copies of his uploads for the
+      // 48px display). They fill the coloured circle, which stays
+      // behind them as the frame.
+      var BOY_IMG = '<img src="assets/avatar-boy.png" alt="" decoding="async" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block">';
+      var GIRL_IMG = '<img src="assets/avatar-girl.png" alt="" decoding="async" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block">';
       var slides = list.map(function (t, i) {
         var s = document.createElement("div");
         s.className = "t-slide";
@@ -287,12 +287,12 @@
         var av = document.createElement("div");
         av.className = "t-avatar " + (i % 2 === 0 ? "cobalt" : "violet");
         av.setAttribute("aria-hidden", "true");
-        // Boy/girl generic profile icon from the testimonial's own sex
+        // Boy/girl avatar photo from the testimonial's own sex
         // field (M/F, supplied with the testimonial data). Falls back
         // to the name initial when the field is missing, so older
         // entries still render.
-        if (t.sex === "F") av.innerHTML = GIRL_ICON;
-        else if (t.sex === "M") av.innerHTML = BOY_ICON;
+        if (t.sex === "F") av.innerHTML = GIRL_IMG;
+        else if (t.sex === "M") av.innerHTML = BOY_IMG;
         else av.textContent = (t.name || "?").trim().charAt(0);
         var bq = document.createElement("blockquote");
         bq.textContent = t.text;
