@@ -52,11 +52,13 @@
     });
   })();
   </script>
-  <!-- site-config.js loads WITHOUT defer on this page only: the notes cards below
-     render during parsing (before first paint), so the footer never shifts.
-     The file is small (13 KB), so the render-blocking cost is negligible.
-     Other pages keep the deferred tag. -->
-  <script src="js/site-config.js?v=8"></script>
+  <!-- site-config.js is deferred on this page (as on every page): the notes
+     cards below render during parsing from an inline copy of DOCUMENTS and
+     OLEVEL_DOCUMENTS placed just before the render script, so no network
+     request blocks the render (PageSpeed previously flagged the no-defer
+     site-config tag as a render-blocking request) and the footer never
+     shifts. Keep the inline copy in sync with js/site-config.js. -->
+  <script defer src="js/site-config.js?v=8"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -88,15 +90,175 @@
     <h1 class="reveal" id="notes-title">Pick your notes</h1>
     <p class="reveal" id="notes-sub">Two complete sets. Preview the first 4 pages of any document free, then request the complete copy.</p>
   </header>
+  <script>
+    // Set the set-view title/subtitle during parsing, right after the header:
+    // the grid render below runs later in parsing, and a first paint landing
+    // between the header and that render would show the short landing title
+    // (1 line on mobile) and then shift the whole page down when the render
+    // replaces it with the set title (2 lines on mobile). The render sets
+    // these same texts again, so this early copy only fixes first paint.
+    (function () {
+      try {
+        var q = new URLSearchParams(window.location.search);
+        var sq = q.get("set") || q.get("tab");
+        var t = document.getElementById("notes-title");
+        var sb = document.getElementById("notes-sub");
+        var sub = "Preview the first 4 pages of any document free. Like what you see? Request the complete copy and I will send it to you.";
+        if (sq === "hsc") { t.textContent = "NCTB HSC ICT Notes"; sb.textContent = sub; }
+        else if (sq === "olevel") { t.textContent = "Cambridge O Level CS Notes"; sb.textContent = sub; }
+      } catch (e) {}
+    })();
+  </script>
 
   <main id="main" class="container" style="padding-top:56px;">
     <section class="section">
       <a class="card-link" id="notes-back" href="notes.html" style="display:none; margin-bottom:24px;">← All notes</a>
       <div class="grid grid-3" id="doc-grid"></div>
+<script>
+    // INLINE COPY of DOCUMENTS and OLEVEL_DOCUMENTS from js/site-config.js,
+    // kept here so the parse-time grid render below does not wait on any
+    // network request (PageSpeed flagged js/site-config.js as a
+    // render-blocking request on notes.html). UPDATE THIS COPY whenever
+    // those arrays change in js/site-config.js: the deferred site-config
+    // below loads too late to affect this render, so a stale copy here
+    // would show stale cards on first paint.
+    var DOCUMENTS = [
+  {
+    id: "ch1",
+    chapter: "Chapter 1 - ICT: World & Bangladesh Perspective",
+    chapterBn: "অধ্যায় ১ - তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত",
+    title: "HSC ICT Chapter 1 Detailed Notes",
+    desc: "How ICT shapes our world and Bangladesh: information society, e-services and ICT in education.",
+    preview: "assets/previews/ch1-preview.pdf"
+  },
+  {
+    id: "ch2",
+    chapter: "Chapter 2 - Communication Systems & Networking",
+    chapterBn: "অধ্যায় ২ - কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
+    title: "HSC ICT Chapter 2 Detailed Notes",
+    desc: "Data communication, transmission modes & media, networking concepts and the internet.",
+    preview: "assets/previews/ch2-preview.pdf"
+  },
+  {
+    id: "ch3p1",
+    chapter: "Chapter 3 (Part 1) - Number System",
+    chapterBn: "অধ্যায় ৩ (১ম অংশ) - সংখ্যা পদ্ধতি",
+    title: "HSC ICT Chapter 3 Part 1 Detailed Notes (Bangla)",
+    desc: "Binary, octal, decimal and hexadecimal conversions with number-system arithmetic.",
+    preview: "assets/previews/ch3p1-preview.pdf"
+  },
+  {
+    id: "ch3p2",
+    chapter: "Chapter 3 (Part 2) - Digital Devices",
+    chapterBn: "অধ্যায় ৩ (২য় অংশ) - ডিজিটাল ডিভাইস",
+    title: "HSC ICT Chapter 3 Part 2 Detailed Notes (Bangla)",
+    desc: "Logic gates, Boolean algebra, encoders, decoders and combinational circuits.",
+    preview: "assets/previews/ch3p2-preview.pdf"
+  },
+  {
+    id: "ch4",
+    chapter: "Chapter 4 - Web Design & HTML",
+    chapterBn: "অধ্যায় ৪ - ওয়েব ডিজাইন পরিচিতি এবং HTML",
+    title: "HSC ICT Chapter 4 Detailed Notes (Bangla)",
+    desc: "HTML structure, tags, tables, forms: building your first web page step by step.",
+    preview: "assets/previews/ch4-preview.pdf"
+  },
+  {
+    id: "ch5",
+    chapter: "Chapter 5 - Programming Language",
+    chapterBn: "অধ্যায় ৫ - প্রোগ্রামিং ভাষা",
+    title: "HSC ICT Chapter 5 Detailed Notes (Bangla)",
+    desc: "C programming fundamentals: variables, operators, control flow and functions.",
+    preview: "assets/previews/ch5-preview.pdf"
+  },
+  {
+    id: "ch6",
+    chapter: "Chapter 6 - Database Management System",
+    chapterBn: "অধ্যায় ৬ - ডেটাবেজ ম্যানেজমেন্ট সিস্টেম",
+    title: "HSC ICT Chapter 6 Detailed Notes (Bangla)",
+    desc: "Database concepts, DBMS, keys, SQL basics and database design.",
+    preview: "assets/previews/ch6-preview.pdf"
+  }
+];
+    var OLEVEL_DOCUMENTS = [
+  {
+    id: "ol1",
+    chapter: "Chapter 1 - Data Representation",
+    title: "O Level CS Chapter 1 Detailed Notes",
+    desc: "Number systems, binary shifts, character sets, sound and image sampling, compression.",
+    preview: "assets/previews/olevel-ch1-preview.pdf"
+  },
+  {
+    id: "ol2",
+    chapter: "Chapter 2 - Data Transmission",
+    title: "O Level CS Chapter 2 Detailed Notes",
+    desc: "Packets, parity checks, checksums, encryption, symmetric and asymmetric keys.",
+    preview: "assets/previews/olevel-ch2-preview.pdf"
+  },
+  {
+    id: "ol3",
+    chapter: "Chapter 3 - Hardware",
+    title: "O Level CS Chapter 3 Detailed Notes",
+    desc: "CPU and the fetch-execute cycle, input/output devices, sensors, storage.",
+    preview: "assets/previews/olevel-ch3-preview.pdf"
+  },
+  {
+    id: "ol4",
+    chapter: "Chapter 4 - Software",
+    title: "O Level CS Chapter 4 Detailed Notes",
+    desc: "System vs application software, OS functions, interrupts, compilers and interpreters.",
+    preview: "assets/previews/olevel-ch4-preview.pdf"
+  },
+  {
+    id: "ol5",
+    chapter: "Chapter 5 - The Internet and Its Uses",
+    title: "O Level CS Chapter 5 Detailed Notes",
+    desc: "How the internet works, URLs, DNS, blockchain, cyber threats and defences.",
+    preview: "assets/previews/olevel-ch5-preview.pdf"
+  },
+  {
+    id: "ol6",
+    chapter: "Chapter 6 - Automated and Emerging Technologies",
+    title: "O Level CS Chapter 6 Detailed Notes",
+    desc: "Automated systems, robotics, expert systems and machine learning.",
+    preview: "assets/previews/olevel-ch6-preview.pdf"
+  },
+  {
+    id: "ol7",
+    chapter: "Chapter 7 - Algorithm Design and Problem Solving",
+    title: "O Level CS Chapter 7 Detailed Notes",
+    desc: "Pseudocode, flowcharts, validation, test data, searching and sorting.",
+    preview: "assets/previews/olevel-ch7-preview.pdf"
+  },
+  {
+    id: "ol8",
+    chapter: "Chapter 8 - Programming",
+    title: "O Level CS Chapter 8 Detailed Notes",
+    desc: "Variables, data types, selection, loops, procedures, arrays and file handling. Updated for syllabus v6: ROUND now takes an identifier or an expression.",
+    preview: "assets/previews/olevel-ch8-preview.pdf"
+  },
+  {
+    id: "ol9",
+    chapter: "Chapter 9 - Databases",
+    title: "O Level CS Chapter 9 Detailed Notes",
+    desc: "Single-table databases, primary keys and SQL queries with worked examples.",
+    preview: "assets/previews/olevel-ch9-preview.pdf"
+  },
+  {
+    id: "ol10",
+    chapter: "Chapter 10 - Boolean Logic",
+    title: "O Level CS Chapter 10 Detailed Notes",
+    desc: "Logic gates, truth tables, Boolean expressions and logic circuits.",
+    preview: "assets/previews/olevel-ch10-preview.pdf"
+  }
+];
+  </script>
   <script>
     // Renders immediately during parsing, not on DOMContentLoaded: #doc-grid
-    // was just parsed above and site-config.js (head, no defer) is already
-    // available. The footer below is parsed only after the grid is filled, so
+    // was just parsed above and the inline DOCUMENTS / OLEVEL_DOCUMENTS
+    // copy above is already available, so no network request blocks
+    // this render. js/site-config.js is deferred now (it still serves
+    // main.js) and re-declares the same arrays when it loads. The footer below is parsed only after the grid is filled, so
     // its first layout is already final and it never shifts (PageSpeed CLS
     // 0.307 landing mobile / 0.558 set views before this fix, caused by the
     // late render, not the font swap). Wrapped in an IIFE to keep its vars local.

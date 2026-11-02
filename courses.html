@@ -69,11 +69,13 @@
   })();
   </script>
   <script defer src="js/site-config.js?v=8"></script>
-  <!-- courses.js loads WITHOUT defer on this page only: the batch cards below render
-     during parsing (before first paint), so the O Level note card never shifts.
-     The file is tiny (two batches), so the render-blocking cost is negligible.
+  <!-- courses.js is deferred on this page (as on index): the batch cards below
+     render during parsing from an inline copy of COURSES placed just before the
+     render script, so no network request blocks the render (PageSpeed previously
+     flagged the no-defer courses.js tag as a render-blocking request) and the
+     O Level note card never shifts. Keep the inline copy in sync with js/courses.js.
      site-config.js stays deferred; the render uses fallbacks that match SITE exactly. -->
-  <script src="js/courses.js?v=2"></script>
+  <script defer src="js/courses.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -109,9 +111,48 @@
   <main id="main" class="container" style="padding-top:56px;">
     <section class="section">
       <div class="course-grid" id="course-list"></div>
+<script>
+    // INLINE COPY of COURSES from js/courses.js, kept here so the parse-time
+    // batch render below does not wait on any network request (PageSpeed
+    // flagged js/courses.js as a render-blocking request on courses.html).
+    // UPDATE THIS COPY whenever COURSES changes in js/courses.js: the
+    // deferred courses.js below loads too late to affect this render, so a
+    // stale copy here would show stale batches on first paint. (The Batch
+    // 2029 text in the js/courses.js header comment is only an example
+    // for editing, not a batch, and is deliberately not copied here.)
+    var COURSES = [
+  {
+    name: "HSC ICT - Batch 2027",
+    days: "Sunday, Tuesday, Thursday",
+    time: "7:00 PM - 8:30 PM",
+    mode: "Online (Google Meet)",
+    status: "Admission open",
+    joinMessage: "Hello, I want to join the HSC ICT Batch 2027 class (Sunday, Tuesday, Thursday, 7:00 PM - 8:30 PM, online on Google Meet).",
+    syllabus: "",
+    classSize: "",
+    recordingsIncluded: "",
+    demoClass: ""
+  },
+  {
+    name: "HSC ICT - Batch 2028",
+    days: "Sunday, Tuesday, Thursday",
+    time: "9:00 PM - 10:30 PM",
+    mode: "Online (Google Meet)",
+    status: "Admission open",
+    joinMessage: "Hello, I want to join the HSC ICT Batch 2028 class (Sunday, Tuesday, Thursday, 9:00 PM - 10:30 PM, online on Google Meet).",
+    syllabus: "",
+    classSize: "",
+    recordingsIncluded: "",
+    demoClass: ""
+  }
+];
+  </script>
   <script>
     // Renders immediately during parsing, not on DOMContentLoaded: #course-list
-    // was just parsed above and courses.js (head, no defer) is already available.
+    // was just parsed above and the inline COURSES copy above is already
+    // available, so no network request blocks this render. js/courses.js is
+    // deferred now (it still serves index.html) and re-declares the same
+    // array when it loads.
     // The note card below is parsed only after the grid is filled, so its first
     // layout is already final and it never shifts (PageSpeed CLS 0.253 mobile /
     // 0.101 desktop before this fix, caused by the late render, not the font swap).

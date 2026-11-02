@@ -54,12 +54,14 @@
     });
   })();
   </script>
-  <!-- site-config.js and videos.js load WITHOUT defer on this page only:
-     the lecture sections below render during parsing (before first paint),
-     so the footer never shifts. Both files are small (13 KB + 905 B), so
-     the render-blocking cost is negligible. Other pages keep deferred tags. -->
-  <script src="js/site-config.js?v=8"></script>
-  <script src="js/videos.js?v=2"></script>
+  <!-- site-config.js and videos.js are deferred on this page (as elsewhere):
+     the lecture sections below render during parsing from inline copies of
+     DOCUMENTS and VIDEOS placed just before the render script, so no network
+     request blocks the render (PageSpeed previously flagged both no-defer
+     tags as render-blocking requests) and the footer never shifts. Keep the
+     inline copies in sync with js/site-config.js and js/videos.js. -->
+  <script defer src="js/site-config.js?v=8"></script>
+  <script defer src="js/videos.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -108,10 +110,94 @@
     </section>
   </main>
 
+<script>
+    // INLINE COPIES of DOCUMENTS (from js/site-config.js) and VIDEOS (from
+    // js/videos.js), kept here so the parse-time sections render below does
+    // not wait on any network request (PageSpeed flagged both files as
+    // render-blocking requests on lectures.html). UPDATE THESE COPIES
+    // whenever those sources change: the deferred files below load too late
+    // to affect this render, so stale copies here would show stale sections
+    // on first paint. (DOCUMENTS is also inlined on notes.html; VIDEOS is
+    // only inlined here.)
+    var DOCUMENTS = [
+  {
+    id: "ch1",
+    chapter: "Chapter 1 - ICT: World & Bangladesh Perspective",
+    chapterBn: "অধ্যায় ১ - তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত",
+    title: "HSC ICT Chapter 1 Detailed Notes",
+    desc: "How ICT shapes our world and Bangladesh: information society, e-services and ICT in education.",
+    preview: "assets/previews/ch1-preview.pdf"
+  },
+  {
+    id: "ch2",
+    chapter: "Chapter 2 - Communication Systems & Networking",
+    chapterBn: "অধ্যায় ২ - কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
+    title: "HSC ICT Chapter 2 Detailed Notes",
+    desc: "Data communication, transmission modes & media, networking concepts and the internet.",
+    preview: "assets/previews/ch2-preview.pdf"
+  },
+  {
+    id: "ch3p1",
+    chapter: "Chapter 3 (Part 1) - Number System",
+    chapterBn: "অধ্যায় ৩ (১ম অংশ) - সংখ্যা পদ্ধতি",
+    title: "HSC ICT Chapter 3 Part 1 Detailed Notes (Bangla)",
+    desc: "Binary, octal, decimal and hexadecimal conversions with number-system arithmetic.",
+    preview: "assets/previews/ch3p1-preview.pdf"
+  },
+  {
+    id: "ch3p2",
+    chapter: "Chapter 3 (Part 2) - Digital Devices",
+    chapterBn: "অধ্যায় ৩ (২য় অংশ) - ডিজিটাল ডিভাইস",
+    title: "HSC ICT Chapter 3 Part 2 Detailed Notes (Bangla)",
+    desc: "Logic gates, Boolean algebra, encoders, decoders and combinational circuits.",
+    preview: "assets/previews/ch3p2-preview.pdf"
+  },
+  {
+    id: "ch4",
+    chapter: "Chapter 4 - Web Design & HTML",
+    chapterBn: "অধ্যায় ৪ - ওয়েব ডিজাইন পরিচিতি এবং HTML",
+    title: "HSC ICT Chapter 4 Detailed Notes (Bangla)",
+    desc: "HTML structure, tags, tables, forms: building your first web page step by step.",
+    preview: "assets/previews/ch4-preview.pdf"
+  },
+  {
+    id: "ch5",
+    chapter: "Chapter 5 - Programming Language",
+    chapterBn: "অধ্যায় ৫ - প্রোগ্রামিং ভাষা",
+    title: "HSC ICT Chapter 5 Detailed Notes (Bangla)",
+    desc: "C programming fundamentals: variables, operators, control flow and functions.",
+    preview: "assets/previews/ch5-preview.pdf"
+  },
+  {
+    id: "ch6",
+    chapter: "Chapter 6 - Database Management System",
+    chapterBn: "অধ্যায় ৬ - ডেটাবেজ ম্যানেজমেন্ট সিস্টেম",
+    title: "HSC ICT Chapter 6 Detailed Notes (Bangla)",
+    desc: "Database concepts, DBMS, keys, SQL basics and database design.",
+    preview: "assets/previews/ch6-preview.pdf"
+  }
+];
+    var VIDEOS = {
+  ch1: [],
+  ch2: [],
+  ch3p1: [],
+  ch3p2: [],
+  ch4: [],
+  ch5: [
+    { id: "c035xP1__aw", title: "Prime Number - C code and Flowchart", addedAt: "2026-10-14" },
+  ],
+  ch6: []
+};
+  </script>
   <script>
     // Renders immediately during parsing, not on DOMContentLoaded: the toolbar,
     // sections container and notify card above are already parsed, and
-    // site-config.js + videos.js (head, no defer) are already available.
+    // the inline DOCUMENTS / VIDEOS copies above are already available,
+    // so no network request blocks this render. js/site-config.js and
+    // js/videos.js are deferred now and re-declare the same data when
+    // they load. The share link below falls back to the exact site URL
+    // when SITE is not defined yet at parse time, and the notify form
+    // reads SITE only when submitted, long after deferred scripts run.
     // The footer below is parsed only after the sections are filled, so its
     // first layout is already final and it never shifts (PageSpeed CLS 0.144
     // desktop before this fix, caused by the late render, not the font swap).
