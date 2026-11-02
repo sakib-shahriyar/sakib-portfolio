@@ -69,7 +69,11 @@
   })();
   </script>
   <script defer src="js/site-config.js?v=8"></script>
-  <script defer src="js/courses.js?v=2"></script>
+  <!-- courses.js loads WITHOUT defer on this page only: the batch cards below render
+     during parsing (before first paint), so the O Level note card never shifts.
+     The file is tiny (two batches), so the render-blocking cost is negligible.
+     site-config.js stays deferred; the render uses fallbacks that match SITE exactly. -->
+  <script src="js/courses.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -105,64 +109,14 @@
   <main id="main" class="container" style="padding-top:56px;">
     <section class="section">
       <div class="course-grid" id="course-list"></div>
-      <div class="card course-note">
-        <h2>O Level, IGCSE and A Level</h2>
-        <p>For Cambridge O Level, Edexcel IGCSE and A Level ICT or Computer Science, message me on WhatsApp for the current batch arrangements.</p>
-        <a class="card-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">Message on WhatsApp &#8594;</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html" style="margin-bottom:14px;">
-        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
-            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
-          </a>
-          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
-        </div>
-        <div>
-          <h3>Pages</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="notes.html">Notes</a></li>
-            <li><a href="lectures.html">Lectures</a></li>
-            <li><a href="practice.html">Practice</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="notes.html">Study Notes</a></li>
-            <li><a href="lectures.html">Video Lectures</a></li>
-            <li><a href="practice.html">Practice Tests</a></li>
-            <li><a href="contact.html">Request a Document</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <ul>
-            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
-            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
-            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
-        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
-      </div>
-    </div>
-  </footer>
-
-  <script defer src="js/main.js?v=5"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    // Renders immediately during parsing, not on DOMContentLoaded: #course-list
+    // was just parsed above and courses.js (head, no defer) is already available.
+    // The note card below is parsed only after the grid is filled, so its first
+    // layout is already final and it never shifts (PageSpeed CLS 0.253 mobile /
+    // 0.101 desktop before this fix, caused by the late render, not the font swap).
+    // Wrapped in an IIFE so the early return below stays legal at parse time.
+    (function () {
       var list = document.getElementById("course-list");
       if (!list || typeof COURSES === "undefined") return;
       var wa = (typeof SITE !== "undefined" && SITE.whatsapp) ? SITE.whatsapp : "https://wa.me/8801832202600";
@@ -219,8 +173,65 @@
       ld.type = "application/ld+json";
       ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
       document.head.appendChild(ld);
-    });
+    })();
   </script>
+      <div class="card course-note">
+        <h2>O Level, IGCSE and A Level</h2>
+        <p>For Cambridge O Level, Edexcel IGCSE and A Level ICT or Computer Science, message me on WhatsApp for the current batch arrangements.</p>
+        <a class="card-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">Message on WhatsApp &#8594;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="practice.html">Practice Tests</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js?v=5"></script>
+
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

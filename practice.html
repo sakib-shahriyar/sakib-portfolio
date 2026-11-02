@@ -37,6 +37,9 @@
 .practice-subject.is-soon { opacity: 0.75; }
 /* v140: Start link stands out as the card action. */
 .practice-subject .card-link { font-weight: 600; }
+/* v142: Setup type links read as links, like Start practising. These are
+   spans, not anchors, so they do not get the shared anchor colour. */
+.practice-type .card-link { color: var(--color-electric-cobalt); }
 .soon-badge {
   display: inline-block;
   margin-top: 12px;

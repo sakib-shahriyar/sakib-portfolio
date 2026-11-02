@@ -52,7 +52,11 @@
     });
   })();
   </script>
-  <script defer src="js/site-config.js?v=8"></script>
+  <!-- site-config.js loads WITHOUT defer on this page only: the notes cards below
+     render during parsing (before first paint), so the footer never shifts.
+     The file is small (13 KB), so the render-blocking cost is negligible.
+     Other pages keep the deferred tag. -->
+  <script src="js/site-config.js?v=8"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -89,90 +93,17 @@
     <section class="section">
       <a class="card-link" id="notes-back" href="notes.html" style="display:none; margin-bottom:24px;">← All notes</a>
       <div class="grid grid-3" id="doc-grid"></div>
-    </section>
-  </main>
-
-  <!-- Preview modal -->
-  <div class="modal-backdrop" id="preview-modal" role="dialog" aria-modal="true" aria-label="Document preview">
-    <div class="modal">
-      <div class="modal-head">
-        <div>
-          <span class="eyebrow" id="pm-chapter" style="margin-bottom:4px;">Chapter</span>
-          <h3 id="pm-title">Document title</h3>
-        </div>
-        <button class="modal-close" id="pm-close" aria-label="Close preview">✕</button>
-      </div>
-      <iframe class="preview-frame" id="pm-frame" title="Document preview: first 4 pages"></iframe>
-      <div class="locked-page" aria-hidden="true">
-        <div class="locked-lines">
-          <div class="line"></div><div class="line"></div><div class="line short"></div>
-          <div class="line"></div><div class="line"></div><div class="line short"></div>
-          <div class="line"></div><div class="line short"></div>
-        </div>
-        <div class="locked-overlay">
-          <span class="lock-badge">🔒 Preview Limited to 4 Pages</span>
-          <a class="btn btn-primary" id="pm-request" href="contact.html">Get Whole Document</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html" style="margin-bottom:14px;">
-        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
-            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
-          </a>
-          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
-        </div>
-        <div>
-          <h3>Pages</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="notes.html">Notes</a></li>
-            <li><a href="lectures.html">Lectures</a></li>
-            <li><a href="practice.html">Practice</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="notes.html">Study Notes</a></li>
-            <li><a href="lectures.html">Video Lectures</a></li>
-            <li><a href="practice.html">Practice Tests</a></li>
-            <li><a href="contact.html">Request a Document</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <ul>
-            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
-            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
-            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
-        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
-      </div>
-    </div>
-  </footer>
-
-  <script defer src="js/main.js?v=5"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    // Renders immediately during parsing, not on DOMContentLoaded: #doc-grid
+    // was just parsed above and site-config.js (head, no defer) is already
+    // available. The footer below is parsed only after the grid is filled, so
+    // its first layout is already final and it never shifts (PageSpeed CLS
+    // 0.307 landing mobile / 0.558 set views before this fix, caused by the
+    // late render, not the font swap). Wrapped in an IIFE to keep its vars local.
+    // The Preview click wrapper calls openPreview, which the modal script at
+    // end of body defines globally, because the modal elements parse later.
+    (function () {
       var grid = document.getElementById("doc-grid");
-      var modal = document.getElementById("preview-modal");
-      var frame = document.getElementById("pm-frame");
-      var pmChapter = document.getElementById("pm-chapter");
-      var pmTitle = document.getElementById("pm-title");
-      var pmRequest = document.getElementById("pm-request");
       var notesTitle = document.getElementById("notes-title");
       var notesSub = document.getElementById("notes-sub");
       var notesBack = document.getElementById("notes-back");
@@ -259,12 +190,100 @@
         notesBack.style.display = "inline-block";
         grid.innerHTML = "";
         set.docs.forEach(function (doc) {
-          docCard(doc, openPreview);
+          docCard(doc, function (d) { openPreview(d); });
         });
       }
 
       if (activeSet) { renderSet(); } else { renderLanding(); }
 
+    })();
+  </script>
+    </section>
+  </main>
+
+  <!-- Preview modal -->
+  <div class="modal-backdrop" id="preview-modal" role="dialog" aria-modal="true" aria-label="Document preview">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" id="pm-chapter" style="margin-bottom:4px;">Chapter</span>
+          <h3 id="pm-title">Document title</h3>
+        </div>
+        <button class="modal-close" id="pm-close" aria-label="Close preview">✕</button>
+      </div>
+      <iframe class="preview-frame" id="pm-frame" title="Document preview: first 4 pages"></iframe>
+      <div class="locked-page" aria-hidden="true">
+        <div class="locked-lines">
+          <div class="line"></div><div class="line"></div><div class="line short"></div>
+          <div class="line"></div><div class="line"></div><div class="line short"></div>
+          <div class="line"></div><div class="line short"></div>
+        </div>
+        <div class="locked-overlay">
+          <span class="lock-badge">🔒 Preview Limited to 4 Pages</span>
+          <a class="btn btn-primary" id="pm-request" href="contact.html">Get Whole Document</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="practice.html">Practice Tests</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js?v=5"></script>
+  <script>
+    // Preview modal wiring, at end of body: all modal elements are parsed by
+    // now, so no DOMContentLoaded wait is needed. openPreview is a top-level
+    // function (global) because the parse-time card render above calls it
+    // from click handlers.
+      var modal = document.getElementById("preview-modal");
+      var frame = document.getElementById("pm-frame");
+      var pmChapter = document.getElementById("pm-chapter");
+      var pmTitle = document.getElementById("pm-title");
+      var pmRequest = document.getElementById("pm-request");
       function openPreview(doc) {
         pmChapter.textContent = doc.chapter;
         pmTitle.textContent = doc.title;
@@ -281,7 +300,6 @@
       document.getElementById("pm-close").addEventListener("click", closePreview);
       modal.addEventListener("click", function (e) { if (e.target === modal) closePreview(); });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePreview(); });
-    });
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>

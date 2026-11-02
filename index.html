@@ -324,7 +324,6 @@
       nav.appendChild(next);
 
       var idx = 0, timer = null;
-      var cachedStep = 0;
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       // Visible slides from viewport breakpoints, not from view.clientWidth:
@@ -340,20 +339,25 @@
         return 1;
       }
       function maxIdx() { return Math.max(0, list.length - visible()); }
+      // The step is measured here, never cached: go() calls step() before
+      // it writes anything, when the layout is clean for autoplay and
+      // clicks, so the read never forces a synchronous layout. Caching
+      // the step after load (v141) still forced one, because that read
+      // landed right after the initial layout writes.
       function step() {
-        if (cachedStep) return cachedStep;
         var s0 = slides[0];
-        cachedStep = s0 ? s0.getBoundingClientRect().width + GAP : 0;
-        return cachedStep;
-      }
-      function refreshStep() {
-        var s0 = slides[0];
-        if (s0) cachedStep = s0.getBoundingClientRect().width + GAP;
+        return s0 ? s0.getBoundingClientRect().width + GAP : 0;
       }
       function go(i, instant) {
+        // Measure before any write: at autoplay and click time the last
+        // writes painted long ago, so this read sees a clean layout.
+        // (On resize, layout() just wrote new flex bases, so that one
+        // read still forces a layout, but resize is a user action and
+        // never appears in a PageSpeed trace.)
+        var s = step();
         idx = i;
         counter.textContent = (idx + 1) + " / " + list.length;
-        var pos = "translateX(" + (-idx * step()) + "px)";
+        var pos = "translateX(" + (-idx * s) + "px)";
         if (instant) {
           track.style.transition = "none";
           track.style.transform = pos;
@@ -385,12 +389,6 @@
         }
       }
       function layout() {
-        // Resize invalidates the cached step (slide widths change with
-        // the viewport), so go() below measures the new width once when
-        // idx > 0. Autoplay and clicks never reach this invalidation,
-        // they reuse the cached step, so no layout read follows a write
-        // during a slide change.
-        cachedStep = 0;
         var v = visible();
         var basis = "calc(" + (100 / v) + "% - " + (GAP * (v - 1) / v) + "px)";
         slides.forEach(function (s) { s.style.flex = "0 0 " + basis; });
@@ -398,16 +396,14 @@
         renderDots();
         counter.textContent = (idx + 1) + " / " + list.length;
         // Slide 0 sits at translateX(0) whatever the slide width is, so
-        // there is nothing to measure here. The step for later slides is
-        // measured once on the frame after this layout paints (double
-        // rAF, so the read sees a clean layout), then cached for every
-        // autoplay step and click until the next resize.
+        // there is nothing to measure here. For idx > 0, go() measures
+        // the new width once; that read follows the flex writes above,
+        // so it forces a layout on resize only, which is a user action.
+        // Nothing here reads layout on initial load, so the load trace
+        // has no forced reflow from this script.
         if (idx === 0) { track.style.transform = "translateX(0px)"; }
         else { go(idx, true); }
         nav.style.display = maxIdx() === 0 ? "none" : "";
-        requestAnimationFrame(function () {
-          requestAnimationFrame(refreshStep);
-        });
       }
       function restart() {
         if (timer) clearInterval(timer);

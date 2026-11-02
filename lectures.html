@@ -54,8 +54,12 @@
     });
   })();
   </script>
-  <script defer src="js/site-config.js?v=8"></script>
-  <script defer src="js/videos.js?v=2"></script>
+  <!-- site-config.js and videos.js load WITHOUT defer on this page only:
+     the lecture sections below render during parsing (before first paint),
+     so the footer never shifts. Both files are small (13 KB + 905 B), so
+     the render-blocking cost is negligible. Other pages keep deferred tags. -->
+  <script src="js/site-config.js?v=8"></script>
+  <script src="js/videos.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -104,120 +108,21 @@
     </section>
   </main>
 
-  <!-- Subscribe modal -->
-  <div class="modal-backdrop" id="notify-modal" role="dialog" aria-modal="true" aria-label="Subscribe to WhatsApp notifications">
-    <div class="modal" style="max-width:440px;">
-      <div class="modal-head">
-        <h3 style="margin:0;">Get notified on WhatsApp</h3>
-        <button class="modal-close" id="notify-close" aria-label="Close">✕</button>
-      </div>
-      <p style="color:var(--color-slate-gray); font-size:15px;">Enter your details below. You will receive a message from me whenever a new lecture is published.</p>
-      <label for="notify-name" style="display:block; font-weight:500; font-size:14px; margin:16px 0 6px;">Your name</label>
-      <input id="notify-name" type="text" placeholder="Your full name" autocomplete="name" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
-      <label for="notify-batch" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your batch</label>
-      <select id="notify-batch" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
-        <option value="">Select your batch</option>
-        <option value="HSC 2027">HSC 2027</option>
-        <option value="HSC 2028">HSC 2028</option>
-        <option value="HSC 2029">HSC 2029</option>
-        <option value="O Level / IGCSE">O Level / IGCSE</option>
-        <option value="Other">Other</option>
-      </select>
-      <label for="notify-chapter" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Which chapter do you want notifications for?</label>
-      <select id="notify-chapter" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
-        <option value="">Select a chapter</option>
-        <option value="All Chapters">All Chapters</option>
-        <option value="Chapter 1 - ICT: World &amp; Bangladesh Perspective">Chapter 1 - ICT: World &amp; Bangladesh Perspective</option>
-        <option value="Chapter 2 - Communication Systems &amp; Networking">Chapter 2 - Communication Systems &amp; Networking</option>
-        <option value="Chapter 3 (Part 1) - Number System">Chapter 3 (Part 1) - Number System</option>
-        <option value="Chapter 3 (Part 2) - Digital Devices">Chapter 3 (Part 2) - Digital Devices</option>
-        <option value="Chapter 4 - Web Design &amp; HTML">Chapter 4 - Web Design &amp; HTML</option>
-        <option value="Chapter 5 - Programming Language">Chapter 5 - Programming Language</option>
-        <option value="Chapter 6 - Database Management System">Chapter 6 - Database Management System</option>
-      </select>
-      <label for="notify-phone" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your WhatsApp number</label>
-      <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
-      <!-- Honeypot: hidden from people, visible to bots. If it is filled in, the submission is dropped entirely. -->
-      <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0;">
-        <label for="notify-website">Website</label>
-        <input id="notify-website" name="website" type="text" autocomplete="off" tabindex="-1">
-      </div>
-      <div class="field-err" id="notify-err"></div>
-      <p style="color:var(--color-slate-gray); font-size:13.5px; line-height:1.6; margin:12px 0 0;">Your name and number are used only to send new-video notifications on WhatsApp and can be removed on request.<br><span lang="bn">আপনার নাম ও নম্বর শুধুমাত্র নতুন ভিডিওর নোটিফিকেশন WhatsApp-এ পাঠাতে ব্যবহার করা হবে, এবং অনুরোধ করলে মুছে দেওয়া হবে।</span></p>
-      <button class="btn btn-primary" id="notify-submit" style="margin-top:14px; width:100%;">Subscribe</button>
-    </div>
-  </div>
-
-  <!-- Video player modal -->
-  <div class="modal-backdrop" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
-    <div class="modal">
-      <div class="modal-head">
-        <h3 id="vm-title">Lecture</h3>
-        <button class="modal-close" id="vm-close" aria-label="Close player">✕</button>
-      </div>
-      <div class="video-player-wrap">
-        <iframe id="vm-frame" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html" style="margin-bottom:14px;">
-        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
-            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
-          </a>
-          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
-        </div>
-        <div>
-          <h3>Pages</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="notes.html">Notes</a></li>
-            <li><a href="lectures.html">Lectures</a></li>
-            <li><a href="practice.html">Practice</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="notes.html">Study Notes</a></li>
-            <li><a href="lectures.html">Video Lectures</a></li>
-            <li><a href="practice.html">Practice Tests</a></li>
-            <li><a href="contact.html">Request a Document</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <ul>
-            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
-            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
-            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
-        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
-      </div>
-    </div>
-  </footer>
-
-  <script defer src="js/main.js?v=5"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    // Renders immediately during parsing, not on DOMContentLoaded: the toolbar,
+    // sections container and notify card above are already parsed, and
+    // site-config.js + videos.js (head, no defer) are already available.
+    // The footer below is parsed only after the sections are filled, so its
+    // first layout is already final and it never shifts (PageSpeed CLS 0.144
+    // desktop before this fix, caused by the late render, not the font swap).
+    // Wrapped in an IIFE to keep its vars local. Card clicks call playVideo,
+    // which the player script at end of body defines globally, because the
+    // video modal elements parse later.
+    (function () {
       var sectionsEl = document.getElementById("video-sections");
       var filtersEl = document.getElementById("chapter-filters");
       var searchEl = document.getElementById("video-search");
       var noResults = document.getElementById("no-results");
-      var modal = document.getElementById("video-modal");
-      var frame = document.getElementById("vm-frame");
-      var vmTitle = document.getElementById("vm-title");
       var activeChapter = "all";
       var query = "";
 
@@ -342,6 +247,128 @@
         noResults.style.display = (!anyVisible && query) ? "block" : "none";
       }
 
+      searchEl.addEventListener("input", function () {
+        query = searchEl.value.trim().toLowerCase();
+        render();
+      });
+
+      render();
+
+    })();
+  </script>
+  <!-- Subscribe modal -->
+  <div class="modal-backdrop" id="notify-modal" role="dialog" aria-modal="true" aria-label="Subscribe to WhatsApp notifications">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-head">
+        <h3 style="margin:0;">Get notified on WhatsApp</h3>
+        <button class="modal-close" id="notify-close" aria-label="Close">✕</button>
+      </div>
+      <p style="color:var(--color-slate-gray); font-size:15px;">Enter your details below. You will receive a message from me whenever a new lecture is published.</p>
+      <label for="notify-name" style="display:block; font-weight:500; font-size:14px; margin:16px 0 6px;">Your name</label>
+      <input id="notify-name" type="text" placeholder="Your full name" autocomplete="name" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+      <label for="notify-batch" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your batch</label>
+      <select id="notify-batch" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+        <option value="">Select your batch</option>
+        <option value="HSC 2027">HSC 2027</option>
+        <option value="HSC 2028">HSC 2028</option>
+        <option value="HSC 2029">HSC 2029</option>
+        <option value="O Level / IGCSE">O Level / IGCSE</option>
+        <option value="Other">Other</option>
+      </select>
+      <label for="notify-chapter" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Which chapter do you want notifications for?</label>
+      <select id="notify-chapter" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+        <option value="">Select a chapter</option>
+        <option value="All Chapters">All Chapters</option>
+        <option value="Chapter 1 - ICT: World &amp; Bangladesh Perspective">Chapter 1 - ICT: World &amp; Bangladesh Perspective</option>
+        <option value="Chapter 2 - Communication Systems &amp; Networking">Chapter 2 - Communication Systems &amp; Networking</option>
+        <option value="Chapter 3 (Part 1) - Number System">Chapter 3 (Part 1) - Number System</option>
+        <option value="Chapter 3 (Part 2) - Digital Devices">Chapter 3 (Part 2) - Digital Devices</option>
+        <option value="Chapter 4 - Web Design &amp; HTML">Chapter 4 - Web Design &amp; HTML</option>
+        <option value="Chapter 5 - Programming Language">Chapter 5 - Programming Language</option>
+        <option value="Chapter 6 - Database Management System">Chapter 6 - Database Management System</option>
+      </select>
+      <label for="notify-phone" style="display:block; font-weight:500; font-size:14px; margin:14px 0 6px;">Your WhatsApp number</label>
+      <input id="notify-phone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="tel" style="width:100%; padding:12px 16px; border-radius:16px; font-size:15px; font-family:inherit; border:1px solid var(--color-hairline); background:var(--color-pure-white); color:var(--color-ink-charcoal); box-sizing:border-box;">
+      <!-- Honeypot: hidden from people, visible to bots. If it is filled in, the submission is dropped entirely. -->
+      <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0;">
+        <label for="notify-website">Website</label>
+        <input id="notify-website" name="website" type="text" autocomplete="off" tabindex="-1">
+      </div>
+      <div class="field-err" id="notify-err"></div>
+      <p style="color:var(--color-slate-gray); font-size:13.5px; line-height:1.6; margin:12px 0 0;">Your name and number are used only to send new-video notifications on WhatsApp and can be removed on request.<br><span lang="bn">আপনার নাম ও নম্বর শুধুমাত্র নতুন ভিডিওর নোটিফিকেশন WhatsApp-এ পাঠাতে ব্যবহার করা হবে, এবং অনুরোধ করলে মুছে দেওয়া হবে।</span></p>
+      <button class="btn btn-primary" id="notify-submit" style="margin-top:14px; width:100%;">Subscribe</button>
+    </div>
+  </div>
+
+  <!-- Video player modal -->
+  <div class="modal-backdrop" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="vm-title">Lecture</h3>
+        <button class="modal-close" id="vm-close" aria-label="Close player">✕</button>
+      </div>
+      <div class="video-player-wrap">
+        <iframe id="vm-frame" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" style="margin-bottom:14px;">
+        <img class="brand-photo" loading="lazy" src="assets/photo-nav-v2.webp" width="80" height="84" alt="Photo of Sakib Shahriyar Pathan">
+            <span class="name" data-site="name">Sakib Shahriyar Pathan</span>
+          </a>
+          <p data-site="tagline">Make ICT simple: memorise less, understand more.</p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="lectures.html">Lectures</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="notes.html">Study Notes</a></li>
+            <li><a href="lectures.html">Video Lectures</a></li>
+            <li><a href="practice.html">Practice Tests</a></li>
+            <li><a href="contact.html">Request a Document</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></li>
+            <li><a data-site="phone-link" href="tel:+8801832202600">+8801832202600</a></li>
+            <li><a data-site="whatsapp-link" href="https://wa.me/8801832202600" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> <span data-site="name">Sakib Shahriyar Pathan</span></span>
+        <span><a data-site="email-link" href="mailto:sakib.shahriyar.pathan@gmail.com">sakib.shahriyar.pathan@gmail.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js?v=5"></script>
+  <script>
+    // Video player + notify wiring, at end of body: all modal elements are
+    // parsed by now, so no DOMContentLoaded wait is needed. playVideo is a
+    // top-level function (global) because the parse-time card render above
+    // calls it from click handlers.
+      var modal = document.getElementById("video-modal");
+      var frame = document.getElementById("vm-frame");
+      var vmTitle = document.getElementById("vm-title");
       function playVideo(v) {
         vmTitle.textContent = v.title;
         frame.src = "https://www.youtube.com/embed/" + encodeURIComponent(v.id) + "?autoplay=1&rel=0";
@@ -356,13 +383,6 @@
       document.getElementById("vm-close").addEventListener("click", closeVideo);
       modal.addEventListener("click", function (e) { if (e.target === modal) closeVideo(); });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeVideo(); });
-
-      searchEl.addEventListener("input", function () {
-        query = searchEl.value.trim().toLowerCase();
-        render();
-      });
-
-      render();
 
       // ---- WhatsApp notify subscription ----
       // Subscribing logs the student's details to the owner's subscriber
@@ -455,7 +475,6 @@
         window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
         closeNotify();
       });
-    });
   </script>
   <script>
     // Deep link: lectures.html?v=<youtube-id> opens that video's player
