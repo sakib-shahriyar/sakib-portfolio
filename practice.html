@@ -195,6 +195,13 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
   user-select: none;
 }
 
+/* During a test: hide the floating WhatsApp button (injected by
+   main.js) so nothing distracts from the exam. It returns as soon
+   as the test view closes, on submit or on end, because the
+   test-active class below is tied to the test view itself. The
+   back-to-top button stays visible during the test instead. */
+body.test-active .wa-float { display: none; }
+
 .qcard.locked .qopt { cursor: default; }
 .qcard.locked .qopt:not(:has(input:checked)) { opacity: 0.72; }
 .qcard.locked .qopt:not(:has(input:checked)):hover { border-color: var(--color-hairline); }
@@ -644,9 +651,7 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
         <h3 class="picker-title" id="review-title">Review your wrong answers</h3>
         <div id="result-review"></div>
       </div>
-      <button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"/><path d="M5 11l7-7 7 7"/></svg>
-      </button>
+      
     </section>
 
     <!-- SYMBOL GUIDE POPUP: page 2 of the Notes Bank PDF -->
@@ -712,7 +717,10 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
 
   <script defer src="js/main.js?v=5"></script>
   <!-- practice.min.js is minified from js/practice.js (readable source). Edit js/practice.js, then minify (terser) + bump ?v=. Do not edit practice.min.js directly. -->
-  <script defer src="js/practice.min.js?v=1"></script>
+  <script defer src="js/practice.min.js?v=2"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+<button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"/><path d="M5 11l7-7 7 7"/></svg>
+      </button>
 </body>
 </html>

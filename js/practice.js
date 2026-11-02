@@ -47,6 +47,14 @@
     ["view-landing", "view-setup", "view-test", "view-result"].forEach(function (id) {
       $(id).hidden = (id !== viewId);
     });
+    // The test is "in progress" exactly while the test view is shown.
+    // This one hook covers every path: start, submit, end, timer and
+    // tab auto-submit, and a resumed test on reload, because all of
+    // them change views through show(). While it holds, the WhatsApp
+    // float hides (practice.html rule) and the back-to-top button
+    // shows; both restore the moment the test view closes.
+    document.body.classList.toggle("test-active", viewId === "view-test");
+    refreshToTop();
     window.scrollTo(0, 0);
   }
 
@@ -854,9 +862,17 @@
     var btn = $("to-top");
     if (!btn) return;
     var showIt = false;
-    if (!$("view-result").hidden) {
-      // Show only once the result card has scrolled out of the screen.
-      showIt = $("result-card").getBoundingClientRect().bottom <= 0;
+    var tv = $("view-test");
+    if (tv && !tv.hidden) {
+      // During a test the button is always available, so a student
+      // can jump back to the top whenever they want.
+      showIt = true;
+    } else {
+      var rv = $("view-result");
+      if (rv && !rv.hidden) {
+        // Show only once the result card has scrolled out of the screen.
+        showIt = $("result-card").getBoundingClientRect().bottom <= 0;
+      }
     }
     btn.classList.toggle("show", showIt);
   }
