@@ -202,6 +202,13 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
    back-to-top button stays visible during the test instead. */
 body.test-active .wa-float { display: none; }
 
+/* During a test: hide the page header ("Practice Tests / Test
+   Yourself / Timed MCQ tests ...") as well, so the test starts at
+   the top of the viewport. It returns as soon as the test view
+   closes, on submit or on end, because the test-active class is
+   tied to the test view itself. */
+body.test-active .page-head { display: none; }
+
 .qcard.locked .qopt { cursor: default; }
 .qcard.locked .qopt:not(:has(input:checked)) { opacity: 0.72; }
 .qcard.locked .qopt:not(:has(input:checked)):hover { border-color: var(--color-hairline); }
