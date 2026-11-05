@@ -195,13 +195,13 @@ body.tab-hidden #view-test > *:not(.modal-backdrop) {
   user-select: none;
 }
 
-/* Screenshot guard (v155): a full-viewport blank shown when Print
-   Screen is pressed during a test (see practice.js). It sits above
-   every other element, including the modals and the back-to-top
-   button, and clears itself after a few seconds. */
-#shot-guard { display: none; position: fixed; inset: 0; z-index: 300; background: var(--color-canvas-cream); place-items: center; padding: 24px; text-align: center; }
-#shot-guard.open { display: grid; }
-#shot-guard p { font-size: 18px; font-weight: 600; color: var(--color-ink-charcoal); margin: 0; }
+/* Screenshot guard (v155, black screen since v156): a full-viewport
+   black screen shown when Print Screen is pressed during a test
+   (see practice.js), like the black frame a streaming site shows.
+   It sits above every other element, including the modals and the
+   back-to-top button, and clears itself after a few seconds. */
+#shot-guard { display: none; position: fixed; inset: 0; z-index: 300; background: #000; }
+#shot-guard.open { display: block; }
 
 /* During a test: hide the floating WhatsApp button (injected by
    main.js) so nothing distracts from the exam. It returns as soon
@@ -625,7 +625,7 @@ body.test-active .page-head { display: none; }
           <h3 id="start-warn-title">Please read before you start</h3>
           <div class="start-warn-box start-warn-amber"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#92400e"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#fef3c7"/><circle cx="12" cy="18" r="1.25" fill="#fef3c7"/></svg></span><p>Once you select an answer, you <strong>cannot change it</strong>. So please think carefully before choosing your answer.</p></div>
           <div class="start-warn-box start-warn-red"><span class="warn-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6 22.8 21a1 1 0 0 1-.87 1.5H2.07A1 1 0 0 1 1.2 21Z" fill="#ffffff"/><rect x="11.05" y="9" width="1.9" height="6" rx="0.95" fill="#dc2626"/><circle cx="12" cy="18" r="1.25" fill="#dc2626"/></svg></span><p><strong>Switching tabs is prohibited.</strong> After 3 tab switches, your test will be submitted automatically. Your timer keeps running while you are away. If you refresh the page, your test resumes where you left off, with the same answers and the same timer.</p></div>
-          <p><strong>Screenshots are not allowed during the test.</strong> If you press Print Screen, the test area will go blank for a few seconds.</p>
+          <p><strong>Screenshots are not allowed during the test.</strong> If you press Print Screen, the test area will go black for a few seconds.</p>
           <p id="start-warn-notes" class="start-warn-notes" hidden>Figures in this bank are text diagrams, not pictures: gates by shape, ER diagrams by boxes, ovals and diamonds, flowcharts by ovals, parallelograms, rectangles and diamonds. A ? in a figure or table was hidden on purpose, so work that cell out. See the PDF first page, <span lang="bn">প্রতীক ও চিহ্ন পরিচিতি</span>, if a diagram looks unfamiliar.</p>
           <button class="btn btn-primary" id="start-warn-ok">I understand</button>
         </div>
@@ -733,11 +733,11 @@ body.test-active .page-head { display: none; }
 
   <script defer src="js/main.js?v=5"></script>
   <!-- practice.min.js is minified from js/practice.js (readable source). Edit js/practice.js, then minify (terser) + bump ?v=. Do not edit practice.min.js directly. -->
-  <script defer src="js/practice.min.js?v=4"></script>
+  <script defer src="js/practice.min.js?v=5"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"/><path d="M5 11l7-7 7 7"/></svg>
       </button>
-      <div id="shot-guard" aria-hidden="true"><p>Screenshots are not allowed during the test.</p></div>
+      <div id="shot-guard" aria-hidden="true"></div>
 </body>
 </html>
