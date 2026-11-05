@@ -21,10 +21,15 @@
   var LETTERS = ["A", "B", "C", "D"];
   // Exam hardening, chosen by Sakib 2026-10-29: a tab switch is a
   // warning, the third switch auto-submits, and an unfinished test
-  // resumes after a refresh. Screenshots cannot be blocked by a web
-  // page, so the deterrent here is blurring the test while the tab
-  // or window is not focused, on top of the right-click and keyboard
-  // blocks in main.js and the text-selection CSS on the public pages.
+  // resumes after a refresh. Screenshots still cannot be blocked by
+  // a web page (a phone's screenshot buttons and OS screenshot
+  // shortcuts give the page no event to react to), so the deterrent
+  // here is layered: the test blurs while the tab or window is not
+  // focused, pressing Print Screen during a test blanks the whole
+  // test area for a few seconds and tries to clear the clipboard
+  // (see the shot guard below), on top of the right-click and
+  // keyboard blocks in main.js and the text-selection CSS on the
+  // public pages.
   // (The JS blocks were removed in Phase 3 and restored at Sakib's
   // direction; the CSS block was kept throughout.)
   var SAVE_KEY = "practice-in-progress-v1";
@@ -54,8 +59,31 @@
     // float hides (practice.html rule) and the back-to-top button
     // shows; both restore the moment the test view closes.
     document.body.classList.toggle("test-active", viewId === "view-test");
+    if (viewId !== "view-test") hideShotGuard();
     refreshToTop();
     window.scrollTo(0, 0);
+  }
+
+  // Screenshot guard (v155): desktop browsers fire a keydown for the
+  // Print Screen key, so while a test is running that key blanks the
+  // whole test area for a few seconds. The blank appears on keydown,
+  // before the key is released, and clears itself, so an accidental
+  // press never strands the student. This cannot stop a phone's
+  // screenshot buttons or an OS shortcut that gives the page no key
+  // event; those captures are still possible, which is why the guard
+  // is a deterrent, not a block.
+  var shotTimer = null;
+  function hideShotGuard() {
+    var g = $("shot-guard");
+    if (g) g.classList.remove("open");
+    if (shotTimer) { clearTimeout(shotTimer); shotTimer = null; }
+  }
+  function showShotGuard() {
+    var g = $("shot-guard");
+    if (!g) return;
+    g.classList.add("open");
+    if (shotTimer) clearTimeout(shotTimer);
+    shotTimer = setTimeout(hideShotGuard, 5000);
   }
 
   function shuffle(arr) {
@@ -1012,6 +1040,27 @@
     });
     window.addEventListener("focus", function () {
       if (!document.hidden) document.body.classList.remove("tab-hidden");
+    });
+    // Print Screen during a running test: blank the test area at
+    // once (keydown), then try to clear the clipboard on release
+    // (keyup), which overwrites a plain Print Screen capture held
+    // there for pasting. Both steps are best-effort and fail
+    // silently where the browser does not allow them; the guard
+    // only runs while a test is actually in progress, never on the
+    // landing, setup, or result views.
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "PrintScreen" && state && state.started && !state.submitted) {
+        e.preventDefault();
+        showShotGuard();
+      }
+    });
+    document.addEventListener("keyup", function (e) {
+      if (e.key !== "PrintScreen" || !state || !state.started || state.submitted) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText("").catch(function () {});
+        }
+      } catch (err) { /* clipboard unavailable: guard still blanked the test */ }
     });
     window.addEventListener("pagehide", function () { saveProgress(); });
     $("to-top").addEventListener("click", function () {
