@@ -20,6 +20,13 @@
 //     does not exist yet), in the header order:
 //       Timestamp | Doc ID | Doc Title | Name | Contact
 //   - Ignores honeypot submissions silently (see below).
+//   - Drops repeat submissions silently: the same phone +
+//     chapter, or the same contact + document, within 24 hours
+//     is not appended again (see Abuse controls).
+//   - Accepts at most 200 rows a day in total (see Abuse
+//     controls); further submissions that day are dropped
+//     silently, while the website's WhatsApp backup still
+//     reaches you.
 //   - Validates the same rules as the website form, then appends
 //     one subscriber row to the sheet's first tab, in the header
 //     order: Name | Batch | Chapter Interest | Phone | Date | Notes
@@ -116,6 +123,8 @@ function doPost(e) {
       reqSheet = ss.insertSheet("Requests");
       reqSheet.getRange(1, 1, 1, 5).setValues([["Timestamp", "Doc ID", "Doc Title", "Name", "Contact"]]);
     }
+    if (isDuplicate(reqSheet, 1, [5, 2], [contact, docId], 24)) return okOut();
+    if (overDailyCap()) return okOut();
     var reqRow = reqSheet.getLastRow() + 1;
     reqSheet.getRange(reqRow, 1, 1, 5).setValues([[ts, docId, docTitle, reqName, contact]]);
     return ContentService
@@ -149,6 +158,8 @@ function doPost(e) {
   // Date | Notes. The phone cell is formatted as text BEFORE
   // writing, so a leading + is not parsed as a formula.
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  if (isDuplicate(sheet, 5, [4, 3], [phone, chapter], 24)) return okOut();
+  if (overDailyCap()) return okOut();
   var row = sheet.getLastRow() + 1;
   sheet.getRange(row, 4).setNumberFormat("@");
   sheet.getRange(row, 1, 1, 6).setValues([[
@@ -169,4 +180,69 @@ function errorOut(message) {
   return ContentService
     .createTextOutput(JSON.stringify({ ok: false, error: message }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function okOut() {
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ---- Abuse controls (v157) ----
+// The web app URL is public by design, so anyone who reads the
+// site's JavaScript can POST. Two controls keep junk out of the
+// lists without blocking real students: a duplicate check (the
+// same phone + chapter, or the same contact + document, within
+// 24 hours is dropped) and a global daily cap of 200 accepted
+// rows, counted in script properties. Both fail open: if the
+// check itself errors, the submission is still appended, because
+// losing a real student's message is worse than one more junk
+// row. Drops return success silently, like the honeypot, so a
+// spammer gets no signal that anything was detected. The day
+// boundary follows the script's timezone; the exact midnight
+// does not matter for a cap. These controls only take effect
+// after this file is pasted and published as a New version
+// (see HOW TO USE above), like every other change here.
+
+// True if the sheet already holds a row matching all matchCols
+// values (1-based column numbers) with a date in the last hours.
+// Rows are appended in time order, so the scan stops at the first
+// matching row older than the window. Only the last 500 rows are
+// scanned, which is plenty for these lists.
+function isDuplicate(sheet, dateCol, matchCols, matchVals, hours) {
+  try {
+    var last = sheet.getLastRow();
+    if (last < 2) return false;
+    var first = Math.max(2, last - 499);
+    var values = sheet.getRange(first, 1, last - first + 1, sheet.getLastColumn()).getValues();
+    var cutoff = new Date().getTime() - hours * 3600 * 1000;
+    for (var i = values.length - 1; i >= 0; i--) {
+      var row = values[i];
+      var match = true;
+      for (var c = 0; c < matchCols.length; c++) {
+        if (String(row[matchCols[c] - 1] || "").trim() !== matchVals[c]) { match = false; break; }
+      }
+      if (!match) continue;
+      var d = row[dateCol - 1];
+      var t = (d instanceof Date) ? d.getTime() : new Date(d).getTime();
+      if (!isNaN(t) && t >= cutoff) return true;
+      if (!isNaN(t)) return false;
+    }
+  } catch (err) { return false; }
+  return false;
+}
+
+// True once 200 rows have been accepted today. Counts attempts
+// that passed validation, before the append, so a failed append
+// may over-count by one; that is harmless for a cap.
+function overDailyCap() {
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var today = new Date();
+    var key = "accepted-" + today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    var n = parseInt(props.getProperty(key) || "0", 10) || 0;
+    if (n >= 200) return true;
+    props.setProperty(key, String(n + 1));
+    return false;
+  } catch (err) { return false; }
 }

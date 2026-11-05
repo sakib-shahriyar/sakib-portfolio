@@ -35,6 +35,104 @@
   var SAVE_KEY = "practice-in-progress-v1";
   var MAX_TAB_SWITCHES = 3;
 
+  // ---- Saved-test integrity (v157) ----
+  // The resume copy used to hold the full questions, including the
+  // correct answer and the explanation, so anyone opening the
+  // browser's storage panel mid-test could read the key. The saved
+  // copy now holds only what rendering needs (id, text, options,
+  // passage, figure). Answers and explanations are merged back from
+  // the bank at grading time, in memory only, and never written back
+  // to storage. The bank file itself is still public, so this raises
+  // the bar instead of making the test cheat-proof: it closes the
+  // storage-panel shortcut, not the download-the-bank path.
+  // A checksum over the saved payload (format v2) catches casual
+  // edits: the salt is in this shipped file, so a determined student
+  // can recompute it, and the check is a tripwire, not a seal.
+  // Format v1 (no checksum, full questions) is still accepted so a
+  // test already in progress when this build deploys still resumes;
+  // every new save writes v2.
+  var SAVE_SALT = "practice-save-v2";
+  function saveChecksum(payload) {
+    var s = SAVE_SALT + JSON.stringify(payload), h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    return ("0000000" + (h >>> 0).toString(16)).slice(-8);
+  }
+  function stripSavedQuestion(q) {
+    return {
+      id: q.id,
+      question: q.question,
+      options: q.options.slice(),
+      passage: q.passage || null,
+      figure: q.figure || null,
+      figureText: q.figureText || null
+    };
+  }
+  function savedPayload() {
+    return {
+      v: 2,
+      subject: state.kind === "paper" ? "board" : subject,
+      kind: state.kind,
+      chapterIdx: state.chapterIdx,
+      chapterNo: state.chapterNo,
+      title: state.title,
+      secs: state.secs,
+      started: state.started,
+      deadline: state.deadline,
+      switches: state.switches || 0,
+      tabWarnPending: !!state.tabWarnPending,
+      questions: state.questions.map(stripSavedQuestion),
+      picked: state.picked.slice()
+    };
+  }
+  // Rebuild the checksummed payload from a loaded save, in exactly
+  // the field order saveProgress writes, so the checksum compares.
+  function payloadFromSaved(s) {
+    return {
+      v: 2,
+      subject: s.subject,
+      kind: s.kind,
+      chapterIdx: s.chapterIdx,
+      chapterNo: s.chapterNo,
+      title: s.title,
+      secs: s.secs,
+      started: s.started,
+      deadline: s.deadline,
+      switches: s.switches || 0,
+      tabWarnPending: !!s.tabWarnPending,
+      questions: s.questions,
+      picked: s.picked
+    };
+  }
+  // Merge answers and explanations from a bank into the test's
+  // questions, matching by question id and mapping the bank's
+  // correct option text onto the displayed (shuffled) option order.
+  // Runs in memory only; saveProgress strips the key again on the
+  // next save, so the merged key never reaches storage.
+  function mergeBankAnswers(data) {
+    if (!state || !data) return;
+    var byId = {};
+    [data.chapters, data.papers].forEach(function (groups) {
+      (groups || []).forEach(function (g) {
+        (g.questions || []).forEach(function (bq) { byId[bq.id] = bq; });
+      });
+    });
+    state.questions.forEach(function (q) {
+      if (typeof q.answer === "number") return;
+      var bq = byId[q.id];
+      if (!bq || typeof bq.answer !== "number" || !bq.options) return;
+      var correctText = bq.options[bq.answer];
+      var idx = q.options.indexOf(correctText);
+      q.answer = idx;
+      q.correctText = correctText;
+      q.explanation = bq.explanation;
+    });
+  }
+  function needsAnswerMerge() {
+    return !!state && state.questions.some(function (q) { return typeof q.answer !== "number"; });
+  }
+  var submitFetchPending = false;
+  var mergeAttempted = false;
+
   var banks = {};  // subject key -> bank JSON (cached)
   var boardBank = null; // board papers bank, loaded into the Board papers card
   var bank = null; // current subject's bank
@@ -60,6 +158,7 @@
     // shows; both restore the moment the test view closes.
     document.body.classList.toggle("test-active", viewId === "view-test");
     if (viewId !== "view-test") hideShotGuard();
+    if (viewId !== "view-test") hideFocusGuard();
     refreshToTop();
     window.scrollTo(0, 0);
   }
@@ -85,6 +184,20 @@
     g.classList.add("open");
     if (shotTimer) clearTimeout(shotTimer);
     shotTimer = setTimeout(hideShotGuard, 5000);
+  }
+
+  // Focus guard (v158): unlike the shot guard, this blackout stays
+  // up for as long as the test is out of focus, however long the
+  // student is away, and it only ever lifts on return. It has no
+  // timer of its own, so it can never clear itself while the
+  // student is still in another tab or app.
+  function hideFocusGuard() {
+    var g = $("focus-guard");
+    if (g) g.classList.remove("open");
+  }
+  function showFocusGuard() {
+    var g = $("focus-guard");
+    if (g) g.classList.add("open");
   }
 
   function shuffle(arr) {
@@ -424,6 +537,7 @@
       tabWarnPending: false
     };
     for (var i = 0; i < state.questions.length; i++) state.picked.push(null);
+    mergeAttempted = false;
     saveProgress();
     renderTest();
     show("view-test");
@@ -437,7 +551,10 @@
 
   // ---- Test resume (refresh) and tab-switch handling ----
   // The saved test holds the already shuffled questions, so a resume
-  // never reshuffles options or re-samples a chapter test. The timer
+  // never reshuffles options or re-samples a chapter test. Since
+  // v157 the saved questions carry no answer or explanation (see the
+  // integrity note above); the key is merged back from the bank at
+  // grading time. The timer
   // is an absolute deadline, so a refresh never pauses or resets it:
   // remaining time is always deadline minus now. Storage is per
   // browser and device, so resume works on the same browser only,
@@ -445,21 +562,9 @@
   function saveProgress() {
     if (!state || state.submitted) { clearProgress(); return; }
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify({
-        v: 1,
-        subject: state.kind === "paper" ? "board" : subject,
-        kind: state.kind,
-        chapterIdx: state.chapterIdx,
-        chapterNo: state.chapterNo,
-        title: state.title,
-        secs: state.secs,
-        started: state.started,
-        deadline: state.deadline,
-        switches: state.switches || 0,
-        tabWarnPending: !!state.tabWarnPending,
-        questions: state.questions,
-        picked: state.picked
-      }));
+      var payload = savedPayload();
+      payload.chk = saveChecksum(payload);
+      localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
     } catch (e) { /* storage unavailable: test still works, resume just cannot */ }
   }
 
@@ -473,7 +578,7 @@
     if (!raw) return null;
     var saved;
     try { saved = JSON.parse(raw); } catch (e) { clearProgress(); return null; }
-    if (!saved || saved.v !== 1 || !saved.questions || !saved.questions.length ||
+    if (!saved || (saved.v !== 1 && saved.v !== 2) || !saved.questions || !saved.questions.length ||
         !saved.picked || saved.picked.length !== saved.questions.length ||
         typeof saved.secs !== "number" || saved.secs <= 0 ||
         ["chapter", "whole", "paper"].indexOf(saved.kind) === -1 ||
@@ -481,9 +586,16 @@
       clearProgress();
       return null;
     }
+    // v2 only: a checksum mismatch means the save was edited by hand
+    // (or corrupted), so it is discarded instead of resumed. v1 saves
+    // predate the checksum and are accepted on the old validation.
+    if (saved.v === 2 && saved.chk !== saveChecksum(payloadFromSaved(saved))) {
+      clearProgress();
+      return null;
+    }
     var okQs = saved.questions.every(function (q) {
-      return q && typeof q.question === "string" && q.options && q.options.length >= 2 &&
-        typeof q.answer === "number" && q.answer >= 0 && q.answer < q.options.length;
+      return q && typeof q.id === "string" && typeof q.question === "string" && q.options && q.options.length >= 2 &&
+        (typeof q.answer !== "number" || (q.answer >= 0 && q.answer < q.options.length));
     });
     var okPicked = saved.picked.every(function (p, i) {
       return p === null || (typeof p === "number" && p >= 0 && p < saved.questions[i].options.length);
@@ -519,6 +631,7 @@
       switches: saved.switches || 0,
       tabWarnPending: !!saved.tabWarnPending
     };
+    mergeAttempted = false;
     renderTest();
     // Re-lock every answered question exactly as it was.
     state.questions.forEach(function (q, i) {
@@ -543,6 +656,10 @@
       banks[subject] = data;
       if (subject === "board") boardBank = data;
       bank = data;
+      // v157: a resumed v2 test's questions carry no key, so merge
+      // the answers back in memory now, ready for grading. A failed
+      // fetch leaves the merge for submit time (see submit()).
+      mergeBankAnswers(data);
     }).catch(function () {});
     if (state.started) {
       tick();
@@ -586,7 +703,7 @@
 
   var tabSeenHidden = false;
   function onTabHidden() {
-    // Blur only. A switch is counted on return, not on hide: a
+    // Black out at once (v158) and count on return, not on hide: a
     // refresh also fires visibilitychange to hidden, and counting
     // it would punish a refresh, which is exactly what resume is
     // for. Switches before the test starts, or after it is
@@ -594,10 +711,12 @@
     if (!state || state.submitted || !state.started) return;
     tabSeenHidden = true;
     document.body.classList.add("tab-hidden");
+    showFocusGuard();
     saveProgress();
   }
 
   function onTabVisible() {
+    hideFocusGuard();
     document.body.classList.remove("tab-hidden");
     if (!state || state.submitted || !state.started) return;
     // A return after a real tab switch counts here, but only if
@@ -787,6 +906,51 @@
       w.scrollIntoView({ behavior: "smooth", block: "nearest" });
       return;
     }
+    // v157: a resumed v2 test grades only after the bank merge. If
+    // the merge has not run yet (the background bank fetch has not
+    // arrived, or it failed), fetch the bank now and grade after it
+    // arrives, instead of grading against missing keys. A failed
+    // fetch keeps the test open with a retry message: grading with
+    // no key would score every answer wrong. mergeAttempted stops a
+    // loop when a question genuinely has no bank match: after one
+    // fetch plus merge, grading proceeds with whatever merged.
+    if (needsAnswerMerge() && !mergeAttempted) {
+      if (submitFetchPending) return;
+      submitFetchPending = true;
+      if (state.auto) stopTimer();
+      var finishMerge = function () {
+        submitFetchPending = false;
+        mergeAttempted = true;
+        submit();
+      };
+      if (banks[subject]) {
+        mergeBankAnswers(banks[subject]);
+        finishMerge();
+      } else {
+        fetch(SUBJECTS[subject].bankUrl).then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        }).then(function (data) {
+          banks[subject] = data;
+          if (subject === "board") boardBank = data;
+          bank = data;
+          mergeBankAnswers(data);
+          finishMerge();
+        }).catch(function () {
+          submitFetchPending = false;
+          if (state.auto) {
+            // Past deadline already: retry the key fetch, not the
+            // whole submit, until it arrives.
+            setTimeout(submit, 3000);
+          } else {
+            var w = $("exam-warn");
+            w.textContent = "Could not load the answer key. Check your connection and click Submit again.";
+            w.hidden = false;
+          }
+        });
+      }
+      return;
+    }
     state.submitted = true;
     closeEndModal();
     setTabWarnOpen(false);
@@ -811,7 +975,7 @@
           figureText: q.figureText,
           yourIdx: state.picked[i],
           yourText: state.picked[i] === null ? null : q.options[state.picked[i]],
-          correctText: q.options[q.answer],
+          correctText: (typeof q.answer === "number" && q.answer >= 0 ? q.options[q.answer] : (q.correctText || "")),
           explanation: q.explanation
         });
       }
@@ -1024,23 +1188,27 @@
     $("exam-submit-bottom").addEventListener("click", function () { submit(); });
     $("start-warn-ok").addEventListener("click", beginTest);
     $("tab-warn-ok").addEventListener("click", hideTabWarning);
-    // Tab switches count only on a real tab/app switch, not on a
-    // window blur alone (clicking the address bar or a notification
-    // must not cost a warning). A window blur still blurs the test
-    // content, so a screenshot taken after switching away shows a
-    // blurred test; a screenshot taken while the test is on screen
-    // cannot be blocked by any web page.
+    // Tab/app switches (v158): leaving the test for any reason, a
+    // tab switch, another app, the Snipping Tool, a screenshot
+    // overlay that takes focus, blacks the screen at once and
+    // counts as a switch when the student comes back. This reverses
+    // the old rule, where a window blur only blurred the content
+    // and never counted: that left a blurry but readable screenshot
+    // for any tool that takes focus without hiding the page.
+    // Counting still happens on return, not on loss, so a refresh
+    // (which also fires a hide) still costs nothing. A capture
+    // that gives the page no blur or hide event at all, like a
+    // phone's hardware screenshot buttons pressed while the test
+    // is on screen, still cannot be blacked by any web page.
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) onTabHidden();
       else onTabVisible();
     });
     window.addEventListener("blur", function () {
-      if (state && state.started && !state.submitted) {
-        document.body.classList.add("tab-hidden");
-      }
+      onTabHidden();
     });
     window.addEventListener("focus", function () {
-      if (!document.hidden) document.body.classList.remove("tab-hidden");
+      if (!document.hidden) onTabVisible();
     });
     // Print Screen during a running test: black out the test area at
     // once (keydown), then try to clear the clipboard on release

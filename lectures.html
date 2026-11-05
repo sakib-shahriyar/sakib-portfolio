@@ -457,7 +457,7 @@
       var vmTitle = document.getElementById("vm-title");
       function playVideo(v) {
         vmTitle.textContent = v.title;
-        frame.src = "https://www.youtube.com/embed/" + encodeURIComponent(v.id) + "?autoplay=1&rel=0";
+        frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(v.id) + "?autoplay=1&rel=0";
         modal.classList.add("open");
         document.body.style.overflow = "hidden";
       }
@@ -578,7 +578,7 @@
         if (!found) return;
         document.getElementById("vm-title").textContent = found.title;
         document.getElementById("vm-frame").src =
-          "https://www.youtube.com/embed/" + encodeURIComponent(found.id) + "?autoplay=1&rel=0";
+          "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(found.id) + "?autoplay=1&rel=0";
         document.getElementById("video-modal").classList.add("open");
         document.body.style.overflow = "hidden";
       }
