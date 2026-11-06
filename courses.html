@@ -161,7 +161,7 @@
       var list = document.getElementById("course-list");
       if (!list || typeof COURSES === "undefined") return;
       var wa = (typeof SITE !== "undefined" && SITE.whatsapp) ? SITE.whatsapp : "https://wa.me/8801832202600";
-      function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+      function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
       // Optional details (Phase 4.5): shown only when filled in.
       // A true value shows as "Yes"; empty, false or missing hides the row.
       function optRow(label, val) {

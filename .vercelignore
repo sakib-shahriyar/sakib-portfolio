@@ -12,3 +12,9 @@ tools
 data-review-board.md
 data-review-olevel.md
 apps-script-notify.gs
+# Internal operations doc: it describes the admin workflow, bank
+# structure and cache rules, so it must not be served on the live
+# site. It stays in the folder for your own use; Vercel will not
+# deploy it. (Same caveat as the files above: this only affects
+# Vercel, not GitHub.)
+README.txt
