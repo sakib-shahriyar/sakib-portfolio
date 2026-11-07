@@ -280,16 +280,29 @@
         return false;
       }
 
-      function videoCard(v, doc) {
+      // Thumbnails are self-hosted in assets/thumbs/<video-id>.jpg (v164):
+      // YouTube serves them with a 5-minute cache, which PageSpeed flags,
+      // so the site serves its own copies under the 1-year immutable rule
+      // in vercel.json. When a new video is merged, download its thumbnail
+      // into assets/thumbs/ at the same time. If a local copy is missing,
+      // fall back once to YouTube, then to the gradient thumb + play button.
+      // The first "Recently added" card is the page's largest paint, so it
+      // loads eager with fetchpriority high; every other card stays lazy.
+      function videoCard(v, doc, priority) {
         var card = document.createElement("div");
         card.className = "card video-card";
+        var imgAttrs = priority
+          ? 'fetchpriority="high" decoding="async"'
+          : 'loading="lazy" decoding="async"';
         card.innerHTML =
-          '<div class="video-thumb"><img src="https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="play">▶</span></div>' +
+          '<div class="video-thumb"><img src="assets/thumbs/' + encodeURIComponent(v.id) + '.jpg" alt="" ' + imgAttrs + '><span class="play">▶</span></div>' +
           '<div class="video-body"><h3></h3><p></p></div>';
-        // If the thumbnail cannot load (video removed or private), drop the
-        // img so the card falls back to the gradient thumb + play button.
         var thumbImg = card.querySelector(".video-thumb img");
-        thumbImg.addEventListener("error", function () { thumbImg.remove(); });
+        thumbImg.addEventListener("error", function () {
+          if (thumbImg.dataset.fbk) { thumbImg.remove(); return; }
+          thumbImg.dataset.fbk = "1";
+          thumbImg.src = "https://i.ytimg.com/vi/" + encodeURIComponent(v.id) + "/hqdefault.jpg";
+        });
         card.querySelector("h3").textContent = v.title;
         card.querySelector("p").textContent = doc.chapter;
         card.addEventListener("click", function () { playVideo(v); });
@@ -334,7 +347,7 @@
             rsec.appendChild(rh);
             var rg = document.createElement("div");
             rg.className = "video-grid";
-            recent.forEach(function (item) { rg.appendChild(videoCard(item.v, item.doc)); });
+            recent.forEach(function (item, idx) { rg.appendChild(videoCard(item.v, item.doc, idx === 0)); });
             rsec.appendChild(rg);
             sectionsEl.appendChild(rsec);
           }
