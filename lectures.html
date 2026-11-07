@@ -223,6 +223,33 @@
       var activeChapter = "all";
       var query = "";
 
+      // Book order for the chapter sections: video id -> its serial in the
+      // book, from Sakib's notes. Chapter 1: Global Village 1.1, Internet
+      // of Things (section 10, under 1.1), Virtual Reality 1.2, Artificial
+      // Intelligence 1.3.1, Robotics 1.3.2, Biometrics 1.3.6,
+      // Bioinformatics 1.3.7, Genetic Engineering 1.3.8, Nanotechnology
+      // 1.3.9. Cryosurgery is not in the book, so it has no serial and
+      // sorts last. Chapter 5 has one video, so it needs no entry. When a
+      // new video is merged, give it its book serial here; a video with no
+      // entry keeps its videos.js order at the end of its chapter.
+      // "Recently added" is NOT sorted by this list; it stays newest first.
+      var BOOK_ORDER = {
+        "elARUe5bOZg": 1,  // Global Village (1.1)
+        "N9qkwJ1uWdw": 2,  // Internet of Things (section 10, under 1.1)
+        "4RRbeP97iXE": 3,  // Virtual Reality (1.2)
+        "RFM0DrDX8uI": 4,  // Artificial Intelligence (1.3.1)
+        "cpgpHYWzLJg": 5,  // Robotics (1.3.2)
+        "5XHtbVEzI5Q": 6,  // Biometrics (1.3.6)
+        "P1uuLSrZYFU": 7,  // Bioinformatics (1.3.7)
+        "xCd8S9QlXnQ": 8,  // Genetic Engineering (1.3.8)
+        "aLHkycO4-K8": 9   // Nanotechnology (1.3.9)
+      };
+
+      function bookRank(v) {
+        var r = BOOK_ORDER[v.id];
+        return (typeof r === "number") ? r : Infinity;
+      }
+
       function chapterName(id) {
         var d = DOCUMENTS.find(function (x) { return x.id === id; });
         return d ? d.chapter : id;
@@ -315,6 +342,10 @@
         docs.forEach(function (doc) {
           if (activeChapter !== "all" && activeChapter !== doc.id) return;
           var vids = (VIDEOS[doc.id] || []).filter(function (v) { return matches(v, doc); });
+          // Chapter sections follow the book order, not upload order.
+          // Unlisted videos (no book serial) keep their videos.js order
+          // at the end; sort is stable, so ties never shuffle.
+          vids.sort(function (a, b) { return bookRank(a) - bookRank(b); });
           var sec = document.createElement("div");
           sec.style.marginBottom = "48px";
           var h = document.createElement("h2");
